@@ -13,13 +13,22 @@ const transporter = nodemailer.createTransport({
   }
 })
 
-const sendVerificationEmail = async (email, code)=>{
-    const mailOptions={
-      from: process.env.EMAIL_USER, 
-      to: email,
-      subject: 'Email Verification - Chitkara University',
-      text: `Your email verification code is: ${code}. This code is only 15 minutes\nPlease enter this code to verify your account.`
-    }
+const sendVerificationEmail = async (email, code,name)=>{
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: 'OTP for Email Verification | Chitkara University',
+    text: `Dear ${name},
+
+Your One Time Password (OTP) for email verification is: ${code}
+
+This OTP is valid for 15 minutes only.
+
+Note: Please do not share this OTP with anyone.
+
+Best Regards,
+Chitkara University`
+}
   
     try {
         const info = await transporter.sendMail(mailOptions);
