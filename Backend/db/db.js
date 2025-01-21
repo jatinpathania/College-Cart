@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
-
+require('dotenv').config();
 const connectMongdb=()=>{
-    mongoose.connect("mongodb://127.0.0.1:27017/IP_PROJECT")
+    mongoose.connect(process.env.Connection_URL)
     .then(()=>console.log("Mongodb Connected"))
 }
 
