@@ -2,7 +2,8 @@ const user = require("../Model/user");
 const bcrypt = require("bcryptjs");
 const cookieToken = require("../util/cookies");
 const Verify = require("../Model/emailVerification")
-const { generateVerificationCode, sendVerificationEmail } = require("../util/emailConfig")
+const { generateVerificationCode, sendVerificationEmail } = require("../util/emailConfig");
+const User = require("../Model/user");
 
 
 exports.signup = async (req, res) => {
@@ -151,5 +152,33 @@ exports.login = async (req, res) => {
         return res.status(201).json({ message: "Login successful!", user: existingUser })
     } catch (error) {
         return res.status(500).json({ message: "Error during  login" })
+    }
+}
+
+
+exports.updatePassword=async(req,res)=>{
+    const {id} = req.params;
+    const {password} = req.body;
+    if (!password || password.length < 8) {
+        return res.status(400).json({ error: 'Password must be at least 8 characters long' });
+      }
+    try {
+        const user = await User.findOne({
+            _id:id
+        })
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+          }
+
+        const hashPassword = await bcrypt.hash(password,10);
+        const updatedUser = await User.updateOne(
+            {
+                _id:id
+            },
+             {password:hashPassword}
+          );
+       res.status(200).json({ message: 'Password updated successfully', updatedUser });
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
     }
 }
