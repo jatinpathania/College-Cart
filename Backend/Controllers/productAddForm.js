@@ -58,3 +58,14 @@ exports.createProduct = async (req, res) => {
     }
 }
 
+exports.allProduct = async (req, res) => {
+    try {
+        const productAll = await ProductAdd.find({});
+        if (!productAll) {
+            return res.status(404).json({ messgae: "Products not founds" });
+        }
+        return res.status(200).json({ message: "All product fetch", item: productAll });
+    } catch (error) {
+        return res.status(400).json({ message: "Error during product fetch" });
+    }
+}
