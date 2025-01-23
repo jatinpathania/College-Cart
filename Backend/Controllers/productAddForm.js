@@ -69,3 +69,18 @@ exports.allProduct = async (req, res) => {
         return res.status(400).json({ message: "Error during product fetch" });
     }
 }
+
+exports.productById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const productId = await ProductAdd.findOne({
+            _id: id
+        })
+        if (!productId) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+        return res.status(200).json({ message: "Product fetch by id", item: productId })
+    } catch (error) {
+        return res.status(400).json({ message: "Error during fetch id data" });
+    }
+}
