@@ -84,3 +84,19 @@ exports.productById = async (req, res) => {
         return res.status(400).json({ message: "Error during fetch id data" });
     }
 }
+
+exports.productDeleteById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const productIdDelete = await ProductAdd.findOne({
+            _id: id
+        })
+        if (!productIdDelete) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+        await ProductAdd.deleteOne({ _id: id });
+        return res.status(200).json({ message: "Product delete successfull" })
+    } catch (error) {
+        return res.status(400).json({ message: "Error during delete id data" });
+    }
+}
