@@ -100,3 +100,21 @@ exports.productDeleteById = async (req, res) => {
         return res.status(400).json({ message: "Error during delete id data" });
     }
 }
+
+exports.productUpdateById = async (req, res) => {
+    const { id } = req.params;
+    const updateData = req.body;
+    try {
+        const productUpdate = await ProductAdd.findByIdAndUpdate({ _id: id },
+            updateData,
+            { new: true }
+        );
+        if (!productUpdate) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        return res.status(200).json({ message: "Product update successfull", item: productUpdate })
+    } catch (error) {
+        return res.status(400).json({ message: "Error during update" })
+    }
+}
