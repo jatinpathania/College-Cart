@@ -14,7 +14,7 @@ const Signup = () => {
   const [verificationShowInput, setVerificationShowInput] = useState(false);
   const [error, setError] = useState('');
   const dispatch = useDispatch();
-  const { status ,user,token,isLoading} = useSelector((state) => state.app);
+  const { status, user, token, isLoading } = useSelector((state) => state.app);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-       dispatch(signUpUser({ name, username, email, password }));
+      dispatch(signUpUser({ name, username, email, password }));
       setError('');
     } catch (err) {
       setError('Failed to create an account. Please try again.');
@@ -42,7 +42,7 @@ const Signup = () => {
   const verifyEmailAccount = async (e) => {
     e.preventDefault();
     try {
-       dispatch(emailVerify({email, code }));
+      dispatch(emailVerify({ email, code }));
       setError('');
     } catch (err) {
       setError('Verification failed. Please check the code and try again.');
@@ -62,7 +62,7 @@ const Signup = () => {
             name="name"
             placeholder="John"
             type="text"
-           // required
+            // required
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -75,7 +75,7 @@ const Signup = () => {
             name="username"
             placeholder="John123"
             type="text"
-          //  required
+            //  required
             value={username}
             onChange={(e) => setUserName(e.target.value)}
           />
@@ -88,7 +88,7 @@ const Signup = () => {
             name="email"
             placeholder="@example.com"
             type="email"
-          //  required
+            //  required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -101,39 +101,54 @@ const Signup = () => {
             name="password"
             placeholder="password"
             type="password"
-          //  required
+            //  required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
         <div className="btnContainer">
-          <button type="submit">{isLoading ? '...Loading' : "Account Verification"}</button>
+          <button type="submit" disabled={isLoading}>{isLoading ? '...Loading' : "Account Verification"}</button>
         </div>
 
         {error && <p className="errorMessage">{error}</p>}
 
         <div className="alreadyAccountContainer">
           <p className="alreadyAccount">
-            Already have an account?<span className="alreadySignin" onClick={()=>navigate('/login')}> Sign in</span>
+            Already have an account?<span className="alreadySignin" onClick={() => navigate('/login')}> Sign in</span>
           </p>
         </div>
         {verificationShowInput && (
-        <div className="codeContainer">
-          {/* <label htmlFor="code" className="code">Verification Code</label><br /> */}
-          <input
-            id="code"
-            placeholder="Enter code"
-            type="text"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-          />
-          <div className="createAccountContainer">
-            <button onClick={verifyEmailAccount} className="createAccount">Create account</button>
+          <div className="verification-overlay">
+            <div className="verification-dialog">
+              <button className="close-button" onClick={() => setVerificationShowInput(false)}>×</button>
+              <h3 className="verification-title">Email Verification</h3>
+              <p className="verification-message">
+                A verification code has been sent to {email}
+              </p>
+              <input
+                id="code"
+                className="verification-input"
+                placeholder="Enter verification code"
+                type="text"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+              />
+              <div className="createAccountContainer">
+                <button onClick={verifyEmailAccount} className="createAccount">
+                  Create account
+                </button>
+              </div>
+              <div className="resend-text">
+                Didn't receive the code?{' '}
+                <button className="resend-button" onClick={handleSubmit}>
+                  Resend
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      )}
-      </form> 
+        )}
+      </form>
       <MessageHandler />
     </div>
   );

@@ -1,6 +1,7 @@
-*{
+* {
     font-family: Arial, Helvetica, sans-serif;
 }
+
 .formContainer {
     display: flex;
     justify-content: center;
@@ -84,32 +85,128 @@ input[type="password"] {
     margin: 6px;
     padding: 6px;
 }
-.alreadyAccountContainer{
+
+.alreadyAccountContainer {
     display: flex;
     text-align: center;
     justify-content: center;
 }
-.alreadyAccount{
+
+.alreadyAccount {
     color: white;
     font-size: 20px;
     margin-top: 20px;
 }
-.alreadySignin{
+
+.alreadySignin {
     text-decoration: underline;
     color: rgb(137, 137, 137);
     cursor: pointer;
 }
-.alreadySignin:hover{
+
+.alreadySignin:hover {
     color: blue;
 }
-.codeConatiner{
+
+.codeConatiner {
     margin-left: 20px;
     margin: 10px;
 }
-.code{
-
+.createAccountContainer {
+    margin-left: 0px;
+    margin-top: 0px;
 }
-.createAccountContainer{
-    margin-left: 30px;
-    margin-top: 20px;
+
+.verification-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    border: 1px solid rgb(159, 155, 155);
+    border-radius: 20px;
+    padding: 30px;
+    width: 400px;
+    z-index: 1000;
+}
+
+.verification-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
+.verification-title {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.verification-message {
+    color: rgb(146, 143, 143);
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.verification-input {
+    background-color: black;
+    color: white;
+    border: 1px solid gray;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.resend-text {
+    color: rgb(146, 143, 143);
+    font-size: 14px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.resend-button {
+    background: none;
+    border: none;
+    color: rgb(137, 137, 137);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+}
+
+.resend-button:hover {
+    color: blue;
+}
+
+.timer-text {
+    color: rgb(146, 143, 143);
+    font-size: 14px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.close-button {
+    position: absolute;
+    right: 1px;
+    top: 15px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    width: auto;
+    padding: 5px;
+}
+
+.close-button:hover {
+    color: rgb(159, 155, 155);
 }
