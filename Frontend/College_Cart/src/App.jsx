@@ -6,6 +6,8 @@ import Signup from './Components/Signup/Signup'
 import Store from './Components/SagaRedux/Store'
 import Signin from './Components/Signin/Signin'
 import {Routes,BrowserRouter,Route} from "react-router-dom"
+import ForgotPassword from './Components/ForgetPassword/Form'
+import Reset from './Components/ResetPassword/Reset'
 
 const App = () => {
   return (
@@ -15,6 +17,8 @@ const App = () => {
       <Routes>
         <Route path='/login' element={<Signin/>}/>
         <Route path='/signup' element={<Signup/>}/>
+        <Route path='/forgotpassword' element={<ForgotPassword/>}/>
+        <Route path='/newPassword' element={<Reset/>}/>
       </Routes>
       </BrowserRouter>
       </Provider>
@@ -23,3 +27,4 @@ const App = () => {
 }
 
 export default App
+
