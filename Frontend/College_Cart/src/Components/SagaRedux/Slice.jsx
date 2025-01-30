@@ -139,7 +139,12 @@ const Slice = createSlice({
             state.message = action.payload.message,
             state.error = action.payload.error
         },
-        
+        resetState: (state) => {
+            state.status = null;
+            state.message = null;
+            state.error = null;
+          }
+
     }
 })
 
@@ -162,6 +167,7 @@ export const {
     newPasswordSet,
     newPasswordSetSuccess,
     newPasswordSetFailed,
+    resetState
 } = Slice.actions;
 
 export default Slice.reducer;
