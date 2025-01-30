@@ -22,3 +22,6 @@ API.interceptors.response.use(
 export const signUp = (userData)=>API.post("/signup", userData)
 export const signIn = (credentials) => API.post('/login', credentials);
 export const verifyEmail = (verificationData) => API.post('/verify-email', verificationData);
+export const forGotpassword = (password)=>API.post("/for-got-password-send",password);
+export const forGotpasswordVerifyOTP = (otpVerify)=>API.post("/verify-for-got-password",otpVerify);
+export const passwordNewSet = (newPassword)=>API.put("/password",newPassword);
