@@ -54,6 +54,7 @@ const Signin = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <p className='forgotpassword' onClick={()=>navigate('/forgotpassword')}>Forgot password?</p>
         </div>
 
         <div className="btnContainer">
