@@ -6,6 +6,12 @@ import {
     signUpUserSuccess,
     emailVerifyFailed,
     emailVerifySuccess,
+    forGotPasswordFailed,
+    forGotPasswordSuccess,
+    emailveirfyForgotpasswordSuccess,
+    emailveirfyForgotpasswordFailed,
+    newPasswordSetSuccess,
+    newPasswordSetFailed
 } from './Slice'
 
 import * as api from "./api"
@@ -61,9 +67,63 @@ function* verifyEmailSaga(acton){
         }))    }
 }
 
+function* forGotPasswordSaga(action){
+    try {
+        const response = yield call(api.forGotpassword,action.payload);
+        if (response.data.message) {
+            yield put(forGotPasswordSuccess({
+                message: response.data.message,
+                user: response.data.user || null,
+            }))
+        }
+    } catch (error) {
+        yield put(forGotPasswordFailed({
+            message: error.message,
+            error: error.message
+        }))    
+    }
+}
+
+function* emailVerifyforGotPasswordSaga(action){
+    try {
+        const response = yield call(api.forGotpasswordVerifyOTP,action.payload);
+        if (response.data.message) {
+            yield put(emailveirfyForgotpasswordSuccess({
+                message: response.data.message,
+                user: response.data.user || null,
+            }))
+        }
+    } catch (error) {
+        yield put(emailveirfyForgotpasswordFailed({
+            message: error.message,
+            error: error.message
+        }))    
+    }
+}
+
+function* newPasswordSaga(action){
+    try {
+        const response = yield call(api.passwordNewSet, action.payload);
+        if (response.data.message) {
+            yield put(newPasswordSetSuccess({
+                message: response.data.message,
+                user: response.data.user || null,
+            }))
+        }
+    } catch (error) {
+        yield put(newPasswordSetFailed({
+            message: error.message,
+            error: error.message
+        }))  
+    }
+}
+
 function* Saga() {
     yield takeLatest('app/signUpUser', signUpUserSaga);
     yield takeLatest('app/signInUser', signInUserSaga);
     yield takeLatest('app/emailVerify',verifyEmailSaga);
+    yield takeLatest('app/forGotPassword',forGotPasswordSaga);
+    yield takeLatest('app/emailveirfyForgotpassword',emailVerifyforGotPasswordSaga)
+    yield takeLatest('app/newPasswordSet', newPasswordSaga);
 }
 export default Saga
