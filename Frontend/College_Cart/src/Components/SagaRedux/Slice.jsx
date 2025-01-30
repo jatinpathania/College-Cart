@@ -78,7 +78,68 @@ const Slice = createSlice({
             state.token = null,
             state.message = action.payload.message,
             state.error = action.payload.error
-        }
+        },
+        forGotPassword:(state)=>{
+            state.status = 'loading',
+            state.isLoading = true,
+            state.error = null,
+            state.message = null
+        },
+        forGotPasswordSuccess:(state,action)=>{
+            state.status = 'success',
+            state.isLoading = false,
+            state.user = action.payload.user,
+            state.message = action.payload.message
+            state.error = null
+        },
+        forGotPasswordFailed:(state,action)=>{
+            state.status = 'failed',
+            state.isLoading = false,
+            state.user = null,
+            state.message = action.payload.message,
+            state.error = action.payload.error
+        },
+        emailveirfyForgotpassword:(state)=>{
+            state.status = 'loading',
+            state.isLoading = true,
+            state.error = null,
+            state.message = null
+        },
+        emailveirfyForgotpasswordSuccess:(state,action)=>{
+            state.status = 'success',
+            state.isLoading = false,
+            state.user = action.payload.user,
+            state.message = action.payload.message
+            state.error = null
+        },
+        emailveirfyForgotpasswordFailed:(state,action)=>{
+            state.status = 'failed',
+            state.isLoading = false,
+            state.user = null,
+            state.message = action.payload.message,
+            state.error = action.payload.error
+        },
+        newPasswordSet:(state)=>{
+            state.status = 'loading',
+            state.isLoading = true,
+            state.error = null,
+            state.message = null
+        },
+        newPasswordSetSuccess:(state,action)=>{
+            state.status = 'success',
+            state.isLoading = false,
+            state.user = action.payload.user,
+            state.message = action.payload.message
+            state.error = null
+        },
+        newPasswordSetFailed:(state,action)=>{
+            state.status = 'failed',
+            state.isLoading = false,
+            state.user = null,
+            state.message = action.payload.message,
+            state.error = action.payload.error
+        },
+        
     }
 })
 
@@ -91,7 +152,16 @@ export const {
     signUpUserFailed,
     emailVerifyFailed,
     emailVerify,
-    emailVerifySuccess
+    emailVerifySuccess,
+    forGotPassword,
+    forGotPasswordFailed,
+    forGotPasswordSuccess,
+    emailveirfyForgotpassword,
+    emailveirfyForgotpasswordSuccess,
+    emailveirfyForgotpasswordFailed,
+    newPasswordSet,
+    newPasswordSetSuccess,
+    newPasswordSetFailed,
 } = Slice.actions;
 
 export default Slice.reducer;
