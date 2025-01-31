@@ -43,11 +43,20 @@ const Signup = () => {
     e.preventDefault();
     try {
       dispatch(emailVerify({ email, code }));
+      
       setError('');
     } catch (err) {
       setError('Verification failed. Please check the code and try again.');
     }
   };
+  useEffect(()=>{
+    if(status==='success' && user && token){
+      setTimeout(()=>{ navigate("/")},5000)
+    }
+
+  },[status,navigate])
+
+   
 
   return (
     <div className="formContainer">
@@ -69,7 +78,7 @@ const Signup = () => {
         </div>
 
         <div className="usernameContainer">
-          <label htmlFor="username" className="username">Username</label><br />
+          <label htmlFor="username" >Username</label><br />
           <input
             id="username"
             name="username"
