@@ -8,6 +8,7 @@ import Signin from './Components/Signin/Signin'
 import {Routes,BrowserRouter,Route} from "react-router-dom"
 import ForgotPassword from './Components/ForgetPassword/Form'
 import Reset from './Components/ResetPassword/Reset'
+import Home from './Components/Home/Home'
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/forgotpassword' element={<ForgotPassword/>}/>
         <Route path='/newPassword' element={<Reset/>}/>
+        <Route path='/' element={<Home/>}/>
       </Routes>
       </BrowserRouter>
       </Provider>
