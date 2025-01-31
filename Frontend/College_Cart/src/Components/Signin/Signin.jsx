@@ -1,6 +1,6 @@
-import React, { useState,  } from 'react';
+import React, { useEffect, useState,  } from 'react';
 import './signin.css';
-import { useDispatch,  } from 'react-redux';
+import { useDispatch, useSelector,  } from 'react-redux';
 import {  signInUser} from '../SagaRedux/Slice';
 import MessageHandler from '../Signup/MessageHandler';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ const Signin = () => {
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate()
+  const {status,user,token} = useSelector((state)=>state.app)
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +22,14 @@ const Signin = () => {
       setError('Failed to signin an account. Please try again.');
     }
   };
+
+  useEffect(()=>{
+    if(status==='success' && user && token){
+      setTimeout(()=>{ navigate("/")},5000)
+      console.log(user,token)
+    }
+
+  },[status,navigate])
 
 
   return (
@@ -60,9 +69,6 @@ const Signin = () => {
         <div className="btnContainer">
           <button type="submit">Signin</button>
         </div>
-
-        {error && <p className="errorMessage">{error}</p>}
-
         <div className="alreadyAccountContainer">
           <p className="alreadyAccount">
             Don't have an account?<span className="alreadySignin" onClick={()=>navigate('/signup')}> Sign up</span>
