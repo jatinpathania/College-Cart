@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
-
+import { setToken, removeToken, getToken } from "../../util/tokenService"
 const initialState = {
     user: null,
-    token: null,
+    token: getToken(),
     status: null,
     error: null,
     message: null,
@@ -43,9 +43,11 @@ const Slice = createSlice({
         },
         signInUserSuccess: (state, action) => {
             state.status = 'success',
-            state.isLoading = false,
+            state.isLoading = false;
+            const token = action.payload.token;
+            setToken(token);
             state.user = action.payload.user,
-            state.token = action.payload.token
+            state.token = token;
             state.message = action.payload.message
             state.error = null
         },
@@ -143,6 +145,13 @@ const Slice = createSlice({
             state.status = null;
             state.message = null;
             state.error = null;
+          },
+
+          logout: (state) => {
+            removeToken();
+            state.status = 'success'
+            state.token = null;
+            state.user = null;
           }
 
     }
@@ -167,7 +176,8 @@ export const {
     newPasswordSet,
     newPasswordSetSuccess,
     newPasswordSetFailed,
-    resetState
+    resetState,
+    logout
 } = Slice.actions;
 
 export default Slice.reducer;
