@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { IoMenu } from 'react-icons/io5';
 import { IoMdSearch } from 'react-icons/io';
 import './header.css';
 import Sidebar from '../Sidebar/Sidebar';
 import icon from "../../assets/logo.jpeg"
+import { UserDataContext } from './context';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-
+  const {data} = useContext(UserDataContext);
+  // console.log(data)
   return (
     <>
       <div className="header">
@@ -41,7 +43,7 @@ const Header = () => {
               alt="Profile"
               className="avatar"
             />
-            <span className="username">Harash Poriya</span>
+            <span className="username">{data.name}</span>
           </div>
         </div>
       </div>
