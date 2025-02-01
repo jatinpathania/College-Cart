@@ -148,8 +148,8 @@ exports.login = async (req, res) => {
             return res.status(400).json({ message: "Invalid password." });
         }
 
-        cookieToken(existingUser, res);
-        return res.status(201).json({ message: "Login successful!", user: existingUser })
+       const token = cookieToken(existingUser, res);
+        return res.status(201).json({ message: "Login successful!", user: existingUser,token })
     } catch (error) {
         return res.status(500).json({ message: "Error during  login" })
     }
