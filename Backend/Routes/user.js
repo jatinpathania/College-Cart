@@ -9,10 +9,10 @@ router.post("/verify-email", accountCreate.verifyEmail);
 router.post("/login",accountCreate.login);
 router.put('/password', isAuthenticated, accountCreate.updatePassword);
 router.get("/user-profile", isAuthenticated, (req, res) => {
-    const { email, name, username } = req.user;
+    const { email, name, username,_id,profileImage } = req.user;
     res.status(200).json({
         success: true,
-        data: { email, name, username }
+        data: { email, name, username,_id,profileImage }
     });
 });
 
