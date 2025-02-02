@@ -25,7 +25,7 @@ const Signin = () => {
 
   useEffect(()=>{
     if(status==='success' && user && token){
-      setTimeout(()=>{ navigate("/")},5000)
+      setTimeout(()=>{ navigate("/dashboard")},5000)
       // console.log(user,token)
     }
 
