@@ -22,13 +22,16 @@ const App = () => {
             <Route path='/signup' element={<Signup/>}/>
             <Route path='/forgotpassword' element={<ForgotPassword/>}/>
             <Route path='/newPassword' element={<Reset/>}/>
-            <Route path='/user-profile' element={<Profile/>}/>
+            <Route path='/:id/user-profile'
+             element={<ProtectedRoute><Profile/></ProtectedRoute>}
+             />
+             <Route path='/' element={<Home/>}/>
             <Route 
-              path='/' 
+              path='/dashboard' 
               element={
-                <ProtectedRoute>
+                // <ProtectedRoute>
                   <Home/>
-                </ProtectedRoute>
+                // </ProtectedRoute>
               }
             />
           </Routes>
