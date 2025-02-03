@@ -6,6 +6,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import icon from "../../assets/logo.jpeg";
 import { UserDataContext } from './context';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,12 +57,14 @@ const Header = () => {
 
         <div className="header-right" ref={profileRef}>
           <div className="profile" onClick={() => setShow(!show)}>
-            <img
+            <motion.img
               src={data.profileImage || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
               alt="Profile"
               className="avatar"
+              whileHover={{scale:1.3}}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
             />
-            <span className="username">{data && data.name ? data.name : 'Loading...'}</span>
+            <span className="username">{data && data.name ? data.name : 'Jhon Doe'}</span>
           </div>
           {show && (
             <div className="profile-dropdown" onClick={()=>naviagte(`/${data._id}/user-profile`)}>
@@ -73,8 +76,8 @@ const Header = () => {
                     className="dropdown-avatar"
                   />
                   <div className="profile-info">
-                    <span className="profile-name" style={{fontSize:20}}>{data.name}</span><br/>
-                    <span className="profile-username" style={{fontSize:14}}>@{data.username}</span>
+                    <span className="profile-name" style={{fontSize:20}}>{data.name || 'Jhon Doe'}</span><br/>
+                    <span className="profile-username" style={{fontSize:14}}>@{data.username || 'jhondoe'}</span>
                   </div>
                   
                 </div>
