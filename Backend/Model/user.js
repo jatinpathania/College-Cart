@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
+    cloudinaryId: {
+        type: String,
+        default: null
+    },
     name: {
         type: String,
         required: true
