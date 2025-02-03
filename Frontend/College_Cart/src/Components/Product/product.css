@@ -1,0 +1,9 @@
+.productContainer{
+    display: flex;
+    justify-content: center;
+}
+.productNotFoundText{
+    color: gray;
+    font-size: 30px;
+    margin-top: 300px;
+}
