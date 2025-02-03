@@ -11,6 +11,9 @@ import Home from './Components/Home/Home'
 import PersistentAuth from './util/PersistentAuth'
 import ProtectedRoute from './util/ProtectedRoute'
 import Profile from './Components/Profile/Profile'
+import AddProduct from './Components/AddProductForm/AddProduct'
+import Product from './Components/Product/Product'
+import Messages from './Components/Messages/Messages'
 
 const App = () => {
   return (
@@ -26,6 +29,9 @@ const App = () => {
              element={<ProtectedRoute><Profile/></ProtectedRoute>}
              />
              <Route path='/' element={<Home/>}/>
+             <Route path='/:id/add-products-user' element={<ProtectedRoute><AddProduct/></ProtectedRoute>}/>
+             <Route path='/all-products' element={<Product/>}/>
+             <Route path='/messages' element={<Messages/>}/>
             <Route 
               path='/dashboard' 
               element={
