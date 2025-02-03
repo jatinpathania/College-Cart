@@ -4,12 +4,13 @@ const cookieToken = require("../util/cookies");
 const Verify = require("../Model/emailVerification")
 const { generateVerificationCode, sendVerificationEmail } = require("../util/emailConfig");
 const User = require("../Model/user");
+const { deleteFromCloudinary, uploadToCloudinary } = require("../Config/cloudinary");
 
 
 exports.signup = async (req, res) => {
 
     try {
-        const { name, username, email, password } = req.body;
+        const {cloudinaryId, name, username, email, password } = req.body;
 
         if (!name || !username || !email || !password) {
             return res.status(400).json({ message: "All fields are required" })
@@ -39,6 +40,7 @@ exports.signup = async (req, res) => {
         if(existingVerification){
             existingVerification.code = verificationCode;
             existingVerification.pendingUserData={
+                cloudinaryId,
                 name,
                 username,
                 email,
@@ -52,6 +54,7 @@ exports.signup = async (req, res) => {
                 email,
                 code: verificationCode,
                 pendingUserData: {
+                    cloudinaryId,
                     name,
                     username,
                     email,
@@ -111,6 +114,7 @@ exports.verifyEmail = async (req, res) => {
             username: verificationRecord.pendingUserData.username,
             email: verificationRecord.pendingUserData.email,
             password: hashPassword,
+            cloudinaryId:verificationRecord.pendingUserData.cloudinaryId,
             isVerified: true
         });
 
@@ -148,8 +152,8 @@ exports.login = async (req, res) => {
             return res.status(400).json({ message: "Invalid password." });
         }
 
-        cookieToken(existingUser, res);
-        return res.status(201).json({ message: "Login successful!", user: existingUser })
+       const token = cookieToken(existingUser, res);
+        return res.status(201).json({ message: "Login successful!", user: existingUser,token })
     } catch (error) {
         return res.status(500).json({ message: "Error during  login" })
     }
@@ -157,28 +161,127 @@ exports.login = async (req, res) => {
 
 
 exports.updatePassword=async(req,res)=>{
-    const {id} = req.params;
+    // const {id} = req.params;
     const {password} = req.body;
     if (!password || password.length < 8) {
         return res.status(400).json({ error: 'Password must be at least 8 characters long' });
       }
     try {
-        const user = await User.findOne({
-            _id:id
-        })
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-          }
+        // const user = await User.findOne({
+        //     _id:id
+        // })
+        // if (!user) {
+        //     return res.status(404).json({ error: 'User not found' });
+        //   }
 
         const hashPassword = await bcrypt.hash(password,10);
         const updatedUser = await User.updateOne(
-            {
-                _id:id
-            },
+            // {
+            //     _id:id
+            // },
              {password:hashPassword}
           );
        res.status(200).json({ message: 'Password updated successfully', updatedUser });
     } catch (error) {
         res.status(500).json({ error: 'Server error' });
+    }
+}
+
+exports.updateProfileImageAndUserName = async(req, res) => {
+    const {id} = req.params;
+    const { username } = req.body;
+    const profileImage = req.file; 
+    
+    try {
+        if (!id) {
+            return res.status(400).json({
+                success: false,
+                message: "User ID is required"
+            });
+        }
+
+        const existingUser = await User.findById(id);
+        if (!existingUser) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+        const updateFields = {};
+
+       
+        if (username) {
+            if (username !== existingUser.username) {
+                const usernameExists = await User.findOne({ 
+                    username,
+                    _id: { $ne: id } 
+                });
+
+                if (usernameExists) {
+                    return res.status(400).json({
+                        success: false,
+                        message: "Username already taken"
+                    });
+                }
+                updateFields.username = username;
+            }
+        }
+     
+        if (profileImage) {
+            try {
+                if (existingUser.cloudinaryId) {
+                    await deleteFromCloudinary(existingUser.cloudinaryId);
+                }
+
+                const cloudinaryResponse = await uploadToCloudinary(profileImage);
+        
+                if (cloudinaryResponse && cloudinaryResponse.url) {
+                    updateFields.profileImage = cloudinaryResponse.url;
+                    updateFields.cloudinaryId = cloudinaryResponse.public_id;
+                } else {
+                    throw new Error("Failed to get valid response from Cloudinary");
+                }
+            } catch (uploadError) {
+                console.error("Upload error:", uploadError); 
+                return res.status(400).json({
+                    success: false,
+                    message: "Error uploading image",
+                    error: uploadError.message
+                });
+            }
+        }
+
+        
+        if (Object.keys(updateFields).length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: "No fields to update"
+            });
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(
+            id,
+            { $set: updateFields },
+            { new: true, runValidators: true }
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: "Profile updated successfully",
+            data: {
+                username: updatedUser.username,
+                profileImage: updatedUser.profileImage,
+                cloudinaryId: updatedUser.cloudinaryId
+            }
+        });
+
+    } catch (error) {
+        console.error("Update profile error:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Error updating profile",
+            error: error.message
+        });
     }
 }

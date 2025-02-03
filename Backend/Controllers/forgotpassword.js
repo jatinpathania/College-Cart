@@ -1,6 +1,6 @@
 const emailVeirfyForPassword = require("../Model/emailVerifyForNewPassword");
 const User = require("../Model/user");
-const {generateVerificationCode, sendVerificationEmail} = require("../util/emailConfig");
+const {generateVerificationCode, sendVerificationEmail} = require("../util/forgotPasswordEmailConfig");
 
 const sendCode = async(req,res)=>{
     const {email} = req.body;
