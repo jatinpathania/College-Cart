@@ -3,50 +3,58 @@ const mongoose = require("mongoose")
 const productAddFormSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: [true, "Product name is required"],
+        trim:true
     },
     brand: {
         type: String,
-        required: true
+        required: [true, "Brand name is required"],
+        trim: true
     },
-    category: {
+    selectHostel: {
         type: String,
         enum: ["Hostler", "Day Scholar"],
-        default: "Hostler",
-        required: true
+        required: [true, "Category is required"]
     },
     hostleName:{
-        type:String,
-        enum:["Boss","Aryabhata","Sarabhai"],
-        required:false,
+        type: String,
+        enum: ["Boss", "Aryabhata", "Sarabhai"],
+        required: function() { return this.selectHostel === "Hostler"; }
     },
-    roomNumber:{
-        type:String,
-        required:false,
+    roomNumber: {
+        type: String,
+        required: function() { return this.selectHostel === "Hostler"; },
+        trim: true
     },
-    dayScholarContectNumber:{
-       type:String,
-       required:false,
+    dayScholarContectNumber: {
+        type: String,
+        required: function() { return this.selectHostel === "Day Scholar"; },
+        trim: true
     },
     prevAmount: {
         type: Number,
-        required: true,
+        required: [true, "Previous amount is required"],
         min: [0, 'Previous amount must be a positive number']
     },
     newAmount: {
         type: Number,
-        required: true,
+        required: [true, "New amount is required"],
         min: [0, 'New amount must be a positive number']
     },
     image: {
         type: String,
-        required: true,
+        required: [true, "Product image is required"]
     },
     description:{
         type:String,
-        required:true,
+        required: [true, "Product description is required"],
+    },
+    userId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
-})
+},{timestamps:true})
 
 const ProductAdd = mongoose.model("ProductAdd",productAddFormSchema);
 
