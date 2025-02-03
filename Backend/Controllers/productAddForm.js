@@ -35,86 +35,136 @@ exports.productAddForm = upload.single('image', { limits: { fileSize: 5 * 1024 *
 exports.createProduct = async (req, res) => {
     try {
 
-        const { name, brand, category, hostleName, roomNumber, dayScholarContectNumber, prevAmount, newAmount, description } = req.body;
+        const { name, brand, selectHostel, hostleName, roomNumber, dayScholarContectNumber, prevAmount, newAmount, description } = req.body;
+
+        if (!req.user?._id) {
+            return res.status(401).json({
+                success: false,
+                message: "User authentication required"
+            });
+        }
+
+        if (!name || !brand || !selectHostel || !prevAmount || !newAmount || !description) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+
+        if (selectHostel === "Hostler" && (!hostleName || !roomNumber)) {
+            return res.status(400).json({ message: "Hostel name and room number are required for hostlers" });
+        }
+
+        if (selectHostel === "Day Scholar" && !dayScholarContectNumber) {
+            return res.status(400).json({ message: "Contact number is required for day scholars" });
+        }
+
+
         const image = req.file ? `/assets/${req.file.filename}` : null;
+        if (!image) {
+            return res.status(400).json({ message: "Product image is required" });
+        }
+
 
         const createProduct = await ProductAdd.create({
             name,
             brand,
-            category,
+            selectHostel,
             hostleName,
             roomNumber,
             dayScholarContectNumber,
             image,
             description,
             prevAmount,
-            newAmount
+            newAmount,
+            userId:req.user._id
         })
 
         return res.status(201).json({ message: "Product created successful!", product: createProduct });
 
     } catch (error) {
-        return res.status(400).json({ message: "Error during product created" });
+        console.error("Create product error:", error);
+        return res.status(500).json({ success:false, message: "Error during product created" ,error:error.message});
     }
 }
 
-exports.allProduct = async (req, res) => {
+exports.getAllProduct = async (req, res) => {
     try {
-        const productAll = await ProductAdd.find({});
-        if (!productAll) {
-            return res.status(404).json({ messgae: "Products not founds" });
-        }
-        return res.status(200).json({ message: "All product fetch", item: productAll });
+        const products = await ProductAdd.find().populate('userId','name');
+        return res.status(200).json({success: true, count: products.length, products });
     } catch (error) {
-        return res.status(400).json({ message: "Error during product fetch" });
+        console.error("Get all products error:", error);
+        return res.status(500).json({success:false, message: "Error during product fetch",error:error.message });
     }
 }
 
-exports.productById = async (req, res) => {
-    const { id } = req.params;
+exports.getProductById = async (req, res) => {
+    const {id}=req.params
     try {
-        const productId = await ProductAdd.findOne({
-            _id: id
-        })
-        if (!productId) {
-            return res.status(404).json({ message: "Product not found" });
+        const product = await ProductAdd.findOne({
+            _id:id
+        }).populate('userId','name');
+        if (!product) {
+            return res.status(404).json({success:false, message: "Product not found" });
         }
-        return res.status(200).json({ message: "Product fetch by id", item: productId })
+        return res.status(200).json({ success:true, product })
     } catch (error) {
-        return res.status(400).json({ message: "Error during fetch id data" });
+        console.error("Get product by ID error:", error);
+        return res.status(500).json({success:false, message: "Error during fetch id data", error:error.message });
     }
 }
 
 exports.productDeleteById = async (req, res) => {
-    const { id } = req.params;
+    const {id} = req.params;
     try {
-        const productIdDelete = await ProductAdd.findOne({
-            _id: id
+        const product = await ProductAdd.findById({
+            _id:id
         })
-        if (!productIdDelete) {
-            return res.status(404).json({ message: "Product not found" });
+        if (!product) {
+            return res.status(404).json({success:false, message: "Product not found" });
         }
-        await ProductAdd.deleteOne({ _id: id });
-        return res.status(200).json({ message: "Product delete successfull" })
+        if (product.image) {
+            const imagePath = path.join(process.cwd(), 'public', product.image);
+            if (fs.existsSync(imagePath)) {
+                fs.unlinkSync(imagePath);
+            }
+        }
+
+        await product.deleteOne();
+
+        return res.status(200).json({success:true, message: "Product delete successfull" })
     } catch (error) {
-        return res.status(400).json({ message: "Error during delete id data" });
+        console.error("Delete product error:", error);
+        return res.status(500).json({ message: "Error during delete id data", error:error.message });
     }
 }
 
-exports.productUpdateById = async (req, res) => {
-    const { id } = req.params;
-    const updateData = req.body;
+exports.updateProduct = async (req, res) => {
+    const {id} = req.params;
     try {
-        const productUpdate = await ProductAdd.findByIdAndUpdate({ _id: id },
-            updateData,
-            { new: true }
-        );
-        if (!productUpdate) {
-            return res.status(404).json({ message: "Product not found" });
+        const product = await ProductAdd.findById({
+            _id:id
+        });
+        if (!product) {
+            return res.status(404).json({success:false, message: "Product not found" });
         }
 
-        return res.status(200).json({ message: "Product update successfull", item: productUpdate })
+        if(req.file){
+            if(product.image){
+                const oldImagePath = path.join(process.cwd(), 'public', product.image);
+                if(fs.existsSync(oldImagePath)){
+                    fs.unlinkSync(oldImagePath);
+                }
+            }
+            req.body.image = `/assets/${req.file.filename}`
+        }
+
+        const updateProduct = await ProductAdd.findByIdAndUpdate(
+            {_id:id},
+            req.body,
+            {new: true, runValidators: true}
+        ).populate("userId","name");
+
+        return res.status(200).json({success:true, message: "Product update successfull", updateProduct })
     } catch (error) {
-        return res.status(400).json({ message: "Error during update" })
+        console.error("Update product error:", error);
+        return res.status(500).json({success:false, message: "Error during update",error:error.message })
     }
 }
