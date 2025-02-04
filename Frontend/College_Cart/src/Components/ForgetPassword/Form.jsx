@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React, { useEffect, useState, } from 'react';
 import './form.css';
 import MessageHandler from '../Signup/MessageHandler';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ const ForgotPassword = () => {
   const [code, setCode] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { isLoading, message } = useSelector((state) => state.app)
+  const { isLoading, message, status, user } = useSelector((state) => state.app)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,20 +29,25 @@ const ForgotPassword = () => {
         email,
         code
       }));
-      setTimeout(()=>{
-        navigate("/newPassword")
-       },5000)
     } catch (err) {
       setError('Failed to verify code. Please try again.');
     }
   };
+  useEffect(()=>{
+    if(status == 'success' && user){
+      setTimeout(()=>{
+        navigate("/newPassword")
+       },5000)
+    }
+    console.log(user)
+  },[status,user])
 
   return (
     <div className="formContainer">
       <form className="form" >
         <p className="signupText">Forgot Password</p>
         <div className="emailContainer">
-          <label htmlFor="email" className="email">Email</label><br />
+          <label htmlFor="email" className="email" style={{color:"white"}}>Email</label><br />
           <div className='otpInputContainer'>
             <input
               id="email"
@@ -53,6 +58,7 @@ const ForgotPassword = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className='email'
+              style={{color:"white"}}
             />
             <button className='btnOTP' onClick={handleSubmit} disabled={isLoading || !email}>  {isLoading ? 'Sending...' : 'Send OTP'}</button>
           </div>
