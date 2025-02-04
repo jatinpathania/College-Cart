@@ -177,8 +177,8 @@ const Sidebar = ({ isOpen, onClose }) => {
               <img className="image" src={data.profileImage || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} alt="Profile" />
             </div>
             <div>
-              <span className="name">{data.name || 'Jhon Doe'}</span><br />
-              <span className="email">{localPart || 'jhondow1215.be23'} <br />@{domainPart || 'chitkarauniversity.edu.in'}</span>
+              <span className="nameUser">{data.name || 'Jhon Doe'}</span><br />
+              <span className="emailUser">{localPart || 'jhondow1215.be23'} <br />@{domainPart || 'chitkarauniversity.edu.in'}</span>
             </div>
           </div>
         </div>
