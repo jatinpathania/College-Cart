@@ -40,7 +40,7 @@ const Signin = () => {
 
 
         <div className="emailContainer">
-          <label htmlFor="email" className="email">Email</label><br />
+          <label htmlFor="email" className="email" style={{color:"white"}}>Email</label><br />
           <input
             id="email"
             name="email"

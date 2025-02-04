@@ -1,4 +1,4 @@
-.profile-page {
+.profilePage {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -7,7 +7,7 @@
     background-color: #f5f5f5;
 }
 
-.profile-card {
+.profileCard {
     background: white;
     border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -17,19 +17,19 @@
     margin-top: 20px;
 }
 
-.profile-header {
+.profileHeader {
     display: flex;
     align-items: center;
     gap: 2rem;
     margin-bottom: 2rem;
 }
 
-.profile-image-container {
+.profileImageContainer {
     flex-shrink: 0;
     position: relative;
 }
 
-.profile-image {
+.profileImage {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -39,27 +39,27 @@
     transition: transform 0.3s ease;
 }
 
-.profile-image:hover {
+.profileImage:hover {
     transform: scale(1.05);
 }
 
-.profile-info {
+.profileInfo {
     flex-grow: 1;
 }
 
-.profile-name {
+.profileName {
     font-size: 2rem;
     font-weight: 700;
     color: #333;
     margin: 0 0 0.5rem 0;
 }
 
-.profile-username {
+.profileUsername {
     font-size: 1.1rem;
     color: #666;
     margin: 0;
 }
-.profile-email{
+.profileEmail{
     font-size: 1.1rem;
     color: #666;
     margin: 0.5rem 0 0 0;
@@ -87,4 +87,63 @@
     color: rgb(0, 0, 0);
     font-weight: 540;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+.dialog{
+    display: flex;
+    align-items: center;
+}
+.dialogContainer{
+    position: fixed;
+    inset: 0;
+    background-color: black;
+    opacity: 0.9;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dialogPage{
+    background-color: rgb(255, 255, 255);
+    padding: 50px;
+    border-radius: 20px;
+    width: 400px;
+    height: 200px;
+}
+.textDialog{
+    column-rule: black;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 0px;
+}
+input[type="file"]{
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+.changeUsername{
+  background-color: white;
+}
+/* input[type="text"]{
+    color: black;
+    margin-bottom: 20px;
+}  */
+.usernameContainer{
+ margin-left: 25px;
+ /* text-align: center; */
+ margin-top: 2rem;
+} 
+.fileUploadContainer{
+    margin-left: 30px;
+    margin: 10px;
+    text-align: center;
+    margin-top: 2rem;
+}
+.updateButton{
+    background-color: black;
+    color: white;
+}
+.updatebtnProfile{
+    margin-top: 20px;
+    margin-left: 15px; 
+    align-items: center;
+    text-align: center;
 }

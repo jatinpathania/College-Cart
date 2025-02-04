@@ -11,7 +11,9 @@ import {
     emailveirfyForgotpasswordSuccess,
     emailveirfyForgotpasswordFailed,
     newPasswordSetSuccess,
-    newPasswordSetFailed
+    newPasswordSetFailed,
+    profileEditUserSuccess,
+    profileEditUserFailed
 } from './Slice'
 
 import * as api from "./api"
@@ -118,6 +120,24 @@ function* newPasswordSaga(action){
     }
 }
 
+function* profileUpdate(action) {
+    try {
+        const response = yield call(api.updateProfileAndEdit, action.payload);
+        
+        if (response.data) {
+            yield put(profileEditUserSuccess({
+                message: response.data.message,
+                user: response.data.data || null,
+            }));
+        }
+    } catch (error) {
+        yield put(profileEditUserFailed({
+            message: error.response?.data?.message || error.message,
+            error: error.message
+        }));  
+    }
+}
+
 function* Saga() {
     yield takeLatest('app/signUpUser', signUpUserSaga);
     yield takeLatest('app/signInUser', signInUserSaga);
@@ -125,5 +145,6 @@ function* Saga() {
     yield takeLatest('app/forGotPassword',forGotPasswordSaga);
     yield takeLatest('app/emailveirfyForgotpassword',emailVerifyforGotPasswordSaga)
     yield takeLatest('app/newPasswordSet', newPasswordSaga);
+    yield takeLatest('app/profileEditUser', profileUpdate);
 }
 export default Saga

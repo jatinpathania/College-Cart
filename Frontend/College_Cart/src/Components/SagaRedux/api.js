@@ -38,3 +38,16 @@ export const forGotpassword = (password)=>API.post("/for-got-password-send",pass
 export const forGotpasswordVerifyOTP = (otpVerify)=>API.post("/verify-for-got-password",otpVerify);
 export const passwordNewSet = (newPassword)=>API.put("/password",newPassword);
 export const getUserProfile = (getUserProfile)=>API.get("/user-profile",getUserProfile);
+
+
+export const updateProfileAndEdit = (formData) => {
+  const userId = formData.get('userId');
+  const token = getToken();
+
+  return axios.patch(`http://localhost:8001/api/update-profile/${userId}`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': `Bearer ${token}`
+    }
+  });
+};

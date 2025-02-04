@@ -152,7 +152,27 @@ const Slice = createSlice({
             state.status = 'success'
             state.token = null;
             state.user = null;
-          }
+          },
+        profileEditUser:(state)=>{
+            state.status = 'loading',
+            state.isLoading = true,
+            state.error = null,
+            state.message = null
+        },
+        profileEditUserSuccess:(state,action)=>{
+            state.status = 'success',
+            state.isLoading = false,
+            state.user = action.payload.user,
+            state.message = action.payload.message
+            state.error = null
+        } ,
+        profileEditUserFailed:(state,action)=>{
+            state.status = 'failed',
+            state.isLoading = false,
+            state.user = null,
+            state.message = action.payload.message,
+            state.error = action.payload.error
+        } 
 
     }
 })
@@ -177,7 +197,10 @@ export const {
     newPasswordSetSuccess,
     newPasswordSetFailed,
     resetState,
-    logout
+    logout,
+    profileEditUser,
+    profileEditUserFailed,
+    profileEditUserSuccess
 } = Slice.actions;
 
 export default Slice.reducer;

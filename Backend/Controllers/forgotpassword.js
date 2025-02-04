@@ -44,7 +44,7 @@ const verifyCode = async(req,res) =>{
     }
 
     await emailVeirfyForPassword.deleteOne({ _id: verification._id });
-    res.status(200).json({ message: 'Code verified' });
+    res.status(200).json({ message: 'Code verified',verification });
    } catch (error) {
     res.status(500).json({ error: 'Error during verification' });
    }
