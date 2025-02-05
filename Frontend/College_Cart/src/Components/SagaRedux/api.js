@@ -26,6 +26,11 @@ API.interceptors.request.use(
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
+    if (config.data instanceof FormData) {
+      config.headers['Content-Type'] = 'multipart/form-data';
+  } else {
+      config.headers['Content-Type'] = 'application/json';
+  }
     return config;
   },
   error => Promise.reject(error)
@@ -38,6 +43,9 @@ export const forGotpassword = (password)=>API.post("/for-got-password-send",pass
 export const forGotpasswordVerifyOTP = (otpVerify)=>API.post("/verify-for-got-password",otpVerify);
 export const passwordNewSet = (newPassword)=>API.put("/password",newPassword);
 export const getUserProfile = (getUserProfile)=>API.get("/user-profile",getUserProfile);
+export const productCreate = (newProduct) =>API.post("/product-create",newProduct)
+export const getAllProduct = (allProduct)=>API.get("/all-product",allProduct)
+
 
 
 export const updateProfileAndEdit = (formData) => {
