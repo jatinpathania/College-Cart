@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import { UserDataContext } from '../Header/context';
 import styles from "./profile.module.css"; 
@@ -6,11 +6,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { profileEditUser } from '../SagaRedux/Slice';
 import MessageHandler from '../Signup/MessageHandler';
-
+import Product from './Product';
 
 const Profile = () => {
     const dispatch = useDispatch();
-    const { data } = useContext(UserDataContext);
+    const {data} = useContext(UserDataContext);
     const [isOpen, setIsOpen] = useState(false);
     const [userName, setUserName] = useState(data.username || '');
     const [profileImage, setProfileImage] = useState(null);
@@ -39,7 +39,6 @@ const Profile = () => {
         const file = e.target.files[0];
         setProfileImage(file);
     };
-
 
     return (
         <>
@@ -109,9 +108,11 @@ const Profile = () => {
 
                         </div>
                     </div>
-                </div>
+                   
+                </div> <Product/>
             </div>
             <MessageHandler/>
+            
         </>
     );
 };
