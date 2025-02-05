@@ -3,7 +3,7 @@ const fs = require("fs");
 const { v4: uuid4 } = require("uuid")
 const ProductAdd = require("../Model/productAddForm");
 const multer = require("multer");
-
+const {uploadToCloudinary} = require("../Config/cloudinary")
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const uploadPath = path.join(process.cwd(), "/public/assets");
@@ -35,7 +35,7 @@ exports.productAddForm = upload.single('image', { limits: { fileSize: 5 * 1024 *
 exports.createProduct = async (req, res) => {
     try {
 
-        const { name, brand, selectHostel, hostleName, roomNumber, dayScholarContectNumber, prevAmount, newAmount, description } = req.body;
+        const { cloudinaryPublicId,name, brand, category, selectHostel, hostleName, roomNumber, dayScholarContectNumber, prevAmount, newAmount, description } = req.body;
 
         if (!req.user?._id) {
             return res.status(401).json({
@@ -44,7 +44,7 @@ exports.createProduct = async (req, res) => {
             });
         }
 
-        if (!name || !brand || !selectHostel || !prevAmount || !newAmount || !description) {
+        if (!name || !brand || !category || !selectHostel || !prevAmount || !newAmount || !description) {
             return res.status(400).json({ message: "Missing required fields" });
         }
 
@@ -62,15 +62,26 @@ exports.createProduct = async (req, res) => {
             return res.status(400).json({ message: "Product image is required" });
         }
 
+        let cloudinaryResult = null;
+        if(req.file){
+            cloudinaryResult = await uploadToCloudinary(req.file);
+            if (!cloudinaryResult) {
+                return res.status(400).json({ message: "Image upload failed" });
+            }
+        }
+
 
         const createProduct = await ProductAdd.create({
+            cloudinaryPublicId,
             name,
             brand,
+            category,
             selectHostel,
             hostleName,
             roomNumber,
             dayScholarContectNumber,
-            image,
+            image:cloudinaryResult.url,
+            cloudinaryPublicId: cloudinaryResult.public_id,
             description,
             prevAmount,
             newAmount,
