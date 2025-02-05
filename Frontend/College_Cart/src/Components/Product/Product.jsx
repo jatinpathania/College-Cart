@@ -1,16 +1,45 @@
-import React from 'react'
-import Header from '../Header/Header'
-import './product.css'
+import React, { useEffect, useState } from 'react';
+import Header from '../Header/Header';
+import ProductCard from './CardProduct';
+import axios from 'axios';
 
 const Product = () => {
-  return (
-    <>
-      <Header/>
-      <div className='productContainer'>
-        <p className='productNotFoundText'>Products Not Found</p>
-      </div>
-      </>
-  )
-}
+   const [products, setProducts] = useState([]);
 
-export default Product
+   useEffect(() => {
+     const fetchProductData = async () => {
+       try {
+         const res = await axios.get("http://localhost:8001/api/all-product");
+         setProducts(res.data.products);
+       } catch (error) {
+         console.log(error);
+       }
+     };
+     fetchProductData();
+   }, []);
+
+   return (
+     <>
+       <Header/>
+       <div style={{
+        display: 'flex', 
+        flexWrap: 'wrap', 
+        gap: '40px', 
+        justifyContent: 'center', 
+        padding: '20px',
+        maxWidth: '1700px',
+        margin: '0 auto'
+       }}>
+         {products.length === 0 ? (
+           <p className='productNotFoundText'>Products Not Found</p>
+         ) : (
+           products.map(product => (
+             <ProductCard key={product._id} product={product} />
+           ))
+         )}
+       </div>
+     </>
+   );
+};
+
+export default Product;
