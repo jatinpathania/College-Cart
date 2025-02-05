@@ -41,6 +41,8 @@
 .searchIcon {
   color: #666;
   margin-right: 0.5rem;
+  margin-top: 0.8rem;
+  cursor: pointer;
 }
 
 .searchInput {
