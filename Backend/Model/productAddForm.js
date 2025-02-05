@@ -1,6 +1,20 @@
 const mongoose = require("mongoose")
 
+const PRODUCT_CATEGORIES = [
+    "Electronics",
+    "Furniture",
+    "Clothing",
+    "Books",
+    "Stationary",
+    "Sports Equipment",
+    "Miscellaneous"
+];
+
 const productAddFormSchema = new mongoose.Schema({
+    cloudinaryPublicId: {
+        type: String,
+        default: null
+    },
     name: {
         type: String,
         required: [true, "Product name is required"],
@@ -10,6 +24,11 @@ const productAddFormSchema = new mongoose.Schema({
         type: String,
         required: [true, "Brand name is required"],
         trim: true
+    },
+    category: {
+        type: String,
+        enum: PRODUCT_CATEGORIES,
+        required: [true, "Product category is required"]
     },
     selectHostel: {
         type: String,
