@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import ProductCard from './CardProduct';
 import axios from 'axios';
-
+const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 const Product = () => {
    const [products, setProducts] = useState([]);
 
    useEffect(() => {
      const fetchProductData = async () => {
        try {
-         const res = await axios.get("http://localhost:8001/api/all-product");
+         const res = await axios.get(`${backend_url}/all-product`);
          setProducts(res.data.products);
        } catch (error) {
          console.log(error);
