@@ -43,6 +43,7 @@ const Profile = () => {
     return (
         <>
             <Header />
+            <div className={styles.profilePageContainer}>
             <div className={styles.profilePage}>
                 <div className={styles.profileCard}>
                     <div className={styles.profileHeader}>
@@ -109,7 +110,14 @@ const Profile = () => {
                         </div>
                     </div>
                    
-                </div> <Product/>
+                </div>
+               <div className={styles.totalDetailsForBuyAndSelling}>
+                    
+               </div>
+            </div>
+            <div>
+               <Product/>
+               </div>
             </div>
             <MessageHandler/>
             
