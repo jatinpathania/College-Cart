@@ -1,8 +1,8 @@
 import axios from "axios";
-const backend_url = import.meta.env.BACKEND_API_URL;
+const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 import { getToken } from "../../util/tokenService";
 const API = axios.create({
-  baseURL:"http://localhost:8001/api",
+  baseURL:backend_url,
   withCredentials: true,
   headers:{
     'Content-Type':'application/json'
@@ -52,7 +52,7 @@ export const updateProfileAndEdit = (formData) => {
   const userId = formData.get('userId');
   const token = getToken();
 
-  return axios.patch(`http://localhost:8001/api/update-profile/${userId}`, formData, {
+  return axios.patch(`${backend_url}/update-profile/${userId}`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': `Bearer ${token}`
