@@ -5,7 +5,7 @@ const storage = multer.memoryStorage()
 const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
-        console.log("Received file in multer:", file);
+     //   console.log("Received file in multer:", file);
         const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
         if (allowedTypes.includes(file.mimetype)) {
             cb(null, true);
