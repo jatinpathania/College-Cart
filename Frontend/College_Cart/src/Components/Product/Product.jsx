@@ -2,14 +2,21 @@ import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import ProductCard from './CardProduct';
 import axios from 'axios';
+import { getToken } from '../../util/tokenService';
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 const Product = () => {
    const [products, setProducts] = useState([]);
 
    useEffect(() => {
      const fetchProductData = async () => {
+      const token = getToken()
        try {
-         const res = await axios.get(`${backend_url}/all-product`);
+         const res = await axios.get(`${backend_url}/all-product`,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+         });
          setProducts(res.data.products);
        } catch (error) {
          console.log(error);
