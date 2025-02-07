@@ -9,15 +9,29 @@ const productRoute = require("./Routes/productAddRoute");
 const cookieParser = require('cookie-parser');
 const cors = require("cors")
 
+const allowedOrigins = [process.env.FRONTEND_URL, process.env.FRONTEND_DEPLOY_URL];
 
 app.get("/",(res,req)=>{
     return req.send("Hello world");
 })
 connectMongdb();
-app.use(cors({
-    origin: process.env.FRONTEND_URL, 
-    credentials: true 
-}));
+// app.use(cors({
+//     origin: process.env.FRONTEND_URL, 
+//     credentials: true 
+// }));
+
+app.use(
+    cors({
+      origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error("Not allowed by CORS"));
+        }
+      },
+      credentials: true,
+    })
+  );
 
 app.use(express.json());
 app.use(cookieParser());
