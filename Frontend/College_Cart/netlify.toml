@@ -1,7 +1,3 @@
-[build]
-publish = "dist"
-command = "npm run build" # or "yarn build" if you are using Yarn
-
 [[redirects]]
 from = "/*"
 to = "/index.html"
