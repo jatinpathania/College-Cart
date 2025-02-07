@@ -140,7 +140,7 @@ input[type="file"]{
     margin-top: 2rem;
 }
 .updateButton{
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     color: white;
 }
 .updatebtnProfile{
