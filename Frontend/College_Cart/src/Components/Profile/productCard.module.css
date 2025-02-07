@@ -31,7 +31,9 @@
 span{
  font-weight: 550;
  font-size: 20px;
- /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+}
+.item{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .saleBadge{
   position: absolute;
@@ -78,4 +80,43 @@ span{
 }
 .menuItemDeleteBtn:hover{
   background-color: rgb(234, 8, 8);
+}
+.skeletonWrapper {
+  display: flex;
+  background-color: white;
+  margin: 30px;
+  border-radius: 20px;
+  max-width: 1000px;
+  position: relative;
+}
+
+.skeletonImageContainer {
+  height: 230px;
+  width: 380px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.skeletonDetailsContainer {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.skeletonActionsContainer {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
+.skeletonWrapper .MuiSkeleton-root {
+  background-color: rgba(0, 0, 0, 0.11);
+  border-radius: 4px;
+}
+
+.skeletonDetailsContainer .MuiSkeleton-text {
+  transform: none;
 }
