@@ -3,37 +3,30 @@ const fs = require("fs");
 const { v4: uuid4 } = require("uuid")
 const ProductAdd = require("../Model/productAddForm");
 const multer = require("multer");
-const {uploadToCloudinary} = require("../Config/cloudinary")
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const uploadPath = path.join(process.cwd(), "/public/assets");
-        if (!fs.existsSync(uploadPath)) {
-            fs.mkdirSync(uploadPath, { recursive: true });
-        }
-        cb(null, uploadPath);
-    },
-    filename: (req, file, cb) => {
-        const uniqueName = `${uuid4()}${path.extname(file.originalname)}`;
-        cb(null, uniqueName);
-    }
-})
+const {uploadToCloudinary, deleteFromCloudinary} = require("../Config/cloudinary");
+const storage = multer.memoryStorage()
 
 const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
+        console.log("Received file in multer:", file);
         const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
         if (allowedTypes.includes(file.mimetype)) {
             cb(null, true);
         } else {
             cb(new Error('Invalid file type'), false);
         }
-    }
+    },
+     limits: { fileSize: 5 * 1024 * 1024 } 
 })
 
-exports.productAddForm = upload.single('image', { limits: { fileSize: 5 * 1024 * 1024 } });
+exports.productAddForm = upload.single('image');
 
 exports.createProduct = async (req, res) => {
     try {
+
+
+        console.log("file created",req.file)
 
         const { cloudinaryPublicId,name, brand, category, selectHostel, hostleName, roomNumber, dayScholarContectNumber, prevAmount, newAmount, description } = req.body;
 
@@ -57,17 +50,25 @@ exports.createProduct = async (req, res) => {
         }
 
 
-        const image = req.file ? `/assets/${req.file.filename}` : null;
-        if (!image) {
+        // const image = req.file ? `/assets/${req.file.filename}` : null;
+        if (!req.file) {
             return res.status(400).json({ message: "Product image is required" });
         }
 
-        let cloudinaryResult = null;
-        if(req.file){
+        let cloudinaryResult;
+        try {
             cloudinaryResult = await uploadToCloudinary(req.file);
+            console.log("Cloudinary result:", cloudinaryResult);
             if (!cloudinaryResult) {
                 return res.status(400).json({ message: "Image upload failed" });
             }
+        } catch (uploadError) {
+            console.error("Cloudinary upload error:", uploadError);
+            return res.status(500).json({ 
+                success: false, 
+                message: "Error uploading image",
+                error: uploadError.message 
+            });
         }
 
 
@@ -131,11 +132,8 @@ exports.productDeleteById = async (req, res) => {
         if (!product) {
             return res.status(404).json({success:false, message: "Product not found" });
         }
-        if (product.image) {
-            const imagePath = path.join(process.cwd(), 'public', product.image);
-            if (fs.existsSync(imagePath)) {
-                fs.unlinkSync(imagePath);
-            }
+        if(product.cloudinaryPublicId){
+            await deleteFromCloudinary(product.cloudinaryPublicId)
         }
 
         await product.deleteOne();
@@ -158,13 +156,16 @@ exports.updateProduct = async (req, res) => {
         }
 
         if(req.file){
-            if(product.image){
-                const oldImagePath = path.join(process.cwd(), 'public', product.image);
-                if(fs.existsSync(oldImagePath)){
-                    fs.unlinkSync(oldImagePath);
-                }
-            }
-            req.body.image = `/assets/${req.file.filename}`
+          const cloudinaryResult = await uploadToCloudinary(req.file);
+          if(!cloudinaryResult){
+            return res.status(400).json({ message: "Image upload failed" });
+          }
+
+          if(product.cloudinaryPublicId){
+            await deleteFromCloudinary(product.cloudinaryPublicId)
+          }
+          req.body.image = cloudinaryResult.url;
+          req.body.cloudinaryPublicId = cloudinaryResult.public_id
         }
 
         const updateProduct = await ProductAdd.findByIdAndUpdate(
