@@ -12,15 +12,12 @@ import { SquarePlus } from 'lucide-react';
 
 const Sidebar = ({ isOpen, onClose }) => {
   const navigate = useNavigate()
-  const { status, token, user } = useSelector((state) => state.app);
   const { data } = useContext(UserDataContext)
   const dispatch = useDispatch();
-  const [showLogout, setShowLogout] = useState(false);
   const email = data.email || "";
   const [localPart, domainPart] = email.includes("@") ? email.split("@") : ["", ""];
-  const [showAddProducts, setShowAddProducts] = useState(false)
-  const [showMessages, setshowMessages] = useState(false);
 
+  const isAuthenticated = Boolean(data && data._id);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -28,19 +25,6 @@ const Sidebar = ({ isOpen, onClose }) => {
       navigate("/login")
   }
   
-  useEffect(() => {
-    if (token && user && status === 'success') {
-      setShowLogout(true);
-      setShowAddProducts(true)
-      setshowMessages(true);
-    } else {
-      setShowLogout(false);
-      setShowAddProducts(false)
-      setshowMessages(false);
-    }
-  }, [token, user, status]);
-
-
   const sidebarVaraints = {
     open: { x: 0, opacity: 1, scale: 1 },
     closed: { x: "-100%", opacity: 0, scale: 0.9 }
@@ -71,6 +55,10 @@ const Sidebar = ({ isOpen, onClose }) => {
     closed: { opacity: 0, y: -20, scale: 0.95 }
   }
 
+  // useEffect(() => {
+  //   console.log("Auth Status:", isAuthenticated);
+  //   console.log("Current User Data:", data);
+  // }, [isAuthenticated, data]);
 
   return (
     <>
@@ -126,7 +114,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             <span className="menu-title">Settings</span>
           </motion.div>
 
-         { showMessages && 
+         { isAuthenticated && 
           <motion.div className="menu-item" onClick={()=>navigate("/messages")}
           variants={itemsVaraints} whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300, damping: 15 }} >
@@ -142,7 +130,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           </motion.div>
 
          {
-          showAddProducts && 
+          isAuthenticated && 
           <motion.div className="menu-item" onClick={()=>navigate(`/${data._id}/add-products-user`)}
           variants={itemsVaraints} whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300, damping: 15 }}>
@@ -152,7 +140,7 @@ const Sidebar = ({ isOpen, onClose }) => {
          }
 
           {
-            showLogout ?
+            isAuthenticated ?
               (
                 <motion.div className="menu-item" onClick={handleLogout}
                   variants={itemsVaraints} whileHover={{ scale: 1.05 }}
