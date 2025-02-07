@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { profileEditUser } from '../SagaRedux/Slice';
 import MessageHandler from '../Signup/MessageHandler';
 import Product from './Product';
+import Skeleton from '@mui/material/Skeleton';
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -14,7 +15,9 @@ const Profile = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [userName, setUserName] = useState(data.username || '');
     const [profileImage, setProfileImage] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
+    // console.log(data)
     const handleProfileUpdate = () => {
         const formData = new FormData();
         formData.append('userId', data._id);
@@ -48,22 +51,23 @@ const Profile = () => {
                 <div className={styles.profileCard}>
                     <div className={styles.profileHeader}>
                         <div className={styles.profileImageContainer}>
+                            
                             <img
                                 className={styles.profileImage}
-                                src={data.profileImage || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
+                                src={data.profileImage || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
                                 alt={data.name}
                             />
                         </div>
                         <div className={styles.profileInfo}>
-                            <h1 className={styles.profileName}>{data.name}</h1>
-                            <p className={styles.profileUsername}>@{data.username}</p>
-                            <p className={styles.profileEmail}>{data.email}</p>
+                            <h1 className={styles.profileName}>{data.name || <Skeleton variant="text" width={380} height={60} />}</h1>
+                            <p className={styles.profileUsername}>{data.username || <Skeleton variant="text" width={280} height={30} />}</p>
+                            <p className={styles.profileEmail}>{data.email || <Skeleton variant="text" width={380} height={30} />}</p>
                         </div>
                     </div>
                     <div className={styles.accountCreateContainer}>
                         <div>
-                            <p className={styles.accountCreate}>Account Create: {new Date(data.createdAt).toLocaleDateString()}, {new Date(data.createdAt).toLocaleTimeString()}</p>
-                            <p className={styles.profileUpdate}>Profile Update: {new Date(data.updatedAt).toLocaleDateString()}, {new Date(data.updatedAt).toLocaleTimeString()}</p>
+                            <p className={styles.accountCreate}>Account Create: { new Date(data.createdAt).toLocaleDateString() ||  <Skeleton variant="text" width={80} height={30} />}, {new Date(data.createdAt).toLocaleTimeString() ||  <Skeleton variant="text" width={80} height={30} />}</p>
+                            <p className={styles.profileUpdate}>Profile Update: {new Date(data.updatedAt).toLocaleDateString() ||  <Skeleton variant="text" width={80} height={30} />}, {new Date(data.updatedAt).toLocaleTimeString() ||  <Skeleton variant="text" width={80} height={30} />}</p>
                         </div>
                         <div className={styles.btnEditProfileContainer} onClick={() => setIsOpen(true)}>
                             <motion.button whileHover={{ scale: 1.05 }}
