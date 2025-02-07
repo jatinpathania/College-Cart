@@ -9,7 +9,7 @@ const productRoute = require("./Routes/productAddRoute");
 const cookieParser = require('cookie-parser');
 const cors = require("cors")
 
-const allowedOrigins = [process.env.FRONTEND_URL, process.env.FRONTEND_DEPLOY_URL];
+const allowedOrigins = [process.env.FRONTEND_URL, process.env.FRONTEND_DEPLOY_URL, process.env.FRONTEND_DEPLOY_URL_VERCEL];
 
 app.get("/",(res,req)=>{
     return req.send("Hello world");
