@@ -5,6 +5,10 @@ import styles from './productCard.module.css';
 import { Ellipsis } from 'lucide-react';
 import { motion } from 'framer-motion';
 import DeleteProduct from './DeleteProduct';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+import { getToken } from '../../util/tokenService';
+
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
 const Product = () => {
@@ -13,96 +17,149 @@ const Product = () => {
   const { data } = useContext(UserDataContext);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [productToDeleteId, setProductToDeleteId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchProductData = async () => {
+      setIsLoading(true);
+      const token = getToken()
+      console.log(token)
       try {
-        const res = await axios.get(`${backend_url}/all-product`);
+        const res = await axios.get(`${backend_url}/all-product`,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         const userProducts = res.data.products.filter(
           (product) => product.userId._id === data._id
         );
         setProducts(userProducts);
       } catch (error) {
         console.error('Error fetching products:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchProductData();
+    if (data._id) fetchProductData();
   }, [data._id]);
 
-  const toggleMenu = (productId)=>{
-    setOpenMenuId(openMenuId === productId ? null : productId)
-  }
+  const toggleMenu = (productId) => {
+    setOpenMenuId(openMenuId === productId ? null : productId);
+  };
 
-  const decDescription = (text) => {
+  const truncateDescription = (text) => {
     const words = text.split(' ');
-    if (words.length > 30) {
-      return words.slice(0, 30).join(' ') + '...';
-    }
-    return text;
+    return words.length > 30 ? words.slice(0, 30).join(' ') + '...' : text;
   };
 
   return (
     <>
-    <div className={styles.productContainer}>
-      {products.map((product) => (
-        <div key={product._id} className={styles.productWrapper}>
-          <div className={styles.productImageContainer}>
-            <motion.img whileHover={{scale:0.9}}
-            transition={{type:"spring", stiffness:300, damping:90}}
-              src={product.image}
-              alt={product.name}
-              className={styles.productImage}
-            />
-            <span className={styles.saleBadge} onClick={() => toggleMenu(product._id)}><Ellipsis />
-            </span>
-            {openMenuId === product._id && (
-              <div className={styles.popupMenu}>
-                <button className={styles.menuItem}>Edit</button>
-                <button className={styles.menuItem}>Update</button>
-                <button className={styles.menuItemDeleteBtn}  onClick={() => {
-                setProductToDeleteId(product._id);
-                setIsDeleteModalOpen(true);
-            }}>Delete</button>
+      <div className={styles.productContainer}>
+        {isLoading
+          ? Array(products.length || 10).fill().map((_, index) => (
+              <div key={index} className={styles.skeletonWrapper}>
+                <Skeleton 
+                  variant="rectangular" 
+                  width={500} 
+                  height={230} 
+                  className={styles.skeletonImageContainer}
+                />
+                <div className={styles.hrline} />
+                <div className={styles.skeletonDetailsContainer}>
+                  <Skeleton variant="text" width="80%" height={20} />
+                  <Skeleton variant="text" width="60%" height={20} />
+                  <Skeleton variant="text" width="70%" height={20} />
+                  <Skeleton variant="text" width="50%" height={20} />
+                  <Skeleton variant="text" width="90%" height={20} />
+                  <Skeleton variant="text" width="80%" height={20} />
+                  <Skeleton variant="text" width="50%" height={20} />
+                  <Skeleton variant="text" width="90%" height={20} />
+                  <Skeleton variant="text" width="80%" height={20} />
+                </div>
+                <div className={styles.skeletonActionsContainer}>
+                  <Skeleton variant="rectangular" width={70} height={30} />
+                  {/* <Skeleton variant="rectangular" width={70} height={30} />
+                  <Skeleton variant="rectangular" width={70} height={30} /> */}
+                </div>
               </div>
-            )}
-          </div>
-          <div className={styles.hrline}/>
-         <div className={styles.allProductContainer}>
-         <div className={styles.nameContainer}>
-            <p className={styles.productName}><span>Name: </span> {product.name}</p>
-          </div>
-          <div>
-            <p className={styles.productBrand}><span>Brand: </span>{product.brand}</p>
-          </div>
-          <div>
-            <p className={styles.productCategory}><span>Category: </span>{product.category}</p>
-          </div>
-          <div>
-            <p className={styles.productSelectHostel}><span>Hostel: </span>{product.selectHostel}</p>
-          </div>
-          <div>
-            <p className={styles.productHostleName}><span>Hostle Name: </span>{product.hostleName}</p>
-          </div>
-          <div>
-            <p className={styles.productRoomNumber}><span>Room Number: </span>{product.roomNumber}</p>
-          </div>
-          <div>
-            <p className={styles.productPrevAmount}><span>Buy Amount: </span>{product.prevAmount}</p>
-          </div>
-          <div>
-            <p className={styles.productNewAmount}><span>Selling Amount: </span>{product.newAmount}</p>
-          </div>
-          <div>
-            <p className={styles.productDescription}><span>Description: </span>{decDescription(product.description)}</p>
-          </div>
-         </div>
-        </div>
-      ))}
-    </div>
-    <DeleteProduct isOpen={isDeleteModalOpen}
+            ))
+          : products.map((product) => (
+              <div key={product._id} className={styles.productWrapper}>
+                <div className={styles.productImageContainer}>
+                  <motion.img
+                    whileHover={{ scale: 0.9 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 90 }}
+                    src={product.image}
+                    alt={product.name}
+                    className={styles.productImage}
+                  />
+                  <span className={styles.saleBadge} onClick={() => toggleMenu(product._id)}>
+                    <Ellipsis />
+                  </span>
+                  {openMenuId === product._id && (
+                    <div className={styles.popupMenu}>
+                      <button className={styles.menuItem}>Edit</button>
+                      <button className={styles.menuItem}>Update</button>
+                      <button
+                        className={styles.menuItemDeleteBtn}
+                        onClick={() => {
+                          setProductToDeleteId(product._id);
+                          setIsDeleteModalOpen(true);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <div className={styles.hrline} />
+                <div className={styles.allProductContainer}>
+                  <p className={styles.productName}>
+                    <span className={styles.item}>Name: </span> {product.name}
+                  </p>
+                  <p className={styles.productBrand}>
+                    <span className={styles.item}>Brand: </span> {product.brand}
+                  </p>
+                  <p className={styles.productCategory}>
+                    <span className={styles.item}>Category: </span> {product.category}
+                  </p>
+                  <p className={styles.productSelectHostel}>
+                    <span className={styles.item}>Choice student: </span> {product.selectHostel}
+                  </p>
+                  {product.selectHostel === 'Hostler' ? (
+                    <>
+                      <p className={styles.productHostleName}>
+                        <span className={styles.item}>Hostel Name: </span> {product.hostleName}
+                      </p>
+                      <p className={styles.productRoomNumber}>
+                        <span className={styles.item}>Room Number: </span> {product.roomNumber}
+                      </p>
+                    </>
+                  ) : (
+                    <p className={styles.productHostleName}>
+                      <span className={styles.item}>Contact number: </span> {product.dayScholarContectNumber}
+                    </p>
+                  )}
+                  <p className={styles.productPrevAmount}>
+                    <span className={styles.item}>Buy Amount: </span> {product.prevAmount}
+                  </p>
+                  <p className={styles.productNewAmount}>
+                    <span className={styles.item}>Selling Amount: </span> {product.newAmount}
+                  </p>
+                  <p className={styles.productDescription}>
+                    <span className={styles.item}>Description: </span> {truncateDescription(product.description)}
+                  </p>
+                </div>
+              </div>
+            ))}
+      </div>
+      <DeleteProduct
+        isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-        productId={productToDeleteId}/>
+        productId={productToDeleteId}
+      />
     </>
   );
 };
