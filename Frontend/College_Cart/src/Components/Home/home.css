@@ -2,7 +2,7 @@
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to right, #1e3c72, #2a5298);
+  background: linear-gradient(to right, #189db1, #1658ca);
   color: white;
 }
 
@@ -47,11 +47,17 @@ nav ul li a:hover {
 
 .hero {
   text-align: center;
-  padding: 120px 20px;
+  padding: 0; /* Remove padding to avoid white spaces */
+  margin: 0; /* Remove default body margin if present */
+  height: 100vh; /* Make the section cover the full height of the viewport */
+  width: 100%; /* Ensure it spans the full width of the screen */
   background: url('https://www.libertyid.com/wp-content/uploads/2017/10/ecommerce-2140604_1920.jpg') no-repeat center center/cover;
   color: rgb(0, 0, 0);
-  animation: fadeIn 1.5s ease-in-out;
+  display: flex; /* Center content vertically and horizontally */
+  justify-content: center;
+  align-items: center;
 }
+
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-20px); }
