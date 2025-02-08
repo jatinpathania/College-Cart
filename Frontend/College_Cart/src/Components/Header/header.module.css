@@ -122,3 +122,71 @@
   display: flex;
   justify-content: space-around;
 }
+
+
+@media screen and (max-width:480px) {
+  .logo{
+    width: 60px;
+    height: 60px;
+  }
+
+  .header {
+    width: 100%;
+  }
+  
+  .menuButton {
+    width: 50px;
+  }
+  
+  .searchContainer {
+    height: 50px;
+    width: 150px;
+    margin: 0px 8px 0px 8px;
+  }
+  
+  .profile{
+    margin: 4px;
+    padding: 0px;
+    gap: 0%;
+    height: 50px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 3px;
+  }
+  .username{
+    font-size: 12px;
+    word-wrap: break-word;
+  }
+
+  .profileDropdown {
+    word-wrap: break-word;
+    width: 200px;
+    height: 70px;
+  }
+  
+  .profileMenu {
+    padding: 1rem;
+  }
+  
+  .dropdownAvatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .profileName {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .profileUsername {
+    font-size: 14px;
+    color: gray;
+  }
+  .profileHeader{
+    display: flex;
+    justify-content: space-around;
+  }
+}
