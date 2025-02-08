@@ -8,6 +8,7 @@ import DeleteProduct from './DeleteProduct';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import { getToken } from '../../util/tokenService';
+import UpdateProduct from './UpdateProduct';
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
@@ -18,6 +19,8 @@ const Product = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [productToDeleteId, setProductToDeleteId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [productToUpdate, setProductToUpdate] = useState(null);
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -101,7 +104,13 @@ const Product = () => {
                   {openMenuId === product._id && (
                     <div className={styles.popupMenu}>
                       <button className={styles.menuItem}>Edit</button>
-                      <button className={styles.menuItem}>Update</button>
+                      <button className={styles.menuItem}
+                      onClick={()=>{
+                        setProductToUpdate(product);
+                        setIsUpdateModalOpen(true); 
+                       }
+                      }
+                      >Update</button>
                       <button
                         className={styles.menuItemDeleteBtn}
                         onClick={() => {
@@ -160,6 +169,11 @@ const Product = () => {
         onClose={() => setIsDeleteModalOpen(false)}
         productId={productToDeleteId}
       />
+      <UpdateProduct 
+        isOpen={isUpdateModalOpen}
+        onClose={() => setIsUpdateModalOpen(false)}
+        productData={productToUpdate}
+        />
     </>
   );
 };
