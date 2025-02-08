@@ -33,6 +33,7 @@ const DeleteProduct = ({ isOpen, onClose, productId}) => {
           }
         });
         toast.success("Product delete successfull");
+        onClose();
       } catch (error) {
         console.error('Error deleting product:', error);
         toast.error("Product delete during error");

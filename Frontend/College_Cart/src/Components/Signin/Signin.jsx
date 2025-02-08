@@ -17,6 +17,7 @@ const Signin = () => {
     e.preventDefault();
     try {
        dispatch(signInUser({ email, password }));
+      //  console.log("calling dispact")
       setError('');
     } catch (err) {
       setError('Failed to signin an account. Please try again.');
