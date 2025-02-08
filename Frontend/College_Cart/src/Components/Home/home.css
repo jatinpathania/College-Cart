@@ -1,0 +1,111 @@
+.container {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+  color: white;
+}
+
+header {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 15px 0;
+}
+
+/* nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+} */
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #f39c12;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  transition: color 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+  color: #f39c12;
+}
+
+.hero {
+  text-align: center;
+  padding: 120px 20px;
+  background: url('https://www.libertyid.com/wp-content/uploads/2017/10/ecommerce-2140604_1920.jpg') no-repeat center center/cover;
+  color: rgb(0, 0, 0);
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.cta {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #e74c3c;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.cta:hover {
+  background: #000000;
+  transform: scale(1.05);
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 60px 20px;
+}
+
+.feature-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  width: 280px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.feature-box:hover {
+  transform: translateY(-10px);
+}
+
+.icon {
+  font-size: 50px;
+  color: #f1c40f;
+  margin-bottom: 10px;
+}
