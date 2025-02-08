@@ -5,6 +5,7 @@ import axios from 'axios';
 import { getToken } from '../../util/tokenService';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
+import Footer from '../Footer/Footer';
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
@@ -106,6 +107,7 @@ const Product = () => {
           ))
         )}
       </div>
+      <Footer/>
     </>
   );
 };
