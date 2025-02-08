@@ -116,7 +116,11 @@ const Profile = () => {
                    
                 </div>
                <div className={styles.totalDetailsForBuyAndSelling}>
-                    
+                    <div>
+                        <p>Total sell the product: <spna>5</spna></p>
+                        <p>Total Buy the product: <span>0</span></p>
+                        <p></p>
+                    </div>
                </div>
             </div>
             <div>
