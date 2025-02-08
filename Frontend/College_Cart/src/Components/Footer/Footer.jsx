@@ -4,7 +4,6 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
-        {/* About Section */}
         <div className="footer-section">
           <h3>About College Cart</h3>
           <ul>
@@ -14,8 +13,6 @@ const Footer = () => {
             <li><a href="#">Contact Us</a></li>
           </ul>
         </div>
-
-        {/* Sell & Buy Section */}
         <div className="footer-section">
           <h3>Sell & Buy</h3>
           <ul>
@@ -25,8 +22,6 @@ const Footer = () => {
             <li><a href="#">Policies</a></li>
           </ul>
         </div>
-
-        {/* Support Section */}
         <div className="footer-section">
           <h3>Support</h3>
           <ul>
@@ -36,8 +31,6 @@ const Footer = () => {
             <li><a href="#">Feedback</a></li>
           </ul>
         </div>
-
-        {/* Social & Contact Section */}
         <div className="footer-section">
           <h3>Connect with Us</h3>
           <ul>
