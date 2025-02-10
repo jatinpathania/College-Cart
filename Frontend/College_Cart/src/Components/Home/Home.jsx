@@ -1,43 +1,66 @@
-import React from 'react'
-import Header from '../Header/Header'
-import './home.css'
-import { FaShoppingCart, FaTags, FaExchangeAlt,FaLinkedin ,FaGithub , FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
+import React from 'react';
+import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import './home.css'
+import Electronic from './Category/Electronices/Electronic';
+import Book from './Category/Books/Book';
+import Clothing from './Category/Clothings/Clothing';
+import Sport from './Category/SportsEquipment/Sport';
+import Stationary from './Category/Stationary/Stationary';
+
 const Home = () => {
   return (
-  <>
-  <Header/>
-    <div className="container">
-      <section className="hero">
-        <div className="hero-overlay">
-          <h1>Buy, Sell & Exchange Items in Your University</h1>
-          <p>Find amazing deals, trade items, and connect with students effortlessly!</p>
-          <a href="#" className="cta">Get Started</a>
-        </div>
-      </section>
+    <>
+      <Header/>
+      <div className="home-container">
+        <section className="hero">
+          <div className="hero-content">
+            <h1>Buy, Sell & Exchange Items in Your University</h1>
+            <p>Find amazing deals, trade items, and connect with students effortlessly!</p>
+            <a href="#get-started" className="cta-button">Get Started</a>
+          </div>
+        </section>
 
-      <section className="features">
-        <div className="feature-box">
-          <FaShoppingCart className="icon" />
-          <h3>Buy</h3>
-          <p>Discover affordable, second-hand items from your peers.</p>
-        </div>
-        <div className="feature-box">
-          <FaTags className="icon" />
-          <h3>Sell</h3>
-          <p>Sell unused stuff and earn extra cash quickly.</p>
-        </div>
-        <div className="feature-box">
-          <FaExchangeAlt className="icon" />
-          <h3>Exchange</h3>
-          <p>Trade items with fellow students easily.</p>
-        </div>
-      </section>
+        <div className="cards-section">
+          <div className="card">
+            <h2>Buy Products</h2>
+            <div className="card-image buy-image"></div>
+            <p>Discover great deals on campus</p>
+            <a href="/buy" className="button">Shop Now</a>
+          </div>
 
-    </div>
-    <Footer/>
-   </> 
-  )
-}
+          <div className="card">
+            <h2>Sell Items</h2>
+            <div className="card-image sell-image"></div>
+            <p>Turn your items into cash</p>
+            <a href="/sell" className="button">Start Selling</a>
+          </div>
 
-export default Home
+          <div className="card">
+            <h2>Exchange Books</h2>
+            <div className="card-image exchange-image"></div>
+            <p>Trade textbooks with students</p>
+            <a href="/exchange" className="button">Exchange Now</a>
+          </div>
+
+          <div className="card">
+            <h2>Student Deals</h2>
+            <div className="card-image deals-image"></div>
+            <p>Special offers for students</p>
+            <a href="/deals" className="button">See Deals</a>
+          </div>
+        </div>
+        <div>
+          <Electronic/>
+          <Book/>
+          <Clothing/>
+          <Sport/>
+          <Stationary/>
+        </div>
+      </div>
+      <Footer/>
+    </>
+  );
+};
+
+export default Home;
