@@ -106,6 +106,15 @@ exports.getAllProduct = async (req, res) => {
         return res.status(500).json({success:false, message: "Error during product fetch",error:error.message });
     }
 }
+exports.getPublicProducts = async (req, res) => {
+    try {
+        const products = await ProductAdd.find().select("name prevAmount newAmount image category"); 
+        return res.status(200).json({ success: true, count: products.length, products });
+    } catch (error) {
+        console.error("Get public products error:", error);
+        return res.status(500).json({ success: false, message: "Error during product fetch", error: error.message });
+    }
+};
 
 exports.getProductById = async (req, res) => {
     const {id}=req.params

@@ -8,7 +8,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const DeleteProduct = ({ isOpen, onClose, productId}) => {
   const dialogRef = useRef(null);
-   console.log(productId)
+  //  console.log(productId)
   useEffect(() => {
     const dialogElement = dialogRef.current;
     if (isOpen) {

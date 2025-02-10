@@ -8,6 +8,7 @@ import { profileEditUser } from '../SagaRedux/Slice';
 import MessageHandler from '../Signup/MessageHandler';
 import Product from './Product';
 import Skeleton from '@mui/material/Skeleton';
+import Footer from "../Footer/Footer"
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -116,15 +117,20 @@ const Profile = () => {
                    
                 </div>
                <div className={styles.totalDetailsForBuyAndSelling}>
-                    
+                    <div>
+                        <p>Total sell the product: <spna>5</spna></p>
+                        <p>Total Buy the product: <span>0</span></p>
+                        <p></p>
+                    </div>
                </div>
             </div>
             <div>
                <Product/>
                </div>
+
             </div>
             <MessageHandler/>
-            
+            <Footer/>
         </>
     );
 };

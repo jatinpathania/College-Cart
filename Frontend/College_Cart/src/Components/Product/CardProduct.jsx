@@ -1,51 +1,79 @@
 import React from 'react';
+import { motion } from "framer-motion";
 import './ProductCard.css';
-import {motion} from "framer-motion"
+
 
 const ProductCard = ({ product }) => {
+
   const decDescription = (text) => {
+    if (!text) return ""; 
     const words = text.split(' ');
-    if (words.length > 30) {
-      return words.slice(0, 30).join(' ') + '...';
+    if (words.length > 20) {
+      return words.slice(0, 20).join(' ') + '...';
     }
     return text;
   };
+
+  const calculateDiscount = () => {
+    if (product.prevAmount > product.newAmount) {
+      const discount = ((product.prevAmount - product.newAmount) / product.prevAmount) * 100;
+      return Math.round(discount);
+    }
+    return 0;
+  };
+
   return (
-    <motion.div className="product-card" 
-    // whileHover={{scale:1.05}}
-    // transition={{ type: "spring", stiffness: 300, damping: 50 }}
-     >
-      <div className="product-image-container">
-        <motion.img whileHover={{scale:0.9}}
-            transition={{type:"spring", stiffness:300, damping:90}}
-         src={product.image} alt={product.name} className="product-image" />
-        {product.newAmount < product.prevAmount && (
-          <span className="sale-badge">Sale</span>
+    <motion.div 
+      className="product-card"
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div className="product-image-wrapper">
+        <motion.img 
+          whileHover={{ scale: 1.05 }}
+          transition={{ type:"spring",stiffness:300, damping:90 }}
+          src={product.image} 
+          alt={product.name} 
+          className="product-image"
+        />
+        {calculateDiscount() > 0 && (
+          <div className="discount-badge">
+            -{calculateDiscount()}%
+          </div>
         )}
       </div>
 
-      <div className="product-details">
-        <div className="product-header">
-          <h2 className="product-name">{product.name}</h2>
-          {/* <span className="product-brand">{product.brand}</span> */}
+      <div className="product-content">
+        <h2 className="product-title">{product.name}</h2>
+        
+        <div className="rating-container">
+          <div className="stars">★★★★☆</div>
+          <span className="rating-count">1,234</span>
+        </div>
+
+        <div className="pricing-section">
+          <div className="price-container">
+            <span className="rupee-symbol">₹</span>
+            <span className="main-price">{product.newAmount}</span>
+            {product.prevAmount !== product.newAmount && (
+              <div className="original-price-container">
+                <span className="mrp">M.R.P.:</span>
+                <span className="original-price">₹{product.prevAmount}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="delivery-info">
+          <span className="prime-icon">✓</span>
+          <span className="delivery-text">Free Delivery</span>
         </div>
 
         <p className="product-description">{decDescription(product.description)}</p>
 
-        <div className="product-pricing">
-          <div className="price-container">
-            <span className="current-price">&#8377; {product.newAmount}</span>
-            {product.prevAmount !== product.newAmount && (
-              <span className="original-price">&#8377; {product.prevAmount}</span>
-            )}
-          </div>
-          <button className="add-to-cart-btn">Add to Cart</button>
-        </div>
-
-        {/* <div className="product-meta">
-          <span>Category: {product.category}</span>
-          <span>Hostel: {product.hostleName}</span>
-        </div> */}
+        <button className="add-to-cart-button">
+          Add to Cart
+        </button>
       </div>
     </motion.div>
   );
