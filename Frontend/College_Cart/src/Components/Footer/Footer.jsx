@@ -8,30 +8,30 @@ const Footer = () => {
         <div className="footer-section">
           <h4>About College Cart</h4>
           <ul>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/team">Our Team</a></li>
-            <li><a href="/careers">Careers</a></li>
-            <li><a href="/contact">Contact Us</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Team</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact Us</a></li>
           </ul>
         </div>
 
         <div className="footer-section">
           <h4>Sell & Buy</h4>
           <ul>
-            <li><a href="/sell">Sell Items</a></li>
-            <li><a href="/buy">Buy Items</a></li>
-            <li><a href="/exchange">Exchange Items</a></li>
-            <li><a href="/policies">Policies</a></li>
+            <li><a href="#">Sell Items</a></li>
+            <li><a href="#">Buy Items</a></li>
+            <li><a href="#">Exchange Items</a></li>
+            <li><a href="#">Policies</a></li>
           </ul>
         </div>
 
         <div className="footer-section">
           <h4>Support</h4>
           <ul>
-            <li><a href="/help">Help Center</a></li>
-            <li><a href="/faqs">FAQs</a></li>
-            <li><a href="/report">Report Issues</a></li>
-            <li><a href="/feedback">Feedback</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Report Issues</a></li>
+            <li><a href="#">Feedback</a></li>
           </ul>
         </div>
 
