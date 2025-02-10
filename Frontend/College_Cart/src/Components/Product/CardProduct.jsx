@@ -6,6 +6,7 @@ import './ProductCard.css';
 const ProductCard = ({ product }) => {
 
   const decDescription = (text) => {
+    if (!text) return ""; 
     const words = text.split(' ');
     if (words.length > 20) {
       return words.slice(0, 20).join(' ') + '...';
