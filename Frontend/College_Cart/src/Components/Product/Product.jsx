@@ -67,13 +67,13 @@ const Product = () => {
   useEffect(() => {
     const fetchProductData = async () => {
       const token = getToken();
+      console.log(token)
+      const apiUrl = token ? `${backend_url}/all-product` : `${backend_url}/public-products`;
+      console.log(apiUrl)
       try {
         setLoading(true);
-        const res = await axios.get(`${backend_url}/all-product`, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
+        const res = await axios.get(apiUrl, {
+          headers: token ? { 'Authorization': `Bearer ${token}` } : {},
         });
         setProducts(res.data.products);
       } catch (error) {
