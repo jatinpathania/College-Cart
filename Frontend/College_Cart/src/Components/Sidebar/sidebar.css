@@ -101,5 +101,34 @@
 }
 .emailUser{
     color: rgb(119, 119, 118);
-    font-size: 12px;
+}
+
+@media screen and (orientation:portrait) and (max-width:480px){
+    
+    .sidebar.open{
+        width: 185px;
+        height: 600px;
+    }
+    .menu-item{
+        padding-left: 0px;
+    }
+    .sidebar-logo{
+        height: 50px;
+        width: 50px;
+    }
+    
+    .image{
+        height: 35px;
+        width:35px;
+    }
+    .profileContainer{
+        padding:0px;
+    }
+    .emailUser{
+        font-size: 13px;
+        display: block;
+        width: 120px;
+        height: 50px;
+        word-wrap: break-word;
+    }
 }
