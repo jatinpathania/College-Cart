@@ -101,6 +101,7 @@
 }
 .emailUser{
     color: rgb(119, 119, 118);
+    font-size: 12px;
 }
 
 @media screen and (orientation:portrait) and (max-width:480px){
