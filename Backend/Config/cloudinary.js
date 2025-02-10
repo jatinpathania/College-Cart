@@ -1,5 +1,5 @@
-const cloudinary = require("cloudinary").v2;
-require('dotenv').config();
+const cloudinary = require('cloudinary').v2;
+const { Readable } = require('stream');
 
 
 cloudinary.config({
@@ -8,31 +8,48 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET
 });
 
-const uploadToCloudinary = async (file)=>{
+const uploadToCloudinary = async (file) => {
     try {
-        if(!file) return null;
-
-        const result = await cloudinary.uploader.upload(file.path,{
-            folder: 'profile_images',
-            width:500,
-            heigth:500,
-            crop:'fill',
-            quality:'auto'
-        })
-
-        return {
-            url: result.secure_url,
-            public_id: result.public_id,
+        if (!file || !file.buffer) {
+            throw new Error('No file provided or invalid file format');
         }
+
+        
+        return new Promise((resolve, reject) => {
+            const stream = cloudinary.uploader.upload_stream(
+                {
+                    folder: 'assets',
+                    resource_type: 'auto'
+                },
+                (error, result) => {
+                    if (error) {
+                        console.error('Upload error:', error);
+                        reject(error);
+                    } else {
+                        resolve({
+                            url: result.secure_url,
+                            public_id: result.public_id
+                        });
+                    }
+                }
+            );
+            const bufferStream = new Readable();
+            bufferStream.push(file.buffer);
+            bufferStream.push(null);
+            bufferStream.pipe(stream);
+        });
     } catch (error) {
         console.error('Cloudinary upload error:', error);
         throw new Error('Error uploading image to Cloudinary');
     }
-}
+};
 
 const deleteFromCloudinary = async (publicId) => {
     try {
-        if (!publicId) return null;
+        if (!publicId) {
+            throw new Error('No public ID provided');
+        }
+
         const result = await cloudinary.uploader.destroy(publicId);
         return result;
     } catch (error) {

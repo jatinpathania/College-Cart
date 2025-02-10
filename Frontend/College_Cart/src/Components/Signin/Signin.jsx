@@ -17,6 +17,7 @@ const Signin = () => {
     e.preventDefault();
     try {
        dispatch(signInUser({ email, password }));
+      //  console.log("calling dispact")
       setError('');
     } catch (err) {
       setError('Failed to signin an account. Please try again.');
@@ -25,7 +26,7 @@ const Signin = () => {
 
   useEffect(()=>{
     if(status==='success' && user && token){
-      setTimeout(()=>{ navigate("/dashboard")},5000)
+      setTimeout(()=>{ navigate("/dashboard")},2000)
       // console.log(user,token)
     }
 

@@ -1,10 +1,12 @@
-.profilePage {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+.profilePageContainer{
     min-height: 100vh;
     padding: 2rem;
     background-color: #f5f5f5;
+}
+.profilePage {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
 }
 
 .profileCard {
@@ -138,7 +140,7 @@ input[type="file"]{
     margin-top: 2rem;
 }
 .updateButton{
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     color: white;
 }
 .updatebtnProfile{
@@ -146,4 +148,14 @@ input[type="file"]{
     margin-left: 15px; 
     align-items: center;
     text-align: center;
+}
+.totalDetailsForBuyAndSelling{
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 40rem;
+    padding: 2rem;
+    margin-top: 20px;
+    height: 240px;
 }

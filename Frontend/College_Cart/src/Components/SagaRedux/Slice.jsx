@@ -6,7 +6,8 @@ const initialState = {
     status: null,
     error: null,
     message: null,
-    isLoading:false
+    isLoading:false,
+    product:null
 }
 
 const Slice = createSlice({
@@ -172,7 +173,27 @@ const Slice = createSlice({
             state.user = null,
             state.message = action.payload.message,
             state.error = action.payload.error
-        } 
+        },
+        productNew:(state)=>{
+            state.status = 'loading',
+            state.isLoading = true,
+            state.error = null,
+            state.message = null
+        },
+        productNewCreateSuccess:(state, action)=>{
+            state.status = 'success',
+            state.isLoading = false,
+            state.product = action.payload.product,
+            state.message = action.payload.message
+            state.error = null
+        },
+        productNewCreateFailed:(state,action)=>{
+            state.status = 'failed',
+            state.isLoading = false,
+            state.product = null,
+            state.message = action.payload.message,
+            state.error = action.payload.error
+        }
 
     }
 })
@@ -200,7 +221,10 @@ export const {
     logout,
     profileEditUser,
     profileEditUserFailed,
-    profileEditUserSuccess
+    profileEditUserSuccess,
+    productNew,
+    productNewCreateFailed,
+    productNewCreateSuccess
 } = Slice.actions;
 
 export default Slice.reducer;

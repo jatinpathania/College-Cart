@@ -51,7 +51,7 @@ const Signup = () => {
   };
   useEffect(()=>{
     if(status==='success' && user && token){
-      setTimeout(()=>{ navigate("/dashboard")},5000)
+      setTimeout(()=>{ navigate("/login")},2000)
     }
 
   },[status,navigate])

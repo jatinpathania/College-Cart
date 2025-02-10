@@ -1,8 +1,8 @@
 import axios from "axios";
-const backend_url = import.meta.env.BACKEND_API_URL;
+const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 import { getToken } from "../../util/tokenService";
 const API = axios.create({
-  baseURL:"http://localhost:8001/api",
+  baseURL:backend_url,
   withCredentials: true,
   headers:{
     'Content-Type':'application/json'
@@ -26,6 +26,11 @@ API.interceptors.request.use(
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
+    if (config.data instanceof FormData) {
+      config.headers['Content-Type'] = 'multipart/form-data';
+  } else {
+      config.headers['Content-Type'] = 'application/json';
+  }
     return config;
   },
   error => Promise.reject(error)
@@ -38,13 +43,16 @@ export const forGotpassword = (password)=>API.post("/for-got-password-send",pass
 export const forGotpasswordVerifyOTP = (otpVerify)=>API.post("/verify-for-got-password",otpVerify);
 export const passwordNewSet = (newPassword)=>API.put("/password",newPassword);
 export const getUserProfile = (getUserProfile)=>API.get("/user-profile",getUserProfile);
+export const productCreate = (newProduct) =>API.post("/product-create",newProduct)
+export const getAllProduct = (allProduct)=>API.get("/all-product",allProduct)
+
 
 
 export const updateProfileAndEdit = (formData) => {
   const userId = formData.get('userId');
   const token = getToken();
 
-  return axios.patch(`http://localhost:8001/api/update-profile/${userId}`, formData, {
+  return axios.patch(`${backend_url}/update-profile/${userId}`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': `Bearer ${token}`
