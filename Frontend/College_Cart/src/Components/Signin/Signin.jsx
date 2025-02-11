@@ -12,15 +12,19 @@ const Signin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const {status,user,token} = useSelector((state)=>state.app)
+  const [isLoading, setIsLoading] = useState(false);
  
   const handleSubmit = async (e) => {
     e.preventDefault();
+   
     try {
        dispatch(signInUser({ email, password }));
       //  console.log("calling dispact")
-      setError('');
+      setError(''); 
+      setIsLoading(true);
     } catch (err) {
       setError('Failed to signin an account. Please try again.');
+      setIsLoading(false);
     }
   };
 
@@ -29,7 +33,9 @@ const Signin = () => {
       setTimeout(()=>{ navigate("/dashboard")},2000)
       // console.log(user,token)
     }
-
+    if (status === 'failed') {
+      setIsLoading(false);
+    }
   },[status,navigate])
 
 
@@ -68,7 +74,7 @@ const Signin = () => {
         </div>
 
         <div className="btnContainer">
-          <button type="submit">Signin</button>
+          <button type="submit"> {isLoading ? 'Signing In...' : 'Sign In'}</button>
         </div>
         <div className="alreadyAccountContainer">
           <p className="alreadyAccount">
