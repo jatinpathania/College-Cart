@@ -156,14 +156,21 @@
 }
 
 @media (max-width: 480px) {
+    .electronics-container{
+        margin:0px 10px 0px 10px;
+        width: 56vh;
+    }
     .products-grid-electronics {
         gap: 10px;
+        width: 55vh;
+        flex-wrap: wrap;
     }
 
     .product-card-electronics {
         flex: 0 0 calc(50% - 5px);
         min-width: 140px;
         padding: 10px;
+        flex-wrap: wrap;
     }
 
     .product-skeleton {

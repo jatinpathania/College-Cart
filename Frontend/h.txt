@@ -2,3 +2,8 @@ hello hardik
 hello jatin
 hello sunny
 
+git status
+git add
+git commit -m ""
+git pull 
+git push

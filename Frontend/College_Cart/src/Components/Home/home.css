@@ -149,6 +149,25 @@
     opacity: 1;
   }
 }
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero{
+    width: 63vh;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+  }
+  .cards-section {
+    grid-template-columns: 1fr;
+    width: 58.3vh;
+  }
+}
+
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2.5rem;

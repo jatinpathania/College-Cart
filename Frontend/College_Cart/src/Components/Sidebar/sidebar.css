@@ -107,8 +107,8 @@
 @media screen and (orientation:portrait) and (max-width:480px){
     
     .sidebar.open{
-        width: 185px;
-        height: 600px;
+        width: 250px;
+        height: 125vh;
     }
     .menu-item{
         padding-left: 0px;

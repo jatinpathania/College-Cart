@@ -128,12 +128,11 @@
 
 @media screen and (max-width:480px) {
   .logo{
-    width: 60px;
-    height: 60px;
+    display: none;
   }
 
   .header {
-    width: 100%;
+    width: 57vh;
   }
   
   .menuButton {
@@ -142,7 +141,7 @@
   
   .searchContainer {
     height: 50px;
-    width: 150px;
+    width: 220px;
     margin: 0px 8px 0px 8px;
   }
   
@@ -159,8 +158,7 @@
     margin-right: 3px;
   }
   .username{
-    font-size: 12px;
-    word-wrap: break-word;
+    display: none;
   }
 
   .profileDropdown {
