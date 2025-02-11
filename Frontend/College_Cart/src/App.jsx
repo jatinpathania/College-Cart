@@ -14,6 +14,7 @@ import Profile from './Components/Profile/Profile'
 import AddProduct from './Components/AddProductForm/AddProduct'
 import Product from './Components/Product/Product'
 import Messages from './Components/Messages/Messages'
+import ProductDetails from './Components/Product/ProductDetails'
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
              <Route path='/:id/add-products-user' element={<ProtectedRoute><AddProduct/></ProtectedRoute>}/>
              <Route path='/all-products' element={<Product/>}/>
              <Route path='/messages' element={<Messages/>}/>
+             <Route path="/:id/product" element={<ProductDetails/>} />
             <Route 
               path='/dashboard' 
               element={
