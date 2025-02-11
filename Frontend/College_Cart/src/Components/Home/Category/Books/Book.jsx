@@ -37,7 +37,7 @@ const Book = () => {
     const fetchProductData = async () => {
       const token = getToken();
       const apiUrl = token ? `${backend_url}/all-product` : `${backend_url}/public-products`;
-      console.log(apiUrl)
+      // console.log(apiUrl)
       try {
         setLoading(true);
         const res = await axios.get(apiUrl, {
@@ -46,7 +46,7 @@ const Book = () => {
         const fileterDataByBook = res.data.products.filter(
           (productcategory) => productcategory.category === 'Books'
         ).slice(0,5);
-        console.log("Books",fileterDataByBook)
+        // console.log("Books",fileterDataByBook)
         setProducts(fileterDataByBook);
       } catch (error) {
         console.log(error);
