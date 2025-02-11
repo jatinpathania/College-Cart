@@ -193,7 +193,22 @@ const Slice = createSlice({
             state.product = null,
             state.message = action.payload.message,
             state.error = action.payload.error
-        }
+        },
+        fetchProductDetails: (state) => {
+            state.status = "loading";
+            state.isLoading = true;
+            state.error = null;
+        },
+        productDetailsSuccess: (state, action) => {
+            state.status = "success";
+            state.isLoading = false;
+            state.product = action.payload;
+        },
+        productDetailsFailed: (state, action) => {
+            state.status = "failed";
+            state.isLoading = false;
+            state.error = action.payload.error;
+        },
 
     }
 })
@@ -224,7 +239,10 @@ export const {
     profileEditUserSuccess,
     productNew,
     productNewCreateFailed,
-    productNewCreateSuccess
+    productNewCreateSuccess,
+    fetchProductDetails,
+    productDetailsFailed,
+    productDetailsSuccess
 } = Slice.actions;
 
 export default Slice.reducer;
