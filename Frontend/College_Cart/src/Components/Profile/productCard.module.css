@@ -120,3 +120,129 @@ span{
 .skeletonDetailsContainer .MuiSkeleton-text {
   transform: none;
 }
+
+@media (max-width: 480px) {
+  .productContainer{
+    margin-left: 0px;
+  }
+  .productWrapper{
+     display: flex;
+      background-color: white;
+      margin: 30px;
+      border-radius: 20px;
+      max-width: 1000px;
+      position: relative; 
+  }
+  .productImage{
+      height: 230px;
+      width: 280px;
+      border-radius: 20px;
+      padding: 10px;
+  }
+  .hrline{
+      width: 1px;
+      height: 230px;
+      background-color: rgb(230, 230, 230);
+      margin: 20px;
+  }
+  .nameContainer{
+    display: flex;
+  }
+  .allProductContainer{
+    /* margin-top: 0px; */
+    padding: 20px;
+  }
+  span{
+   font-weight: 550;
+   font-size: 20px;
+  }
+  .item{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  .saleBadge{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(211, 211, 211);
+    color: rgb(0, 0, 0);
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .popupMenu {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    min-width: 100px;
+    z-index: 10;
+  }
+  .menuItem {
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+  }
+  .menuItem:hover {
+    background-color: rgb(230, 230, 230);
+  }
+  .menuItemDeleteBtn{
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    background-color: red;
+    color: white;
+  }
+  .menuItemDeleteBtn:hover{
+    background-color: rgb(234, 8, 8);
+  }
+  .skeletonWrapper {
+    display: flex;
+    background-color: white;
+    margin: 30px;
+    border-radius: 20px;
+    max-width: 1000px;
+    position: relative;
+  }
+  
+  .skeletonImageContainer {
+    height: 230px;
+    width: 380px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+  
+  .skeletonDetailsContainer {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .skeletonActionsContainer {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+  }
+  .skeletonWrapper .MuiSkeleton-root {
+    background-color: rgba(0, 0, 0, 0.11);
+    border-radius: 4px;
+  }
+  
+  .skeletonDetailsContainer .MuiSkeleton-text {
+    transform: none;
+  }
+  
+}

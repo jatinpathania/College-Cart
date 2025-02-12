@@ -6,6 +6,8 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 998;
+    overflow: hidden;
+    touch-action: none;
 }
 
 .sidebar {
@@ -106,10 +108,18 @@
 
 @media screen and (orientation:portrait) and (max-width:480px){
     
-    .sidebar.open{
-        width: 250px;
-        height: 125vh;
+    .sidebar{
+        width: 280px;
+        height: 100vh;   /* Default full height */
+        min-height: 100vh; /* Ensure full screen */
     }
+
+    body:has(.sidebar.open) {
+        overflow: hidden;
+        height: 100vh;
+        touch-action: none;
+    }
+
     .menu-item{
         padding-left: 0px;
     }
@@ -122,6 +132,7 @@
         height: 35px;
         width:35px;
     }
+    
     .profileContainer{
         padding:0px;
     }

@@ -2,8 +2,14 @@ hello hardik
 hello jatin
 hello sunny
 
+    Steps to do git
 git status
 git add
 git commit -m ""
 git pull 
 git push
+
+  
+  1. side height
+  2. profile css
+  3. sigin/ signup css
