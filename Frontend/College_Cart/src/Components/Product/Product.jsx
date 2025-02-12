@@ -18,7 +18,8 @@ const ProductSkeleton = () => {
         padding: '15px',
         border: '1px solid #e0e0e0',
         borderRadius: '8px',
-        background: '#fff'
+        background: '#fff',
+        margin:'10px'
       }}
     >
       <Skeleton
