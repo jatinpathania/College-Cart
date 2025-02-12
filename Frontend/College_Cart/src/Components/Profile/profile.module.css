@@ -172,3 +172,172 @@ input[type="file"]{
     color: rgb(0, 0, 0);
     font-size: 18px;
 }
+
+@media (max-width: 480px) {
+    .profilePageContainer{
+        padding: 2px;
+        margin: 0px;
+        width: 62.2vh;
+    }
+    .profilePage {
+        width: 62.2vh;
+        display: block;
+    }
+    
+    .profileCard {
+        width: 55vh;
+    }
+    
+    .profileHeader {
+        width: 55vh;
+        margin: 0px;
+        
+    }
+    
+    .profileImageContainer {
+        flex-shrink: 0;
+        position: relative;
+    }
+    
+    .profileImage {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .profileImage:hover {
+        transform: scale(1.05);
+    }
+    
+    .profileInfo {
+        flex-grow: 1;
+    }
+    
+    .profileName {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #333;
+        margin: 0 0 0.5rem 0;
+    }
+    
+    .profileUsername {
+        font-size: 1.1rem;
+        color: #666;
+        margin: 0;
+    }
+    .profileEmail{
+        font-size: 1.1rem;
+        color: #666;
+        margin: 0.5rem 0 0 0;
+    }
+    .accountCreate{
+        font-size: 1.1rem;
+        color: #666;
+        margin: 0.5rem 0 0 0;
+    }
+    .profileUpdate{
+        font-size: 1.1rem;
+        color: #666;
+        margin: 0.5rem 0 0 0;
+    }
+    .accountCreateContainer{
+        display: flex;
+        justify-content: space-between;
+    }
+    .btnEditProfileContainer{
+        margin-top: 15px;
+    }
+    .btn{
+        background-color: #66666669;
+        width: 100px;
+        color: rgb(0, 0, 0);
+        font-weight: 540;
+        font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+    }
+    .dialog{
+        display: flex;
+        align-items: center;
+    }
+    .dialogContainer{
+        position: fixed;
+        inset: 0;
+        background-color: black;
+        opacity: 0.9;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .dialogPage{
+        background-color: rgb(255, 255, 255);
+        padding: 50px;
+        border-radius: 20px;
+        width: 400px;
+        height: 200px;
+    }
+    .textDialog{
+        column-rule: black;
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 0px;
+    }
+    input[type="file"]{
+        background-color: rgb(255, 255, 255);
+        color: black;
+    }
+    .changeUsername{
+      background-color: white;
+    }
+    /* input[type="text"]{
+        color: black;
+        margin-bottom: 20px;
+    }  */
+    .usernameContainer{
+     margin-left: 25px;
+     /* text-align: center; */
+     margin-top: 2rem;
+    } 
+    .fileUploadContainer{
+        margin-left: 30px;
+        margin: 10px;
+        text-align: center;
+        margin-top: 2rem;
+    }
+    .updateButton{
+        background-color: rgb(0, 0, 0);
+        color: white;
+    }
+    .updatebtnProfile{
+        margin-top: 20px;
+        margin-left: 15px; 
+        align-items: center;
+        text-align: center;
+    }
+    .totalDetailsForBuyAndSelling{
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 40rem;
+        padding: 2rem;
+        margin-top: 20px;
+        height: 240px;
+        text-align: center;
+    }
+    .totalDetailsForBuyAndSelling p {
+        font-size: 20px;
+        color: #000000;
+        margin: 10px 0;
+        font-weight: 600;
+    
+    }
+    .totalDetailsForBuyAndSelling span {
+        font-weight: bold;
+        color: rgb(0, 0, 0);
+        font-size: 18px;
+    }
+}
