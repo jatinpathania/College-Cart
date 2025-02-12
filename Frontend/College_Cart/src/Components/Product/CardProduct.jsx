@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import './ProductCard.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const ProductCard = ({ product }) => {
-
+  const navigate = useNavigate()
   const decDescription = (text) => {
     if (!text) return ""; 
     const words = text.split(' ');
@@ -24,6 +25,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <motion.div 
+    onClick={()=>navigate(`/${product._id}/product`)}
       className="product-card"
       whileHover={{ y: -5 }}
       transition={{ duration: 0.2 }}

@@ -45,7 +45,7 @@ export const passwordNewSet = (newPassword)=>API.put("/password",newPassword);
 export const getUserProfile = (getUserProfile)=>API.get("/user-profile",getUserProfile);
 export const productCreate = (newProduct) =>API.post("/product-create",newProduct)
 export const getAllProduct = (allProduct)=>API.get("/all-product",allProduct)
-
+export const getProductDetails = (productId) => API.get(`/${productId}/product`);
 
 
 export const updateProfileAndEdit = (formData) => {

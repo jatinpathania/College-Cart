@@ -10,11 +10,11 @@ import style from "./header.module.css";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const { data } = useContext(UserDataContext);
   const [show, setShow] = useState(false);
   const profileRef = useRef(null);
   const navigate = useNavigate();
+  const { searchQuery, setSearchQuery } = useContext(UserDataContext);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
