@@ -12,15 +12,18 @@ const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
 const ProductSkeleton = () => {
   return (
-    <Box
+   <div className='skeletonContainer'>
+     <Box
       sx={{
-        width: 300,
+        width: 330,
         padding: '15px',
         border: '1px solid #e0e0e0',
         borderRadius: '8px',
         background: '#fff',
-        margin:'10px'
+        marginRight:'30px',
+        marginLeft:"0"
       }}
+      
     >
       <Skeleton
         variant="rectangular"
@@ -59,6 +62,7 @@ const ProductSkeleton = () => {
         sx={{ borderRadius: '20px' }}
       />
     </Box>
+   </div>
   );
 };
 
