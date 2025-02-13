@@ -62,9 +62,16 @@
     margin: 0;
 }
 .profileEmail{
-    font-size: 1.1rem;
+    /* font-size: 1.1rem; */
     color: #666;
     margin: 0.5rem 0 0 0;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+    font-size: 16px;
+    line-height: 1.4;
+    padding: 0 10px;
 }
 .accountCreate{
     font-size: 1.1rem;
@@ -108,14 +115,13 @@
     background-color: rgb(255, 255, 255);
     padding: 50px;
     border-radius: 20px;
-    width: 400px;
-    height: 200px;
+    width: 430px;
+    height: 300px;
 }
-.textDialog{
-    column-rule: black;
+.textDialogText{
+    color: black;
     font-size: 20px;
     text-align: center;
-    margin-bottom: 0px;
 }
 input[type="file"]{
     background-color: rgb(255, 255, 255);
@@ -129,15 +135,15 @@ input[type="file"]{
     margin-bottom: 20px;
 }  */
 .usernameContainer{
- margin-left: 25px;
+ /* margin-left: 25px; */
  /* text-align: center; */
- margin-top: 2rem;
+ /* margin-top: 2rem; */
 } 
 .fileUploadContainer{
-    margin-left: 30px;
-    margin: 10px;
-    text-align: center;
-    margin-top: 2rem;
+    /* margin-left: 30px; */
+    /* margin: 10px;
+    text-align: center; */
+    margin-top: 1rem;
 }
 .updateButton{
     background-color: rgb(0, 0, 0);
@@ -146,8 +152,8 @@ input[type="file"]{
 .updatebtnProfile{
     margin-top: 20px;
     margin-left: 15px; 
-    align-items: center;
-    text-align: center;
+    /* align-items: center;
+    text-align: center; */
 }
 .totalDetailsForBuyAndSelling{
     background: white;
@@ -157,7 +163,7 @@ input[type="file"]{
     max-width: 40rem;
     padding: 2rem;
     margin-top: 20px;
-    height: 240px;
+    height: 310px;
     text-align: center;
 }
 .totalDetailsForBuyAndSelling p {
@@ -173,171 +179,177 @@ input[type="file"]{
     font-size: 18px;
 }
 
-@media (max-width: 480px) {
-    .profilePageContainer{
-        padding: 2px;
-        margin: 0px;
-        width: 62.2vh;
-    }
+.profilePageContainer {
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: #f5f5f5;
+}
+
+.profilePage {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.profileCard {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 40rem;
+    padding: 2rem;
+    margin-top: 20px;
+}
+
+.profileHeader {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.profileImageContainer {
+    flex-shrink: 0;
+}
+
+.profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.profileInfo {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.totalDetailsForBuyAndSelling {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 40rem;
+    padding: 2rem;
+    margin-top: 20px;
+    text-align: center;
+}
+@media screen and (max-width: 1024px) {
     .profilePage {
-        width: 62.2vh;
-        display: block;
+        flex-direction: column;
+        align-items: center;
     }
-    
-    .profileCard {
-        width: 55vh;
+
+    .profileCard,
+    .totalDetailsForBuyAndSelling {
+        max-width: 100%;
     }
-    
+}
+@media screen and (max-width: 768px) {
+    .profilePageContainer {
+        padding: 1rem;
+    }
+
     .profileHeader {
-        width: 55vh;
-        margin: 0px;
-        
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
     }
-    
-    .profileImageContainer {
-        flex-shrink: 0;
-        position: relative;
-    }
-    
-    .profileImage {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 4px solid white;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }
-    
-    .profileImage:hover {
-        transform: scale(1.05);
-    }
-    
+
     .profileInfo {
-        flex-grow: 1;
-    }
-    
-    .profileName {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #333;
-        margin: 0 0 0.5rem 0;
-    }
-    
-    .profileUsername {
-        font-size: 1.1rem;
-        color: #666;
-        margin: 0;
-    }
-    .profileEmail{
-        font-size: 1.1rem;
-        color: #666;
-        margin: 0.5rem 0 0 0;
-    }
-    .accountCreate{
-        font-size: 1.1rem;
-        color: #666;
-        margin: 0.5rem 0 0 0;
-    }
-    .profileUpdate{
-        font-size: 1.1rem;
-        color: #666;
-        margin: 0.5rem 0 0 0;
-    }
-    .accountCreateContainer{
-        display: flex;
-        justify-content: space-between;
-    }
-    .btnEditProfileContainer{
-        margin-top: 15px;
-    }
-    .btn{
-        background-color: #66666669;
-        width: 100px;
-        color: rgb(0, 0, 0);
-        font-weight: 540;
-        font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
-    }
-    .dialog{
-        display: flex;
-        align-items: center;
-    }
-    .dialogContainer{
-        position: fixed;
-        inset: 0;
-        background-color: black;
-        opacity: 0.9;
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .dialogPage{
-        background-color: rgb(255, 255, 255);
-        padding: 50px;
-        border-radius: 20px;
-        width: 400px;
-        height: 200px;
-    }
-    .textDialog{
-        column-rule: black;
-        font-size: 20px;
-        text-align: center;
-        margin-bottom: 0px;
-    }
-    input[type="file"]{
-        background-color: rgb(255, 255, 255);
-        color: black;
-    }
-    .changeUsername{
-      background-color: white;
-    }
-    /* input[type="text"]{
-        color: black;
-        margin-bottom: 20px;
-    }  */
-    .usernameContainer{
-     margin-left: 25px;
-     /* text-align: center; */
-     margin-top: 2rem;
-    } 
-    .fileUploadContainer{
-        margin-left: 30px;
-        margin: 10px;
-        text-align: center;
-        margin-top: 2rem;
-    }
-    .updateButton{
-        background-color: rgb(0, 0, 0);
-        color: white;
-    }
-    .updatebtnProfile{
-        margin-top: 20px;
-        margin-left: 15px; 
-        align-items: center;
-        text-align: center;
-    }
-    .totalDetailsForBuyAndSelling{
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         width: 100%;
-        max-width: 40rem;
-        padding: 2rem;
-        margin-top: 20px;
-        height: 240px;
+    }
+
+    .profileName {
+        font-size: 1.5rem;
+    }
+
+    .profileUsername,
+    .profileEmail,
+    .accountCreate,
+    .profileUpdate {
+        font-size: 0.9rem;
+    }
+
+    .accountCreateContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .dialogPage {
+        width: 90%;
+        padding: 1.5rem;
+        height: auto;
+    }
+}
+@media screen and (max-width: 480px) {
+    .profilePageContainer {
+        padding: 0.5rem;
+        width: 63vh;
+    }
+
+    .profileCard {
+        padding: 1rem;
+    }
+
+    .profileImage {
+        width: 120px;
+        height: 120px;
+    }
+
+    .btn {
+        width: 120px;
+        font-size: 0.9rem;
+    }
+
+    .dialogPage {
+        padding: 1rem;
+    }
+
+    .textDialogText {
+        font-size: 1.2rem;
+    }
+
+    .totalDetailsForBuyAndSelling p {
+        font-size: 16px;
+    }
+
+    .totalDetailsForBuyAndSelling span {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .dialogPage {
+        width: 95%;
+        max-width: none;
+        margin: 0 10px;
+    }
+
+    .usernameContainer,
+    .fileUploadContainer {
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    .updatebtnProfile {
+        margin: 1rem 0;
         text-align: center;
     }
-    .totalDetailsForBuyAndSelling p {
-        font-size: 20px;
-        color: #000000;
-        margin: 10px 0;
-        font-weight: 600;
-    
+
+    .updateButton {
+        width: 100%;
+        padding: 0.8rem;
     }
-    .totalDetailsForBuyAndSelling span {
-        font-weight: bold;
-        color: rgb(0, 0, 0);
-        font-size: 18px;
+
+    input[type="text"],
+    input[type="file"] {
+        width: 100%;
+        padding: 0.5rem;
     }
 }
