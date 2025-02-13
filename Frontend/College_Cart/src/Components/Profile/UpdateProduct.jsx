@@ -25,6 +25,7 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
   const [formData, setFormData] = useState({
     name: '',
     brand: '',
+    quantity:'',
     category: '',
     selectHostel: '',
     hostleName: '',
@@ -40,6 +41,7 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
       setFormData({
         name: productData.name || '',
         brand: productData.brand || '',
+        quantity: productData.quantity || '',
         category: productData.category || '',
         selectHostel: productData.selectHostel || '',
         hostleName: productData.hostleName || '',
@@ -88,10 +90,15 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
 
       await axios.put(`${backend_url}/${productData._id}/product-update`, formData, {
         headers: {
-          'Content-Type': 'application/form-data',
+          'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`
         }
       });
+
+      if(formData.quantity===0){
+        toast.success("Product deleted successfully because quantity reached zero")
+        return;
+      }
       
       toast.success("Product updated successfully");
       onClose();
@@ -125,6 +132,18 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
               type="text"
               name="brand"
               value={formData.brand}
+              onChange={handleChange}
+              className="inputColorText"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Quantity</label>
+            <input
+              type="Number"
+              name="quantity"
+              value={formData.quantity}
               onChange={handleChange}
               className="inputColorText"
               required
