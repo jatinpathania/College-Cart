@@ -1,12 +1,13 @@
 .product-card {
-    width: 300px;
+    width: 330px;
     background: #fff;
     border-radius: 8px;
     padding: 15px;
     transition: all 0.3s ease;
     border: 1px solid #e0e0e0;
     position: relative;
-    margin-left: 10px;
+    margin-left: 0px;
+    margin-right: 20px;
 }
 
 .product-card:hover {
@@ -158,4 +159,9 @@
 
 .add-to-cart-button:hover {
     background: #F7CA00;
+}
+@media screen and (max-width:480px){
+    .product-cart-container, .skeletonContainer{
+      margin-left:140px;
+    }
 }
