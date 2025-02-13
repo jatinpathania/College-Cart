@@ -30,6 +30,11 @@ const productAddFormSchema = new mongoose.Schema({
         enum: PRODUCT_CATEGORIES,
         required: [true, "Product category is required"]
     },
+    quantity:{
+       type:Number,
+       required:[true, "Quantity is required"],
+       default:1
+    },
     selectHostel: {
         type: String,
         enum: ["Hostler", "Day Scholar"],
@@ -74,6 +79,13 @@ const productAddFormSchema = new mongoose.Schema({
         required: true
     }
 },{timestamps:true})
+
+productAddFormSchema.pre('save', function(next){
+    if(this.quantity === 0){
+        this.remove();
+    }
+    next();
+})
 
 const ProductAdd = mongoose.model("ProductAdd",productAddFormSchema);
 
