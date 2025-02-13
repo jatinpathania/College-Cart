@@ -4,6 +4,7 @@ import { getToken } from '../../../../util/tokenService';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import './electronic.css';
+import Button from '../../Button/Button';
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
@@ -61,7 +62,7 @@ const Electronic = () => {
       <div className="electronics-header">
         <h2 className="electronics-title">
           Electronics
-          <span className="see-more-electronics">See more</span>
+          <span ><Button/></span>
         </h2>
       </div>
       <div className="products-grid-electronics">
