@@ -9,11 +9,12 @@
     max-width: 1000px;
     position: relative; 
 }
-.productImage{
+.productImageProfile{
     height: 230px;
-    width: 280px;
+    width: 300px;
     border-radius: 20px;
     padding: 10px;
+    margin-top: 30px;
 }
 .hrline{
     width: 1px;
@@ -120,129 +121,215 @@ span{
 .skeletonDetailsContainer .MuiSkeleton-text {
   transform: none;
 }
+.productContainer {
+  margin-left: 360px;
+  padding: 1rem;
+}
 
-@media (max-width: 480px) {
-  .productContainer{
-    margin-left: 0px;
+.productWrapper {
+  display: flex;
+  background-color: white;
+  margin: 30px;
+  border-radius: 20px;
+  max-width: 1000px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.productImageProfile {
+  height: 230px;
+  width: 300px;
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 30px;
+  object-fit: cover;
+}
+
+.hrline {
+  width: 1px;
+  height: 230px;
+  background-color: rgb(230, 230, 230);
+  margin: 20px;
+}
+
+.allProductContainer {
+  padding: 20px;
+  flex: 1;
+}
+
+span {
+  font-weight: 550;
+  font-size: 20px;
+}
+
+.item {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.saleBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgb(211, 211, 211);
+  color: rgb(0, 0, 0);
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.popupMenu {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+  z-index: 10;
+}
+.skeletonWrapper {
+  display: flex;
+  background-color: white;
+  margin: 30px;
+  border-radius: 20px;
+  max-width: 1000px;
+  position: relative;
+}
+@media screen and (max-width: 1200px) {
+  .productContainer {
+      margin-left: 0;
+      padding: 1rem;
   }
-  .productWrapper{
-     display: flex;
-      background-color: white;
-      margin: 30px;
-      border-radius: 20px;
-      max-width: 1000px;
-      position: relative; 
+
+  .productWrapper {
+      margin: 20px auto;
+      width: 90%;
   }
-  .productImage{
-      height: 230px;
-      width: 280px;
-      border-radius: 20px;
+}
+@media screen and (max-width: 900px) {
+  .productWrapper {
+      flex-direction: column;
+      align-items: center;
+      margin: 20px auto;
+      width: 95%;
+  }
+
+  .productImageProfile {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      margin: 15px 0;
+  }
+
+  .hrline {
+      width: 90%;
+      height: 1px;
+      margin: 10px auto;
+  }
+
+  .allProductContainer {
+      width: 100%;
+      padding: 15px;
+  }
+
+  span {
+      font-size: 18px;
+  }
+
+  .skeletonWrapper {
+      flex-direction: column;
+      width: 95%;
+      margin: 20px auto;
+  }
+
+  .skeletonImageContainer {
+      width: 100%;
+      height: 200px;
+      margin: 10px 0;
+  }
+}
+@media screen and (max-width: 600px) {
+  .productContainer {
+      padding: 0.5rem;
+  }
+
+  .productWrapper {
+      margin: 15px auto;
+      width: 100%;
+      border-radius: 15px;
+  }
+
+  .productImageProfile {
+      max-width: 100%;
+      padding: 8px;
+      margin-top: 15px;
+  }
+
+  span {
+      font-size: 16px;
+  }
+
+  .allProductContainer {
       padding: 10px;
   }
-  .hrline{
-      width: 1px;
-      height: 230px;
-      background-color: rgb(230, 230, 230);
-      margin: 20px;
+
+  .saleBadge {
+      padding: 3px 8px;
+      font-size: 14px;
   }
-  .nameContainer{
-    display: flex;
-  }
-  .allProductContainer{
-    /* margin-top: 0px; */
-    padding: 20px;
-  }
-  span{
-   font-weight: 550;
-   font-size: 20px;
-  }
-  .item{
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  }
-  .saleBadge{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: rgb(211, 211, 211);
-    color: rgb(0, 0, 0);
-    padding: 5px 10px;
-    border-radius: 10px;
-    cursor: pointer;
-  }
+
   .popupMenu {
-    position: absolute;
-    top: 40px;
-    right: 10px;
-    background-color: white;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    min-width: 100px;
-    z-index: 10;
+      min-width: 90px;
   }
-  .menuItem {
-    padding: 8px 12px;
-    border: none;
-    background: none;
-    text-align: left;
-    cursor: pointer;
-    width: 100%;
+
+  .menuItem, 
+  .menuItemDeleteBtn {
+      padding: 6px 10px;
+      font-size: 14px;
   }
-  .menuItem:hover {
-    background-color: rgb(230, 230, 230);
-  }
-  .menuItemDeleteBtn{
-    padding: 8px 12px;
-    border: none;
-    background: none;
-    text-align: left;
-    cursor: pointer;
-    width: 100%;
-    background-color: red;
-    color: white;
-  }
-  .menuItemDeleteBtn:hover{
-    background-color: rgb(234, 8, 8);
-  }
-  .skeletonWrapper {
-    display: flex;
-    background-color: white;
-    margin: 30px;
-    border-radius: 20px;
-    max-width: 1000px;
-    position: relative;
-  }
-  
-  .skeletonImageContainer {
-    height: 230px;
-    width: 380px;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 10px;
-    margin-left: 20px;
-  }
-  
+
   .skeletonDetailsContainer {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
+      padding: 10px;
+      gap: 8px;
   }
   
-  .skeletonActionsContainer {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
+}
+@media screen and (max-width: 400px) {
+  .productWrapper {
+      margin: 10px auto;
   }
-  .skeletonWrapper .MuiSkeleton-root {
-    background-color: rgba(0, 0, 0, 0.11);
-    border-radius: 4px;
+
+  .productImageProfile {
+      height: 180px;
   }
-  
-  .skeletonDetailsContainer .MuiSkeleton-text {
-    transform: none;
+
+  span {
+      font-size: 14px;
   }
-  
+
+  .allProductContainer p {
+      margin: 5px 0;
+      font-size: 14px;
+  }
+
+  .skeletonWrapper {
+      margin: 10px auto;
+  }
+
+  .skeletonImageContainer {
+      height: 150px;
+      width: 200px;
+  }
+}
+@media print {
+  .productContainer {
+      margin: 0;
+  }
+
+  .saleBadge,
+  .popupMenu {
+      display: none;
+  }
 }
