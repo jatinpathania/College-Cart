@@ -5,7 +5,7 @@
   padding: 0.5rem 1.5rem;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 70px;
+  height: 90px;
 }
 
 .headerLeft {
@@ -132,8 +132,72 @@
   }
 
   .header {
-    width: 57vh;
+    width: 63vh;
   }
+  
+  .menuButton {
+    width: 50px;
+  }
+  
+  .searchContainer {
+    height: 50px;
+    width: 220px;
+    margin: 0px 8px 0px 8px;
+  }
+  
+  .profile{
+    margin: 4px;
+    padding: 0px;
+    gap: 0%;
+    height: 50px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 3px;
+  }
+  .username{
+    display: none;
+  }
+
+  .profileDropdown {
+    word-wrap: break-word;
+    width: 200px;
+    height: 70px;
+  }
+  
+  .profileMenu {
+    padding: 1rem;
+  }
+  
+  .dropdownAvatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .profileName {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .profileUsername {
+    font-size: 14px;
+    color: gray;
+  }
+  .profileHeader{
+    display: flex;
+    justify-content: space-around;
+  }
+}
+@media screen and (min-width:480px) and (max-width:1200px) {
+  .logo{
+    display: none;
+  }
+
+  /* .header {
+    width: 100%;
+  } */
   
   .menuButton {
     width: 50px;
