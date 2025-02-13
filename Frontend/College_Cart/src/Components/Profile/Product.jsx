@@ -91,13 +91,15 @@ const Product = () => {
           : products.map((product) => (
               <div key={product._id} className={styles.productWrapper}>
                 <div className={styles.productImageContainer}>
+                  <div style={{width:"300px",display:"flex",alignItems:'center',justifyItems:"center"}}>
                   <motion.img
                     whileHover={{ scale: 0.9 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 90 }}
                     src={product.image}
                     alt={product.name}
-                    className={styles.productImage}
+                    className={styles.productImageProfile}
                   />
+                    </div>
                   <span className={styles.saleBadge} onClick={() => toggleMenu(product._id)}>
                     <Ellipsis />
                   </span>
@@ -130,6 +132,9 @@ const Product = () => {
                   </p>
                   <p className={styles.productBrand}>
                     <span className={styles.item}>Brand: </span> {product.brand}
+                  </p>
+                  <p className={styles.productBrand}>
+                    <span className={styles.item}>Quantity: </span> {product.quantity}
                   </p>
                   <p className={styles.productCategory}>
                     <span className={styles.item}>Category: </span> {product.category}
