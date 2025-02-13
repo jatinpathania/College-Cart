@@ -35,6 +35,7 @@ const ProductDetails = () => {
                             
                             <div className="price-block">
                                 <Skeleton variant="text" width={100} height={40} /> 
+                                <Skeleton variant="text" width={100} height={40} /> 
                                 <Skeleton variant="text" width={150} height={20} />
                                 <Skeleton variant="text" width={120} height={16} />
                             </div>
@@ -92,6 +93,7 @@ const ProductDetails = () => {
                         <div className="brand-link">Visit the {product?.product.brand} Store</div>
                         
                         <div className="price-block">
+                        <h2 className="text-black">Quantity: {product?.product.quantity}</h2>
                             <div className="price-section">
                                 <span className="rupee-symbol">&#8377; </span>
                                 <span className="current-price">{product?.product.newAmount}</span>
