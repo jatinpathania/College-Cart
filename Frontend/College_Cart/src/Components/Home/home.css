@@ -164,7 +164,7 @@
   }
   .cards-section {
     grid-template-columns: 1fr;
-    width: 58.3vh;
+    width: 63vh;
   }
 }
 
