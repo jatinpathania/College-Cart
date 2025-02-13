@@ -24,7 +24,8 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <motion.div 
+    <div className='product-cart-container'>
+      <motion.div 
     onClick={()=>navigate(`/${product._id}/product`)}
       className="product-card"
       whileHover={{ y: -5 }}
@@ -66,10 +67,10 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
 
-        <div className="delivery-info">
+        {/* <div className="delivery-info">
           <span className="prime-icon">✓</span>
           <span className="delivery-text">Free Delivery</span>
-        </div>
+        </div> */}
 
         <p className="product-description">{decDescription(product.description)}</p>
 
@@ -78,6 +79,7 @@ const ProductCard = ({ product }) => {
         </button>
       </div>
     </motion.div>
+    </div>
   );
 };
 
