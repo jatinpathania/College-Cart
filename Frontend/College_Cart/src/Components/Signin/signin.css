@@ -124,7 +124,7 @@ input[type="password"] {
 @media screen and (orientation:portrait) and (max-width: 472px) {
     .form {
         padding: 0px;
-        width: 350px;
+        width: 450px;
     }
     .signupText {
         margin-left: 20px;
@@ -210,6 +210,7 @@ input[type="password"] {
         font-size: 18px;
         cursor: pointer;
         margin-top: 10px;
+        margin-right: 50px
     }
     .forgotpassword:hover{
         color: rgb(105, 105, 105);
