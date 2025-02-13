@@ -89,7 +89,7 @@ const Profile = () => {
                                             exit={{ y: "100vh" }}
                                             transition={{ duration: 0.5 }}
                                         >
-                                            <h2 className={styles.textDialog}>Hello {data.name}</h2>
+                                            <h2 className={styles.textDialogText}>Hello {data.name}</h2>
                                             <div className={styles.usernameContainer}>
                                                 <input type='text' style={{color:"black"}}
                                                     id='name' className={styles.changeUsername} placeholder='Change userName....' 
@@ -118,8 +118,8 @@ const Profile = () => {
                 </div>
                <div className={styles.totalDetailsForBuyAndSelling}>
                     <div>
-                        <p>Total Products Sold: <spna>5</spna></p>
-                        <p>Total Products Bought: <span>0</span></p>
+                        <p>Total sell the product: <spna>5</spna></p>
+                        <p>Total Buy the product: <span>0</span></p>
                         <p></p>
                     </div>
                </div>
