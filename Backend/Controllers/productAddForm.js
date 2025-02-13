@@ -28,7 +28,7 @@ exports.createProduct = async (req, res) => {
 
         console.log("file created",req.file)
 
-        const { cloudinaryPublicId,name, brand, category, selectHostel, hostleName, roomNumber, dayScholarContectNumber, prevAmount, newAmount, description } = req.body;
+        const { cloudinaryPublicId,name, brand, category,quantity, selectHostel, hostleName, roomNumber, dayScholarContectNumber, prevAmount, newAmount, description } = req.body;
 
         if (!req.user?._id) {
             return res.status(401).json({
@@ -37,7 +37,14 @@ exports.createProduct = async (req, res) => {
             });
         }
 
-        if (!name || !brand || !category || !selectHostel || !prevAmount || !newAmount || !description) {
+        if (quantity === 0) {
+            return res.status(400).json({
+                success: false,
+                message: "Cannot create product with zero quantity"
+            });
+        }
+
+        if (!name || !brand || !category || !quantity || !selectHostel || !prevAmount || !newAmount || !description) {
             return res.status(400).json({ message: "Missing required fields" });
         }
 
@@ -77,6 +84,7 @@ exports.createProduct = async (req, res) => {
             name,
             brand,
             category,
+            quantity,
             selectHostel,
             hostleName,
             roomNumber,
@@ -154,14 +162,30 @@ exports.productDeleteById = async (req, res) => {
     }
 }
 
+async function handleProductDeletion(product) {
+    if (product.cloudinaryPublicId) {
+        await deleteFromCloudinary(product.cloudinaryPublicId);
+    }
+    await product.deleteOne();
+}
+
 exports.updateProduct = async (req, res) => {
     const {id} = req.params;
+    // console.log(req.body, id)
     try {
         const product = await ProductAdd.findById({
             _id:id
         });
         if (!product) {
             return res.status(404).json({success:false, message: "Product not found" });
+        }
+
+        if (Number(req.body.quantity) === 0) {
+            await handleProductDeletion(product);
+            return res.status(200).json({
+                success: true,
+                message: "Product deleted successfully because quantity reached zero"
+            });
         }
 
         if(req.file){
