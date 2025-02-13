@@ -23,6 +23,7 @@ const AddProduct = () => {
         name: '',
         brand: '',
         category: '',
+        quantity:'',
         selectHostel: '',
         hostleName: '',
         roomNumber: '',
@@ -74,6 +75,7 @@ const AddProduct = () => {
             setFormData({
                 name: '',
                 brand: '',
+                quantity:'',
                 selectHostel: '',
                 hostleName: '',
                 roomNumber: '',
@@ -118,6 +120,19 @@ const AddProduct = () => {
                                 value={formData.brand}
                                 onChange={handleChange}
                                 placeholder="Enter brand name"
+                            // required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="form-label">Quantity*</label>
+                            <input
+                                type="number"
+                                name="quantity"
+                                className="form-input"
+                                value={formData.quantity}
+                                onChange={handleChange}
+                                placeholder="Enter quantity"
+                                min="0"
                             // required
                             />
                         </div>
