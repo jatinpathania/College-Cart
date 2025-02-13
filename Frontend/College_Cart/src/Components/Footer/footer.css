@@ -91,7 +91,7 @@
 
 @media (max-width: 480px) {
   .footer{
-    width: 55.6vh;
+    width: 63vh;
   }
   .footer-content {
     grid-template-columns: 1/3;
