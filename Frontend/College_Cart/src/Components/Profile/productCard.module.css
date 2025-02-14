@@ -1,5 +1,5 @@
 .productContainer{
-  margin-left: 360px;
+  /* margin-left: 360px; */
 }
 .productWrapper{
    display: flex;
@@ -136,14 +136,14 @@ span{
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.productImageProfile {
+/* .productImageProfile {
   height: 230px;
   width: 300px;
   border-radius: 20px;
   padding: 10px;
   margin-top: 30px;
   object-fit: cover;
-}
+} */
 
 .hrline {
   width: 1px;
