@@ -71,7 +71,7 @@
     max-width: 100%;
     font-size: 16px;
     line-height: 1.4;
-    padding: 0 10px;
+    /* padding: 0 10px; */
 }
 .accountCreate{
     font-size: 1.1rem;
