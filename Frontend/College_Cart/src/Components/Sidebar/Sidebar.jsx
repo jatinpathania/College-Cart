@@ -1,14 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import './sidebar.css';
 import icon from "../../assets/logo.jpeg";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { logout } from '../SagaRedux/Slice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { UserDataContext } from '../Header/context';
 import { motion } from "framer-motion"
-import { SquarePlus } from 'lucide-react';
+import { SquarePlus, LayoutDashboard, User, Settings,Mail, LogOut,LogIn,KeyRound, Barcode } from 'lucide-react';
 
 const Sidebar = ({ isOpen, onClose }) => {
   const navigate = useNavigate()
@@ -96,21 +96,21 @@ const Sidebar = ({ isOpen, onClose }) => {
             variants={itemsVaraints} whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
           >
-            <span className="menu-icon">🏠</span>
+            <span className="menu-icon">  <LayoutDashboard color='red'/></span>
             <span className="menu-title">Dashboard</span>
           </motion.div>
 
           <motion.div variants={itemsVaraints} whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
             className="menu-item" onClick={() => navigate(`/${data._id}/user-profile`)}>
-            <span className="menu-icon">👤</span>
+            <span className="menu-icon"> <User/></span>
             <span className="menu-title">Profile</span>
           </motion.div>
 
           <motion.div variants={itemsVaraints} whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
             className="menu-item">
-            <span className="menu-icon">⚙️</span>
+            <span className="menu-icon">  <Settings /></span>
             <span className="menu-title">Settings</span>
           </motion.div>
 
@@ -118,14 +118,14 @@ const Sidebar = ({ isOpen, onClose }) => {
           <motion.div className="menu-item" onClick={()=>navigate("/messages")}
           variants={itemsVaraints} whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300, damping: 15 }} >
-          <span className="menu-icon">✉️</span>
+          <span className="menu-icon"> <Mail /></span>
           <span className="menu-title">Messages</span>
         </motion.div>}
 
           <motion.div className="menu-item"
             variants={itemsVaraints} whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }} onClick={()=>navigate("/all-products")}>
-            <span className="menu-icon">📊</span>
+            <span className="menu-icon"> <Barcode /></span>
             <span className="menu-title">Products</span>
           </motion.div>
 
@@ -134,7 +134,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           <motion.div className="menu-item" onClick={()=>navigate(`/${data._id}/add-products-user`)}
           variants={itemsVaraints} whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300, damping: 15 }}>
-          <span className="menu-icon"><SquarePlus color='red' /></span>
+          <span className="menu-icon"><SquarePlus /></span>
           <span className="menu-title">Add Products</span>
         </motion.div>
          }
@@ -145,14 +145,14 @@ const Sidebar = ({ isOpen, onClose }) => {
                 <motion.div className="menu-item" onClick={handleLogout}
                   variants={itemsVaraints} whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300, damping: 15 }}>
-                  <span className="menu-icon">🚪</span>
+                  <span className="menu-icon">  <LogOut /></span>
                   <span className="menu-title">Logout</span>
                 </motion.div>
               ) : (
                 <motion.div className="menu-item" onClick={() => navigate("/login")}
                   variants={itemsVaraints} whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300, damping: 15 }}>
-                  <span className="menu-icon">🚪</span>
+                  <span className="menu-icon">    <KeyRound /></span>
                   <span className="menu-title">Signup / Signin</span>
                 </motion.div>
               )
