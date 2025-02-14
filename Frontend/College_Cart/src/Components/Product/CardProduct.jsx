@@ -2,10 +2,18 @@ import React from 'react';
 import { motion } from "framer-motion";
 import './ProductCard.css';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../Redux/Slice';
 
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const handleAddToCart=()=>{
+    dispatch(addToCart(product))
+  }
+
   const decDescription = (text) => {
     if (!text) return ""; 
     const words = text.split(' ');
@@ -26,12 +34,13 @@ const ProductCard = ({ product }) => {
   return (
     <div className='product-cart-container'>
       <motion.div 
-    onClick={()=>navigate(`/${product._id}/product`)}
+   
       className="product-card"
       whileHover={{ y: -5 }}
       transition={{ duration: 0.2 }}
     >
-      <div className="product-image-wrapper">
+     <div >
+     <div className="product-image-wrapper" onClick={()=>navigate(`/${product._id}/product`)}>
         <motion.img 
           whileHover={{ scale: 1.05 }}
           transition={{ type:"spring",stiffness:300, damping:90 }}
@@ -74,7 +83,8 @@ const ProductCard = ({ product }) => {
 
         <p className="product-description">{decDescription(product.description)}</p>
 
-        <button className="add-to-cart-button">
+     </div>
+        <button className="add-to-cart-button" onClick={handleAddToCart}>
           Add to Cart
         </button>
       </div>
