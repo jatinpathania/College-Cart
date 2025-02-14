@@ -15,6 +15,7 @@ import AddProduct from './Components/AddProductForm/AddProduct'
 import Product from './Components/Product/Product'
 import Messages from './Components/Messages/Messages'
 import ProductDetails from './Components/Product/ProductDetails'
+import CartProduct from './Components/CartProduct/CartProduct'
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
              <Route path='/all-products' element={<Product/>}/>
              <Route path='/messages' element={<Messages/>}/>
              <Route path="/:id/product" element={<ProductDetails/>} />
+             <Route path='/addCartProudct' element={<CartProduct/>}/>
             <Route 
               path='/dashboard' 
               element={
