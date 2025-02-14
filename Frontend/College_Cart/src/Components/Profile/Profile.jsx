@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Header from '../Header/Header';
 import { UserDataContext } from '../Header/context';
 import styles from "./profile.module.css"; 
@@ -16,9 +16,7 @@ const Profile = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [userName, setUserName] = useState(data.username || '');
     const [profileImage, setProfileImage] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
 
-    // console.log(data)
     const handleProfileUpdate = () => {
         const formData = new FormData();
         formData.append('userId', data._id);
