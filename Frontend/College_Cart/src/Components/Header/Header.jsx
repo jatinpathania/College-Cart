@@ -7,6 +7,8 @@ import Sidebar from "../Sidebar/Sidebar";
 import icon from "../../assets/logo.jpeg";
 import { UserDataContext } from "./context";
 import style from "./header.module.css"; 
+import { FaCartPlus } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +17,8 @@ const Header = () => {
   const profileRef = useRef(null);
   const navigate = useNavigate();
   const { searchQuery, setSearchQuery } = useContext(UserDataContext);
-
+  const {totalQuantity, itemList }= useSelector((state) => state.cart)
+  // console.log(totalQuantity,itemList)
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -49,6 +52,13 @@ const Header = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             className={style.searchInput}
           />
+        </div >
+
+        <div className={style.addProductCart} onClick={()=>navigate('/addCartProudct')}>
+        <FaCartPlus size={44}/>
+        <div className={style.productCountInCart}>
+         <p>{totalQuantity}</p>
+        </div>
         </div>
 
         <div className={style.headerRight} ref={profileRef}>
