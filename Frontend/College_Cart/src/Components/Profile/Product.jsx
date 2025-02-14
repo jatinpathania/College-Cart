@@ -6,7 +6,6 @@ import { Ellipsis } from 'lucide-react';
 import { motion } from 'framer-motion';
 import DeleteProduct from './DeleteProduct';
 import Skeleton from '@mui/material/Skeleton';
-import Stack from '@mui/material/Stack';
 import { getToken } from '../../util/tokenService';
 import UpdateProduct from './UpdateProduct';
 
@@ -26,7 +25,7 @@ const Product = () => {
     const fetchProductData = async () => {
       setIsLoading(true);
       const token = getToken()
-      console.log(token)
+      // console.log(token)
       try {
         const res = await axios.get(`${backend_url}/all-product`,{
           headers: {
