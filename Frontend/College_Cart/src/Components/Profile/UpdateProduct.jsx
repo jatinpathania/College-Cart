@@ -88,19 +88,13 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
         formDataToSend.append('image', selectedImage);
       }
 
-      await axios.put(`${backend_url}/${productData._id}/product-update`, formData, {
+    const response =  await axios.put(`${backend_url}/${productData._id}/product-update`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`
         }
       });
-
-      if(formData.quantity===0){
-        toast.success("Product deleted successfully because quantity reached zero")
-        return;
-      }
-      
-      toast.success("Product updated successfully");
+      toast.success(response.data.message);
       onClose();
     } catch (error) {
       console.error('Error updating product:', error);
