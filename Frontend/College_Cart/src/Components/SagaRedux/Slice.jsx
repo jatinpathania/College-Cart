@@ -209,7 +209,21 @@ const Slice = createSlice({
             state.isLoading = false;
             state.error = action.payload.error;
         },
-
+        cartAdd:(state)=>{
+            state.status = "loading";
+            state.isLoading = true;
+            state.error = null;
+        },
+        cartAddSuccess: (state, action) => {
+            state.status = "success";
+            state.isLoading = false;
+            state.product = action.payload;
+        },
+        cartAddFailed: (state, action) => {
+            state.status = "failed";
+            state.isLoading = false;
+            state.error = action.payload.error;
+        },
     }
 })
 
@@ -242,7 +256,10 @@ export const {
     productNewCreateSuccess,
     fetchProductDetails,
     productDetailsFailed,
-    productDetailsSuccess
+    productDetailsSuccess,
+    cartAdd,
+    cartAddSuccess,
+    cartAddFailed,
 } = Slice.actions;
 
 export default Slice.reducer;
