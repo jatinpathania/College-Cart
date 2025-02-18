@@ -9,7 +9,9 @@ import { UserDataContext } from "./context";
 import style from "./header.module.css"; 
 import { FaCartPlus } from "react-icons/fa";
 import { useSelector } from "react-redux";
-
+import { getToken } from "../../util/tokenService";
+import axios from "axios";
+const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data } = useContext(UserDataContext);
@@ -17,8 +19,8 @@ const Header = () => {
   const profileRef = useRef(null);
   const navigate = useNavigate();
   const { searchQuery, setSearchQuery } = useContext(UserDataContext);
-  const {totalQuantity, itemList }= useSelector((state) => state.cart)
-  // console.log(totalQuantity,itemList)
+  const [cartItems, setCartItems] = useState([]);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -32,6 +34,28 @@ const Header = () => {
     };
   }, []);
 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = getToken()
+      try {
+        const res = await axios.get(`${backend_url}/all-cart-product`,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        
+        setCartItems(res.data.item);
+        console.log(res.data.item)
+      } catch (error) {
+        console.log(error);
+      } 
+    };
+    fetchData();
+  }, [cartItems]);
+  // console.log(cartItems.length)
+  
 
   return (
     <>
@@ -57,7 +81,7 @@ const Header = () => {
         <div className={style.addProductCart} onClick={()=>navigate('/addCartProudct')}>
         <FaCartPlus size={44}/>
         <div className={style.productCountInCart}>
-         <p>{totalQuantity}</p>
+         <p>{cartItems.length}</p>
         </div>
         </div>
 
