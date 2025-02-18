@@ -17,7 +17,9 @@ import {
     productNewCreateSuccess,
     productNewCreateFailed,
     productDetailsFailed,
-    productDetailsSuccess
+    productDetailsSuccess,
+    cartAddSuccess,
+    cartAddFailed,
 } from './Slice'
 
 import * as api from "./api"
@@ -173,6 +175,19 @@ function* fetchProductDetailsSaga(action) {
     }
 }
 
+function* cartAddProductSaga(action){
+    try {
+        const response = yield call(api.cartProductAdd, action.payload);
+        yield put(cartAddSuccess(response.data));
+    } catch (error) {
+        yield put(cartAddFailed({
+            message: error.response?.data?.message || error.message,
+            error: error.message
+        }));
+    }
+}
+
+
 function* Saga() {
     yield takeLatest('app/signUpUser', signUpUserSaga);
     yield takeLatest('app/signInUser', signInUserSaga);
@@ -183,5 +198,6 @@ function* Saga() {
     yield takeLatest('app/profileEditUser', profileUpdate);
     yield takeLatest('app/productNew', createProductNew);
     yield takeLatest('app/fetchProductDetails', fetchProductDetailsSaga);
+    yield takeLatest('app/cartAdd',cartAddProductSaga);
 }
 export default Saga
