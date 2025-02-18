@@ -6,6 +6,7 @@ require('dotenv').config();
 const PORT = process.env.PORT ?? 3000;
 const forgotPassword = require("./Routes/forgotpassword");
 const productRoute = require("./Routes/productAddRoute");
+const cartProduct = require("./Routes/cartProductAdd")
 const cookieParser = require('cookie-parser');
 const cors = require("cors")
 
@@ -39,6 +40,7 @@ app.use(cookieParser());
 app.use("/api",signupRoute);
 app.use("/api",forgotPassword);
 app.use("/api", productRoute);
+app.use("/api", cartProduct);
 
 app.listen(PORT,()=>{
     console.log(`Server Started at PORT: ${PORT}`);
