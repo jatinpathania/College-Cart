@@ -6,7 +6,8 @@ import Electronic from './Category/Electronices/Electronic';
 import Book from './Category/Books/Book';
 import Clothing from './Category/Clothings/Clothing';
 import Sport from './Category/SportsEquipment/Sport';
-import Stationary from './Category/Stationary/Stationary';
+// import Stationary from './Category/Stationary/Stationary';
+import Grocery from './Category/Grocery/Grocery';
 
 const Home = () => {
   return (
@@ -55,7 +56,8 @@ const Home = () => {
           <Book/>
           <Clothing/>
           <Sport/>
-          <Stationary/>
+          {/* <Stationary/> */}
+          <Grocery/>
         </div>
       </div>
       <Footer/>
