@@ -83,6 +83,7 @@ const Product = () => {
           headers: token ? { 'Authorization': `Bearer ${token}` } : {},
         });
         setProducts(res.data.products);
+        // console.log(res.data.products)
       } catch (error) {
         console.log(error);
       } finally {
