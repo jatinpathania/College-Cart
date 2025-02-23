@@ -2,12 +2,13 @@ const mongoose = require("mongoose")
 
 const PRODUCT_CATEGORIES = [
     "Electronics",
-    "Furniture",
+    // "Furniture",
     "Clothing",
     "Books",
-    "Stationary",
+    // "Stationary",
     "Sports Equipment",
-    "Miscellaneous"
+    // "Miscellaneous",
+    "Grocery",
 ];
 
 const productAddFormSchema = new mongoose.Schema({
@@ -77,6 +78,11 @@ const productAddFormSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
+    },
+    stock:{
+        type:Number,
+        required:false,
+        default:1,
     }
 },{timestamps:true})
 
