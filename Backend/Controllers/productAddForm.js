@@ -4,6 +4,7 @@ const { v4: uuid4 } = require("uuid")
 const ProductAdd = require("../Model/productAddForm");
 const multer = require("multer");
 const {uploadToCloudinary, deleteFromCloudinary} = require("../Config/cloudinary");
+const Cart = require("../Model/cartProductAdd");
 const storage = multer.memoryStorage()
 
 const upload = multer({
@@ -114,6 +115,72 @@ exports.getAllProduct = async (req, res) => {
         return res.status(500).json({success:false, message: "Error during product fetch",error:error.message });
     }
 }
+exports.updateStockZeroAndOne = async (req, res) => {
+    try {
+        const cartItems = await Cart.find();
+        const products = await ProductAdd.find().populate('userId', 'name');
+
+        const filteredCartItems = cartItems.filter(item =>
+            products.some(product => product._id.toString() === item.productId.toString())
+        );
+
+        if (filteredCartItems.length > 0) {
+          
+            const productQuantityMap = new Map();
+
+            products.forEach(product => {
+                productQuantityMap.set(product._id.toString(), {
+                    totalQuantity: product.quantity,
+                    cartQuantity: 0
+                });
+            });
+
+            filteredCartItems.forEach(item => {
+                const productId = item.productId.toString();
+                if (productQuantityMap.has(productId)) {
+                    const data = productQuantityMap.get(productId);
+                    data.cartQuantity += item.quantity || 0;
+                    productQuantityMap.set(productId, data);
+                }
+            });
+            
+            const updatePromises = Array.from(productQuantityMap.entries()).map(([productId, data]) => {
+                const remainingQuantity = data.totalQuantity - data.cartQuantity;
+                return ProductAdd.updateOne(
+                    { _id: productId },
+                    { $set: { stock: remainingQuantity <= 0 ? 0 : 1 } }
+                );
+            });
+            const updateResults = await Promise.all(updatePromises);
+            const totalUpdates = updateResults.reduce((sum, result) => sum + result.modifiedCount, 0);
+
+            return res.status(200).json({
+                success: true,
+                message: "Stock updated successfully",
+                updatedProducts: totalUpdates
+            });
+        } else {
+            const resetResult = await ProductAdd.updateMany(
+                {},
+                { $set: { stock: 1 } }
+            );
+
+            return res.status(200).json({
+                success: true,
+                message: "All products stock reset to 1",
+                updatedProducts: resetResult.modifiedCount
+            });
+        }
+    } catch (error) {
+        console.error("Stock update error:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Error updating stock",
+            error: error.message
+        });
+    }
+};
+
 exports.getPublicProducts = async (req, res) => {
     try {
         const products = await ProductAdd.find().select("name prevAmount newAmount image category"); 
