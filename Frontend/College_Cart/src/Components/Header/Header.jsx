@@ -47,7 +47,7 @@ const Header = () => {
         });
         
         setCartItems(res.data.item);
-        console.log(res.data.item)
+        // console.log(res.data.item)
       } catch (error) {
         console.log(error);
       } 
