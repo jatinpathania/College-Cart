@@ -11,12 +11,13 @@ const AddProduct = () => {
 
     const PRODUCT_CATEGORIES = [
         "Electronics",
-        "Furniture",
+        // "Furniture",
         "Clothing",
         "Books",
-        "Stationary",
+        // "Stationary",
         "Sports Equipment",
-        "Miscellaneous"
+        // "Miscellaneous"
+        "Grocery"
     ];
 
     const [formData, setFormData] = useState({
