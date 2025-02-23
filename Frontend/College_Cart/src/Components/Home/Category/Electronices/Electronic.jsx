@@ -5,6 +5,7 @@ import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import './electronic.css';
 import Button from '../../Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
@@ -34,6 +35,8 @@ const Electronic = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchProductData = async () => {
       const token = getToken();
@@ -62,7 +65,7 @@ const Electronic = () => {
       <div className="electronics-header">
         <h2 className="electronics-title">
           Electronics
-          <span ><Button/></span>
+          <span onClick={()=>navigate("/all-electronic-item")} ><Button/></span>
         </h2>
       </div>
       <div className="products-grid-electronics">
