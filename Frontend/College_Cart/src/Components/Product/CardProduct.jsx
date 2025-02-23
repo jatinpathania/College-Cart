@@ -1,31 +1,54 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { motion } from "framer-motion";
 import './ProductCard.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../Redux/Slice';
 import { cartAdd } from '../SagaRedux/Slice';
-import store from '../SagaRedux/Store'
+import store from '../SagaRedux/Store';
 import { UserDataContext } from '../Header/context';
+import axios from 'axios';
+import { getToken } from '../../util/tokenService';
 
+const backend_url = import.meta.env.VITE_BACKEND_API_URL;
+
+const Stock = ({ product }) => {
+  useEffect(() => {
+    const stockUpdate = async () => {
+      const token = getToken();
+      if (!token) return;
+
+      try {
+        await axios.put(`${backend_url}/${product._id}/update-stock`, {}, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+      } catch (error) {
+        console.error('Stock update error:', error);
+      }
+    };
+    stockUpdate();
+  }, []);
+
+  return (
+    <span className={`stock-status ${product.stock === 0 ? 'out-of-stock' : 'in-stock'}`}>
+      {product.stock === 0 ? ' (Out of Stock)' : ' (In Stock)'}
+    </span>
+  );
+};
 
 const ProductCard = ({ product }) => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  //  const { itemList,totalQuantity } = useSelector((state) => state.cart);
-  const { data } = useContext(UserDataContext)
-  const cart = useSelector((state) => state.cart);
-  const handleAddToCart = () => {
-    // console.log(totalQuantity)
-    dispatch(addToCart(product));
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { data } = useContext(UserDataContext);
 
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+    
     const totalQuantity = store.getState().cart.totalQuantity;
-    // console.log(totalQuantity)
-   
- console.log(totalQuantity)
+
     setTimeout(() => {
       const updatedState = store.getState().cart.itemList;
-      const storeItem = updatedState.find(item => item._id === product._id)
+      const storeItem = updatedState.find(item => item._id === product._id);
       if (storeItem) {
         const cartItem = {
           productId: storeItem._id,
@@ -43,7 +66,7 @@ const ProductCard = ({ product }) => {
           description: storeItem.description,
           productQuantity: storeItem.productQuantity,
           quantity: storeItem.quantity,
-          totalQuantity:totalQuantity
+          totalQuantity: totalQuantity
         };
 
         dispatch(cartAdd(cartItem));
@@ -71,12 +94,11 @@ const ProductCard = ({ product }) => {
   return (
     <div className='product-cart-container'>
       <motion.div
-
         className="product-card"
         whileHover={{ y: -5 }}
         transition={{ duration: 0.2 }}
       >
-        <div >
+        <div>
           <div className="product-image-wrapper" onClick={() => navigate(`/${product._id}/product`)}>
             <motion.img
               whileHover={{ scale: 1.05 }}
@@ -107,31 +129,27 @@ const ProductCard = ({ product }) => {
                 {product.prevAmount !== product.newAmount && (
                   <div className="original-price-container">
                     <span className="mrp">M.R.P.:</span>
-                    <span className="original-price">&#8377; {product.prevAmount}</span>
+                    <span className="original-price">₹ {product.prevAmount}</span>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* <div className="delivery-info">
-          <span className="prime-icon">✓</span>
-          <span className="delivery-text">Free Delivery</span>
-        </div> */}
-
             <p className="product-description">{decDescription(product.description)}</p>
-
           </div>
           {data && data._id ? (
-            <button className="add-to-cart-button" onClick={handleAddToCart}>
-              Add to Cart
+            <button 
+              className={`add-to-cart-button ${product.stock === 0 ? 'disabled' : ''}`} 
+              onClick={handleAddToCart}
+              disabled={product.stock === 0}
+            >
+              Add to Cart <Stock product={product} />
             </button>
           ) : (
             <button className="add-to-cart-button" onClick={() => navigate('/login')}>
               Add to Cart
             </button>
           )}
-
-
         </div>
       </motion.div>
     </div>
