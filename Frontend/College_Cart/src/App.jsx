@@ -16,6 +16,7 @@ import Product from './Components/Product/Product'
 import Messages from './Components/Messages/Messages'
 import ProductDetails from './Components/Product/ProductDetails'
 import CartProduct from './Components/CartProduct/CartProduct'
+import Electronic from './Components/Home/Category/Electronices/ExploreElectronices/Electronic'
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
              <Route path='/messages' element={<Messages/>}/>
              <Route path="/:id/product" element={<ProductDetails/>} />
              <Route path='/addCartProudct' element={<CartProduct/>}/>
+             <Route path='/all-electronic-item' element={<Electronic/>}/>
             <Route 
               path='/dashboard' 
               element={
