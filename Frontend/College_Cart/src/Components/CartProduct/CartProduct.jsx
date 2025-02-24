@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { MinusIcon, PlusIcon } from 'lucide-react';
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -6,19 +6,20 @@ import ProductPriceDetails from './ProductPriceDetails';
 import { addToCart, removeFromCart } from '../Redux/Slice';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
-import { UserDataContext } from '../Header/context';
+import React, { useEffect, useState } from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import { getToken } from '../../util/tokenService';
+import RemoveCartItem from './RemoveCartItem';
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
 const CartProduct = () => {
-  const { itemList } = useSelector((state) => state.cart);
+
   const dispatch = useDispatch();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { data } = useContext(UserDataContext);
+  const [cartProductDeleteId, setCartProductDeleteId] = useState(null);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
 
   const textName = (text) => {
     const words = text.split(' ');
@@ -36,6 +37,7 @@ const CartProduct = () => {
     if (item.quantity > 1) {
       dispatch(removeFromCart(item));
     }
+    // console.log(item)
     toast.success("Decreased one Quantity from Product");
   };
 
@@ -43,13 +45,13 @@ const CartProduct = () => {
     const fetchData = async () => {
       const token = getToken()
       try {
-        const res = await axios.get(`${backend_url}/all-cart-product`,{
+        const res = await axios.get(`${backend_url}/all-cart-product`, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           }
         });
-        
+        console.log(res.data.item)
         setCartItems(res.data.item);
       } catch (error) {
         console.log(error);
@@ -60,6 +62,12 @@ const CartProduct = () => {
     fetchData();
   }, []);
 
+  const handleOpenDeleteDialog = (id) => {
+    setCartProductDeleteId(id);
+    setDeleteDialogOpen(true);
+    // console.log(id)
+  };
+
   // const userCartItems = cartItems.filter(item => item.userId === data?._id);
   // console.log(userCartItems.length)
   return (
@@ -69,7 +77,7 @@ const CartProduct = () => {
         <div className="mx-auto max-w-6xl flex">
           <div className="bg-white shadow-sm mt-10 w-full">
             {loading ? (
-              Array.from({ length: 3 }).map((_, index) => (
+              Array.from({ length: 6 }).map((_, index) => (
                 <div key={index} className="border-b p-4 flex">
                   <Skeleton variant="rectangular" width={100} height={100} />
                   <div className="pl-4 flex-1">
@@ -91,12 +99,12 @@ const CartProduct = () => {
                         className="h-24 w-24 object-contain"
                       />
                       <div className="mt-10 flex items-center space-x-2">
-                        <button 
-                          onClick={() => handleDecreaseQuantity(item)} 
+                        <button
+                          onClick={() => handleDecreaseQuantity(item)}
                           disabled={item.quantity <= 1}
                           className={`flex h-7 w-7 items-center justify-center border border-gray-300 text-black
-                            ${item.quantity <= 1 
-                              ? 'bg-gray-100 cursor-not-allowed text-gray-400' 
+                            ${item.quantity <= 1
+                              ? 'bg-gray-100 cursor-not-allowed text-gray-400'
                               : 'bg-gray-300 hover:bg-gray-400'
                             }`}
                         >
@@ -108,8 +116,8 @@ const CartProduct = () => {
                           value={item.quantity || 1}
                           readOnly
                         />
-                        <button 
-                          onClick={() => handleIncreaseQuantity(item)} 
+                        <button
+                          onClick={() => handleIncreaseQuantity(item)}
                           disabled={item.quantity >= item.productQuantity}
                           className={`flex h-7 w-7 items-center justify-center border border-gray-300 text-black
                             ${item.quantity >= item.productQuantity
@@ -126,7 +134,7 @@ const CartProduct = () => {
                       <p className="mt-1 text-sm text-gray-500">
                         {item.selectHostel && `Hostel: ${item.hostleName}`}
                         {item.roomNumber && `, Room: ${item.roomNumber}`}
-                        {item.dayScholarContectNumber && 
+                        {item.dayScholarContectNumber &&
                           `, Contact: ${item.dayScholarContectNumber}`}
                       </p>
                       <p className="mt-1 text-sm text-gray-500">
@@ -149,7 +157,8 @@ const CartProduct = () => {
                         <button className="text-sm font-bold hover:text-blue-700">
                           SAVE FOR LATER
                         </button>
-                        <button className="text-sm font-bold hover:text-blue-700">
+                        <button className="text-sm font-bold hover:text-blue-700"
+                          onClick={() => handleOpenDeleteDialog(item._id)}>
                           REMOVE
                         </button>
                       </div>
@@ -162,6 +171,12 @@ const CartProduct = () => {
           <ProductPriceDetails />
         </div>
       </div>
+      <RemoveCartItem
+        isOpen={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+        cartItemId={cartProductDeleteId}
+      />
+
       <Footer />
       <Toaster />
     </>
