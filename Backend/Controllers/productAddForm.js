@@ -183,7 +183,7 @@ exports.updateStockZeroAndOne = async (req, res) => {
 
 exports.getPublicProducts = async (req, res) => {
     try {
-        const products = await ProductAdd.find().select("name prevAmount newAmount image category"); 
+        const products = await ProductAdd.find().select("name prevAmount newAmount image category stock"); 
         return res.status(200).json({ success: true, count: products.length, products });
     } catch (error) {
         console.error("Get public products error:", error);
