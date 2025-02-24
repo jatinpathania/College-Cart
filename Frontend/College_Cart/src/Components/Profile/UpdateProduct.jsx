@@ -8,12 +8,13 @@ const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
 const PRODUCT_CATEGORIES = [
   "Electronics",
-  "Furniture",
+  // "Furniture",
   "Clothing",
   "Books",
-  "Stationary",
+  // "Stationary",
   "Sports Equipment",
-  "Miscellaneous"
+  // "Miscellaneous"
+  "Grocery"
 ];
 
 const UpdateProduct = ({ isOpen, onClose, productData }) => {
