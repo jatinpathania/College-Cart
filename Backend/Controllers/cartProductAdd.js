@@ -76,3 +76,33 @@ exports.deleteProductByIdForCart = async(req,res)=>{
      res.status(500).json({success:false, message:"Cart product deletion during error"})
   }
 }
+
+exports.updateQunatityFiled = async(req,res)=>{
+  const {id} = req.params;
+  const {quantity} = req.body
+  try {
+    const cartProduct = await Cart.findById({
+      _id:id
+    })
+  
+    if(!cartProduct){
+      return res.status(404).json({success:false, message:"Cart item not found"});
+    }
+    if (quantity > cartProduct.productQuantity) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Cannot add quantity. Not available product stock."
+      });
+    }
+    const newTotalPrice =  cartProduct.price * quantity;
+       const updateCartItemQunatity = await Cart.findByIdAndUpdate({_id:id},
+        { $set:{quantity:quantity,totalPrice : newTotalPrice}},
+         {new:true},
+        )
+    
+    return res.status(200).json({updateCartItemQunatity})
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({success:false, message:"Cart product updating filed quantity during error"})
+  }
+}
