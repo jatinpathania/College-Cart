@@ -17,6 +17,10 @@ import Messages from './Components/Messages/Messages'
 import ProductDetails from './Components/Product/ProductDetails'
 import CartProduct from './Components/CartProduct/CartProduct'
 import Electronic from './Components/Home/Category/Electronices/ExploreElectronices/Electronic'
+import Book from './Components/Home/Category/Books/ExploreBooks/Books'
+import Clothings from './Components/Home/Category/Clothings/ExploreClothings/Clothings'
+import Sport from './Components/Home/Category/SportsEquipment/ExploreSports/Sport'
+import Grocery from './Components/Home/Category/Grocery/ExploreGrocery/Grocery'
 
 const App = () => {
   return (
@@ -38,6 +42,10 @@ const App = () => {
              <Route path="/:id/product" element={<ProductDetails/>} />
              <Route path='/addCartProudct' element={<CartProduct/>}/>
              <Route path='/all-electronic-item' element={<Electronic/>}/>
+             <Route path='/all-book-item' element={<Book/>}/>
+             <Route path='/all-clothing-item' element={<Clothings/>}/>
+             <Route path='/all-sport-item' element={<Sport/>}/>
+             <Route path='/all-grocery-item' element={<Grocery/>}/>
             <Route 
               path='/dashboard' 
               element={
