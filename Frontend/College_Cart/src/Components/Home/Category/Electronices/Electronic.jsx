@@ -61,7 +61,7 @@ const Electronic = () => {
   }, []);
 
   return (
-    <div className="electronics-container">
+    <div className="electronics-container" onClick={()=>navigate("/all-electronic-item")}>
       <div className="electronics-header">
         <h2 className="electronics-title">
           Electronics
