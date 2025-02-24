@@ -58,3 +58,21 @@ exports.getAllCartProduct=async(req,res)=>{
     });
   }
 }
+
+exports.deleteProductByIdForCart = async(req,res)=>{
+  const {id} = req.params;
+  try {
+    const cartProduct = await Cart.findById({
+      _id:id
+    })
+    if(!cartProduct){
+      return res.status(404).json({success:false, messgae:"Cart Product Not found"});
+    }
+
+    await cartProduct.deleteOne();
+
+    res.status(201).json({success:true, message:"Cart Product delete successfull"})
+  } catch (error) {
+     res.status(500).json({success:false, message:"Cart product deletion during error"})
+  }
+}
