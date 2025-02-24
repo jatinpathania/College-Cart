@@ -5,6 +5,7 @@ import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import "../Books/book.css";
 import Button from '../../Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
@@ -34,6 +35,7 @@ const ProductSkeleton = () => {
 const Grocery = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -60,11 +62,11 @@ const Grocery = () => {
   }, []);
 
   return (
-    <div className="book-container">
+    <div className="book-container" onClick={()=>navigate("/all-grocery-item")}>
       <div className="book-header">
         <h2 className="book-title">
          Grocery
-          <span><Button/></span>
+          <span onClick={()=>navigate("/all-grocery-item")}><Button/></span>
         </h2>
       </div>
       <div className="products-grid-book">
