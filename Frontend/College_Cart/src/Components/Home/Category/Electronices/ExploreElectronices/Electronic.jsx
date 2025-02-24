@@ -3,11 +3,13 @@ import Header from '../../../../Header/Header';
 import Footer from '../../../../Footer/Footer';
 import axios from 'axios';
 import { getToken } from '../../../../../util/tokenService';
+import { useNavigate } from 'react-router-dom';
 
 const Electronic = () => {
   const [electronicItem, setElectronicItem] = useState([]);
   const [loading, setLoading] = useState(true);
   const backend_url = import.meta.env.VITE_BACKEND_API_URL;
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchElectronicItem = async () => {
@@ -46,7 +48,7 @@ const Electronic = () => {
   );
 
   const ProductCard = ({ item }) => (
-    <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
+    <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 cursor-pointer" onClick={()=>navigate(`/${item._id}/product`)}>
       <div className="bg-white rounded-lg shadow-md h-full hover:shadow-lg transition-shadow duration-300">
         <div className="p-4">
           <div className="relative pb-[100%] mb-4">
