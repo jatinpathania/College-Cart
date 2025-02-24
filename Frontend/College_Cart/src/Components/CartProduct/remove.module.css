@@ -1,0 +1,66 @@
+.dialogContainer {
+    border: none;
+    padding: 0;
+    background: none;
+    max-width: 400px;
+    width: 90%;
+    border-radius: 8px;
+    margin: auto;
+}
+
+.dialogContainer::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.openDialog {
+    background-color: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.deleteText {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 16px;
+    font-weight: bold;
+}
+
+.deleteConfirmation {
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.cancelButton,
+.deleteButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancelButton {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.cancelButton:hover {
+    background-color: #e0e0e0;
+}
+
+.deleteButton {
+    background-color: #009dff;
+    color: white;
+}
+
+.deleteButton:hover {
+    background-color: #0084ff;
+}
