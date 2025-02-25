@@ -3,7 +3,7 @@ import React, { useRef,useEffect } from 'react'
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 import toast, { Toaster } from 'react-hot-toast';
 import styles from "./remove.module.css"
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const RemoveCartItem = ({ isOpen, onClose, cartItemId }) => {
 //    console.log(cartItemId)
@@ -38,16 +38,16 @@ const RemoveCartItem = ({ isOpen, onClose, cartItemId }) => {
                  className={styles.dialogContainer}
                  onCancel={handleClose}
                >
-           
+           <AnimatePresence>
                 {isOpen && (
                     <motion.div className={styles.openDialog}
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.9 }}
                         transition={{ duration: 0.3 }}>
-                        <h2 className={styles.deleteText}>Delete Product</h2>
+                        <h2 className={styles.deleteText}>Remove Product</h2>
                         <p className={styles.deleteConfirmation}>
-                            Are you sure you want to delete this product?
+                            Are you sure you want to remove this product?
                         </p>
                         <div className={styles.buttonContainer}>
                             <button
@@ -65,6 +65,7 @@ const RemoveCartItem = ({ isOpen, onClose, cartItemId }) => {
                         </div>
                     </motion.div>
                 )}
+                </AnimatePresence>
             {/* </Animation> */}
             </dialog>
             <Toaster />
