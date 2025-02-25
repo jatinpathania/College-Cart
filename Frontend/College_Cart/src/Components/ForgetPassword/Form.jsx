@@ -1,50 +1,60 @@
-import React, { useEffect, useState, } from 'react';
+import React, { useState, useEffect } from 'react';
 import './form.css';
 import MessageHandler from '../Signup/MessageHandler';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { forGotPassword, emailveirfyForgotpassword } from '../SagaRedux/Slice';
 
-
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
-  const [code, setCode] = useState('')
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const { isLoading, message, status, user } = useSelector((state) => state.app)
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      dispatch(forGotPassword({ email }));
-    } catch (err) {
-      setError('Failed to send OTP. Please try again.');
+  const [code, setCode] = useState('');
+  const [error, setError] = useState('');
+  
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+  const { status, isLoading, message, error: reduxError } = useSelector((state) => state.app);
+  
+  // Effect to handle Redux state changes
+  useEffect(() => {
+    if (status === 'success' && message && message.includes('verified')) {
+      // Only navigate if OTP verification was successful
+      const timer = setTimeout(() => {
+        navigate("/newPassword");
+      }, 2000);
+      
+      return () => clearTimeout(timer);
     }
+    
+    if (status === 'failed' && reduxError) {
+      setError(reduxError);
+    }
+  }, [status, message, reduxError, navigate]);
+
+  const handleSubmit = () => {
+    if (!email) {
+      setError('Email is required');
+      return;
+    }
+    
+    dispatch(forGotPassword({ email }));
   };
 
-  const handleSubmitOtp = async (e) => {
-    e.preventDefault();
-    try {
-      dispatch(emailveirfyForgotpassword({
-        email,
-        code
-      }));
-    } catch (err) {
-      setError('Failed to verify code. Please try again.');
+  const handleSubmitOtp = () => {
+    if (!code) {
+      setError('Verification code is required');
+      return;
     }
+    
+    dispatch(emailveirfyForgotpassword({
+      email,
+      code
+    }));
   };
-  useEffect(()=>{
-    if(status == 'success' && user){
-      setTimeout(()=>{
-        navigate("/newPassword")
-       },5000)
-    }
-    console.log(user)
-  },[status,user])
 
   return (
     <div className="formContainer">
-      <form className="form" >
+      <div className='form'>
         <p className="signupText">Forgot Password</p>
         <div className="emailContainer">
           <label htmlFor="email" className="email" style={{color:"white"}}>Email</label><br />
@@ -54,34 +64,43 @@ const ForgotPassword = () => {
               name="email"
               placeholder="@example.com"
               type="email"
-               required
+              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className='email'
               style={{color:"white"}}
             />
-            <button className='btnOTP' onClick={handleSubmit} disabled={isLoading || !email}>  {isLoading ? 'Sending...' : 'Send OTP'}</button>
+            <button 
+              className='btnOTP' 
+              onClick={handleSubmit} 
+              disabled={isLoading || !email}
+            >
+              {isLoading && status === 'loading' && !code ? 'Sending...' : 'Send OTP'}
+            </button>
           </div>
         </div>
 
         <div className="passwordContainer">
-          <label htmlFor="code" className="password">code</label><br />
+          <label htmlFor="code" className="password">Code</label><br />
           <input
             id="code"
             name="code"
             placeholder="code"
-            type="code"
-             required
+            type="text"
             value={code}
             onChange={(e) => setCode(e.target.value)}
           />
-
         </div>
 
         <div className="btnContainer">
-          <button type="submit" onClick={handleSubmitOtp} disabled={isLoading || !code}>{isLoading ? 'Verifying...' : 'Verify Code'}</button>
+          <button 
+            onClick={handleSubmitOtp} 
+            disabled={isLoading || !code}
+          >
+            {isLoading && status === 'loading' && code ? 'Verifying...' : 'Verify Code'}
+          </button>
         </div>
-      </form>
+      </div>
       <MessageHandler />
     </div>
   );
