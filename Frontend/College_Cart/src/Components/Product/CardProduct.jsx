@@ -27,7 +27,8 @@ const Stock = ({ product }) => {
       }
     };
     stockUpdate();
-  }, []);
+    
+  }, [product.stock]);
 
   return (
     <span className={`stock-status ${product.stock === 0 ? 'out-of-stock' : 'in-stock'}`}>
