@@ -27,7 +27,7 @@ const ProductPriceDetails = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [cartItems]);
 
   // const userCartItems = cartItems.filter(item => item.userId === data?._id);
 
@@ -41,9 +41,10 @@ const ProductPriceDetails = () => {
       { totalItems: 0, totalPrice: 0, totalPrevPrice: 0 }
     );
   };
-
+  
   const { totalItems, totalPrice, totalPrevPrice } = calculateTotals();
   const totalDiscount = totalPrevPrice - totalPrice;
+  // console.log(totalPrice)
 
   return (
     <div className="bg-white shadow-sm w-[500px] h-fit ml-10 mt-10 p-6">
