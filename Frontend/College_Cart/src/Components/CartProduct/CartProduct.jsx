@@ -26,21 +26,30 @@ const CartProduct = () => {
     return words.length > 10 ? words.slice(0, 10).join(' ') + '...' : text;
   };
 
-  const handleIncreaseQuantity = (item) => {
-    if (item.quantity < item.productQuantity) {
-      dispatch(addToCart(item));
+  const handleQuantityUpdate = async (item, action) => {
+    // console.log(item.price)
+    try {
+      const updatedQuantity = action === "increase" ? item.quantity + 1 : item.quantity - 1;
+     
+      if(action === "increase"){
+        toast.success("Quantity increase")
+      }
+      if(action === "decrease"){
+        toast.success("Quantity decrease")
+      }
+  
+      if (updatedQuantity < 1 || updatedQuantity > item.productQuantity) return;
+  
+      const data = { quantity: updatedQuantity, totalPrice: updatedQuantity * item.price };
+  
+      const res = await axios.put(`${backend_url}/${item._id}/update-quantity-filed`, data);
+       
+      console.log(res.data.updateCartItemQunatity);
+    } catch (error) {
+      console.error("Error updating quantity:", error);
     }
-    toast.success("Added one Quantity to Product");
   };
-
-  const handleDecreaseQuantity = (item) => {
-    if (item.quantity > 1) {
-      dispatch(removeFromCart(item));
-    }
-    // console.log(item)
-    toast.success("Decreased one Quantity from Product");
-  };
-
+  
   useEffect(() => {
     const fetchData = async () => {
       const token = getToken()
@@ -51,7 +60,7 @@ const CartProduct = () => {
             'Authorization': `Bearer ${token}`
           }
         });
-        console.log(res.data.item)
+        // console.log(res.data.item)
         setCartItems(res.data.item);
       } catch (error) {
         console.log(error);
@@ -60,7 +69,7 @@ const CartProduct = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [cartItems]);
 
   const handleOpenDeleteDialog = (id) => {
     setCartProductDeleteId(id);
@@ -100,8 +109,7 @@ const CartProduct = () => {
                       />
                       <div className="mt-10 flex items-center space-x-2">
                         <button
-                          onClick={() => handleDecreaseQuantity(item)}
-                          disabled={item.quantity <= 1}
+                          onClick={() => handleQuantityUpdate(item, "decrease")} disabled={item.quantity <= 1}
                           className={`flex h-7 w-7 items-center justify-center border border-gray-300 text-black
                             ${item.quantity <= 1
                               ? 'bg-gray-100 cursor-not-allowed text-gray-400'
@@ -117,8 +125,7 @@ const CartProduct = () => {
                           readOnly
                         />
                         <button
-                          onClick={() => handleIncreaseQuantity(item)}
-                          disabled={item.quantity >= item.productQuantity}
+                         onClick={() => handleQuantityUpdate(item, "increase")} disabled={item.quantity >= item.productQuantity}
                           className={`flex h-7 w-7 items-center justify-center border border-gray-300 text-black
                             ${item.quantity >= item.productQuantity
                               ? 'bg-gray-100 cursor-not-allowed text-gray-400'
