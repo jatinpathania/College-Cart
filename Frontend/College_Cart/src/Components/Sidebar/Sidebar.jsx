@@ -96,7 +96,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             variants={itemsVaraints} whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
           >
-            <span className="menu-icon">  <LayoutDashboard color='red'/></span>
+            <span className="menu-icon">  <LayoutDashboard color='black'/></span>
             <span className="menu-title">Dashboard</span>
           </motion.div>
 
