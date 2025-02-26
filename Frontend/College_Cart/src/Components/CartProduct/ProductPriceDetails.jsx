@@ -11,8 +11,8 @@ const ProductPriceDetails = () => {
   const [cartItems, setCartItems] = useState([]); 
   const { data } = useContext(UserDataContext); 
 
-  useEffect(() => {
-    const fetchData = async () => {
+
+const fetchData = async () => {
       const token = getToken()
       try {
         const res = await axios.get(`${backend_url}/all-cart-product`,{
@@ -26,8 +26,10 @@ const ProductPriceDetails = () => {
         console.log(error);
       }
     };
+
+  useEffect(() => {
     fetchData();
-  }, [cartItems]);
+  }, []);
 
   // const userCartItems = cartItems.filter(item => item.userId === data?._id);
 
