@@ -53,7 +53,7 @@ const Header = () => {
       } 
     };
     fetchData();
-  }, [cartItems]);
+  }, []);
   // console.log(cartItems.length)
   
 
