@@ -38,7 +38,7 @@ const productAddFormSchema = new mongoose.Schema({
     },
     selectHostel: {
         type: String,
-        enum: ["Hostler", "Day Scholar"],
+        enum: ["Hostler", "Day_Scholar"],
         required: [true, "Category is required"]
     },
     hostleName:{
@@ -53,7 +53,7 @@ const productAddFormSchema = new mongoose.Schema({
     },
     dayScholarContectNumber: {
         type: String,
-        required: function() { return this.selectHostel === "Day Scholar"; },
+        required: function() { return this.selectHostel === "Day_Scholar"; },
         trim: true
     },
     prevAmount: {
