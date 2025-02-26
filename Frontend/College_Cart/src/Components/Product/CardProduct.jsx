@@ -125,12 +125,12 @@ const ProductCard = ({ product }) => {
 
             <div className="pricing-section">
               <div className="price-container">
-                <span className="rupee-symbol">₹</span>
+                <span className="rupee-symbol">&#8377;</span>
                 <span className="main-price">{product.newAmount}</span>
                 {product.prevAmount !== product.newAmount && (
                   <div className="original-price-container">
                     <span className="mrp">M.R.P.:</span>
-                    <span className="original-price">₹ {product.prevAmount}</span>
+                    <span className="original-price">&#8377; {product.prevAmount}</span>
                   </div>
                 )}
               </div>
