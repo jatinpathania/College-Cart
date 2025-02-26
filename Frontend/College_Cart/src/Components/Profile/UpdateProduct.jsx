@@ -172,7 +172,7 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
             >
               <option value="">Select Type</option>
               <option value="Hostler">Hostler</option>
-              <option value="Day Scholar">Day Scholar</option>
+              <option value="Day_Scholar">Day Scholar</option>
             </select>
           </div>
 
