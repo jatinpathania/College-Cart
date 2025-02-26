@@ -10,13 +10,13 @@ const storage = multer.memoryStorage()
 const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
-        console.log("Received file in multer:", file);
-        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-        if (allowedTypes.includes(file.mimetype)) {
+        // console.log("Received file in multer:", file);
+        // const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        // if (allowedTypes.includes(file.mimetype)) {
             cb(null, true);
-        } else {
-            cb(new Error('Invalid file type'), false);
-        }
+        // } else {
+        //     cb(new Error('Invalid file type'), false);
+        // }
     },
      limits: { fileSize: 5 * 1024 * 1024 } 
 })
@@ -26,8 +26,8 @@ exports.productAddForm = upload.single('image');
 exports.createProduct = async (req, res) => {
     try {
 
-
-        console.log("file created",req.file)
+     
+        // console.log("file created",req.body)
 
         const { cloudinaryPublicId,name, brand, category,quantity, selectHostel, hostleName, roomNumber, dayScholarContectNumber, prevAmount, newAmount, description } = req.body;
 
@@ -53,7 +53,7 @@ exports.createProduct = async (req, res) => {
             return res.status(400).json({ message: "Hostel name and room number are required for hostlers" });
         }
 
-        if (selectHostel === "Day Scholar" && !dayScholarContectNumber) {
+        if (selectHostel === "Day_Scholar" && !dayScholarContectNumber) {
             return res.status(400).json({ message: "Contact number is required for day scholars" });
         }
 
@@ -79,26 +79,46 @@ exports.createProduct = async (req, res) => {
             });
         }
 
+        if(selectHostel === "Hostler"){
+            const createProduct = await ProductAdd.create({
+                cloudinaryPublicId,
+                name,
+                brand,
+                category,
+                quantity,
+                selectHostel,
+                hostleName,
+                roomNumber,
+                image:cloudinaryResult.url,
+                cloudinaryPublicId: cloudinaryResult.public_id,
+                description,
+                prevAmount,
+                newAmount,
+                userId:req.user._id
+            })
 
-        const createProduct = await ProductAdd.create({
-            cloudinaryPublicId,
-            name,
-            brand,
-            category,
-            quantity,
-            selectHostel,
-            hostleName,
-            roomNumber,
-            dayScholarContectNumber,
-            image:cloudinaryResult.url,
-            cloudinaryPublicId: cloudinaryResult.public_id,
-            description,
-            prevAmount,
-            newAmount,
-            userId:req.user._id
-        })
+            return res.status(201).json({ message: "Product created successful!", product: createProduct });
+        }
 
-        return res.status(201).json({ message: "Product created successful!", product: createProduct });
+        if(selectHostel === "Day_Scholar"){
+            const createProduct = await ProductAdd.create({
+                cloudinaryPublicId,
+                name,
+                brand,
+                category,
+                quantity,
+                selectHostel,
+                dayScholarContectNumber,
+                image:cloudinaryResult.url,
+                cloudinaryPublicId: cloudinaryResult.public_id,
+                description,
+                prevAmount,
+                newAmount,
+                userId:req.user._id
+            })
+
+            return res.status(201).json({ message: "Product created successful!", product: createProduct });
+        }
 
     } catch (error) {
         console.error("Create product error:", error);
@@ -239,6 +259,7 @@ async function handleProductDeletion(product) {
 exports.updateProduct = async (req, res) => {
     const {id} = req.params;
     // console.log(req.body, id)
+    const { cloudinaryPublicId,name, brand, category,quantity, selectHostel, hostleName, roomNumber, dayScholarContectNumber, prevAmount, newAmount, description } = req.body;
     try {
         const product = await ProductAdd.findById({
             _id:id
@@ -268,13 +289,56 @@ exports.updateProduct = async (req, res) => {
           req.body.cloudinaryPublicId = cloudinaryResult.public_id
         }
 
-        const updateProduct = await ProductAdd.findByIdAndUpdate(
-            {_id:id},
-            req.body,
-            {new: true, runValidators: true}
-        ).populate("userId","name");
+        // const updateProduct = await ProductAdd.findByIdAndUpdate(
+        //     {_id:id},
+        //     req.body,
+        //     {new: true, runValidators: true}
+        // ).populate("userId","name");
 
-        return res.status(200).json({success:true, message: "Product update successfull", updateProduct })
+        if(selectHostel === "Hostler"){
+            const updateProduct = await ProductAdd.findByIdAndUpdate( {_id:id},{
+                cloudinaryPublicId,
+                name,
+                brand,
+                category,
+                quantity,
+                selectHostel,
+                hostleName,
+                roomNumber,
+                // image:cloudinaryResult.url,
+                // cloudinaryPublicId: cloudinaryResult.public_id,
+                description,
+                prevAmount,
+                newAmount,
+                userId:req.user._id,
+                
+            },{new: true, runValidators: true}).populate("userId","name");
+
+            return res.status(200).json({success:true, message: "Product update successfull", updateProduct })
+        }
+
+        if(selectHostel === "Day_Scholar"){
+            const updateProduct = await ProductAdd.findByIdAndUpdate( {_id:id},{
+                cloudinaryPublicId,
+                name,
+                brand,
+                category,
+                quantity,
+                selectHostel,
+                dayScholarContectNumber,
+                // image:cloudinaryResult.url,
+                // cloudinaryPublicId: cloudinaryResult.public_id,
+                description,
+                prevAmount,
+                newAmount,
+                userId:req.user._id,
+                
+            },{new: true, runValidators: true}).populate("userId","name");
+
+            return res.status(200).json({success:true, message: "Product update successfull", updateProduct })
+        }
+
+        // return res.status(200).json({success:true, message: "Product update successfull", updateProduct })
     } catch (error) {
         console.error("Update product error:", error);
         return res.status(500).json({success:false, message: "Error during update",error:error.message })
