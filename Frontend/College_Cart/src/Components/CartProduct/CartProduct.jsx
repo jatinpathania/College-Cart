@@ -26,50 +26,57 @@ const CartProduct = () => {
     return words.length > 10 ? words.slice(0, 10).join(' ') + '...' : text;
   };
 
+  const fetchData = async () => {
+    const token = getToken()
+    try {
+      const res = await axios.get(`${backend_url}/all-cart-product`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      // console.log(res.data.item)
+      setCartItems(res.data.item);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const handleQuantityUpdate = async (item, action) => {
-    // console.log(item.price)
     try {
       const updatedQuantity = action === "increase" ? item.quantity + 1 : item.quantity - 1;
-     
-      if(action === "increase"){
-        toast.success("Quantity increase")
-      }
-      if(action === "decrease"){
-        toast.success("Quantity decrease")
-      }
-  
+
       if (updatedQuantity < 1 || updatedQuantity > item.productQuantity) return;
   
       const data = { quantity: updatedQuantity, totalPrice: updatedQuantity * item.price };
-  
       const res = await axios.put(`${backend_url}/${item._id}/update-quantity-filed`, data);
-       
-      console.log(res.data.updateCartItemQunatity);
+     console.log(res.data.updateCartItemQunatity)
+    
+      setCartItems((prevItems) => {
+        return prevItems.map((cartItem) => 
+          cartItem._id === item._id 
+            ? { ...cartItem, quantity: updatedQuantity, totalPrice: updatedQuantity * cartItem.price } 
+            : cartItem
+        );
+      });
+  
+      if(action === "increase"){
+        toast.success("Quantity increased");
+      } else if(action === "decrease") {
+        toast.success("Quantity decreased");
+      }
+  
     } catch (error) {
       console.error("Error updating quantity:", error);
+      toast.error("Failed to update quantity");
     }
   };
   
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = getToken()
-      try {
-        const res = await axios.get(`${backend_url}/all-cart-product`, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        // console.log(res.data.item)
-        setCartItems(res.data.item);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, [cartItems]);
 
   const handleOpenDeleteDialog = (id) => {
     setCartProductDeleteId(id);
@@ -139,7 +146,8 @@ const CartProduct = () => {
                     <div className="flex-1 pl-4">
                       <h2 className="text-lg text-gray-600">{textName(item.name)}</h2>
                       <p className="mt-1 text-sm text-gray-500">
-                        {item.selectHostel && `Hostel: ${item.hostleName}`}
+                        {item.selectHostel === 'Hostler' && `Hostel: ${item.hostleName}`}
+                        {item.selectHostel === 'Day_Scholar' && `Student: ${item.selectHostel}`}
                         {item.roomNumber && `, Room: ${item.roomNumber}`}
                         {item.dayScholarContectNumber &&
                           `, Contact: ${item.dayScholarContectNumber}`}
