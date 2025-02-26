@@ -133,7 +133,7 @@ const AddProduct = () => {
                                 value={formData.quantity}
                                 onChange={handleChange}
                                 placeholder="Enter quantity"
-                                min="0"
+                                min="1"
                             // required
                             />
                         </div>
@@ -167,7 +167,7 @@ const AddProduct = () => {
                             >
                                 <option value="">Select Category</option>
                                 <option value="Hostler">Hostler</option>
-                                <option value="Day Scholar">Day Scholar</option>
+                                <option value="Day_Scholar">Day Scholar</option>
                             </select>
                         </div>
 
@@ -204,7 +204,7 @@ const AddProduct = () => {
                             </>
                         )}
 
-                        {formData.selectHostel === 'Day Scholar' && (
+                        {formData.selectHostel === 'Day_Scholar' && (
                             <div className="form-group">
                                 <label className="form-label">Contact Number*</label>
                                 <input
@@ -215,6 +215,7 @@ const AddProduct = () => {
                                     onChange={handleChange}
                                     placeholder="Enter contact number"
                                 // required
+
                                 />
                             </div>
                         )}
@@ -228,7 +229,7 @@ const AddProduct = () => {
                                 value={formData.prevAmount}
                                 onChange={handleChange}
                                 placeholder="Enter previous amount"
-                                min="0"
+                                min="10"
                             // required
                             />
                         </div>
@@ -242,7 +243,7 @@ const AddProduct = () => {
                                 value={formData.newAmount}
                                 onChange={handleChange}
                                 placeholder="Enter new amount"
-                                min="0"
+                                min="10"
                             // required
                             />
                         </div>
