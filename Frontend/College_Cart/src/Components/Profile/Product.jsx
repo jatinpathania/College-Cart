@@ -27,16 +27,16 @@ const Product = () => {
       const token = getToken()
       // console.log(token)
       try {
-        const res = await axios.get(`${backend_url}/all-product`,{
+        const res = await axios.get(`${backend_url}/${data._id}/get-all-profile-product`,{
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
           },
         });
-        const userProducts = res.data.products.filter(
-          (product) => product.userId._id === data._id
-        );
-        setProducts(userProducts);
+        // const userProducts = res.data.products.filter(
+        //   (product) => product.userId._id === data._id
+        // );
+        setProducts(res.data.products);
       } catch (error) {
         console.error('Error fetching products:', error);
       } finally {
