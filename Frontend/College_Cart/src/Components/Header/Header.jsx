@@ -21,6 +21,8 @@ const Header = () => {
   const { searchQuery, setSearchQuery } = useContext(UserDataContext);
   const [cartItems, setCartItems] = useState([]);
 
+  const isAuthenticated = Boolean(data && data._id);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -86,7 +88,9 @@ const Header = () => {
         </div>
 
         <div className={style.headerRight} ref={profileRef}>
-          <div className={style.profile} onClick={() => setShow(!show)}>
+          {isAuthenticated ?
+          (
+            <div className={style.profile} onClick={() => setShow(!show)}>
             <motion.img
               src={data.profileImage || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
               alt="Profile"
@@ -96,6 +100,15 @@ const Header = () => {
             />
             <span className={style.username}>{data?.name || "John Doe"}</span>
           </div>
+          )  :(
+            <>
+             <div className='space-x-4'>
+              <motion.button className='bg-yellow-300 p-2 font-bold rounded-lg w-16 hover:bg-yellow-400' whileHover={{scale:1.1}}  transition={{ type: "spring", stiffness: 100, damping: 90 }} onClick={()=>navigate("/login")}>Login</motion.button>
+              <motion.button className='text-white bg-black font-bold rounded-lg w-20 hover:bg-slate-800' whileHover={{scale:1.1}} transition={{ type: "spring", stiffness: 100, damping: 90 }} onClick={()=>navigate('/signup')}>Signup</motion.button>
+            </div>
+            </>
+          )
+        }
           {show && (
             <div className={style.profileDropdown} onClick={() => navigate(`/${data._id}/user-profile`)}>
               <div className={style.profileMenu}>
