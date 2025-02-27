@@ -128,13 +128,47 @@ exports.createProduct = async (req, res) => {
 
 exports.getAllProduct = async (req, res) => {
     try {
+        // console.log(req.user._id)
         const products = await ProductAdd.find().populate('userId','name');
-        return res.status(200).json({success: true, count: products.length, products });
+        const findProduct = products.filter(user=>
+            user.userId._id.toString() !== req.user._id.toString()
+        )
+        // console.log("userId",findProductUserId)
+        //  if(!findProductUserId){ 
+            return res.status(200).json({success: true, count: findProduct.length, products:findProduct });
+        //  }
+        // const products = await ProductAdd.find().populate('userId','name');
+        // return res.status(200).json({success: true, count: products.length, products });
     } catch (error) {
         console.error("Get all products error:", error);
         return res.status(500).json({success:false, message: "Error during product fetch",error:error.message });
     }
 }
+
+
+exports.getAllProfileProductUserCreate = async (req,res)=>{
+    const {id} = req.params
+    try {
+        if(!id || !req.user._id.toString()){
+            return res.status(403).json({ success: false, message: "Unauthorized access" });
+        }        
+        // console.log(req.user._id)
+        const products = await ProductAdd.find().populate('userId','name');
+        // console.log(id)
+        if(id === req.user._id.toString()){
+            const findProductUserIdById = products.filter(user=>
+                user.userId._id.toString() === req.user._id.toString()
+            )
+         return res.status(200).json({success: true, count: findProductUserIdById.length, products:findProductUserIdById });
+        }
+       
+    } catch (error) {
+        console.error("Get all products error:", error);
+        return res.status(500).json({success:false, message: "Error during product fetch",error:error.message });
+    }
+}
+
+
 exports.updateStockZeroAndOne = async (req, res) => {
     try {
         const cartItems = await Cart.find();
