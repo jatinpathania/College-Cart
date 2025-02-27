@@ -14,11 +14,11 @@ const Signup = () => {
   const [verificationShowInput, setVerificationShowInput] = useState(false);
   const [error, setError] = useState('');
   const dispatch = useDispatch();
-  const { status, user, token } = useSelector((state) => state.app);
+  const { status, user, token,isLoading } = useSelector((state) => state.app);
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false)
-  const [isLoadingCode, setIsLoadingCode] = useState(false)
-
+  // const [isLoading, setIsLoading] = useState(false)
+  // const [isLoadingCode, setIsLoadingCode] = useState(false)
+  
   useEffect(() => {
     if (status === 'success') {
       setVerificationShowInput(true);
@@ -35,11 +35,11 @@ const Signup = () => {
     e.preventDefault();
     try {
       dispatch(signUpUser({ name, username, email, password }));
-      setIsLoading(true)
+      // setIsLoading(true)
       setError('');
     } catch (err) {
       setError('Failed to create an account. Please try again.'); 
-      setIsLoading(false)
+      // setIsLoading(false)
     }
   };
  
@@ -49,19 +49,19 @@ const Signup = () => {
       dispatch(emailVerify({ email, code }));
       // isLoading(true)
       setError('');
-      setIsLoadingCode(true)
+      // setIsLoadingCode(true)
     } catch (err) {
       setError('Verification failed. Please check the code and try again.');
-      setIsLoadingCode(false)
+      // setIsLoadingCode(false)
     }
   };
   useEffect(()=>{
     if(status==='success' && user && token){
       setTimeout(()=>{ navigate("/dashboard")},2000)
     }
-    if (status === 'failed') {
-      setIsLoading(false);
-    }
+    // if (status === 'failed') {
+    //   setIsLoading(false);
+    // }
 
   },[status,navigate])
 
@@ -126,7 +126,7 @@ const Signup = () => {
         </div>
 
         <div className="btnContainer">
-          <button type="submit" disabled={isLoading}>{isLoading ? 'Account Verification...' : "Account Verification"}</button>
+          <button type="submit" disabled={isLoading && !name}>{isLoading && status === 'loading' ? 'Account Verification...' : "Account Verification"}</button>
         </div>
 
         {error && <p className="errorMessage">{error}</p>}
@@ -154,7 +154,7 @@ const Signup = () => {
               />
               <div className="createAccountContainer">
                 <button onClick={verifyEmailAccount} className="createAccount">
-                  {isLoadingCode ? 'Create account...' : 'Create account'}
+                  {isLoading && status==='loading' ? 'Create account...' : 'Create account'}
                 </button>
               </div>
               <div className="resend-text">
