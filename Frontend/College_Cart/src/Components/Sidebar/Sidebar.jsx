@@ -159,17 +159,29 @@ const Sidebar = ({ isOpen, onClose }) => {
           }
         </motion.div>
 
-        <div className="sidebar-footer">
-          <div className="profileContainer">
-            <div>
-              <img className="image" src={data.profileImage || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} alt="Profile" />
-            </div>
-            <div>
-              <span className="nameUser">{data.name || 'Jhon Doe'}</span><br />
-              <span className="emailUser">{localPart || 'jhondow1215.be23'} <br />@{domainPart || 'chitkarauniversity.edu.in'}</span>
+        {
+          isAuthenticated ?
+          (
+            <div className="sidebar-footer">
+            <div className="profileContainer">
+              <div>
+                <img className="image" src={data.profileImage || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} alt="Profile" />
+              </div>
+              <div>
+                <span className="nameUser">{data.name || 'Jhon Doe'}</span><br />
+                <span className="emailUser">{localPart || 'jhondow1215.be23'} <br />@{domainPart || 'chitkarauniversity.edu.in'}</span>
+              </div>
             </div>
           </div>
-        </div>
+          ):(
+            // <>
+            <div className='flex sidebar-footer'>
+              <button className='bg-yellow-500 p-2 font-bold rounded-none hover:bg-yellow-600' onClick={()=>navigate("/login")}>Login</button>
+              <button className='text-white bg-black font-bold rounded-none hover:bg-slate-900' onClick={()=>navigate('/signup')}>Signup</button>
+            </div>
+            // </>
+          )
+        }
       </motion.div>
 
     </>
