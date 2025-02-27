@@ -12,5 +12,6 @@ router.get("/:id/product",productCreate.getProductById);
 router.delete("/:id/product-delete", isAuthenticated, productCreate.productDeleteById);
 router.put("/:id/product-update",isAuthenticated, upload.single('image'), productCreate.updateProduct);
 router.put("/:id/update-stock", productCreate.updateStockZeroAndOne)
+router.get("/:id/get-all-profile-product", isAuthenticated, productCreate.getAllProfileProductUserCreate);
 
 module.exports = router;
