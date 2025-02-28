@@ -8,8 +8,3 @@ git add
 git commit -m ""
 git pull 
 git push
-
-  
-  1. side height
-  2. cart css
-  3. sigin/ signup css

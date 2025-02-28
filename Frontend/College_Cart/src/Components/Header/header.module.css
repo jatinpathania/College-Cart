@@ -189,16 +189,25 @@
     display: flex;
     justify-content: space-around;
   }
+
+  .person{
+    padding: 0px;
+    margin: 0px;
+  }
+  .login{
+    font-size: 12px;
+    margin: 0px !important;
+  }
+  .signup{
+    font-size: 12px;
+    margin-left: 7px !important;
+  }
 }
 @media screen and (min-width:480px) and (max-width:1200px) {
   .logo{
     display: none;
   }
 
-  /* .header {
-    width: 100%;
-  } */
-  
   .menuButton {
     width: 50px;
   }

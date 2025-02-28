@@ -11,6 +11,7 @@ import { FaCartPlus } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { getToken } from "../../util/tokenService";
 import axios from "axios";
+
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -85,7 +86,7 @@ const Header = () => {
         </div >
 
         <div className={style.addProductCart} onClick={()=>navigate('/addCartProudct')}>
-        <FaCartPlus size={44}/>
+        <FaCartPlus className={style.cart} size={44}/>
         <div className={style.productCountInCart}>
          <p>{totalQuantity || cartItems.length}</p>
         </div>
@@ -106,9 +107,9 @@ const Header = () => {
           </div>
           )  :(
             <>
-             <div className='space-x-4'>
-              <motion.button className='bg-yellow-300 p-2 font-bold rounded-lg w-16 hover:bg-yellow-400' whileHover={{scale:1.1}}  transition={{ type: "spring", stiffness: 100, damping: 90 }} onClick={()=>navigate("/login")}>Login</motion.button>
-              <motion.button className='text-white bg-black font-bold rounded-lg w-20 hover:bg-slate-800' whileHover={{scale:1.1}} transition={{ type: "spring", stiffness: 100, damping: 90 }} onClick={()=>navigate('/signup')}>Signup</motion.button>
+             <div className={`space-x-4 ${style.person}`}>
+              <motion.button className={`bg-yellow-300 p-2 font-bold rounded-lg w-16 hover:bg-yellow-400 ${style.login}`}  whileHover={{scale:1.1}}  transition={{ type: "spring", stiffness: 100, damping: 90 }} onClick={()=>navigate("/login")}>Login</motion.button>
+              <motion.button className={`text-white bg-black font-bold rounded-lg w-20 hover:bg-slate-800' ${style.signup}`}whileHover={{scale:1.1}} transition={{ type: "spring", stiffness: 100, damping: 90 }} onClick={()=>navigate('/signup')}>Signup</motion.button>
             </div>
             </>
           )
