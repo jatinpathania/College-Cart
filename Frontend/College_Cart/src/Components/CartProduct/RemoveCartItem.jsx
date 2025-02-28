@@ -1,12 +1,15 @@
 import axios from 'axios'
-import React, { useRef,useEffect } from 'react'
+import React, { useRef,useEffect, useContext } from 'react'
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 import toast, { Toaster } from 'react-hot-toast';
 import styles from "./remove.module.css"
 import { AnimatePresence, motion } from 'framer-motion';
+import { getToken } from '../../util/tokenService';
+import { UserDataContext } from '../Header/context';
 
-const RemoveCartItem = ({ isOpen, onClose, cartItemId }) => {
-//    console.log(cartItemId)
+const RemoveCartItem = ({ isOpen, onClose, cartItemId,setCartItem,cartItem }) => {
+   const {setTotalQuantity} = useContext(UserDataContext)
+
    const dialogRef = useRef(null);
      useEffect(() => {
        const dialogElement = dialogRef.current;
@@ -21,6 +24,24 @@ const RemoveCartItem = ({ isOpen, onClose, cartItemId }) => {
        e.preventDefault();
        onClose();
      };
+
+
+    const fetchData = async () => {
+      const token = getToken()
+      try {
+        const res = await axios.get(`${backend_url}/all-cart-product`,{
+          headers:{
+            'Content-Type':"application/json",
+            "Authorization":`Bearer ${token}`
+          }
+        });
+        setCartItem(res.data.item); 
+      } catch (error) {
+          console.log(error);
+      }
+    };
+    setTotalQuantity(cartItem.length)
+    console.log(cartItem.length)
      
     const handleDeleteProduct = async () => {
         try {
@@ -30,6 +51,8 @@ const RemoveCartItem = ({ isOpen, onClose, cartItemId }) => {
         } catch (error) {
             console.log("Error", error);
             toast.error("cart product delete during error");
+        }finally{
+            await fetchData();
         }
     }
     return (
