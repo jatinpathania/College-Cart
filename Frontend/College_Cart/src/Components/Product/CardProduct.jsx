@@ -2,78 +2,12 @@ import React, { useContext, useEffect } from 'react';
 import { motion } from "framer-motion";
 import './ProductCard.css';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../Redux/Slice';
-import { cartAdd } from '../SagaRedux/Slice';
-import store from '../SagaRedux/Store';
 import { UserDataContext } from '../Header/context';
-import axios from 'axios';
-import { getToken } from '../../util/tokenService';
 
-const backend_url = import.meta.env.VITE_BACKEND_API_URL;
+const ProductCard = ({ product,handleAddToCart }) => {
 
-const Stock = ({ product }) => {
-  useEffect(() => {
-    const stockUpdate = async () => {
-      const token = getToken();
-      if (!token) return;
-
-      try {
-        await axios.put(`${backend_url}/${product._id}/update-stock`, {}, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-      } catch (error) {
-        console.error('Stock update error:', error);
-      }
-    };
-    stockUpdate();
-    
-  }, [product.stock]);
-
-  return (
-    <span className={`stock-status ${product.stock === 0 ? 'out-of-stock' : 'in-stock'}`}>
-      {product.stock === 0 ? ' (Out of Stock)' : ' (In Stock)'}
-    </span>
-  );
-};
-
-const ProductCard = ({ product }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { data } = useContext(UserDataContext);
-
-  const handleAddToCart = () => {
-    dispatch(addToCart(product));
-    
-    const totalQuantity = store.getState().cart.totalQuantity;
-
-    setTimeout(() => {
-      const updatedState = store.getState().cart.itemList;
-      const storeItem = updatedState.find(item => item._id === product._id);
-      if (storeItem) {
-        const cartItem = {
-          productId: storeItem._id,
-          name: storeItem.name,
-          brand: storeItem.brand,
-          category: storeItem.category,
-          selectHostel: storeItem.selectHostel,
-          hostleName: storeItem.hostleName,
-          roomNumber: storeItem.roomNumber,
-          dayScholarContectNumber: storeItem.dayScholarContectNumber,
-          price: storeItem.price,
-          prevPrice: storeItem.prevPrice,
-          totalPrice: storeItem.totalPrice,
-          image: storeItem.image,
-          description: storeItem.description,
-          productQuantity: storeItem.productQuantity,
-          quantity: storeItem.quantity,
-          totalQuantity: totalQuantity
-        };
-
-        dispatch(cartAdd(cartItem));
-      }
-    }, 200);
-  };
 
   const decDescription = (text) => {
     if (!text) return "";
@@ -99,8 +33,9 @@ const ProductCard = ({ product }) => {
         whileHover={{ y: -5 }}
         transition={{ duration: 0.2 }}
       >
-        <div>
-          <div className="product-image-wrapper" onClick={() => navigate(`/${product._id}/product`)}>
+      <div>
+        <div onClick={()=>navigate(`/${product._id}/product`)}>
+          <div className="product-image-wrapper" >
             <motion.img
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300, damping: 90 }}
@@ -114,7 +49,7 @@ const ProductCard = ({ product }) => {
               </div>
             )}
           </div>
-
+        </div>
           <div className="product-content">
             <h2 className="product-title">{product.name}</h2>
 
@@ -140,11 +75,10 @@ const ProductCard = ({ product }) => {
           </div>
           {data && data._id ? (
             <button 
-              className={`add-to-cart-button ${product.stock === 0 ? 'disabled' : ''}`} 
-              onClick={handleAddToCart}
-              disabled={product.stock === 0}
+              className='add-to-cart-button'
+              onClick={()=>handleAddToCart(product)}
             >
-              Add to Cart <Stock product={product} />
+              Add to Cart 
             </button>
           ) : (
             <button className="add-to-cart-button" onClick={() => navigate('/login')}>
