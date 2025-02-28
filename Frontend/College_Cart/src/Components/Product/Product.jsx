@@ -7,6 +7,10 @@ import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import Footer from '../Footer/Footer';
 import { UserDataContext } from '../Header/context';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../Redux/Slice';
+import { cartAdd } from '../SagaRedux/Slice';
+import store from '../SagaRedux/Store';
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
@@ -70,7 +74,8 @@ const Product = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { searchQuery } = useContext(UserDataContext);
-
+  const dispatch = useDispatch();
+    dispatch({type: "cart/initialize"});
   useEffect(() => {
     const fetchProductData = async () => {
       const token = getToken();
@@ -83,7 +88,7 @@ const Product = () => {
           headers: token ? { 'Authorization': `Bearer ${token}` } : {},
         });
         setProducts(res.data.products);
-        // console.log(res.data.products)
+        // console.log("Product",res.data.products)
       } catch (error) {
         console.log(error);
       } finally {
@@ -97,6 +102,42 @@ const Product = () => {
     product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
     product.category.toLowerCase().includes(searchQuery.toLowerCase())
 );
+
+     const handleAddToCart = (product1) => {
+       dispatch(addToCart(product1));
+       const totalQuantity = store.getState().cart.totalQuantity;
+
+       setTimeout(() => {
+         const updatedState = store.getState().cart.itemList;
+       
+         const storeItem = updatedState.find(item => item._id === product1._id);
+         // console.log(storeItem)
+         if (storeItem) {
+           const cartItem = {
+             productId: storeItem._id,
+             name: storeItem.name,
+             brand: storeItem.brand,
+             category: storeItem.category,
+             selectHostel: storeItem.selectHostel,
+             hostleName: storeItem.hostleName,
+             roomNumber: storeItem.roomNumber,
+             dayScholarContectNumber: storeItem.dayScholarContectNumber,
+             price: storeItem.price,
+             prevPrice: storeItem.prevPrice,
+             totalPrice: storeItem.totalPrice,
+             image: storeItem.image,
+             // description: storeItem.description,
+             productQuantity: storeItem.productQuantity,
+             quantity: storeItem.quantity,
+             totalQuantity: totalQuantity
+           };
+   
+           dispatch(cartAdd(cartItem));
+          //  console.log("Statring dispatch");
+           dispatch({type: "cart/initialize"});
+         }
+       }, 1000);
+     };
   return (
     <>
       <Header />
@@ -104,7 +145,7 @@ const Product = () => {
         {loading ? (
           Array.from(new Array(8)).map((_, index) => <ProductSkeleton key={index} />)
         ) : filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => <ProductCard key={product._id} product={product} />)
+          filteredProducts.map((product) => <ProductCard key={product._id} product={product} handleAddToCart={handleAddToCart} />)
         ) : (
           <p>No products found</p>
         )}
