@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductDetails } from "../SagaRedux/Slice";
 import { useParams } from "react-router-dom";
@@ -6,15 +6,59 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Skeleton from '@mui/material/Skeleton';
 import './ProductDetails.css';
+import { addToCart } from '../Redux/Slice';
+import { cartAdd } from '../SagaRedux/Slice';
+import store from '../SagaRedux/Store';
+// import { CartProductConext } from "./ProductContext";
+
 
 const ProductDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const { product, isLoading, error } = useSelector((state) => state.app);
+    // const {data} = useContext(CartProductConext)
+    // console.log(data)
 
     useEffect(() => {
         dispatch(fetchProductDetails(id));
+        // console.log(product)
     }, [dispatch, id]);
+
+    const handleAddToCart = () => {
+        dispatch(addToCart(product));
+        // console.log("Add to cart")
+        const totalQuantity = store.getState().cart.totalQuantity;
+    
+        setTimeout(() => {
+          const updatedState = store.getState().cart.itemList;
+          console.log(updatedState)
+          const storeItem = updatedState.find(item => item._id === data._id);
+          console.log(storeItem)
+          if (storeItem) {
+            const cartItem = {
+              productId: storeItem._id,
+              name: storeItem.name,
+              brand: storeItem.brand,
+              category: storeItem.category,
+              selectHostel: storeItem.selectHostel,
+              hostleName: storeItem.hostleName,
+              roomNumber: storeItem.roomNumber,
+              dayScholarContectNumber: storeItem.dayScholarContectNumber,
+              price: storeItem.price,
+              prevPrice: storeItem.prevPrice,
+              totalPrice: storeItem.totalPrice,
+              image: storeItem.image,
+            //   description: storeItem.description,
+              productQuantity: storeItem.productQuantity,
+              quantity: storeItem.quantity,
+              totalQuantity: totalQuantity
+            };
+    
+            dispatch(cartAdd(cartItem));
+          }
+        }, 200);
+      };
+    
 
     if (isLoading) {
         return (
@@ -90,10 +134,11 @@ const ProductDetails = () => {
                     </div>
                     <div className="details-column">
                         <h1 className="product-name">{product?.product.name}</h1>
-                        <div className="brand-link">Visit the {product?.product.brand} Store</div>
+                        {/* <div className="brand-link">Visit the {product?.product.brand} Store</div> */}
                         
                         <div className="price-block">
                         <h2 className="text-black">Quantity: {product?.product.quantity}</h2>
+                        {/* <p className={`${product?.product.stock ===0 ? 'text-red-700 font-bold':'text-green-700 font-bold'}`}>{product?.product.stock === 0 ? "out of stock" : 'In of Stock'}</p> */}
                             <div className="price-section">
                                 <span className="rupee-symbol">&#8377; </span>
                                 <span className="current-price">{product?.product.newAmount}</span>
@@ -101,7 +146,7 @@ const ProductDetails = () => {
                             <div className="original-price">
                                 M.R.P.: <span className="strikethrough">&#8377; {product?.product.prevAmount}</span>
                             </div>
-                            <div className="inclusive-tax">Inclusive of all taxes</div>
+                            {/* <div className="inclusive-tax">Inclusive of all taxes</div> */}
                         </div>
 
                         <div className="delivery-info">
@@ -151,7 +196,7 @@ const ProductDetails = () => {
                             <button className="buy-now-button">
                                 Buy Now
                             </button>
-                            <button className="add-to-cart-button">
+                            <button className="add-to-cart-button"  >
                                 Add to Cart
                             </button>
                         </div>
