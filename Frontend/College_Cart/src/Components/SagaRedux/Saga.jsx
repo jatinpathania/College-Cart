@@ -1,4 +1,4 @@
-import { put, call, takeLatest, all } from "redux-saga/effects"
+import { put, call, takeLatest, all, delay } from "redux-saga/effects"
 import {
     signInUserFailed,
     signInUserSuccess,
@@ -20,9 +20,13 @@ import {
     productDetailsSuccess,
     cartAddSuccess,
     cartAddFailed,
+    allCartProductSuccess,
+    allCartProductFalied,
 } from './Slice'
 
 import * as api from "./api"
+import { getToken } from "../../util/tokenService";
+import { updateCart } from "../Redux/Slice";
 
 function* signUpUserSaga(action) {
     try {
@@ -187,6 +191,20 @@ function* cartAddProductSaga(action){
     }
 }
 
+function* initialize(){
+    yield delay(1000);
+    try {
+        const response = yield call(api.productCartAll);
+        // console.log(response.data);
+        yield put(updateCart(response.data));
+    } catch (error) {
+        yield put(allCartProductFalied({
+            message: error.response?.data?.message || error.message,
+            error: error.message
+        }));
+    }
+}
+
 
 function* Saga() {
     yield takeLatest('app/signUpUser', signUpUserSaga);
@@ -199,5 +217,6 @@ function* Saga() {
     yield takeLatest('app/productNew', createProductNew);
     yield takeLatest('app/fetchProductDetails', fetchProductDetailsSaga);
     yield takeLatest('app/cartAdd',cartAddProductSaga);
+    yield takeLatest('cart/initialize', initialize)
 }
 export default Saga
