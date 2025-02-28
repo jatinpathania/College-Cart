@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { UserDataContext } from '../Header/context';
 import { getToken } from '../../util/tokenService';
+import "./ProductPriceDetails.css"
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 

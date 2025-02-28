@@ -158,10 +158,10 @@
 @media (max-width: 480px) {
     .electronics-container{
         margin:0px 10px 0px 10px;
-        width: 56vh;
+        width: 61vh;
     }
     .products-grid-electronics {
-        gap: 10px;
+        gap: 30px;
         width: 55vh;
         flex-wrap: wrap;
     }

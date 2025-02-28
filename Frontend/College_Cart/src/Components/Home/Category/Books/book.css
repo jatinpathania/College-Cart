@@ -158,11 +158,11 @@
 @media (max-width: 480px) {
     .book-container{
         margin:0px 10px 0px 10px;
-        width: 56vh;
+        width: 59vh;
     }
     .products-grid-book {
-        gap: 10px;
-        width: 55vh;
+        gap: 30px;
+        width: 58vh;
         flex-wrap: wrap;
     }
 
