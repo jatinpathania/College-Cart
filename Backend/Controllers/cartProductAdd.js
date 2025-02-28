@@ -3,7 +3,7 @@ const Cart = require("../Model/cartProductAdd");
 exports.cartProduct = async (req, res) => {
   try {
     // console.log(req.body)
-    const {productId,name,totalQunatity,brand,category,selectHostel,hostleName,roomNumber,dayScholarContectNumber,price,prevPrice,totalPrice,image,description,productQuantity,quantity } = req.body;
+    const {productId,name,totalQunatity,brand,category,selectHostel,hostleName,roomNumber,dayScholarContectNumber,price,prevPrice,totalPrice,image,productQuantity,quantity } = req.body;
     const cartProductAdd = await Cart.findOneAndUpdate(
       { productId,userId: req.user._id }, 
       {
@@ -19,7 +19,7 @@ exports.cartProduct = async (req, res) => {
           prevPrice,
           totalPrice,
           image,
-          description,
+          // description,
           productQuantity,
           quantity,
         }
