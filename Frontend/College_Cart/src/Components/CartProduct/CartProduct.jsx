@@ -1,9 +1,7 @@
-import { useDispatch } from 'react-redux';
 import { MinusIcon, PlusIcon } from 'lucide-react';
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import ProductPriceDetails from './ProductPriceDetails';
-import { addToCart, removeFromCart } from '../Redux/Slice';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -15,13 +13,13 @@ const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
 const CartProduct = () => {
 
-  const dispatch = useDispatch();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cartProductDeleteId, setCartProductDeleteId] = useState(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
 
   const textName = (text) => {
+    if(!text) return "";
     const words = text.split(' ');
     return words.length > 10 ? words.slice(0, 10).join(' ') + '...' : text;
   };
@@ -43,6 +41,7 @@ const CartProduct = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -55,7 +54,7 @@ const CartProduct = () => {
   
       const data = { quantity: updatedQuantity, totalPrice: updatedQuantity * item.price };
       const res = await axios.put(`${backend_url}/${item._id}/update-quantity-filed`, data);
-     console.log(res.data.updateCartItemQunatity)
+    //  console.log(res.data.updateCartItemQunatity)
     
       setCartItems((prevItems) => {
         return prevItems.map((cartItem) => 
@@ -81,11 +80,8 @@ const CartProduct = () => {
   const handleOpenDeleteDialog = (id) => {
     setCartProductDeleteId(id);
     setDeleteDialogOpen(true);
-    // console.log(id)
   };
 
-  // const userCartItems = cartItems.filter(item => item.userId === data?._id);
-  // console.log(userCartItems.length)
   return (
     <>
       <Header />
@@ -183,13 +179,14 @@ const CartProduct = () => {
               ))
             )}
           </div>
-          <ProductPriceDetails />
+          <ProductPriceDetails cartItem={cartItems} setCartItem={setCartItems}/>
         </div>
       </div>
       <RemoveCartItem
         isOpen={deleteDialogOpen}
         onClose={() => setDeleteDialogOpen(false)}
         cartItemId={cartProductDeleteId}
+        cartItem={cartItems} setCartItem={setCartItems}
       />
 
       <Footer />
