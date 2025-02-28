@@ -47,6 +47,7 @@ export const productCreate = (newProduct) =>API.post("/product-create",newProduc
 export const getAllProduct = (allProduct)=>API.get("/all-product",allProduct)
 export const getProductDetails = (productId) => API.get(`/${productId}/product`);
 export const cartProductAdd = (cartProduct) => API.post("/cartProductAdd", cartProduct)
+export const productCartAll = (cartAllProduct) => API.get("/all-cart-product", cartAllProduct)
 
 export const updateProfileAndEdit = (formData) => {
   const userId = formData.get('userId');
