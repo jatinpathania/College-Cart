@@ -21,6 +21,10 @@ const Header = () => {
   const { searchQuery, setSearchQuery } = useContext(UserDataContext);
   const [cartItems, setCartItems] = useState([]);
 
+
+  const {totalQuantity} = (useSelector((state)=>state.cart));
+  // const totalQuantity1 = obj.itemList.length;
+  console.log( totalQuantity);
   const isAuthenticated = Boolean(data && data._id);
 
   useEffect(() => {
@@ -52,10 +56,10 @@ const Header = () => {
         // console.log(res.data.item)
       } catch (error) {
         console.log(error);
-      } 
+      }
     };
     fetchData();
-  }, []);
+  }, [cartItems.length]);
   // console.log(cartItems.length)
   
 
@@ -83,7 +87,7 @@ const Header = () => {
         <div className={style.addProductCart} onClick={()=>navigate('/addCartProudct')}>
         <FaCartPlus size={44}/>
         <div className={style.productCountInCart}>
-         <p>{cartItems.length}</p>
+         <p>{totalQuantity || cartItems.length}</p>
         </div>
         </div>
 
