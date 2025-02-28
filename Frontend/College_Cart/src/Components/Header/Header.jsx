@@ -25,7 +25,7 @@ const Header = () => {
 
   const {totalQuantity} = (useSelector((state)=>state.cart));
   // const totalQuantity1 = obj.itemList.length;
-  console.log( totalQuantity);
+  // console.log( totalQuantity);
   const isAuthenticated = Boolean(data && data._id);
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const Header = () => {
         <div className={style.addProductCart} onClick={()=>navigate('/addCartProudct')}>
         <FaCartPlus className={style.cart} size={44}/>
         <div className={style.productCountInCart}>
-         <p>{totalQuantity || cartItems.length}</p>
+         <p>{ cartItems.length}</p>
         </div>
         </div>
 

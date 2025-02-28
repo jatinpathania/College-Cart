@@ -41,7 +41,7 @@ const RemoveCartItem = ({ isOpen, onClose, cartItemId,setCartItem,cartItem }) =>
       }
     };
     setTotalQuantity(cartItem.length)
-    console.log(cartItem.length)
+    // console.log(cartItem.length)
      
     const handleDeleteProduct = async () => {
         try {
