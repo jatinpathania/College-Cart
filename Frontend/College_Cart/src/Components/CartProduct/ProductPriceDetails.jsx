@@ -1,40 +1,8 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { UserDataContext } from '../Header/context';
-import { getToken } from '../../util/tokenService';
+import React from 'react';
 
-const backend_url = import.meta.env.VITE_BACKEND_API_URL;
-
-const ProductPriceDetails = () => {
-  const { totalQuantity } = useSelector((state) => state.cart);
-  const [cartItems, setCartItems] = useState([]); 
-  const { data } = useContext(UserDataContext); 
-
-
-const fetchData = async () => {
-      const token = getToken()
-      try {
-        const res = await axios.get(`${backend_url}/all-cart-product`,{
-          headers:{
-            'Content-Type':"application/json",
-            "Authorization":`Bearer ${token}`
-          }
-        });
-        setCartItems(res.data.item); 
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  // const userCartItems = cartItems.filter(item => item.userId === data?._id);
-
+const ProductPriceDetails = ({cartItem , setCartItems}) => {
   const calculateTotals = () => {
-    return cartItems.reduce(
+    return cartItem.reduce(
       (acc, item) => ({
         totalItems: acc.totalItems + (item.quantity || 1),
         totalPrice: acc.totalPrice + item.totalPrice,
@@ -46,7 +14,6 @@ const fetchData = async () => {
   
   const { totalItems, totalPrice, totalPrevPrice } = calculateTotals();
   const totalDiscount = totalPrevPrice - totalPrice;
-  // console.log(totalPrice)
 
   return (
     <div className="bg-white shadow-sm w-[500px] h-fit ml-10 mt-10 p-6">
