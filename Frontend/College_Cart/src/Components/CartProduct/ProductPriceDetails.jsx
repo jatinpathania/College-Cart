@@ -1,38 +1,5 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { UserDataContext } from '../Header/context';
-import { getToken } from '../../util/tokenService';
-
-const backend_url = import.meta.env.VITE_BACKEND_API_URL;
-
-const ProductPriceDetails = () => {
-  const { totalQuantity } = useSelector((state) => state.cart);
-  const [cartItems, setCartItems] = useState([]); 
-  const { data } = useContext(UserDataContext); 
-
-
-const fetchData = async () => {
-      const token = getToken()
-      try {
-        const res = await axios.get(`${backend_url}/all-cart-product`,{
-          headers:{
-            'Content-Type':"application/json",
-            "Authorization":`Bearer ${token}`
-          }
-        });
-        setCartItems(res.data.item); 
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  // const userCartItems = cartItems.filter(item => item.userId === data?._id);
-
+import React from "react";
+const ProductPriceDetails = ({cartItem , setCartItems}) => {
   const calculateTotals = () => {
     return cartItem.reduce(
       (acc, item) => ({
