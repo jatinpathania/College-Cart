@@ -33,7 +33,7 @@ const cartSlice = createSlice({
           prevPrice: newItem.prevAmount,
           totalPrice: newItem.newAmount,
           image: newItem.image,
-          description: newItem.description,
+          // description: newItem.description,
           productQuantity: newItem.quantity, 
           quantity:1,
         });
@@ -54,11 +54,15 @@ const cartSlice = createSlice({
       }
     },
 
+    updateCart:(state, action)=>{
+      // console.log(action.payload.item)
+      state.itemList = action.payload.item;
+    },
     setShowCart: (state) => {
       state.showCart = !state.showCart;
     },
   },
 });
 
-export const { addToCart, removeFromCart, setShowCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, setShowCart, updateCart } = cartSlice.actions;
 export default cartSlice.reducer;
