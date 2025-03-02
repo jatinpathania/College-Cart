@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { getToken } from '../../../../util/tokenService';
 import Skeleton from '@mui/material/Skeleton';
@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import '../Books/book.css';
 import Button from '../../Button/Button';
 import { useNavigate } from 'react-router-dom';
+import { UserDataContext } from '../../../Header/context';
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
@@ -32,32 +33,17 @@ const ProductSkeleton = () => {
 };
 
 const Sport = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    const fetchProductData = async () => {
-      const token = getToken();
-      const apiUrl = token ? `${backend_url}/all-product` : `${backend_url}/public-products`;
-      
-      try {
-        setLoading(true);
-        const res = await axios.get(apiUrl, {
-          headers: token ? { 'Authorization': `Bearer ${token}` } : {},
-        });
-        const fileterData = res.data.products.filter(
-          (productcategory) => productcategory.category === 'Sports Equipment'
-        ).slice(0,5);
-        setProducts(fileterData);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProductData();
-  }, []);
+  const [productsSport, setProductsSport] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+    const {products} = useContext(UserDataContext)
+      useEffect(() => {
+        if (products.length > 0) {
+          const filterCategory = products.filter((item) => item.category === 'Sports Equipment').slice(0,6);
+          setProductsSport(filterCategory);
+          setLoading(false);
+        }
+      }, [products]);
 
   return (
     <div className="book-container" onClick={()=>navigate("/all-sport-item")}>
@@ -75,7 +61,7 @@ const Sport = () => {
             </>
           ))
         ) : (
-          products.map(product => (
+          productsSport.map(product => (
             <div key={product._id} className="product-card-book">
               <div className="product-image-container-book">
                 <img
