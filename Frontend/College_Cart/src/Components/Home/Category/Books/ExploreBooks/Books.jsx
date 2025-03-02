@@ -1,44 +1,36 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { getToken } from '../../../../../util/tokenService';
+import React, { useContext, useEffect, useState } from 'react'
 import Header from '../../../../Header/Header';
 import Footer from '../../../../Footer/Footer';
-import { Skeleton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { UserDataContext } from '../../../../Header/context';
+import { getToken } from '../../../../../util/tokenService';
 
 
 
 const Books = () => {
-    const backend_url = import.meta.env.VITE_BACKEND_API_URL;
-    const [booksItems, setBooksItems] = useState([]);
-    const [loading, setLoading] = useState(true)
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const token = getToken();
-            // console.log(token)
-            if (!token) {
-                return null;
-            }
-            const apiUrl = token ? `${backend_url}/all-product` : `${backend_url}/public-products`;
-            try {
-                const response = await axios.get(apiUrl, {
-                    headers: token ? { 'Authorization': `Bearer ${token}` } : {}
-                })
-
-                const filteredBooksItem = response.data.products.filter((item) =>
-                    item.category === 'Books')
-                setBooksItems(filteredBooksItem);
-                setLoading(false)
-                // console.log(filteredBooksItem)
-            } catch (error) {
-                console.log("Error", error);
-                setLoading(false)
-            }
+    
+    const [productsBooks, setProductsBooks] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+    const {products, data} = useContext(UserDataContext)
+      useEffect(() => {
+        if (products.length > 0) {
+          const filterCategoryBooks = products.filter((item) => item.category === 'Books');
+          setProductsBooks(filterCategoryBooks);
+          setLoading(false);
         }
-        fetchData();
-    }, [])
+      }, [products]);
+
+      const handleNavigate=(item)=>{
+              const token = getToken();
+              if(token && data && data._id){
+                navigate(`/${item._id}/product`)
+              }else{
+                navigate('/login')
+              }
+        }
+
+
 
     const ProductSkeleton = () => (
         <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
@@ -56,7 +48,7 @@ const Books = () => {
 
 
     const ProductCard = ({ item }) => (
-        <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 cursor-pointer" onClick={()=>navigate(`/${item._id}/product`)}>
+        <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 cursor-pointer" onClick={()=>handleNavigate(item)}>
             <div className="bg-white rounded-lg shadow-md h-full hover:shadow-lg transition-shadow duration-300">
                 <div className="p-4">
                     <div className="relative pb-[100%] mb-4">
@@ -113,7 +105,7 @@ const Books = () => {
               <ProductSkeleton />
             </>
           ) : (
-            booksItems.map((item) => (
+            productsBooks.map((item) => (
               <ProductCard key={item._id} item={item} />
             ))
           )}
