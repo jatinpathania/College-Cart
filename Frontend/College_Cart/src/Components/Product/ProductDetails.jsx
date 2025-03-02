@@ -9,6 +9,7 @@ import './ProductDetails.css';
 import { addToCart } from '../Redux/Slice';
 import { cartAdd } from '../SagaRedux/Slice';
 import store from '../SagaRedux/Store';
+import { getToken } from "../../util/tokenService";
 // import { CartProductConext } from "./ProductContext";
 
 
@@ -20,7 +21,12 @@ const ProductDetails = () => {
     // console.log(data)
 
     useEffect(() => {
+    //     const token = getToken()
+    //    if(token){
         dispatch(fetchProductDetails(id));
+    //    }else{
+    //     navigator
+    //    }
         // console.log(product)
     }, [dispatch, id]);
 
