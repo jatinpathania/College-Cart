@@ -1,37 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../../../../Header/Header';
 import Footer from '../../../../Footer/Footer';
-import axios from 'axios';
-import { getToken } from '../../../../../util/tokenService';
 import { useNavigate } from 'react-router-dom';
+import { UserDataContext } from '../../../../Header/context';
+import { getToken } from '../../../../../util/tokenService';
 
 const Electronic = () => {
-  const [electronicItem, setElectronicItem] = useState([]);
+  const [productsElectronic, setProductsElectronic] = useState([]);
   const [loading, setLoading] = useState(true);
-  const backend_url = import.meta.env.VITE_BACKEND_API_URL;
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    const fetchElectronicItem = async () => {
-      try {
-        const token = getToken();
-        const apiUrl = token ? `${backend_url}/all-product` : `${backend_url}/public-products`;
-        const response = await axios.get(apiUrl, {
-          headers: token ? { 'Authorization': `Bearer ${token}` } : {},
-        });
-        const electronicItemFilter = response.data.products.filter(
-          (productcategory) => productcategory.category === 'Electronics'
-        );
-        setElectronicItem(electronicItemFilter);
-        setLoading(false);
-        // console.log(electronicItemFilter)
-      } catch (error) {
-        console.log("Error", error);
+  const navigate = useNavigate();
+  const {products,data} = useContext(UserDataContext)
+    useEffect(() => {
+      if (products.length > 0) {
+        const filterCategory = products.filter((item) => item.category === 'Electronics');
+        setProductsElectronic(filterCategory);
         setLoading(false);
       }
-    };
-    fetchElectronicItem();
-  }, []);
+    }, [products]);
+
+    const handleNavigate=(item)=>{
+        const token = getToken();
+        if(token && data && data._id){
+          navigate(`/${item._id}/product`)
+        }else{
+          navigate('/login')
+        }
+      }
 
   const ProductSkeleton = () => (
     <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
@@ -48,7 +42,7 @@ const Electronic = () => {
   );
 
   const ProductCard = ({ item }) => (
-    <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 cursor-pointer" onClick={()=>navigate(`/${item._id}/product`)}>
+    <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 cursor-pointer" onClick={()=>handleNavigate(item)}>
       <div className="bg-white rounded-lg shadow-md h-full hover:shadow-lg transition-shadow duration-300">
         <div className="p-4">
           <div className="relative pb-[100%] mb-4">
@@ -105,7 +99,7 @@ const Electronic = () => {
               <ProductSkeleton />
             </>
           ) : (
-            electronicItem.map((item) => (
+            productsElectronic.map((item) => (
               <ProductCard key={item._id} item={item} />
             ))
           )}
