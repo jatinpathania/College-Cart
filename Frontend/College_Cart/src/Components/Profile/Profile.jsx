@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import { UserDataContext } from '../Header/context';
 import styles from "./profile.module.css"; 
@@ -9,6 +9,7 @@ import MessageHandler from '../Signup/MessageHandler';
 import Product from './Product';
 import Skeleton from '@mui/material/Skeleton';
 import Footer from "../Footer/Footer"
+import { X } from 'lucide-react';
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const Profile = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [userName, setUserName] = useState(data.username || '');
     const [profileImage, setProfileImage] = useState(null);
+    const [showImageModal, setShowImageModal] = useState(false);
 
     const handleProfileUpdate = () => {
         const formData = new FormData();
@@ -42,6 +44,21 @@ const Profile = () => {
         setProfileImage(file);
     };
 
+    const toggleImageModal = () => {
+        setShowImageModal(!showImageModal);
+    };
+
+    useEffect(()=>{
+        if(showImageModal){
+            document.body.style.overflow = 'hidden';
+        }else{
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    },[showImageModal])
+
     return (
         <>
             <Header />
@@ -49,8 +66,10 @@ const Profile = () => {
             <div className={styles.profilePage}>
                 <div className={styles.profileCard}>
                     <div className={styles.profileHeader}>
-                        <div className={styles.profileImageContainer}>
-                            
+                        <div 
+                            className={styles.profileImageContainer}
+                            onClick={toggleImageModal}
+                        >
                             <img
                                 className={styles.profileImage}
                                 src={data.profileImage || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
@@ -76,7 +95,6 @@ const Profile = () => {
                             </motion.button>
                         </div>
                         <div className={styles.dialog}>
-
                             <AnimatePresence>
                                 {isOpen && (
                                     <motion.div className={styles.dialogContainer} onClick={() => setIsOpen(false)}>
@@ -104,19 +122,48 @@ const Profile = () => {
                                                 <button className={styles.updateButton} onClick={handleProfileUpdate}>Update profile</button>
                                             </div>
                                         </motion.div>
-
                                     </motion.div>
-                                )
-                                }
+                                )}
                             </AnimatePresence>
-
                         </div>
+                        <AnimatePresence>
+                            {showImageModal && (
+                                <motion.div 
+                                    className={styles.imageModalContainer} 
+                                    onClick={toggleImageModal}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <motion.div 
+                                        className={styles.imageModalContent}
+                                        onClick={(e) => e.stopPropagation()}
+                                        initial={{ scale: 0.8 }}
+                                        animate={{ scale: 1 }}
+                                        exit={{ scale: 0.8 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <img
+                                            className={styles.modalProfileImage}
+                                            src={data.profileImage || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
+                                            alt={data.name}
+                                        />
+                                        <button 
+                                            className={styles.closeModalButton}
+                                            onClick={toggleImageModal}
+                                        >
+                                              <X />
+                                        </button>
+                                    </motion.div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
-                   
                 </div>
                <div className={styles.totalDetailsForBuyAndSelling}>
                     <div>
-                        <p>Total sell the product: <spna>5</spna></p>
+                        <p>Total sell the product: <span>5</span></p>
                         <p>Total Buy the product: <span>0</span></p>
                         <p></p>
                     </div>
@@ -124,8 +171,7 @@ const Profile = () => {
             </div>
             <div>
                <Product/>
-               </div>
-
+            </div>
             </div>
             <MessageHandler/>
             <Footer/>
