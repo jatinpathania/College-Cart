@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { getToken } from '../../../../util/tokenService';
+import React, { useContext, useEffect, useState } from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import '../Books/book.css';
 import Button from '../../Button/Button';
 import { useNavigate } from 'react-router-dom';
-
-const backend_url = import.meta.env.VITE_BACKEND_API_URL;
+import { UserDataContext } from '../../../Header/context';
 
 const ProductSkeleton = () => {
   return (
@@ -32,32 +29,17 @@ const ProductSkeleton = () => {
 };
 
 const Clothing = () => {
-  const [products, setProducts] = useState([]);
+  const [productsClothing, setProductsClothing] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    const fetchProductData = async () => {
-      const token = getToken();
-      const apiUrl = token ? `${backend_url}/all-product` : `${backend_url}/public-products`;
-      
-      try {
-        setLoading(true);
-        const res = await axios.get(apiUrl, {
-          headers: token ? { 'Authorization': `Bearer ${token}` } : {},
-        });
-        const fileterData = res.data.products.filter(
-          (productcategory) => productcategory.category === 'Clothing'
-        ).slice(0,5);
-        setProducts(fileterData);
-      } catch (error) {
-        console.log(error);
-      } finally {
+  const navigate = useNavigate();
+  const {products} = useContext(UserDataContext)
+    useEffect(() => {
+      if (products.length > 0) {
+        const filterCategoryClothing = products.filter((item) => item.category === 'Clothing').slice(0,6);
+        setProductsClothing(filterCategoryClothing);
         setLoading(false);
       }
-    };
-    fetchProductData();
-  }, []);
+    }, [products]);
 
   return (
     <div className="book-container" onClick={()=>navigate("/all-clothing-item")}>
@@ -73,7 +55,7 @@ const Clothing = () => {
             <ProductSkeleton key={index} />
           ))
         ) : (
-          products.map(product => (
+          productsClothing.map(product => (
             <div key={product._id} className="product-card-book">
               <div className="product-image-container-book">
                 <img
