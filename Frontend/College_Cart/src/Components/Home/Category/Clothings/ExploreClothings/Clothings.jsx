@@ -72,11 +72,11 @@ const Clothings = () => {
             </div>
           )}
           <div className="text-sm">
-            {item.stock === 1 ? (
+            {/* {item.stock === 1 ? ( */}
               <span className="text-green-600">In Stock</span>
-            ) : (
-              <span className="text-red-600">Out of Stock</span>
-            )}
+            {/* ) : ( */}
+              {/* <span className="text-red-600">Out of Stock</span> */}
+            {/* )} */}
           </div>
         </div>
       </div>
