@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import './ProductCard.css';
 import { useNavigate } from 'react-router-dom';
 import { UserDataContext } from '../Header/context';
+import { getToken } from '../../util/tokenService';
 
 const ProductCard = ({ product,handleAddToCart }) => {
 
@@ -26,6 +27,15 @@ const ProductCard = ({ product,handleAddToCart }) => {
     return 0;
   };
 
+  const handleNavigate=()=>{
+    const token = getToken();
+    if(token && data && data._id){
+      navigate(`/${product._id}/product`)
+    }else{
+      navigate('/login')
+    }
+  }
+
   return (
     <div className='product-cart-container'>
       <motion.div
@@ -34,7 +44,7 @@ const ProductCard = ({ product,handleAddToCart }) => {
         transition={{ duration: 0.2 }}
       >
       <div>
-        <div onClick={()=>navigate(`/${product._id}/product`)}>
+        <div onClick={handleNavigate}>
           <div className="product-image-wrapper" >
             <motion.img
               whileHover={{ scale: 1.05 }}

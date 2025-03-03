@@ -29,6 +29,7 @@
 .profileImageContainer {
     flex-shrink: 0;
     position: relative;
+    cursor: pointer;
 }
 
 .profileImage {
@@ -239,6 +240,59 @@ input[type="file"]{
     margin-top: 20px;
     text-align: center;
 }
+
+
+.imageModalContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.imageModalContent {
+    position: relative;
+    max-width: 30%;
+    max-height: 90%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modalImage {
+    display: block;
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+.closeModalButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.closeModalButton:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+}
 @media screen and (max-width: 1024px) {
     .profilePage {
         flex-direction: column;
@@ -249,7 +303,12 @@ input[type="file"]{
     .totalDetailsForBuyAndSelling {
         max-width: 100%;
     }
+    
+    .modalImage {
+        max-height: 70vh;
+    }
 }
+
 @media screen and (max-width: 768px) {
     .profilePageContainer {
         padding: 1rem;
@@ -287,11 +346,21 @@ input[type="file"]{
         padding: 1.5rem;
         height: auto;
     }
+    
+    .imageModalContent {
+        max-width: 95%;
+    }
+    
+    .modalImage {
+        max-height: 60vh;
+    }
 }
+
 @media screen and (max-width: 480px) {
     .profilePageContainer {
         padding: 0.5rem;
         width: 63vh;
+        min-width: 320px;
     }
 
     .profileCard {
@@ -323,7 +392,12 @@ input[type="file"]{
     .totalDetailsForBuyAndSelling span {
         font-size: 14px;
     }
+    
+    .modalImage {
+        max-height: 50vh;
+    }
 }
+
 @media screen and (max-width: 600px) {
     .dialogPage {
         width: 95%;
@@ -351,5 +425,10 @@ input[type="file"]{
     input[type="file"] {
         width: 100%;
         padding: 0.5rem;
+    }
+    
+    .closeModalButton {
+        top: 5px;
+        right: 5px;
     }
 }

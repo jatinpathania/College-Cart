@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { getToken } from '../../../../util/tokenService';
+import React, { useContext, useEffect, useState } from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import './electronic.css';
 import Button from '../../Button/Button';
 import { useNavigate } from 'react-router-dom';
-
-const backend_url = import.meta.env.VITE_BACKEND_API_URL;
+import { UserDataContext } from '../../../Header/context';
 
 const ProductSkeleton = () => {
   return (
@@ -32,34 +29,17 @@ const ProductSkeleton = () => {
 };
 
 const Electronic = () => {
-  const [products, setProducts] = useState([]);
+  const [productsElectronic, setProductsElectronic] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchProductData = async () => {
-      const token = getToken();
-      const apiUrl = token ? `${backend_url}/all-product` : `${backend_url}/public-products`;
-      
-      try {
-        setLoading(true);
-        const res = await axios.get(apiUrl, {
-          headers: token ? { 'Authorization': `Bearer ${token}` } : {},
-        });
-        const fileterDataByElectronices = res.data.products.filter(
-          (productcategory) => productcategory.category === 'Electronics'
-        ).slice(0,5);
-        setProducts(fileterDataByElectronices);
-      } catch (error) {
-        console.log(error);
-      } finally {
+  const {products} = useContext(UserDataContext)
+    useEffect(() => {
+      if (products.length > 0) {
+        const filterCategory = products.filter((item) => item.category === 'Electronics').slice(0,6);
+        setProductsElectronic(filterCategory);
         setLoading(false);
       }
-    };
-    fetchProductData();
-  }, []);
-
+    }, [products]);
   return (
     <div className="electronics-container" onClick={()=>navigate("/all-electronic-item")}>
       <div className="electronics-header">
@@ -70,11 +50,11 @@ const Electronic = () => {
       </div>
       <div className="products-grid-electronics">
         {loading ? (
-          Array.from(new Array(5)).map((_, index) => (
+          Array.from(new Array(6)).map((_, index) => (
             <ProductSkeleton key={index} />
           ))
         ) : (
-          products.map(product => (
+          productsElectronic.map(product => (
             <div key={product._id} className="product-card-electronics">
               <div className="product-image-container-electronics">
                 <img

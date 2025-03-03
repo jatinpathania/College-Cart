@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import ProductCard from './CardProduct';
-import axios from 'axios';
-import { getToken } from '../../util/tokenService';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import Footer from '../Footer/Footer';
@@ -11,8 +9,6 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../Redux/Slice';
 import { cartAdd } from '../SagaRedux/Slice';
 import store from '../SagaRedux/Store';
-
-const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
 const ProductSkeleton = () => {
   return (
@@ -71,37 +67,23 @@ const ProductSkeleton = () => {
 };
 
 const Product = () => {
-  const [products, setProducts] = useState([]);
+  const [filteredProducts, setfilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { searchQuery } = useContext(UserDataContext);
+  const { searchQuery, products } = useContext(UserDataContext);
+   console.log(products)
   const dispatch = useDispatch();
     dispatch({type: "cart/initialize"});
-  useEffect(() => {
-    const fetchProductData = async () => {
-      const token = getToken();
-      // console.log(token)
-      const apiUrl = token ? `${backend_url}/all-product` : `${backend_url}/public-products`;
-      // console.log(apiUrl)
-      try {
-        setLoading(true);
-        const res = await axios.get(apiUrl, {
-          headers: token ? { 'Authorization': `Bearer ${token}` } : {},
-        });
-        setProducts(res.data.products);
-        // console.log("Product",res.data.products)
-      } catch (error) {
-        console.log(error);
-      } finally {
+
+    useEffect(() => {
+      if (products.length > 0) {
+        const filtered = products.filter((product) =>
+          product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+          product.category.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setfilteredProducts(filtered)
         setLoading(false);
       }
-    };
-    fetchProductData();
-  }, []);
-
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    product.category.toLowerCase().includes(searchQuery.toLowerCase())
-);
+    }, [products]);
 
      const handleAddToCart = (product1) => {
        dispatch(addToCart(product1));

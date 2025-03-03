@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { getToken } from '../../../../util/tokenService';
+import React, { useContext, useEffect, useState } from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import "../Books/book.css";
 import Button from '../../Button/Button';
 import { useNavigate } from 'react-router-dom';
-
-
-const backend_url = import.meta.env.VITE_BACKEND_API_URL;
+import { UserDataContext } from '../../../Header/context';
 
 const ProductSkeleton = () => {
   return (
@@ -33,33 +29,17 @@ const ProductSkeleton = () => {
 };
 
 const Grocery = () => {
-  const [products, setProducts] = useState([]);
+  const [productsGrocery, setProductsGrocery] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    const fetchProductData = async () => {
-      const token = getToken();
-      const apiUrl = token ? `${backend_url}/all-product` : `${backend_url}/public-products`;
-      // console.log(apiUrl)
-      try {
-        setLoading(true);
-        const res = await axios.get(apiUrl, {
-          headers: token ? { 'Authorization': `Bearer ${token}` } : {},
-        });
-        const fileterDataByBook = res.data.products.filter(
-          (productcategory) => productcategory.category === 'Grocery'
-        ).slice(0,5);
-        // console.log("Books",fileterDataByBook)
-        setProducts(fileterDataByBook);
-      } catch (error) {
-        console.log(error);
-      } finally {
+  const navigate = useNavigate();
+  const {products} = useContext(UserDataContext)
+    useEffect(() => {
+      if (products.length > 0) {
+        const filterCategory = products.filter((item) => item.category === 'Grocery').slice(0,6);
+        setProductsGrocery(filterCategory);
         setLoading(false);
       }
-    };
-    fetchProductData();
-  }, []);
+    }, [products]);
 
   return (
     <div className="book-container" onClick={()=>navigate("/all-grocery-item")}>
@@ -71,11 +51,11 @@ const Grocery = () => {
       </div>
       <div className="products-grid-book">
         {loading ? (
-          Array.from(new Array(5)).map((_, index) => (
+          Array.from(new Array(6)).map((_, index) => (
             <ProductSkeleton key={index} />
           ))
         ) : (
-          products.map(product => (
+          productsGrocery.map(product => (
             <div key={product._id} className="product-card-book">
               <div className="product-image-container-book">
                 <img

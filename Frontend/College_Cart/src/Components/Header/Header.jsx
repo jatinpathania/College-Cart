@@ -88,7 +88,7 @@ const Header = () => {
         <div className={style.addProductCart} onClick={()=>navigate('/addCartProudct')}>
         <FaCartPlus className={style.cart} size={44}/>
         <div className={style.productCountInCart}>
-         <p>{ cartItems.length}</p>
+         <p>{cartItems.length ||totalQuantity}</p>
         </div>
         </div>
 
