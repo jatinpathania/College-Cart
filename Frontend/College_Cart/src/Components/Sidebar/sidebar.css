@@ -10,6 +10,12 @@
     touch-action: none;
 }
 
+body:has(.sidebar.open) {
+    overflow: hidden;
+    height: 100vh;
+    touch-action: none;
+}
+
 
 .sidebar {
     position: fixed;
@@ -107,6 +113,16 @@
 .emailUser{
     color: rgb(119, 119, 118);
     font-size: 12px;
+}
+
+button {
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 8px;
+    width: 300px;
+    border-radius: 10px;
+    font-size: 16px;
 }
 
 
