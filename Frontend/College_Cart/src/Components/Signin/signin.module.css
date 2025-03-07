@@ -1,0 +1,407 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.bodyContainer{
+    width: 100%;
+    height: 100vh;
+    background-color: #23242a;
+}
+.container {
+    background:#23242a;
+    padding: 0px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    max-width: 1400px;
+    width: 100%;
+    height: 800px;
+    margin: auto; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    border: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.leftContainer, .rightContainer {
+    width: 50%;
+    height: 100%;
+}
+
+.leftContainer {
+    display: flex;
+    margin:0px;
+    justify-content: center;
+    align-items: center;
+    background:#23242a;
+    padding:5px 0px 5px 5px;
+}
+
+.formContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding:0px;
+}
+
+.form{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+	inset: 0.5px;
+	background: #28292d;
+	padding: 50px 40px;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+    margin: 0px;
+}
+
+.box {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.container::before {
+	content: '';
+	z-index: 1;
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width:  100%;
+	height: 100%;
+	transform-origin: bottom right;
+	background: linear-gradient(0deg,transparent,#FCD200,#FCD200);
+	animation: animate 6s linear infinite;
+}
+.container::after {
+	content: '';
+	z-index: 1;
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 100%;
+	height: 100%;
+	transform-origin: bottom right;
+	background: linear-gradient(0deg,transparent,#FCD200,#FCD200);
+	animation: animate 6s linear infinite;
+	animation-delay: -3s;
+}
+
+@keyframes animate{
+	0%
+	{
+		transform: rotate(0deg);
+	}
+	100%
+	{
+		transform: rotate(360deg);
+	}
+}
+
+.inputBox {
+	position: relative;
+	width: 100%;
+	margin-top: 35px;
+}
+
+.inputBox input {
+	position: relative;
+	width: 100%;
+	padding: 20px 10px 10px;
+	background: transparent;
+	box-shadow: none;
+	border: none;
+    outline: none ;
+	color: #23242a;
+    font-weight: 700;
+    font-size: 1em;
+	letter-spacing: 0.05em;
+	transition: 0.5s;
+	z-index: 10;
+    margin-top:20px;
+}
+.inputBox span {
+	position: absolute;
+	left: 0;
+	padding: 20px 0px 10px;
+	pointer-events: none;
+	font-size: 1em;
+	color: #8f8f8f;
+	letter-spacing: 0.05em;
+	transition: 0.5s;
+}
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
+	color: #FCD200;
+	transform: translateX(0px) translateY(-34px);
+	font-size: 0.75em;
+}
+.inputBox i{
+    position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2px;
+	background:  #FCD200;
+	border-radius: 4px;
+	overflow: hidden;
+	transition: 0.5s;
+	pointer-events: none;
+	z-index: 9;
+}
+.inputBox input:valid ~ i,
+.inputBox input:focus ~ i 
+{
+	height: 44px;
+}
+
+.signupText {
+    color: #FCD200;
+    font-size: 35px;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin: 20px;
+}
+
+.textInformation {
+    color: #FCD200;
+    margin-left: 20px;
+    font-size: 20px;
+    margin:10px;
+}
+.btnContainer{
+    margin-bottom:10px;
+}
+
+.btnContainer button{
+    border: none;
+	outline: none;
+    padding: 11px 25px;
+	background: #FCD200;
+	cursor: pointer;
+	border-radius: 4px;
+	font-weight: 600;
+	width: 200px;
+    height: 50px;
+	margin-top: 10px;
+}
+
+.btnContainer button:hover{
+    background: #F7DC6F;
+}
+
+.inputBox input:-webkit-autofill,
+.inputBox input:-webkit-autofill:hover,
+.inputBox input:-webkit-autofill:focus,
+.inputBox input:-webkit-autofill:active {
+    -webkit-text-fill-color: black !important; 
+    caret-color: #FCD200 !important;
+    background: transparent !important; 
+    box-shadow: 0 0 0px 1000px #FCD200 inset !important; 
+    transition: background-color 5000s ease-in-out 0s !important;
+}
+
+
+.alreadyAccountContainer{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.alreadyAccount{
+    color: #FCD200;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.alreadySignin{
+    text-decoration: underline;
+    color: rgb(137, 137, 137);
+    cursor: pointer;
+}
+
+.alreadySignin:hover{
+    color: #FCD200;
+}
+.codeConatiner{
+    margin-left: 20px;
+    margin: 10px;
+}
+.createAccountContainer{
+    margin-left: 30px;
+    margin-top: 20px;
+}
+.forgotpassword{
+    color: rgb(123, 121, 126);
+    display: flex;
+    width: 150px;
+    float: right;
+    text-decoration: underline;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.forgotpassword:hover{
+    color: #FCD200;
+}
+
+.rightContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1c1c1c;
+    text-align: center;
+    flex-direction: column;
+    z-index: 2;
+    position: relative;
+    padding:5px 5px 5px 0px;
+    background: url('https://images.pexels.com/photos/6214470/pexels-photo-6214470.jpeg?auto=compress&cs=tinysrgb&w=600') no-repeat center center/cover;
+   background-clip: content-box;
+}
+
+@media screen and (orientation:portrait) and (max-width: 472px) {
+    .container {
+        background:#23242a;
+        padding: 0px;
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        max-width: 380px;
+        width: 100%;
+        height: 600px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+        border: none;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    
+    
+    .leftContainer {
+        display: flex;
+        margin:0px;
+        justify-content: center;
+        align-items: center;
+        background:#23242a;
+        padding:5px 5px 5px 5px;
+        width: 100%;
+    }
+    
+    .formContainer {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding:0px;
+    }
+    
+    .form{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0.5px;
+        background: #28292d;
+        padding: 20px 20px;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        margin: 0px;
+    }
+
+    .signupText {
+        font-size: 30px;
+    }
+    
+    .textInformation {
+        margin-left: 20px;
+        font-size: 17px;
+        margin:0px;
+    }
+    
+    .inputBox {
+        position: relative;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .inputBox span {
+        padding: 40px 0px 10px;
+    }
+    
+    .btnContainer{
+        display: flex;
+        justify-content: center;
+        margin-bottom:10px;
+    }
+    
+    .btnContainer button{
+        padding: 11px 25px;
+        background: #FCD200;
+        cursor: pointer;
+        border-radius: 4px;
+        font-weight: 600;
+        width: 200px;
+        height: 45px;
+        margin-top: 10px;
+    }
+    
+    
+    .alreadyAccountContainer{
+        display: flex;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .alreadyAccount{
+        color: #FCD200;
+        font-size: 18px;
+        margin-top: 20px;
+    }
+    
+    .alreadySignin{
+        text-decoration: underline;
+        color: rgb(137, 137, 137);
+        cursor: pointer;
+    }
+    
+    .alreadySignin:hover{
+        color: #FCD200;
+    }
+    .codeConatiner{
+        margin-left: 20px;
+        margin: 10px;
+    }
+    .createAccountContainer{
+        margin-left: 30px;
+        margin-top: 20px;
+    }
+    .forgotpassword{
+        color: rgb(123, 121, 126);
+        display: flex;  
+        flex-direction: row-reverse;
+        text-decoration: underline;
+        font-size: 17px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    .forgotpassword:hover{
+        color: #FCD200;
+    }
+    
+    .rightContainer {
+        display: none;
+    }
+}
