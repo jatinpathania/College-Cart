@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './signup.css';
+import styles from './signup.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { emailVerify, signUpUser } from '../SagaRedux/Slice';
 import MessageHandler from './MessageHandler';
@@ -68,108 +68,132 @@ const Signup = () => {
    
 
   return (
-    <div className="formContainer">
-      <form className="form" onSubmit={handleSubmit}>
-        <p className="signupText">Signup</p>
-        <p className="textInformation">Enter your information to create an account</p>
+    <div className={styles.bodyContainer}>
+      <div className={styles.container}>
+        <div className={styles.leftContainer}>
+          <div className={styles.formContainer}>
+          <div className={styles.box}>
+          <form className={styles.form} onSubmit={handleSubmit}>
+        <p className={styles.signupText}>Signup</p>
+        <p className={styles.textInformation}>Enter your information to create an account</p>
 
-        <div className="nameContainer">
-          <label htmlFor="name" className="name">Name</label><br />
+        <div className={styles.nameContainer}>
+          <div className={styles.inputBox}>
           <input
             id="name"
             name="name"
-            placeholder="John"
             type="text"
-            // required
+            required
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+          <span>Name</span>
+          <i></i>
+        </div>
         </div>
 
-        <div className="usernameContainer">
-          <label htmlFor="username" >Username</label><br />
+        <div className={styles.usernameContainer}>
+          <div className={styles.inputBox}>
           <input
             id="username"
             name="username"
-            placeholder="John123"
             type="text"
-            //  required
+            required
             value={username}
             onChange={(e) => setUserName(e.target.value)}
           />
+          <span>Username</span>
+          <i></i>
+          </div>
         </div>
 
-        <div className="emailContainer">
-          <label htmlFor="email" className="email" style={{color:"white"}}>Email</label><br />
+        <div className={styles.emailContainer}>
+          <div className={styles.inputBox}>
           <input
             id="email"
             name="email"
-            placeholder="@example.com"
             type="email"
-            //  required
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <span>Email</span>
+          <i></i>
+        </div>
         </div>
 
-        <div className="passwordContainer">
-          <label htmlFor="password" className="password">Password</label><br />
+        <div className={styles.passwordContainer}>
+          <div className={styles.inputBox}>
           <input
             id="password"
             name="password"
-            placeholder="password"
             type="password"
-            //  required
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <span>Password</span>
+          <i></i>
+        </div>
         </div>
 
-        <div className="btnContainer">
+        <div className={styles.btnContainer}>
           <button type="submit" disabled={isLoading && !name}>{isLoading && status === 'loading' ? 'Account Verification...' : "Account Verification"}</button>
         </div>
 
-        {error && <p className="errorMessage">{error}</p>}
+        {error && <p className={styles.errorMessage}>{error}</p>}
 
-        <div className="alreadyAccountContainer">
-          <p className="alreadyAccount">
-            Already have an account?<span className="alreadySignin" onClick={() => navigate('/login')}> Sign in</span>
+        <div className={styles.alreadyAccountContainer}>
+          <p className={styles.alreadyAccount}>
+            Already have an account?<span className={styles.alreadySignin} onClick={() => navigate('/login')}> Sign in</span>
           </p>
         </div>
         {verificationShowInput && (
-          <div className="verification-overlay">
-            <div className="verification-dialog">
-              <button className="close-button" onClick={() => setVerificationShowInput(false)}>×</button>
-              <h3 className="verification-title">Email Verification</h3>
-              <p className="verification-message">
+          <div className={styles.verificationOverlay}>
+            <div className={styles.verificationDialog}>
+              <button className={styles.closeButton} onClick={() => setVerificationShowInput(false)}>×</button>
+              <h3 className={styles.verificationTitle}>Email Verification</h3>
+              <p className={styles.verificationMessage}>
                 A verification code has been sent to {email}
               </p>
+              <div className={styles.otpinputBox}>
               <input
                 id="code"
-                className="verification-input"
-                placeholder="Enter verification code"
+                className={styles.verificationInput}
                 type="text"
+                required
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
               />
-              <div className="createAccountContainer">
-                <button onClick={verifyEmailAccount} className="createAccount">
+              <span className={styles.otpspan}>Enter verification code</span>
+              <i className={styles.otpi}></i>
+              </div>
+
+              <div className={styles.createAccountContainer}>
+                <button onClick={verifyEmailAccount} className={styles.createAccount}>
                   {isLoading && status==='loading' ? 'Create account...' : 'Create account'}
                 </button>
               </div>
-              <div className="resend-text">
+              <div className={styles.resendText}>
                 Didn't receive the code?{' '}
-                <button className="resend-button" onClick={handleSubmit}>
+                <button className={styles.resendButton} onClick={handleSubmit}>
                   Resend
                 </button>
               </div>
             </div>
-          </div>
+            </div>
         )}
       </form>
       <MessageHandler />
     </div>
+    </div>
+    </div>
+    <div className={styles.rightContainer}>
+    </div>
+    </div>
+    </div>
   );
 };
+
 
 export default Signup;
