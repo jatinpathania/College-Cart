@@ -72,6 +72,7 @@
 	border: none;
     outline: none ;
 	color: #23242a !important;
+    font-weight: 700;
     font-size: 1em;
 	letter-spacing: 0.05em;
 	transition: 0.5s;
@@ -141,6 +142,10 @@
 	margin-top: 20px;
 }
 
+.btnContainer button:hover{
+    background: #F7DC6F;
+}
+
 .btnOTP{
     background-color: #FCD200;
     margin-top:20px;
@@ -148,9 +153,23 @@
     height: 35px;
     border-radius: 10px;
 }
+.btnOTP:hover{
+    background-color: #F7DC6F;
+}
 
 button{
     cursor:pointer;
+}
+
+.inputBox input:-webkit-autofill,
+.inputBox input:-webkit-autofill:hover,
+.inputBox input:-webkit-autofill:focus,
+.inputBox input:-webkit-autofill:active {
+    -webkit-text-fill-color: black !important; 
+    caret-color: #FCD200 !important;
+    background: transparent !important; 
+    box-shadow: 0 0 0px 1000px #FCD200 inset !important; 
+    transition: background-color 5000s ease-in-out 0s !important;
 }
     @media screen and (orientation:portrait) and (max-width: 472px) {
         .container {
