@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from './signup.module.css';
-import styles from './signup.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { emailVerify, signUpUser } from '../SagaRedux/Slice';
 import MessageHandler from './MessageHandler';
@@ -139,27 +138,19 @@ const Signup = () => {
         </div>
 
         <div className={styles.btnContainer}>
-        <div className={styles.btnContainer}>
           <button type="submit" disabled={isLoading && !name}>{isLoading && status === 'loading' ? 'Account Verification...' : "Account Verification"}</button>
         </div>
 
-        {error && <p className={styles.errorMessage}>{error}</p>}
+       
         {error && <p className={styles.errorMessage}>{error}</p>}
 
-        <div className={styles.alreadyAccountContainer}>
-          <p className={styles.alreadyAccount}>
-            Already have an account?<span className={styles.alreadySignin} onClick={() => navigate('/login')}> Sign in</span>
+    
         <div className={styles.alreadyAccountContainer}>
           <p className={styles.alreadyAccount}>
             Already have an account?<span className={styles.alreadySignin} onClick={() => navigate('/login')}> Sign in</span>
           </p>
         </div>
         {verificationShowInput && (
-          <div className={styles.verificationOverlay}>
-            <div className={styles.verificationDialog}>
-              <button className={styles.closeButton} onClick={() => setVerificationShowInput(false)}>×</button>
-              <h3 className={styles.verificationTitle}>Email Verification</h3>
-              <p className={styles.verificationMessage}>
           <div className={styles.verificationOverlay}>
             <div className={styles.verificationDialog}>
               <button className={styles.closeButton} onClick={() => setVerificationShowInput(false)}>×</button>
@@ -186,9 +177,7 @@ const Signup = () => {
                 </button>
               </div>
               <div className={styles.resendText}>
-              <div className={styles.resendText}>
                 Didn't receive the code?{' '}
-                <button className={styles.resendButton} onClick={handleSubmit}>
                 <button className={styles.resendButton} onClick={handleSubmit}>
                   Resend
                 </button>
