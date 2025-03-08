@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
-import { getToken } from '../../../../util/tokenService';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import '../Books/book.css';
@@ -8,7 +6,6 @@ import Button from '../../Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { UserDataContext } from '../../../Header/context';
 
-const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
 const ProductSkeleton = () => {
   return (
@@ -55,7 +52,7 @@ const Sport = () => {
       </div>
       <div className="products-grid-book">
         {loading ? (
-          Array.from(new Array(5)).map((_, index) => (
+          Array.from(new Array(6)).map((_, index) => (
             <>
             <ProductSkeleton key={index} />
             </>

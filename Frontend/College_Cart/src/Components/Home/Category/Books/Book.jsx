@@ -50,7 +50,7 @@ const Book = () => {
       </div>
       <div className="products-grid-book">
         {loading ? (
-          Array.from(new Array(5)).map((_, index) => (
+          Array.from(new Array(6)).map((_, index) => (
             <ProductSkeleton key={index} />
           ))
         ) : (

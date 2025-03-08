@@ -6,9 +6,6 @@ import Button from '../../Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { UserDataContext } from '../../../Header/context';
 
-
-const backend_url = import.meta.env.VITE_BACKEND_API_URL;
-
 const ProductSkeleton = () => {
   return (
     <Box className="product-skeleton-book">
@@ -54,7 +51,7 @@ const Grocery = () => {
       </div>
       <div className="products-grid-book">
         {loading ? (
-          Array.from(new Array(5)).map((_, index) => (
+          Array.from(new Array(6)).map((_, index) => (
             <ProductSkeleton key={index} />
           ))
         ) : (

@@ -50,7 +50,7 @@ const Electronic = () => {
       </div>
       <div className="products-grid-electronics">
         {loading ? (
-          Array.from(new Array(5)).map((_, index) => (
+          Array.from(new Array(6)).map((_, index) => (
             <ProductSkeleton key={index} />
           ))
         ) : (

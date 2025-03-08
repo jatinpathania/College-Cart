@@ -200,7 +200,6 @@
     background-color: #f7dc6f;
 }
 
-
 .codeConatiner {
     margin-left: 20px;
     margin: 10px;
@@ -263,7 +262,9 @@
 
 .verificationTitle {
     color: white;
+
     font-size: 24px;
+
     margin-bottom: 15px;
     text-align: center;
 }
@@ -274,6 +275,7 @@
     margin-bottom: 20px;
     text-align: center;
 }
+
 
 .otpinputBox {
 	position: relative;
@@ -336,7 +338,6 @@
     color: rgb(146, 143, 143);
     font-size: 14px;
     text-align: center;
-    margin-top: 25px;
 }
 
 .resendButton {
@@ -360,6 +361,7 @@
     margin-top: 15px;
 }
 
+
 .alreadyAccount{
     color: #FCD200 ;
     font-size: 17px;
@@ -375,6 +377,7 @@
 .alreadySignin:hover{
     color: #FCD200;
 }
+
 
 .closeButton {
     position: absolute;
@@ -392,8 +395,6 @@
 .closeButton:hover {
     color: rgb(159, 155, 155);
 }
-
-
 .rightContainer {
     display: flex;
     justify-content: center;
@@ -555,4 +556,3 @@
     }
     
 }
-
