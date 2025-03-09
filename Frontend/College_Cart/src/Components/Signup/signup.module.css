@@ -1,0 +1,558 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.bodyContainer{
+    width: 100%;
+    height: 100vh;
+    background-color: #23242a;
+}
+.container {
+    background:#23242a;
+    padding: 0px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    max-width: 1400px;
+    width: 100%;
+    height: 800px;
+    margin: auto; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    border: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.leftContainer, .rightContainer {
+    height: 100%;
+}
+
+.leftContainer {
+    width:70%;
+    display: flex;
+    margin:0px;
+    justify-content: center;
+    align-items: center;
+    background:#23242a;
+    padding:5px 0px 5px 5px;
+}
+
+.formContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding:0px;
+}
+
+.form{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+	inset: 0.5px;
+	background: #28292d;
+	padding: 30px 40px;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+    margin: 0px;
+}
+
+.box {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.container::before {
+	content: '';
+	z-index: 1;
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width:  100%;
+	height: 100%;
+	transform-origin: bottom right;
+	background: linear-gradient(0deg,transparent,#FCD200,#FCD200);
+	animation: animate 6s linear infinite;
+}
+.container::after {
+	content: '';
+	z-index: 1;
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 100%;
+	height: 100%;
+	transform-origin: bottom right;
+	background: linear-gradient(0deg,transparent,#FCD200,#FCD200);
+	animation: animate 6s linear infinite;
+	animation-delay: -3s;
+}
+
+@keyframes animate{
+	0%
+	{
+		transform: rotate(0deg);
+	}
+	100%
+	{
+		transform: rotate(360deg);
+	}
+}
+
+.inputBox {
+	position: relative;
+	width: 100%;
+	margin-top: 35px;
+}
+
+.inputBox input {
+	position: relative;
+	width: 100%;
+	padding: 10px 10px 10px;
+	background: transparent;
+	box-shadow: none;
+	border: none;
+    outline: none ;
+	color: #23242a;
+    font-weight: 700;
+    font-size: 1em;
+	letter-spacing: 0.05em;
+	transition: 0.5s;
+	z-index: 10;
+    margin-top:20px;
+}
+.inputBox span {
+	position: absolute;
+	left: 0;
+	padding: 20px 0px 10px;
+	pointer-events: none;
+	font-size: 1em;
+	color: #8f8f8f;
+	letter-spacing: 0.05em;
+	transition: 0.5s;
+}
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
+	color: #FCD200;
+	transform: translateX(0px) translateY(-34px);
+	font-size: 0.75em;
+}
+.inputBox i{
+    position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2px;
+	background:  #FCD200;
+	border-radius: 4px;
+	overflow: hidden;
+	transition: 0.5s;
+	pointer-events: none;
+	z-index: 9;
+}
+.inputBox input:valid ~ i,
+.inputBox input:focus ~ i 
+{
+	height: 44px;
+}
+
+.signupText {
+    color: #FCD200;
+    font-size: 35px;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin: 20px;
+}
+
+.textInformation {
+    color: #FCD200;
+    margin-left: 20px;
+    font-size: 20px;
+    margin:10px;
+}
+.btnContainer{
+    margin-bottom:10px;
+}
+
+.btnContainer button{
+    border: none;
+	outline: none;
+    padding: 11px 25px;
+	background: #FCD200;
+	cursor: pointer;
+	border-radius: 4px;
+	font-weight: 600;
+	width: 300px;
+    height: 50px;
+	margin-top: 30px;
+}
+
+.btnContainer button:hover{
+    background-color: #f7dc6f;
+}
+
+.codeConatiner {
+    margin-left: 20px;
+    margin: 10px;
+}
+.createAccountContainer {
+    margin-left: 0px;
+    margin-top: 20px;
+}
+.createAccountContainer button{
+    border: none;
+	outline: none;
+    padding: 0px;
+	background: #FCD200;
+	cursor: pointer;
+	border-radius: 4px;
+	font-weight: 600;
+	width: 250px;
+    height: 45px;
+	margin-top: 20px;
+}
+.createAccountContainer button:hover{
+    background: #F7DC6F;
+}
+
+
+.otpinputBox input:-webkit-autofill,
+.otpinputBox input:-webkit-autofill:hover,
+.otpinputBox input:-webkit-autofill:focus,
+.otpinputBox input:-webkit-autofill:active {
+    -webkit-text-fill-color: black !important; 
+    caret-color: #FCD200 !important;
+    background: transparent !important; 
+    box-shadow: 0 0 0px 1000px #FCD200 inset !important; 
+    transition: background-color 5000s ease-in-out 0s !important;
+}
+
+.verificationDialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 30px;
+    width: 550px;
+    height: 400px;
+    z-index: 1000;
+}
+
+.verificationOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
+.verificationTitle {
+    color: white;
+
+    font-size: 24px;
+
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.verificationMessage {
+    color: rgb(146, 143, 143);
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+.otpinputBox {
+	position: relative;
+	width: 100%;
+	margin-top: 40px;
+}
+
+.otpinputBox input {
+	position: relative;
+	width: 100%;
+	padding: 10px;
+	background: transparent;
+	box-shadow: none;
+	border: none;
+    outline: none ;
+	color: #23242a ;
+    font-weight: 600;
+    font-size: 1em;
+	letter-spacing: 0.05em;
+	transition: 0.5s;
+	z-index: 10;
+}
+.otpspan{
+	position: absolute;
+	left: 0;
+	padding:10px;
+	pointer-events: none;
+	font-size: 1em;
+	color: #8f8f8f;
+	letter-spacing: 0.05em;
+	transition: 0.5s;
+}
+
+.otpinputBox input:valid ~ .otpspan,
+.otpinputBox input:focus ~ .otpspan {
+	color: #FCD200;
+	transform: translateX(0px) translateY(-34px);
+	font-size: 0.75em;
+}
+.otpi{
+    position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2px;
+	background:  #FCD200 !important;
+	border-radius: 4px;
+	overflow: hidden;
+	transition: 0.5s;
+	pointer-events: none;
+	z-index: 9;
+}
+.otpinputBox input:valid ~ .otpi,
+.otpinputBox input:focus ~ .otpi 
+{
+	height: 44px;
+}
+
+.resendText {
+    color: rgb(146, 143, 143);
+    font-size: 14px;
+    text-align: center;
+}
+
+.resendButton {
+    background: none;
+    border: none;
+    color: rgb(137, 137, 137);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+}
+
+.resendButton:hover {
+    color: #FCD200;
+}
+
+.timerText {
+    color: rgb(146, 143, 143);
+    font-size: 14px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+
+.alreadyAccount{
+    color: #FCD200 ;
+    font-size: 17px;
+    margin-top: 20px;
+}
+
+.alreadySignin{
+    text-decoration: underline;
+    color: rgb(137, 137, 137);
+    cursor: pointer;
+}
+
+.alreadySignin:hover{
+    color: #FCD200;
+}
+
+
+.closeButton {
+    position: absolute;
+    right: 1px;
+    top: 15px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    width: auto;
+    padding: 5px;
+}
+
+.closeButton:hover {
+    color: rgb(159, 155, 155);
+}
+.rightContainer {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    align-items: center;
+    color: #1c1c1c;
+    text-align: center;
+    flex-direction: column;
+    z-index: 2;
+    position: relative;
+    padding:5px 5px 5px 0px;
+    background: url('https://i.im.ge/2025/03/04/pMCulW.Untitled.png') no-repeat center center/cover;
+    background-size: 415px 790px;
+    background-position: left center;
+}
+.inputBox input:-webkit-autofill,
+.inputBox input:-webkit-autofill:hover,
+.inputBox input:-webkit-autofill:focus,
+.inputBox input:-webkit-autofill:active {
+    -webkit-text-fill-color: black !important; 
+    caret-color: #FCD200 !important;
+    background: transparent !important; 
+    box-shadow: 0 0 0px 1000px #FCD200 inset !important; 
+    transition: background-color 5000s ease-in-out 0s !important;
+}
+
+@media screen and (orientation:portrait) and (max-width: 472px) {
+    .container {
+        background:#23242a;
+        padding: 0px;
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        max-width: 380px;
+        width: 100%;
+        height: 600px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+        border: none;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    
+    
+    .leftContainer {
+        display: flex;
+        margin:0px;
+        justify-content: center;
+        align-items: center;
+        background:#23242a;
+        padding:5px 5px 5px 5px;
+        width: 100%;
+    }
+    
+    .formContainer {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding:0px;
+    }
+    
+    .form{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0.5px;
+        background: #28292d;
+        padding: 20px 20px;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        margin: 0px;
+    }
+
+    .signupText {
+        margin: 10px 0px 15px 0px;
+        font-size: 28px;
+    }
+    
+    .textInformation {
+        font-size: 17px;
+        margin:10px 0px 20px 0px;
+    }
+    
+    .inputBox {
+        margin:8px 0px 8px 0px;
+    }
+
+    .inputBox span {
+        padding-top: 15px;
+        margin-top: 13px;
+    }
+    
+    .btnContainer{
+        display: flex;
+        justify-content: center;
+        margin-bottom:10px;
+    }
+    
+    .btnContainer button{
+        padding: 0px;
+        background: #FCD200;
+        cursor: pointer;
+        border-radius: 4px;
+        font-weight: 600;
+        width: 200px;
+        height: 50px;
+        margin-top: 20px;
+    }
+    .alreadyAccount{
+        color: #FCD200 ;
+        font-size: 17px;
+        margin-top: 10px;
+    }
+    
+    .codeConatiner{
+        margin-left: 20px;
+        margin: 10px;
+    }
+    .createAccountContainer{
+        margin-left: 30px;
+        margin-top: 20px;
+    }
+    .forgotpassword{
+        color: rgb(123, 121, 126);
+        display: flex;
+        flex-direction: row-reverse;
+        text-decoration: underline;
+        font-size: 17px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    .forgotpassword:hover{
+        color: #FCD200;
+    }
+    
+    .rightContainer {
+        display: none;
+    }
+
+    .verificationDialog {
+        padding: 20px;
+        max-width: 360px;
+        width: 100%;
+        height: 450px;
+    }
+    
+    .verificationTitle {
+        font-size: 19px;
+        margin-bottom: 15px;
+    }
+    
+    .verificationMessage {
+        font-size: 15px;
+        margin-bottom: 24px;
+    }
+    
+}

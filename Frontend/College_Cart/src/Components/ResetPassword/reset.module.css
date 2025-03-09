@@ -1,0 +1,222 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.bodyContainer{
+    width: 100%;
+    height: 100vh;
+    background-color: #23242a;
+}
+.container {
+    background:#23242a;
+    padding: 0px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    max-width: 800px;
+    width: 100%;
+    height: 600px;
+    margin: auto; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    border: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+
+.formContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding:0px;
+}
+
+.form{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+	inset: 0.5px;
+	background: #28292d;
+	padding: 50px 40px;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+    margin: 0px;
+}
+
+.box {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+
+.inputBox {
+	position: relative;
+	width: 100%;
+	margin-top: 40px;
+}
+
+.inputBox input {
+	position: relative;
+	width: 100%;
+	padding: 10px 10px 10px;
+	background: transparent;
+	box-shadow: none;
+	border: none;
+    outline: none ;
+	color: #23242a ;
+    font-weight: 700;
+    font-size: 1em;
+	letter-spacing: 0.05em;
+	transition: 0.5s;
+	z-index: 10;
+    margin-top:20px;
+}
+.inputBox span {
+	position: absolute;
+	left: 0;
+	padding: 20px 0px 10px;
+	pointer-events: none;
+	font-size: 1em;
+	color: #8f8f8f;
+	letter-spacing: 0.05em;
+	transition: 0.5s;
+}
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
+	color: #FCD200;
+	transform: translateX(0px) translateY(-34px);
+	font-size: 0.75em;
+}
+.inputBox i{
+    position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2px;
+	background:  #FCD200 !important;
+	border-radius: 4px;
+	overflow: hidden;
+	transition: 0.5s;
+	pointer-events: none;
+	z-index: 9;
+}
+.inputBox input:valid ~ i,
+.inputBox input:focus ~ i 
+{
+	height: 44px;
+}
+
+.signupText {
+    color: #FCD200;
+    font-size: 30px;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin: 20px;
+}
+
+
+.btnContainer{
+    margin-bottom:10px;
+}
+
+.btnContainer button{
+    border: none;
+	outline: none;
+    padding: 0px;
+	background: #FCD200;
+	cursor: pointer;
+	border-radius: 4px;
+	font-weight: 600;
+	width: 200px;
+    height: 50px;
+	margin-top: 40px;
+}
+
+.btnContainer button:hover{
+    background: #F7DC6F;
+}
+
+
+button{
+    cursor:pointer;
+}
+    @media screen and (orientation:portrait) and (max-width: 472px) {
+        .container {
+            background:#23242a;
+            padding: 0px;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            max-width: 350px;
+            width: 100%;
+            height: 500px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); 
+            border: none;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .formContainer {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding:0px;
+        }
+        
+        .form{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0.5px;
+            background: #28292d;
+            padding: 20px 20px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            margin: 0px;
+        }
+    
+        .signupText {
+            font-size: 25px;
+        }
+        
+        .textInformation {
+            margin-left: 20px;
+            font-size: 17px;
+            margin:0px;
+        }
+        
+        .inputBox {
+            margin:20px 0px 8px 0px;
+        }
+    
+        .inputBox span {
+            padding-top: 15px;
+            margin-top: 13px;
+        }
+        
+        .btnContainer{
+            display: flex;
+            justify-content: center;
+            margin-bottom:10px;
+        }
+        
+        .btnContainer button{
+            padding: 0px;
+            margin-top: 30px;
+        }
+    }

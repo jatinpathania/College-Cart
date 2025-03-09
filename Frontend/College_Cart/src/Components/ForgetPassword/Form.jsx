@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './form.css';
+import styles from './form.module.css';
 import MessageHandler from '../Signup/MessageHandler';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -53,16 +53,20 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="formContainer">
-      <div className='form'>
-        <p className="signupText">Forgot Password</p>
-        <div className="emailContainer">
-          <label htmlFor="email" className="email" style={{color:"white"}}>Email</label><br />
-          <div className='otpInputContainer'>
+    <div className={styles.bodyContainer}>
+        <div className={styles.container}>
+          <div className={styles.formContainer}>
+            <div className={styles.box}>
+            <div className={styles.form}>
+              <p className={styles.signupText}>Forgot Password</p>
+
+              <div className={styles.emailContainer}>
+
+              <div className={styles.otpInputContainer}>
+              <div className={styles.inputBox}>
             <input
               id="email"
               name="email"
-              placeholder="@example.com"
               type="email"
               required
               value={email}
@@ -70,29 +74,36 @@ const ForgotPassword = () => {
               className='email'
               style={{color:"white"}}
             />
+            <span>Email</span>
+            <i></i>
+            </div>
+          </div>
             <button 
-              className='btnOTP' 
+              className={styles.btnOTP} 
               onClick={handleSubmit} 
               disabled={isLoading || !email}
             >
               {isLoading && status === 'loading' && !code ? 'Sending...' : 'Send OTP'}
             </button>
-          </div>
+          
         </div>
 
-        <div className="passwordContainer">
-          <label htmlFor="code" className="password">Code</label><br />
+        <div className={styles.passwordContainer}>
+        <div className={styles.inputBox}>
           <input
             id="code"
             name="code"
-            placeholder="code"
+            required
             type="text"
             value={code}
             onChange={(e) => setCode(e.target.value)}
           />
+          <span>Code</span>
+          <i></i>
+        </div>
         </div>
 
-        <div className="btnContainer">
+        <div className={styles.btnContainer}>
           <button 
             onClick={handleSubmitOtp} 
             disabled={isLoading || !code}
@@ -100,8 +111,11 @@ const ForgotPassword = () => {
             {isLoading && status === 'loading' && code ? 'Verifying...' : 'Verify Code'}
           </button>
         </div>
-      </div>
       <MessageHandler />
+      </div>
+    </div>
+    </div>
+    </div>
     </div>
   );
 };

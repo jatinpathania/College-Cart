@@ -1,5 +1,5 @@
 import React, { useState,  } from 'react';
-import './reset.css';
+import styles from './reset.module.css';
 import { useDispatch,  } from 'react-redux';
 import MessageHandler from '../Signup/MessageHandler';
 import { useNavigate } from 'react-router-dom';
@@ -8,13 +8,13 @@ import { toast, ToastContainer } from 'react-toastify';
 
 const Reset = () => {
    const [password, setNewPassword] = useState('');
-   const [confrimNewPassword, setConfrimNewPassword] = useState('');
+   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate()
  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(password !== confrimNewPassword){
+    if(password !== confirmNewPassword){
       toast.error("Passwords do not match");
       return;
     }
@@ -31,40 +31,51 @@ const Reset = () => {
 
 
   return (
-    <div className="formContainer">
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="emailContainer">
-          <label htmlFor="newPassword" className="newPassword">New Password</label><br />
+    <div className={styles.bodyContainer}>
+      <div className={styles.container}>
+          <div className={styles.formContainer}>
+            <div className={styles.box}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+
+          <div className={styles.emailContainer}>
+          <div className={styles.inputBox}>
           <input
             id="newPassword"
             name="newPassword"
-            placeholder="new password"
             type="text"
-           required
+            required
             value={password}
             onChange={(e) => setNewPassword(e.target.value)}
           />
+          <span>New Password</span>
+          <i></i>
+          </div>
         </div>
 
-        <div className="passwordContainer">
-          <label htmlFor="confrimNewPassword" className="confrimNewPassword">Confrim Password</label><br />
+        <div className={styles.passwordContainer}>
+          <div className={styles.inputBox}>
           <input
-            id="confrimNewPassword"
-            name="confrimNewPassword"
-            placeholder="confrimNewPassword"
+            id="confirmNewPassword"
+            name="confirmNewPassword"
             type="password"
-           required
-            value={confrimNewPassword}
-            onChange={(e) => setConfrimNewPassword(e.target.value)}
+            required
+            value={confirmNewPassword}
+            onChange={(e) => setConfirmNewPassword(e.target.value)}
           />
+          <span>Confirm Password</span>
+          <i></i>
+          </div>
         </div>
 
-        <div className="btnContainer">
+        <div className={styles.btnContainer}>
           <button type="submit">Set Password</button>
         </div>
       </form> 
       <ToastContainer/>
       <MessageHandler />
+      </div>
+      </div>
+      </div>
     </div>
   );
 };
