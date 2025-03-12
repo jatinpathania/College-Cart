@@ -14,7 +14,7 @@ const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 const Product = () => {
   const [products, setProducts] = useState([]);
   const [openMenuId, setOpenMenuId] = useState(null);
-  const { data } = useContext(UserDataContext);
+  const { data, setUserProduct } = useContext(UserDataContext);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [productToDeleteId, setProductToDeleteId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -37,6 +37,7 @@ const Product = () => {
         //   (product) => product.userId._id === data._id
         // );
         setProducts(res.data.products);
+        setUserProduct(res.data.products.length)
       } catch (error) {
         console.error('Error fetching products:', error);
       } finally {
