@@ -13,12 +13,12 @@ import { X } from 'lucide-react';
 
 const Profile = () => {
     const dispatch = useDispatch();
-    const {data} = useContext(UserDataContext);
+    const {data, userProduct} = useContext(UserDataContext);
     const [isOpen, setIsOpen] = useState(false);
     const [userName, setUserName] = useState(data.username || '');
     const [profileImage, setProfileImage] = useState(null);
     const [showImageModal, setShowImageModal] = useState(false);
-
+// console.log(userProduct)
     const handleProfileUpdate = () => {
         const formData = new FormData();
         formData.append('userId', data._id);
@@ -163,7 +163,19 @@ const Profile = () => {
                 </div>
                <div className={styles.totalDetailsForBuyAndSelling}>
                     <div>
-                        <p>Total sell the product: <span>5</span></p>
+                        <p>Total sell the product: 
+                        {
+                            userProduct ? (
+                                <>
+                                <span> {userProduct}</span>
+                                </>
+                            ):(
+                                <>
+                                <span>0</span>
+                                </>
+                            )
+                        }
+                        </p>
                         <p>Total Buy the product: <span>0</span></p>
                         <p></p>
                     </div>
