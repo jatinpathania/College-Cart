@@ -43,7 +43,7 @@ const productAddFormSchema = new mongoose.Schema({
     },
     hostleName:{
         type: String,
-        enum: ["Boss", "Aryabhata", "Sarabhai"],
+        enum: ["Boss", "Aryabhata", "Sarabhai", "Kalpana", "Gargi", "Teresa","New girls hostel"],
         required: function() { return this.selectHostel === "Hostler"; }
     },
     roomNumber: {
