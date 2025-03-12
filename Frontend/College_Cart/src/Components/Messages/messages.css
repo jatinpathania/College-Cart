@@ -353,4 +353,7 @@
     .message-area {
         height: 65%;
     }
+    .send-button{
+        width: 140px;
+    }
 }

@@ -186,7 +186,7 @@ const Messages = () => {
         sender: msg.senderId === userId ? 'self' : 'other',
         timestamp: msg.createdAt,
       }));
-  
+    console.log(formattedMessages)
       setMessages(formattedMessages);
     } catch (error) {
       console.error("Error fetching messages:", error);
@@ -195,7 +195,7 @@ const Messages = () => {
   
   const navigateToProduct = (productId) => {
     if (productId) {
-      navigate(`/product/${productId}`);
+      navigate(`/${productId}/product`);
     }
   };
 
@@ -313,7 +313,7 @@ const Messages = () => {
               <Skeleton variant="text" width={200} height={28} sx={{ bgcolor: 'rgba(0, 0, 0, 0.08)' }} />
             </div>
             <div className="messages-display">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((i) => (
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,16,17].map((i) => (
                 <div key={i} className={`message-group ${i % 2 === 0 ? 'self' : 'other'}`}>
                   <div className="message-content-wrapper">
                     <div className={`message-bubble-skeleton ${i % 2 === 0 ? 'self' : 'other'}`}>
@@ -322,7 +322,7 @@ const Messages = () => {
                         width={i % 2 === 0 ? 180 : 140}
                         height={30}
                         sx={{
-                          bgcolor: i % 2 === 0 ? 'rgba(26, 115, 232, 0.5)' : 'rgba(255, 255, 255, 0.5)',
+                          bgcolor: i % 2 === 0 ? 'rgba(26, 115, 232, 0.5)' : '(210, 215, 211);, 1',
                           borderRadius: '16px',
                         }}
                       />
@@ -408,7 +408,7 @@ const Messages = () => {
                   </p>
                 </div>
                 <div className="product-price">
-                  <span>₹{selectedConversation.product.newAmount || selectedConversation.product.price}</span>
+                  <span>&#8377;{selectedConversation.product.newAmount || selectedConversation.product.price}</span>
                 </div>
               </div>
 
@@ -422,7 +422,7 @@ const Messages = () => {
                 ) : (
                   <>
                     <div className="chat-date-header">
-                      <span>{new Date().toLocaleDateString([], {weekday: 'long', month: 'long', day: 'numeric'})}</span>
+                      {/* <span>{new Date().toLocaleDateString([], {weekday: 'long', month: 'long', day: 'numeric'})}</span> */}
                     </div>
                     {messages.map((msg, index) => {
                       const isFirstMessageOrDifferentSender = index === 0 || messages[index - 1].sender !== msg.sender;
