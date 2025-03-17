@@ -12,6 +12,7 @@ import store from '../SagaRedux/Store';
 import { io } from "socket.io-client";
 import { UserDataContext } from "../Header/context";
 import axios from "axios";
+import {motion} from "framer-motion"
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -320,17 +321,32 @@ const ProductDetails = () => {
                     </div>
 
                     {messageModal && (
-                        <div 
-                            style={{
-                                position: 'fixed',
-                                top: '50%',
-                                right: '20px',
-                                transform: 'translateY(-50%)',
-                                zIndex: 1000,
-                                boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-                                borderRadius: '8px',
-                                background: 'white'
-                            }}
+                        <motion.div 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        style={{
+                            position: 'fixed',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            zIndex: 1000,
+                            boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                            borderRadius: '12px',
+                            background: 'white',
+                            width: '400px',
+                            maxWidth: '90vw',
+                            cursor: 'grab'
+                        }}
+                        drag
+                        dragConstraints={{ left: -1100, right: 800, top: -1000, bottom: 400 }}
+                        dragElastic={0.1}
+                        dragMomentum={false}
+                        dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+                        whileDrag={{ scale: 1.02, boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}
+                        whileTap={{ cursor: 'grabbing' }}
+                        dragPropagation
                         >
                             <div className="max-w-md mx-auto bg-white dark:bg-zinc-800 shadow-md rounded-lg overflow-hidden">
                                 <div className="flex flex-col h-[700px]">
@@ -370,8 +386,8 @@ const ProductDetails = () => {
                                                     key={index}
                                                     className={`chat-message ${msg.sender === 'self' ? 'self-end bg-blue-500' : 'self-start bg-zinc-500'} text-white max-w-xs rounded-lg px-3 py-1.5 text-sm flex flex-col`}
                                                 >
-                                                    <span>{msg.message}</span>
-                                                    <span className="text-xs text-white text-opacity-75 self-end mt-1">
+                                                    <span className="text-sm">{msg.message}</span>
+                                                    <span className="text-sm text-white text-opacity-75 self-end mt-1">
                                                         {formatTime(msg.timestamp)}
                                                     </span>
                                                 </div>
@@ -399,7 +415,7 @@ const ProductDetails = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     )}
                     
                     <div className="buy-box-column">
