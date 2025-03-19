@@ -86,7 +86,7 @@ const Grocery = () => {
         <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold mb-6">Clothings</h1>
+        <h1 className="text-2xl font-bold mb-6">Grocery</h1>
         <div className="flex flex-wrap -mx-4">
           {loading ? (
             <>
