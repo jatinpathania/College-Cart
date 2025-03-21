@@ -292,7 +292,7 @@ const Messages = () => {
         <Header />
         <div className="messages-container">
           <div className="conversation-list">
-            <h2 className="conversations-title">Conversations</h2>
+            <h2 className="conversations-title">Chat</h2>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => (
               <div key={i} className="conversation-item-skeleton">
                 <Skeleton 
@@ -345,7 +345,7 @@ const Messages = () => {
       <Header />
       <div className="messages-container">
         <div className="conversation-list">
-          <h2 className="conversations-title">Conversations</h2>
+          <h2 className="conversations-title">Chat</h2>
           {conversations.length === 0 ? (
             <div className="no-conversations">
               <p>No conversations found</p>
