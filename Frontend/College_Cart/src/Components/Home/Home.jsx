@@ -22,11 +22,11 @@ const Home = () => {
           <div className="hero-content">
             <h1>Buy, Sell & Exchange Items in Your University</h1>
             <p>Find amazing deals, trade items, and connect with students effortlessly!</p>
-            <a href="#get-started" className="cta-button">Get Started</a>
+            <a href="#cards-head" className="cta-button">Get Started</a>
           </div>
         </section>
 
-        <div className="cards-section">
+        <div className="cards-section" id="cards-head">
           <div className="card">
             <h2>Buy Products</h2>
             <div className="card-image buy-image"></div>
