@@ -461,11 +461,11 @@ const Messages = () => {
               </div>
 
               <div className="message-input-area">
-                {!socketConnected && (
+                {/* {!socketConnected && (
                   <div className="connection-status-warning">
                     Connection lost. Messages will be saved but not delivered instantly.
                   </div>
-                )}
+                )} */}
                 <input
                   type="text"
                   placeholder="Type your message..."
