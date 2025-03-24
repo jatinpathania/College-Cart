@@ -71,11 +71,12 @@ const Reset = () => {
           <button type="submit">Set Password</button>
         </div>
       </form> 
+      
+      </div>
+      </div>
+      </div>
       <ToastContainer/>
       <MessageHandler />
-      </div>
-      </div>
-      </div>
     </div>
   );
 };
