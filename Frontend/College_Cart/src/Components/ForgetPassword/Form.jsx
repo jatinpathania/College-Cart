@@ -111,11 +111,12 @@ const ForgotPassword = () => {
             {isLoading && status === 'loading' && code ? 'Verifying...' : 'Verify Code'}
           </button>
         </div>
-      <MessageHandler />
+     
       </div>
     </div>
     </div>
     </div>
+    <MessageHandler />
     </div>
   );
 };

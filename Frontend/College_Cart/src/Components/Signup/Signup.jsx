@@ -186,13 +186,14 @@ const Signup = () => {
             </div>
         )}
       </form>
-      <MessageHandler />
+      
     </div>
     </div>
     </div>
     <div className={styles.rightContainer}>
     </div>
     </div>
+    <MessageHandler />
     </div>
   );
 };

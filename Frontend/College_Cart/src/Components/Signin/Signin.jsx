@@ -91,12 +91,13 @@ const Signin = () => {
         </div>
       </form>
       </div> 
-      <MessageHandler />
+
     </div>
     </div>
     <div className={styles.rightContainer}>
     </div>
     </div>
+    <MessageHandler />
     </div>
   );
 };
