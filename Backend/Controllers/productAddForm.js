@@ -129,7 +129,7 @@ exports.createProduct = async (req, res) => {
 exports.getAllProduct = async (req, res) => {
     try {
         // console.log(req.user._id)
-        const products = await ProductAdd.find().populate('userId','name');
+        const products = await ProductAdd.find().populate('userId','name profileImage');
         const findProduct = products.filter(user=>
             user.userId._id.toString() !== req.user._id.toString()
         )
@@ -250,7 +250,7 @@ exports.getProductById = async (req, res) => {
     try {
         const product = await ProductAdd.findOne({
             _id:id
-        }).populate('userId','name');
+        }).populate('userId','name profileImage');
         if (!product) {
             return res.status(404).json({success:false, message: "Product not found" });
         }

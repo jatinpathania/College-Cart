@@ -70,7 +70,7 @@ const Product = () => {
   const [filteredProducts, setfilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { searchQuery, products } = useContext(UserDataContext);
-   console.log(products)
+   console.log(searchQuery)
   const dispatch = useDispatch();
     dispatch({type: "cart/initialize"});
 
@@ -83,7 +83,7 @@ const Product = () => {
       setfilteredProducts(filtered)
         setLoading(false);
       }
-    }, [products]);
+    }, [products,searchQuery]);
 
      const handleAddToCart = (product1) => {
        dispatch(addToCart(product1));

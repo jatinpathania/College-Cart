@@ -5,13 +5,14 @@
     background-color: #fff;
     margin-top: 50px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
-                0 8px 16px rgba(0, 0, 0, 0.1);
+        0 8px 16px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     border: 1px solid #e7e7e7;
 }
+
 .amazon-container:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12),
-                0 12px 24px rgba(0, 0, 0, 0.12);
+        0 12px 24px rgba(0, 0, 0, 0.12);
     transition: box-shadow 0.3s ease;
 }
 
@@ -26,6 +27,7 @@
     grid-template-columns: minmax(300px, 40%) minmax(300px, 40%) minmax(200px, 20%);
     gap: 20px;
 }
+
 .image-column {
     position: relative;
 }
@@ -130,17 +132,20 @@
     border-radius: 8px;
 }
 
-.hostel-details, .contact-details {
+.hostel-details,
+.contact-details {
     display: flex;
     gap: 12px;
     align-items: flex-start;
 }
 
-.location-icon, .phone-icon {
+.location-icon,
+.phone-icon {
     font-size: 20px;
 }
 
-.hostel-name, .contact-number {
+.hostel-name,
+.contact-number {
     font-size: 16px;
     font-weight: 500;
     color: #0F1111;
@@ -173,12 +178,13 @@
 }
 
 .buy-box {
-    position: sticky;
-    top: 20px;
+    /* position: sticky; */
+    /* top: 0px; */
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 14px;
     background: white;
+    margin-top: 30px;
 }
 
 .buy-box-price {
@@ -199,7 +205,8 @@
     margin-bottom: 16px;
 }
 
-.buy-now-button, .add-to-cart-button {
+.buy-now-button,
+.add-to-cart-button {
     width: 100%;
     padding: 8px 10px;
     border-radius: 20px;
@@ -227,15 +234,16 @@
 .add-to-cart-button:hover {
     background: #FA8900;
 }
+
 @media screen and (max-width: 1200px) {
     .product-grid {
         grid-template-columns: 1fr 1fr;
     }
-    
+
     .buy-box-column {
         grid-column: span 2;
     }
-    
+
     .buy-box {
         position: static;
     }
@@ -245,43 +253,93 @@
     .product-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .buy-box-column {
         grid-column: span 1;
     }
-    
+
     .details-column {
         padding-right: 0;
     }
-    
+
     .main-image-container {
         position: static;
     }
 }
+
 @media screen and (max-width: 480px) {
     .product-grid {
         grid-template-columns: 1fr;
     }
-    .amazon-container{
+
+    .amazon-container {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 50vh;
-        margin-left:60px;
+        margin-left: 60px;
     }
-    
+
     .buy-box-column {
         grid-column: span 1;
     }
-    
+
     .details-column {
         padding-right: 0;
     }
-    
+
     .main-image-container {
         position: static;
     }
-    .breadcrumb{
+
+    .breadcrumb {
         display: none;
     }
+}
+
+.messageButton {
+    align-items: center;
+    background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #ffffff;
+    display: flex;
+    font-size: 18px;
+    justify-content: center;
+    line-height: 1em;
+    max-width: 100%;
+    min-width: 140px;
+    padding: 3px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 30px;
+}
+
+.messageButton:active,
+.messageButton:hover {
+    outline: 0;
+}
+
+.messageButton span {
+    background-color: rgb(5, 6, 45);
+    padding: 16px 24px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+}
+
+.messageButton:hover span {
+    background: none;
+}
+
+.messageButton:active {
+    transform: scale(0.9);
 }

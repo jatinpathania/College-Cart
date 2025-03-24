@@ -7,6 +7,7 @@ const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 const UserDataContext = createContext();
 
 const UserDataProvider =({children})=>{
+  const [userProduct, setUserProduct] = useState();
   const [data, setData] = useState('');
   const [searchQuery, setSearchQuery] = useState("");
   const [totalQuantity, setTotalQuantity] = useState(0)
@@ -31,7 +32,7 @@ const UserDataProvider =({children})=>{
   }, [getToken()]);
 
   return(
-    <UserDataContext.Provider value={{data,setData,searchQuery,setSearchQuery, totalQuantity, setTotalQuantity,setProducts,products, productId, setProductIdBy}}>
+    <UserDataContext.Provider value={{data,setData,searchQuery,setSearchQuery, totalQuantity, setTotalQuantity,setProducts,products, productId, setProductIdBy,setUserProduct,userProduct}}>
         {children}
     </UserDataContext.Provider>
   )

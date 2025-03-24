@@ -19,5 +19,6 @@ router.get("/user-profile", isAuthenticated, (req, res) => {
 });
 
 router.patch("/update-profile/:id", isAuthenticated, upload.single('profileImage'), accountCreate.updateProfileImageAndUserName);
+router.get("/user/:userId", accountCreate.getUserDetails);
 
 module.exports = router;
