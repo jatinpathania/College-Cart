@@ -129,14 +129,30 @@ const Sidebar = ({ isOpen, onClose }) => {
             <span className="menu-title">Products</span>
           </motion.div>
 
+          <motion.div className="menu-item"
+            variants={itemsVaraints} whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15 }} onClick={()=>navigate("/all-products-exchange-books")}>
+            <span className="menu-icon"> <Barcode /></span>
+            <span className="menu-title">Books</span>
+          </motion.div>
+
          {
           isAuthenticated && 
+          <>
           <motion.div className="menu-item" onClick={()=>navigate(`/${data._id}/add-products-user`)}
           variants={itemsVaraints} whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300, damping: 15 }}>
           <span className="menu-icon"><SquarePlus /></span>
           <span className="menu-title">Add Products</span>
         </motion.div>
+
+         <motion.div className="menu-item" onClick={()=>navigate(`/${data._id}/exchange-add-product-form`)}
+         variants={itemsVaraints} whileHover={{ scale: 1.05 }}
+         transition={{ type: "spring", stiffness: 300, damping: 15 }}>
+         <span className="menu-icon"><SquarePlus /></span>
+         <span className="menu-title">Exchange Book Add</span>
+       </motion.div>
+          </>
          }
 
           {
