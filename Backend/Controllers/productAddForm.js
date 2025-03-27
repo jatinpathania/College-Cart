@@ -1,6 +1,3 @@
-const path = require("path")
-const fs = require("fs");
-const { v4: uuid4 } = require("uuid")
 const ProductAdd = require("../Model/productAddForm");
 const multer = require("multer");
 const {uploadToCloudinary, deleteFromCloudinary} = require("../Config/cloudinary");

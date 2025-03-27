@@ -21,6 +21,8 @@ import Book from './Components/Home/Category/Books/ExploreBooks/Books'
 import Clothings from './Components/Home/Category/Clothings/ExploreClothings/Clothings'
 import Sport from './Components/Home/Category/SportsEquipment/ExploreSports/Sport'
 import Grocery from './Components/Home/Category/Grocery/ExploreGrocery/Grocery'
+import ExchangeBook from './Components/ExchangeBookForm/ExchangeBook'
+import ExchangeBookAllProduct from './Components/ProductExchangebook/ExchangeBook'
 
 const App = () => {
   return (
@@ -54,6 +56,13 @@ const App = () => {
                 // </ProtectedRoute>
               }
             />
+            <Route path='/:id/exchange-add-product-form' element={
+              <ProtectedRoute>
+              <ExchangeBook/>
+              </ProtectedRoute>
+              }/>
+
+              <Route path='/all-products-exchange-books' element={<ExchangeBookAllProduct/>}/>
           </Routes>
         </BrowserRouter>
       </PersistentAuth>

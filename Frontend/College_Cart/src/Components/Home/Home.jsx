@@ -47,7 +47,8 @@ const Home = () => {
             <h2>Exchange Books</h2>
             <div className="card-image exchange-image"></div>
             <p>Trade textbooks with students</p>
-            <a  className="button">Exchange Now</a>
+            {/* <a  className="button">Exchange Now</a> */}
+            <button onClick={()=>navigate(`/${data._id}/exchange-add-product-form`)}  className="button">Exchange Now</button>
           </div>
 
           <div className="card">

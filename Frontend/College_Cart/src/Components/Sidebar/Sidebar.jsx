@@ -10,6 +10,7 @@ import { UserDataContext } from '../Header/context';
 import { motion } from "framer-motion"
 import { SquarePlus, LayoutDashboard, User, Settings,Mail, LogOut,LogIn,KeyRound, Barcode } from 'lucide-react';
 
+
 const Sidebar = ({ isOpen, onClose }) => {
   const navigate = useNavigate()
   const { data } = useContext(UserDataContext)
@@ -129,14 +130,30 @@ const Sidebar = ({ isOpen, onClose }) => {
             <span className={styles.menuTitle}>Products</span>
           </motion.div>
 
+          <motion.div className={styles.menuItem}
+            variants={itemsVaraints} whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15 }} onClick={()=>navigate("/all-products-exchange-books")}>
+            <span className={styles.menuIcon}> <Barcode /></span>
+            <span className={styles.menuTitle}>Books</span>
+          </motion.div>
+
          {
           isAuthenticated && 
+          <>
           <motion.div className={styles.menuItem} onClick={()=>navigate(`/${data._id}/add-products-user`)}
           variants={itemsVaraints} whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300, damping: 15 }}>
           <span className={styles.menuIcon}><SquarePlus /></span>
           <span className={styles.menuTitle}>Add Products</span>
         </motion.div>
+
+         <motion.div className={styles.menuItem} onClick={()=>navigate(`/${data._id}/exchange-add-product-form`)}
+         variants={itemsVaraints} whileHover={{ scale: 1.05 }}
+         transition={{ type: "spring", stiffness: 300, damping: 15 }}>
+         <span className={styles.menuIcon}><SquarePlus /></span>
+         <span className={styles.menuTitle}>Exchange Book Add</span>
+       </motion.div>
+          </>
          }
 
           {

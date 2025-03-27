@@ -13,6 +13,7 @@ const UserDataProvider =({children})=>{
   const [totalQuantity, setTotalQuantity] = useState(0)
   const [products, setProducts] = useState([])
   const [productId, setProductIdBy] = useState([])
+  const [exchangeProduct, setExchangeProduct] = useState([])
 //  console.log(productId)
   useEffect(() => {
     const fetchProductData = async () => {
@@ -31,8 +32,26 @@ const UserDataProvider =({children})=>{
     fetchProductData();
   }, [getToken()]);
 
+  useEffect(()=>{
+    const token = getToken();
+      const fetchData = async()=>{
+
+        try {
+          const res = await axios.get(`${backend_url}/allProduct`,{
+            headers:{'Authorization': `Bearer ${token}` }
+          });
+          setExchangeProduct(res.data.product);
+        } catch (error) {
+          console.log(error, "error");
+        }
+      }
+      fetchData()
+  },[getToken()])
+
   return(
-    <UserDataContext.Provider value={{data,setData,searchQuery,setSearchQuery, totalQuantity, setTotalQuantity,setProducts,products, productId, setProductIdBy,setUserProduct,userProduct}}>
+    <UserDataContext.Provider value={{data,setData,searchQuery,setSearchQuery, 
+      totalQuantity, setTotalQuantity,setProducts,products, productId, setProductIdBy,
+    setUserProduct,userProduct,exchangeProduct,setExchangeProduct}}>
         {children}
     </UserDataContext.Provider>
   )
