@@ -123,7 +123,7 @@ const Product = () => {
   return (
     <>
       <Header />
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px', justifyContent: 'center', padding: '20px' }}>
+      <div className='min-h-screen h-full' style={{ display: 'flex', flexWrap: 'wrap', gap: '40px', justifyContent: 'center', padding: '20px' }}>
         {loading ? (
           Array.from(new Array(8)).map((_, index) => <ProductSkeleton key={index} />)
         ) : filteredProducts.length > 0 ? (
