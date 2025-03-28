@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { IoMdClose } from 'react-icons/io';
-import './sidebar.css';
+import styles from './sidebar.module.css';
 import icon from "../../assets/logo.jpeg";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { UserDataContext } from '../Header/context';
 import { motion } from "framer-motion"
 import { SquarePlus, LayoutDashboard, User, Settings,Mail, LogOut,LogIn,KeyRound, Barcode } from 'lucide-react';
+
 
 const Sidebar = ({ isOpen, onClose }) => {
   const navigate = useNavigate()
@@ -62,21 +63,21 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {isOpen && <div className="sidebar-overlay" onClick={onClose} />}
-      <motion.div className={`sidebar ${isOpen ? 'open' : ''}`}
+      {isOpen && <div className={styles.sidebarOverlay} onClick={onClose} />}
+      <motion.div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}
         initial="closed"
         animate={isOpen ? "open" : "closed"}
         variants={sidebarVaraints}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
 
-        <div className="sidebar-header">
+        <div className={styles.sidebarHeader}>
           <img
             src={icon}
             alt="Logo"
-            className="sidebar-logo"
+            className={styles.sidebarLogo}
           />
-          <motion.button className="close-button" onClick={onClose}
+          <motion.button className={styles.closeButton} onClick={onClose}
             initial="closed"
             animate={isOpen ? "open" : "closed"}
             variants={backdropVaraints}
@@ -87,70 +88,70 @@ const Sidebar = ({ isOpen, onClose }) => {
           </motion.button>
         </div>
 
-        <motion.div className="sidebar-content"
+        <motion.div className={styles.sidebarContent}
           variants={containerVaraints}
           initial="closed"
           animate={isOpen ? "open" : "closed"}
         >
-          <motion.div className="menu-item" onClick={() => navigate("/dashboard")}
+          <motion.div className={styles.menuItem} onClick={() => navigate("/dashboard")}
             variants={itemsVaraints} whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
           >
-            <span className="menu-icon">  <LayoutDashboard color='black'/></span>
-            <span className="menu-title">Dashboard</span>
+            <span className={styles.menuIcon}>  <LayoutDashboard color='black'/></span>
+            <span className={styles.menuTitle}>Dashboard</span>
           </motion.div>
 
           <motion.div variants={itemsVaraints} whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            className="menu-item" onClick={() => navigate(`/${data._id}/user-profile`)}>
-            <span className="menu-icon"> <User/></span>
-            <span className="menu-title">Profile</span>
+            className={styles.menuItem} onClick={() => navigate(`/${data._id}/user-profile`)}>
+            <span className={styles.menuIcon}> <User/></span>
+            <span className={styles.menuTitle}>Profile</span>
           </motion.div>
 
           <motion.div variants={itemsVaraints} whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            className="menu-item">
-            <span className="menu-icon">  <Settings /></span>
-            <span className="menu-title">Settings</span>
+            className={styles.menuItem}>
+            <span className={styles.menuIcon}>  <Settings /></span>
+            <span className={styles.menuTitle}>Settings</span>
           </motion.div>
 
          { isAuthenticated && 
-          <motion.div className="menu-item" onClick={()=>navigate("/messages")}
+          <motion.div className={styles.menuItem} onClick={()=>navigate("/messages")}
           variants={itemsVaraints} whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300, damping: 15 }} >
-          <span className="menu-icon"> <Mail /></span>
-          <span className="menu-title">Messages</span>
+          <span className={styles.menuIcon}> <Mail /></span>
+          <span className={styles.menuTitle}>Messages</span>
         </motion.div>}
 
-          <motion.div className="menu-item"
+          <motion.div className={styles.menuItem}
             variants={itemsVaraints} whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }} onClick={()=>navigate("/all-products")}>
-            <span className="menu-icon"> <Barcode /></span>
-            <span className="menu-title">Products</span>
+            <span className={styles.menuIcon}> <Barcode /></span>
+            <span className={styles.menuTitle}>Products</span>
           </motion.div>
 
-          <motion.div className="menu-item"
+          <motion.div className={styles.menuItem}
             variants={itemsVaraints} whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }} onClick={()=>navigate("/all-products-exchange-books")}>
-            <span className="menu-icon"> <Barcode /></span>
-            <span className="menu-title">Books</span>
+            <span className={styles.menuIcon}> <Barcode /></span>
+            <span className={styles.menuTitle}>Books</span>
           </motion.div>
 
          {
           isAuthenticated && 
           <>
-          <motion.div className="menu-item" onClick={()=>navigate(`/${data._id}/add-products-user`)}
+          <motion.div className={styles.menuItem} onClick={()=>navigate(`/${data._id}/add-products-user`)}
           variants={itemsVaraints} whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300, damping: 15 }}>
-          <span className="menu-icon"><SquarePlus /></span>
-          <span className="menu-title">Add Products</span>
+          <span className={styles.menuIcon}><SquarePlus /></span>
+          <span className={styles.menuTitle}>Add Products</span>
         </motion.div>
 
-         <motion.div className="menu-item" onClick={()=>navigate(`/${data._id}/exchange-add-product-form`)}
+         <motion.div className={styles.menuItem} onClick={()=>navigate(`/${data._id}/exchange-add-product-form`)}
          variants={itemsVaraints} whileHover={{ scale: 1.05 }}
          transition={{ type: "spring", stiffness: 300, damping: 15 }}>
-         <span className="menu-icon"><SquarePlus /></span>
-         <span className="menu-title">Exchange Book Add</span>
+         <span className={styles.menuIcon}><SquarePlus /></span>
+         <span className={styles.menuTitle}>Exchange Book Add</span>
        </motion.div>
           </>
          }
@@ -158,18 +159,18 @@ const Sidebar = ({ isOpen, onClose }) => {
           {
             isAuthenticated ?
               (
-                <motion.div className="menu-item" onClick={handleLogout}
+                <motion.div className={styles.menuItem} onClick={handleLogout}
                   variants={itemsVaraints} whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300, damping: 15 }}>
-                  <span className="menu-icon">  <LogOut /></span>
-                  <span className="menu-title">Logout</span>
+                  <span className={styles.menuIcon}>  <LogOut /></span>
+                  <span className={styles.menuTitle}>Logout</span>
                 </motion.div>
               ) : (
-                <motion.div className="menu-item" onClick={() => navigate("/login")}
+                <motion.div className={styles.menuItem} onClick={() => navigate("/login")}
                   variants={itemsVaraints} whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300, damping: 15 }}>
-                  <span className="menu-icon">    <KeyRound /></span>
-                  <span className="menu-title">Signup / Signin</span>
+                  <span className={styles.menuIcon}>    <KeyRound /></span>
+                  <span className={styles.menuTitle}>Signup / Signin</span>
                 </motion.div>
               )
           }
@@ -178,20 +179,20 @@ const Sidebar = ({ isOpen, onClose }) => {
         {
           isAuthenticated ?
           (
-            <div className="sidebar-footer">
-            <div className="profileContainer">
+            <div className={styles.sidebarFooter}>
+            <div className={styles.profileContainer}>
               <div>
-                <img className="image" src={data.profileImage || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} alt="Profile" />
+                <img className={styles.image} src={data.profileImage || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} alt="Profile" />
               </div>
               <div>
-                <span className="nameUser">{data.name || 'Jhon Doe'}</span><br />
-                <span className="emailUser">{localPart || 'jhondow1215.be23'} <br />@{domainPart || 'chitkarauniversity.edu.in'}</span>
+                <span className={styles.nameUser}>{data.name || 'Jhon Doe'}</span><br />
+                <span className={styles.emailUser}>{localPart || 'jhondow1215.be23'} <br />@{domainPart || 'chitkarauniversity.edu.in'}</span>
               </div>
             </div>
           </div>
           ):(
             // <>
-            <div className='flex sidebar-footer'>
+            <div className={`flex ${styles.sidebarFooter}`}>
               <button className='bg-yellow-500 p-2 font-bold rounded-none hover:bg-yellow-600' onClick={()=>navigate("/login")}>Login</button>
               <button className='text-white bg-black font-bold rounded-none hover:bg-slate-900' onClick={()=>navigate('/signup')}>Signup</button>
             </div>

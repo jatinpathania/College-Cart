@@ -1,4 +1,4 @@
-.sidebar-overlay {
+.sidebarOverlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -36,7 +36,7 @@ body:has(.sidebar.open) {
     left: 0;
 }
 
-.sidebar-header {
+.sidebarHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -44,26 +44,26 @@ body:has(.sidebar.open) {
     border-bottom: 1px solid #eee;
 }
 
-.sidebar-logo {
+.sidebarLogo {
     height: 60px;
     width: auto;
 }
 
-.close-button {
+.closeButton {
     background: none;
     border: none;
     cursor: pointer;
     padding: 0.5rem;
     color: #333;
     display: flex;
-    align-items: center;
+    justify-content: right;
 }
 
-.sidebar-content {
+.sidebarContent {
     padding: 1rem;
 }
 
-.menu-item {
+.menuItem {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -73,15 +73,15 @@ body:has(.sidebar.open) {
     transition: background-color 0.2s;
 }
 
-.menu-item:hover {
+.menuItem:hover {
     background-color: #dbd6d6;
 }
 
-.menu-icon {
+.menuIcon {
     font-size: 1.2rem;
 }
 
-.menu-title {
+.menuTitle {
     color: #000000;
     font-size: 1.3rem;
     font-weight: 300;
@@ -104,7 +104,7 @@ body:has(.sidebar.open) {
     justify-content: space-between;
 }
 
-.sidebar-footer {
+.sidebarFooter {
     margin-top: auto;
     padding: 10px;
     border-top: 1px solid #ddd;
@@ -139,10 +139,10 @@ button {
         touch-action: none;
     }
 
-    .menu-item{
+    .menuItem{
         padding-left: 0px;
     }
-    .sidebar-logo{
+    .sidebarLogo{
         height: 50px;
         width: 50px;
     }
