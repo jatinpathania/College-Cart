@@ -1,6 +1,7 @@
 import { MinusIcon, PlusIcon } from 'lucide-react';
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import styles from "./CartProduct.module.css"
 import ProductPriceDetails from './ProductPriceDetails';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
@@ -85,14 +86,14 @@ const CartProduct = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gray-100">
-        <div className="mx-auto max-w-6xl flex">
-          <div className="bg-white shadow-sm mt-10 w-full">
+      <div className={styles.header}>
+        <div className={styles.container}>
+          <div className={styles.cart}>
             {loading ? (
               Array.from({ length: 6 }).map((_, index) => (
-                <div key={index} className="border-b p-4 flex">
+                <div key={index} className={styles.cartItem}>
                   <Skeleton variant="rectangular" width={100} height={100} />
-                  <div className="pl-4 flex-1">
+                  <div className={styles.itemDetails}>
                     <Skeleton variant="text" width="60%" height={30} />
                     <Skeleton variant="text" width="40%" height={20} />
                     <Skeleton variant="text" width="30%" height={20} />
@@ -102,84 +103,71 @@ const CartProduct = () => {
               ))
             ) : (
               cartItems.map((item) => (
-                <div key={item._id} className="border-b p-4">
-                  <div className="flex">
-                    <div className="flex w-1/4 flex-col items-center">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="h-24 w-24 object-contain"
+                <div key={item._id} className={styles.cartItem}>
+                  <div className={styles.imageContainer}>
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className={styles.image}
+                    />
+                    <div className={styles.quantityControls}>
+                      <button
+                        onClick={() => handleQuantityUpdate(item, "decrease")}  
+                        disabled={item.quantity <= 1}
+                        className={`${styles.button} ${item.quantity <= 1 ? styles.buttonDisabled : styles.buttonEnabled}`}
+                      >
+                        <MinusIcon className={styles.icon} />
+                      </button>
+                      <input
+                        type="text"
+                        className={styles.input}
+                        value={item.quantity || 1}
+                        readOnly
                       />
-                      <div className="mt-10 flex items-center space-x-2">
-                        <button
-                          onClick={() => handleQuantityUpdate(item, "decrease")} disabled={item.quantity <= 1}
-                          className={`flex h-7 w-7 items-center justify-center border border-gray-300 text-black
-                            ${item.quantity <= 1
-                              ? 'bg-gray-100 cursor-not-allowed text-gray-400'
-                              : 'bg-gray-300 hover:bg-gray-400'
-                            }`}
-                        >
-                          <MinusIcon className="h-4 w-4" />
-                        </button>
-                        <input
-                          type="text"
-                          className="h-7 w-12 border border-gray-300 text-center"
-                          value={item.quantity || 1}
-                          readOnly
-                        />
-                        <button
-                         onClick={() => handleQuantityUpdate(item, "increase")} disabled={item.quantity >= item.productQuantity}
-                          className={`flex h-7 w-7 items-center justify-center border border-gray-300 text-black
-                            ${item.quantity >= item.productQuantity
-                              ? 'bg-gray-100 cursor-not-allowed text-gray-400'
-                              : 'bg-gray-300 hover:bg-gray-400'
-                            }`}
-                        >
-                          <PlusIcon className="h-4 w-4" />
-                        </button>
-                      </div>
+                      <button
+                        onClick={() => handleQuantityUpdate(item, "increase")}
+                        disabled={item.quantity >= item.productQuantity}
+                        className={`${styles.button} ${item.quantity >= item.productQuantity ? styles.buttonDisabled : styles.buttonEnabled}`}
+                      >
+                        <PlusIcon className={styles.icon} />
+                      </button>
                     </div>
-                    <div className="flex-1 pl-4">
-                      <h2 className="text-lg text-gray-600">{textName(item.name)}</h2>
-                      <p className="mt-1 text-sm text-gray-500">
-                        {item.selectHostel === 'Hostler' && `Hostel: ${item.hostleName}`}
-                        {item.selectHostel === 'Day_Scholar' && `Student: ${item.selectHostel}`}
-                        {item.roomNumber && `, Room: ${item.roomNumber}`}
-                        {item.dayScholarContectNumber &&
-                          `, Contact: ${item.dayScholarContectNumber}`}
-                      </p>
-                      <p className="mt-1 text-sm text-gray-500">
-                        Category: {item.category}
-                      </p>
-                      <div className="mt-2 flex items-center space-x-2">
-                        <span className="text-lg font-medium">&#8377;{item.price}</span>
-                        {item.prevPrice && (
-                          <>
-                            <span className="text-sm text-gray-500 line-through">
-                              &#8377;{item.prevPrice}
-                            </span>
-                            <span className="text-xs text-green-600">
-                              {Math.round((item.prevPrice - item.price) / item.prevPrice * 100)}% off
-                            </span>
-                          </>
-                        )}
-                      </div>
-                      <div className="mt-4 flex">
-                        <button className="text-sm font-bold hover:text-blue-700">
-                          SAVE FOR LATER
-                        </button>
-                        <button className="text-sm font-bold hover:text-blue-700"
-                          onClick={() => handleOpenDeleteDialog(item._id)}>
-                          REMOVE
-                        </button>
-                      </div>
+                  </div>
+                  <div className={styles.itemDetails}>
+                    <h2 className={styles.itemName}>{textName(item.name)}</h2>
+                    <p className={styles.itemCategory}>
+                      {item.selectHostel === 'Hostler' && `Hostel: ${item.hostleName}`}
+                      {item.selectHostel === 'Day_Scholar' && `Student: ${item.selectHostel}`}
+                      {item.roomNumber && `, Room: ${item.roomNumber}`}
+                      {item.dayScholarContectNumber && `, Contact: ${item.dayScholarContectNumber}`}
+                    </p>
+                    <p className={styles.itemCategory}>Category: {item.category}</p>
+                    <div className={styles.priceDetails}>
+                      <span className={styles.price}>&#8377;{item.price}</span>
+                      {item.prevPrice && (
+                        <>
+                          <span className={styles.prevPrice}>&#8377;{item.prevPrice}</span>
+                          <span className={styles.discount}>
+                            {Math.round((item.prevPrice - item.price) / item.prevPrice * 100)}% off
+                          </span>
+                        </>
+                      )}
+                    </div>
+                    <div className={styles.actionButtons}>
+                      <button className={styles.actionButton}>SAVE FOR LATER</button>
+                      <button
+                        className={styles.actionButton}
+                        onClick={() => handleOpenDeleteDialog(item._id)}
+                      >
+                        REMOVE
+                      </button>
                     </div>
                   </div>
                 </div>
               ))
             )}
           </div>
-          <ProductPriceDetails cartItem={cartItems} setCartItem={setCartItems}/>
+          <ProductPriceDetails cartItem={cartItems} setCartItem={setCartItems} />
         </div>
       </div>
       <RemoveCartItem
@@ -188,7 +176,7 @@ const CartProduct = () => {
         cartItemId={cartProductDeleteId}
         cartItem={cartItems} setCartItem={setCartItems}
       />
-
+      
       <Footer />
       <Toaster />
     </>
