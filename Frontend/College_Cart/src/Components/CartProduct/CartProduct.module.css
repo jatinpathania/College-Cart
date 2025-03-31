@@ -1,0 +1,168 @@
+.header{
+    background-image: url('../../assets/cartbackground.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.header {
+    min-height: 100vh;
+    background-color: #f3f4f6;
+  }
+  
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 75rem;
+    display: flex;
+  }
+  
+  .cart {
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin-top: 2.5rem;
+    width: 100%;
+  }
+  
+  .cartItem {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 20% 80%;
+  }
+  
+  .imageContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 140px;
+  }
+  
+  .image {
+    height: 6rem;
+    width: 6rem;
+    object-fit: contain;
+  }
+  
+  .quantityControls {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .buttonDisabled,
+  .buttonEnabled {
+    background-color: #f3f4f6;
+    color: #4b5563;
+    cursor: pointer;
+    border: 1px solid #d1d5db;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .buttonEnabled:hover {
+    background-color: #e5e7eb;
+  }
+  
+  .input {
+    height: 1.75rem;
+    width: 3rem;
+    border: 1px solid #d1d5db;
+    text-align: center;
+  }
+  
+  .itemDetails {
+    padding-left: 1rem;
+    flex: 1;
+  }
+  
+  .itemName {
+    font-size: 1.125rem;
+    color: #4b5563;
+  }
+  
+  .itemCategory {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
+  .priceDetails {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .price {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+  
+  .prevPrice {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-decoration: line-through;
+  }
+  
+  .discount {
+    font-size: 0.75rem;
+    color: #16a34a;
+  }
+  
+  .actionButtons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .actionButton {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #1e3a8a;
+  }
+  
+  .actionButton:hover {
+    color: #1d4ed8;
+}
+  
+@media screen and (orientation:portrait) and (max-width: 472px) {
+
+  .header{
+    background-image: none;
+    width: 63vh ;
+    margin: 0px;
+  }
+  .container {
+        flex-direction: column;
+        align-items: center;
+        max-width: fit-content;
+        width: 100%;
+        margin: 0px 10px 20px 10px;
+    }
+      
+    .actionButtons{
+        margin: 0;
+        width: fit-content;
+        padding: 0;
+        gap: 0;
+        display: flex;
+        justify-content: space-evenly;
+        margin-left: auto;
+    }
+
+    .actionButton{
+      width: auto;
+    }
+      
+    .priceDetails {
+          width: 100%;
+          margin-top: 1rem;
+    } 
+}
