@@ -338,6 +338,7 @@
     color: rgb(146, 143, 143);
     font-size: 14px;
     text-align: center;
+    margin-top: 25px;
 }
 
 .resendButton {
@@ -347,6 +348,7 @@
     text-decoration: underline;
     cursor: pointer;
     padding: 0;
+    width: auto;
     font-size: 14px;
 }
 
@@ -554,5 +556,9 @@
         font-size: 15px;
         margin-bottom: 24px;
     }
-    
+
+    .resendText {
+        margin-top: 30px;
+    }
+
 }
