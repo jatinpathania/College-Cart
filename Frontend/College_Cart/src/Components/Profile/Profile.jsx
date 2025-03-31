@@ -176,7 +176,7 @@ const Profile = () => {
                 </div>
                <div className={styles.totalDetailsForBuyAndSelling}>
                     <div>
-                        <p>Total sell the product: 
+                        <p>Total Products Sold:
                         {
                             userProduct ? (
                                 <>
@@ -189,7 +189,7 @@ const Profile = () => {
                             )
                         }
                         </p>
-                        <p>Total Buy the product: <span>0</span></p>
+                        <p>Total Products bought: <span>0</span></p>
                         <p></p>
                     </div>
                </div>
