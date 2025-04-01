@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import Header from "../Header/Header";
 import styles from "./exchange.module.css";
@@ -8,6 +8,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const ExchangeBook = () => {
   const backend_url = import.meta.env.VITE_BACKEND_API_URL;
+  const [isLoading, setIsLoading] = useState(false)
 
   const hostelOptions = [
     "Boss", 
@@ -34,6 +35,7 @@ const ExchangeBook = () => {
   const selectHostel = watch('selectHostel');
 
   const onSubmit = async (data) => {
+    setIsLoading(true)
     const submitData = new FormData();
     submitData.append('name', data.name);
     submitData.append('selectHostel', data.selectHostel);
@@ -63,9 +65,13 @@ const ExchangeBook = () => {
       
       toast.success(response.data.message);
       reset();
+      // setIsLoading(false)
     } catch (error) {
+      // setIsLoading(true)
       console.error('Submission error:', error);
       toast.error(error.response?.data?.message || 'Product creating Error');
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -180,8 +186,8 @@ const ExchangeBook = () => {
               {errors.image && <span className={styles.error}>{errors.image.message}</span>}
             </div>
 
-            <button type="submit" className={styles.submitButton}>
-              Add Book for Exchange
+            <button type="submit" className={styles.submitButton} disabled={isLoading}>
+             { isLoading ?  "Add Book for Exchange..." : " Add Book for Exchange"}
             </button>
           </form>
         </div>
