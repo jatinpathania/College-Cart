@@ -190,7 +190,11 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
                   <option value="">Select Hostel</option>
                   <option value="Boss">Boss</option>
                   <option value="Aryabhata">Aryabhata</option>
-                  <option value="Sarabhai">Sarabhai</option>
+                 <option value="Sarabhai">Sarabhai</option>
+                  <option value="Kalpana">Kalpana</option>
+                  <option value="Gargi">Gargi</option>
+                  <option value="Teresa">Teresa</option>
+                  <option value="New girls hostel">New girls hostel</option>
                 </select>
               </div>
 
