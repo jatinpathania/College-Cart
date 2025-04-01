@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
+import { data } from 'react-router-dom';
 
 
 const ProductSkeleton = () => {
@@ -52,16 +53,20 @@ const ProductSkeleton = () => {
 };
 
 const ExchangeBookAllProduct = () => {
-  const { exchangeProduct, searchQuery } = useContext(UserDataContext);
+  const { exchangeProduct, searchQuery, data } = useContext(UserDataContext);
   const [filterData, setFilterData] = useState([]);
   const [loading, setLoading] = useState(true)
+
 
   useEffect(()=>{
  if(exchangeProduct.length > 0){
   const bookFilter =  exchangeProduct.filter((item)=>
     item.name.toLowerCase().includes(searchQuery.toLowerCase()) 
   )
-  setFilterData(bookFilter)
+  const withOutUserDataShow = bookFilter.filter((item)=>
+    item.userId._id !== data._id
+  )
+  setFilterData(withOutUserDataShow)
   setLoading(false)
  }
   },[searchQuery,exchangeProduct])
