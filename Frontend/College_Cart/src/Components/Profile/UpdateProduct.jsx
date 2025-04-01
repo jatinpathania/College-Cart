@@ -300,4 +300,5 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
   );
 };
 
+
 export default UpdateProduct;
