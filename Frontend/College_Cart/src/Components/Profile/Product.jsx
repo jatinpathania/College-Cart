@@ -8,6 +8,7 @@ import DeleteProduct from './DeleteProduct';
 import Skeleton from '@mui/material/Skeleton';
 import { getToken } from '../../util/tokenService';
 import UpdateProduct from './UpdateProduct';
+import ExchangeBookCard from './ExchangeBookCard';
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
@@ -20,6 +21,7 @@ const Product = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [productToUpdate, setProductToUpdate] = useState(null);
+  const [exchangeBooks, setExchangeBooks] = useState([])
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -56,6 +58,25 @@ const Product = () => {
     const words = text.split(' ');
     return words.length > 30 ? words.slice(0, 30).join(' ') + '...' : text;
   };
+
+  useEffect(()=>{
+   const fetchDataExchangeBook = async()=>{
+    const token = getToken()
+    try {
+      const response = await axios.get(`${backend_url}/allProduct`,{
+        headers:{ 'Content-Type': 'application/json','Authorization':`Bearer ${token}`}
+      })
+      const findUserBookCreate = response.data.product.filter(
+        (user)=> data._id === user.userId._id)
+
+      setExchangeBooks(findUserBookCreate)
+      console.log(findUserBookCreate)
+    } catch (error) {
+      console.log("Error", error);
+    }
+   }
+   fetchDataExchangeBook()
+  },[data._id])
 
   return (
     <>
@@ -168,11 +189,17 @@ const Product = () => {
                 </div>
               </div>
             ))}
+           {exchangeBooks.length > 0 && (
+          <div>
+            <ExchangeBookCard exchangeBooks={exchangeBooks} />
+            </div>
+          )}
       </div>
       <DeleteProduct
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         productId={productToDeleteId}
+        bookId=""
       />
       <UpdateProduct 
         isOpen={isUpdateModalOpen}
