@@ -5,9 +5,11 @@ const {
   exchangeBookCreate, 
   getAllProduct,
   getProductById,
-  deleteProductById
+  deleteProductById,
+  updateProductBookExchange
 } = require('../Controllers/exchangeBook');
 const { isAuthenticated } = require('../middleware/auth');
+const upload = require("../Config/multer")
 
 router.post('/create', 
   isAuthenticated,         
@@ -15,8 +17,9 @@ router.post('/create',
   exchangeBookCreate 
 );
 
-router.get("/allProduct", getAllProduct)
+router.get("/allProduct", isAuthenticated, getAllProduct)
 router.get("/:id/productId", getProductById)
-router.delete("/:id/deleteId", deleteProductById)
+router.delete("/:id/deleteId",isAuthenticated, deleteProductById)
+router.put("/:id/updateBook", isAuthenticated, upload.single('image'),updateProductBookExchange)
 
 module.exports = router;
