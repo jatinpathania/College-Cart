@@ -152,19 +152,77 @@ exports.getProductById=async(req,res)=>{
 
 exports.deleteProductById = async(req,res)=>{
   const{id} = req.params;
+  // console.log(id)
   try {
     const productById = await exchange.findById({_id:id});
     if(!productById){
       return res.status(404).json({success:false, message:"Product not found"})
     }
+    // console.log(productById)
     if(productById.cloudinaryPublicId){
       await deleteFromCloudinary(productById.cloudinaryPublicId)
     }
-
-    await exchange.deleteOne();
+        
+    await productById.deleteOne();
 
     return res.status(200).json({success:true, message: "Product delete successfull" })
   } catch (error) {
     return res.status(500).json({ message: "Error during delete id data", error:error.message });
+  }
+}
+
+exports.updateProductBookExchange = async(req,res)=>{
+  const {id} = req.params;
+  const {
+    cloudinaryPublicId, 
+    name, 
+    selectHostel, 
+    hostleName, 
+    roomNumber, 
+    dayScholarContectNumber, 
+    description 
+  } = req.body;
+  try {
+    const product = await exchange.findById({
+      _id:id
+    })
+    if(!product){
+      return res.status(404).json({success:false, message:"Product Not Found"})
+    }
+    if(req.file){
+      const cloudinaryResult = await uploadToCloudinary(req.file);
+      if(!cloudinaryResult){
+        return res.status(400).json({message:"Image upload failed"})
+      }
+      if(exchange.cloudinaryPublicId){
+        await deleteFromCloudinary(exchange.cloudinaryPublicId)
+      }
+      req.body.image = cloudinaryResult.url;
+      req.body.cloudinaryPublicId = cloudinaryResult.public_id
+    }
+    if(selectHostel==="Hostler"){
+      const updateBook = await exchange.findByIdAndUpdate({_id:id},{
+       cloudinaryPublicId,
+       name,
+       hostleName,
+       roomNumber,
+       description,
+       userId:req.user._id,
+      },{new:true, runValidators: true}).populate('userId','name');
+      return res.status(200).json({success:true, message: "Product update successfull", updateBook })
+    }
+    if(selectHostel==="Day_Scholar"){
+      const updateBook = await exchange.findByIdAndUpdate({_id:id},{
+       cloudinaryPublicId,
+       name,
+       dayScholarContectNumber,
+       description,
+       userId:req.user._id,
+      },{new:true, runValidators: true}).populate('userId','name');
+      return res.status(200).json({success:true, message: "Product update successfull", updateBook })
+    }
+  } catch (error) {
+    console.error("Update product error:", error);
+    return res.status(500).json({success:false, message: "Error during update",error:error.message })
   }
 }
