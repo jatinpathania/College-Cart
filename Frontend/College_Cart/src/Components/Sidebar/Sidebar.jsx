@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import styles from './sidebar.module.css';
 import icon from "../../assets/logo.jpeg";
@@ -25,6 +25,17 @@ const Sidebar = ({ isOpen, onClose }) => {
     toast.success("Logout success")
       navigate("/login")
   }
+
+  useEffect(() => {
+          if(isOpen){
+              document.body.style.overflow = 'hidden';
+          }else{
+              document.body.style.overflow = 'auto';
+          }
+          return () => {
+              document.body.style.overflow = 'auto';
+          };
+  }, [isOpen]);
   
   const sidebarVaraints = {
     open: { x: 0, opacity: 1, scale: 1 },
