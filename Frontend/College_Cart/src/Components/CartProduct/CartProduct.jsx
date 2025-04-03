@@ -177,7 +177,8 @@ const CartProduct = () => {
         cartItem={cartItems} setCartItem={setCartItems}
       />
       
-      <Footer />
+      
+      <div className={styles.cartFooter}><Footer /></div>
       <Toaster />
     </>
   );
