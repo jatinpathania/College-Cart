@@ -145,7 +145,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             variants={itemsVaraints} whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }} onClick={()=>navigate("/all-products-exchange-books")}>
             <span className={styles.menuIcon}> <Barcode /></span>
-            <span className={styles.menuTitle}>Books</span>
+            <span className={styles.menuTitle}>Exchange Books</span>
           </motion.div>
 
          {

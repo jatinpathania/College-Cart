@@ -6,18 +6,7 @@ import './updateProduct.css';
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
-const PRODUCT_CATEGORIES = [
-  "Electronics",
-  // "Furniture",
-  "Clothing",
-  "Books",
-  // "Stationary",
-  "Sports Equipment",
-  // "Miscellaneous"
-  "Grocery"
-];
-
-const UpdateProduct = ({ isOpen, onClose, productData }) => {
+const ExchangeBookUpdate = ({ isOpen, onClose, productData }) => {
 
   if (!isOpen) return null;
   const [selectedImage, setSelectedImage] = useState(null);
@@ -25,15 +14,10 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
 
   const [formData, setFormData] = useState({
     name: '',
-    brand: '',
-    quantity:'',
-    category: '',
     selectHostel: '',
     hostleName: '',
     roomNumber: '',
     dayScholarContectNumber: '',
-    prevAmount: '',
-    newAmount: '',
     description: ''
   });
 
@@ -41,15 +25,10 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
     if (productData) {
       setFormData({
         name: productData.name || '',
-        brand: productData.brand || '',
-        quantity: productData.quantity || '',
-        category: productData.category || '',
         selectHostel: productData.selectHostel || '',
         hostleName: productData.hostleName || '',
         roomNumber: productData.roomNumber || '',
         dayScholarContectNumber: productData.dayScholarContectNumber || '',
-        prevAmount: productData.prevAmount || '',
-        newAmount: productData.newAmount || '',
         description: productData.description || ''
       });
       setImagePreview(productData.image || '');
@@ -89,7 +68,7 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
         formDataToSend.append('image', selectedImage);
       }
 
-    const response =  await axios.put(`${backend_url}/${productData._id}/product-update`, formData, {
+    const response =  await axios.put(`${backend_url}/${productData._id}/updateBook`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`
@@ -120,47 +99,6 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
               required
             />
           </div>
-
-          <div className="form-group">
-            <label>Brand</label>
-            <input
-              type="text"
-              name="brand"
-              value={formData.brand}
-              onChange={handleChange}
-              className="inputColorText"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Quantity</label>
-            <input
-              type="Number"
-              name="quantity"
-              value={formData.quantity}
-              onChange={handleChange}
-              className="inputColorText"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Category</label>
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              className="inputColorText"
-              required
-            >
-              <option value="">Select Category</option>
-              {PRODUCT_CATEGORIES.map(category => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
-          </div>
-
           <div className="form-group">
             <label>Student Type</label>
             <select
@@ -225,31 +163,6 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
           ) : null}
 
           <div className="form-group">
-            <label>Buy Amount</label>
-            <input
-              type="number"
-              name="prevAmount"
-              value={formData.prevAmount}
-              onChange={handleChange}
-              className="inputColorText"
-              min="0"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Selling Amount</label>
-            <input
-              type="number"
-              name="newAmount"
-              value={formData.newAmount}
-              onChange={handleChange}
-              className="inputColorText"
-              min="0"
-              required
-            />
-          </div>
-          <div className="form-group">
             <label>Product Image</label>
             <div className="image-upload-container">
               {imagePreview && (
@@ -300,5 +213,4 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
   );
 };
 
-
-export default UpdateProduct;
+export default ExchangeBookUpdate;

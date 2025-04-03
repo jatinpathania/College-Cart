@@ -29,17 +29,17 @@ const Messages = () => {
       socketRef.current = io(socket_url);
   
       socketRef.current.on("connect", () => {
-        console.log("Socket connected:", socketRef.current.id);
+        // console.log("Socket connected:", socketRef.current.id);
         setSocketConnected(true);
       });
   
       socketRef.current.on("connect_error", (err) => {
-        console.error("Socket connection error:", err);
+        // console.error("Socket connection error:", err);
         setSocketConnected(false);
       });
   
       socketRef.current.on("disconnect", () => {
-        console.log("Socket disconnected");
+        // console.log("Socket disconnected");
         setSocketConnected(false);
       });
   
@@ -79,14 +79,14 @@ const Messages = () => {
         socketRef.current.disconnect();
         socketRef.current = null;
         setSocketConnected(false);
-        console.log("Socket disconnected on cleanup");
+        // console.log("Socket disconnected on cleanup");
       }
     };
   }, [userId, socket_url]); 
   
   useEffect(() => {
     if (socketRef.current && socketConnected && selectedConversation) {
-      console.log("Joining room:", selectedConversation.roomId);
+      // console.log("Joining room:", selectedConversation.roomId);
       socketRef.current.emit("join_room", { joinRoomId: selectedConversation.roomId });
     }
   }, [selectedConversation, socketConnected]);
@@ -186,7 +186,7 @@ const Messages = () => {
         sender: msg.senderId === userId ? 'self' : 'other',
         timestamp: msg.createdAt,
       }));
-    console.log(formattedMessages)
+    // console.log(formattedMessages)
       setMessages(formattedMessages);
     } catch (error) {
       console.error("Error fetching messages:", error);

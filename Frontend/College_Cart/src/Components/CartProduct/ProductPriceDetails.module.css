@@ -1,79 +1,79 @@
 .container {
-    background-color: white;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    width: 500px;
-    height: fit-content;
-    margin-left: 2.5rem;
-    margin-top: 2.5rem;
-    padding: 1.5rem;
-  }
-  
-  .title {
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: #1f2937;
-    margin-bottom: 1rem;
-  }
-  
-  .divider {
-    font-size: 1.125rem;
-    margin-bottom: 1rem;
-  }
-  
-  .details {
-    margin-top: 0.75rem;
-  }
-  
-  .textSmall {
-    font-size: 0.875rem;
-  }
-  
-  .flex {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .discountText {
-    color: #16a34a;
-  }
-  
-  .borderTop {
-    border-top: 1px solid #e5e7eb;
-    padding-top: 0.75rem;
-    margin-top: 0.75rem;
-  }
-  
-  .textMedium {
-    font-weight: 500;
-    font-size: 1rem;
-  }
-  
-  .saveText {
-    color: #16a34a;
-    font-size: 0.875rem;
-  }
-  
-  .button {
-    width: 100%;
-    background-color: #ea580c;
-    color: white;
-    padding: 0.75rem;
-    border-radius: 0.375rem;
-    margin-top: 1.5rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .button:hover {
-    background-color: #f97316;
-  }
+  background-color: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  width: 500px;
+  height: fit-content;
+  margin-left: 2.5rem;
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+}
 
-  @media screen and (orientation:portrait) and (max-width: 472px) {
-    
-    .container{
-      width: 100%;
-      margin: 0px;
-      margin-top: 20px;;
-    }
+.title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.divider {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+.details {
+  margin-top: 0.75rem;
+}
+
+.textSmall {
+  font-size: 0.875rem;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.discountText {
+  color: #16a34a;
+}
+
+.borderTop {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.textMedium {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.saveText {
+  color: #16a34a;
+  font-size: 0.875rem;
+}
+
+.button {
+  width: 100%;
+  background-color: #ea580c;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: #f97316;
+}
+
+@media screen and (orientation:portrait) and (max-width: 472px) {
+
+  .container {
+    width: 100%;
+    margin: 0px;
+    margin-top: 20px;
+    ;
   }
-  
+}

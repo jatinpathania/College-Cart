@@ -12,7 +12,8 @@ import store from '../SagaRedux/Store';
 import { io } from "socket.io-client";
 import { UserDataContext } from "../Header/context";
 import axios from "axios";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
+import toast, { Toaster } from 'react-hot-toast'; 
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -32,18 +33,9 @@ const ProductDetails = () => {
         dispatch(fetchProductDetails(id));
     }, [dispatch, id]);
 
-
     useEffect(() => {
         if (!socketRef.current && data?._id) {
             socketRef.current = io(socket_url);
-
-            socketRef.current.on("connect", () => {
-                console.log("Socket connected:", socketRef.current.id);
-            });
-
-            socketRef.current.on("connect_error", (err) => {
-                console.error("Socket connection error:", err);
-            });
 
             socketRef.current.on("receive_message", (data) => {
                 if (data.message && data.joinRoomId === roomId) {
@@ -60,10 +52,9 @@ const ProductDetails = () => {
         return () => {
             if (socketRef.current) {
                 socketRef.current.disconnect();
-                console.log("Socket disconnected");
             }
         };
-    }, [data?._id, socket_url]);
+    }, [data?._id, socket_url, roomId]);
 
     useEffect(() => {
         if (messagesEndRef.current) {
@@ -98,14 +89,13 @@ const ProductDetails = () => {
                     setRoomId(joinRoomId);
 
                     socketRef.current.emit("join_room", { joinRoomId });
-                    console.log("Joined Room:", joinRoomId);
-
                     
                     loadPreviousMessages(joinRoomId);
                 }
             }
         } catch (error) {
             console.error("Error joining room:", error);
+            toast.error("Failed to join chat room");
         }
     };
 
@@ -120,6 +110,7 @@ const ProductDetails = () => {
             setMessages(formattedMessages);
         } catch (error) {
             console.error("Error loading previous messages:", error);
+            toast.error("Failed to load previous messages");
         }
     };
 
@@ -138,9 +129,7 @@ const ProductDetails = () => {
             }
         ]);
 
-        
         setInputMessage("");
-
 
         socketRef.current.emit("send_message", {
             joinRoomId: roomId,
@@ -157,6 +146,7 @@ const ProductDetails = () => {
             });
         } catch (error) {
             console.error("Error sending message:", error);
+            toast.error("Failed to send message");
         }
     };
 
@@ -172,13 +162,25 @@ const ProductDetails = () => {
         return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     };
 
-    const handleAddToCart = () => {
-        dispatch(addToCart(product));
-        const totalQuantity = store.getState().cart.totalQuantity;
+   
+    const handleAddToCart = (e, productData) => {
+        
+        e.preventDefault();
+        
+        if (!productData || !productData.product) {
+            toast.error("Product data is missing");
+            return;
+        }
 
-        setTimeout(() => {
+        try {
+            const totalQuantity = store.getState().cart.totalQuantity;
+            
+            
+            dispatch(addToCart(productData.product));
+            
             const updatedState = store.getState().cart.itemList;
-            const storeItem = updatedState.find(item => item._id === product.product._id);
+            const storeItem = updatedState.find(item => item._id === productData.product._id);
+            
             if (storeItem) {
                 const cartItem = {
                     productId: storeItem._id,
@@ -189,18 +191,25 @@ const ProductDetails = () => {
                     hostleName: storeItem.hostleName,
                     roomNumber: storeItem.roomNumber,
                     dayScholarContectNumber: storeItem.dayScholarContectNumber,
-                    price: storeItem.price,
-                    prevPrice: storeItem.prevPrice,
-                    totalPrice: storeItem.totalPrice,
+                    price: storeItem.newAmount,
+                    prevPrice: storeItem.prevAmount,
+                    totalPrice: storeItem.newAmount,
                     image: storeItem.image,
                     productQuantity: storeItem.productQuantity,
-                    quantity: storeItem.quantity,
+                    quantity: storeItem.quantity, 
                     totalQuantity: totalQuantity
                 };
-
+             
                 dispatch(cartAdd(cartItem));
+                
+                toast.success(`${storeItem.name} added to cart!`);
+            } else {
+                toast.error("Failed to add product to cart");
             }
-        }, 200);
+        } catch (error) {
+            console.error("Error adding to cart:", error);
+            toast.error("Failed to add to cart");
+        }
     };
 
     if (isLoading) {
@@ -259,6 +268,9 @@ const ProductDetails = () => {
     return (
         <>
             <Header />
+            
+            <Toaster position="top-center" reverseOrder={false} />
+            
             <div className="amazon-container">
                 <div className="breadcrumb">
                     {product?.product.category} {'>'} {product?.product.brand}
@@ -435,14 +447,17 @@ const ProductDetails = () => {
                             <button className="buy-now-button">
                                 Buy Now
                             </button>
-                            <button className="add-to-cart-button" onClick={handleAddToCart}>
+                            {/* <button 
+                                className="add-to-cart-button" 
+                                onClick={(e) => handleAddToCart(e, product)}
+                            >
                                 Add to Cart
-                            </button>
+                            </button> */}
                         </div>
                        
-                            <button className="messageButton" onClick={toggleMessageModal}>
-                                <span className="text">Message</span>
-                            </button>
+                        <button className="messageButton" onClick={toggleMessageModal}>
+                            <span className="text">Message</span>
+                        </button>
                     </div>
                 </div>
             </div>

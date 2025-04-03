@@ -1,7 +1,7 @@
-.header{
-    background-image: url('../../assets/cartbackground.jpg');
-    background-size: cover;
-    background-attachment: fixed;
+.header {
+  background-image: url('../../assets/cartbackground.jpg');
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .header {
@@ -132,38 +132,39 @@
   .actionButton:hover {
     color: #1d4ed8;
 }
-
+  
 @media screen and (orientation:portrait) and (max-width: 472px) {
 
-  .header{
+  .header {
     background-image: none;
-    width: 63vh ;
+    width: 63vh;
     margin: 0px;
   }
-  .container {
-        flex-direction: column;
-        align-items: center;
-        max-width: fit-content;
-        width: 100%;
-        margin: 0px 10px 20px 10px;
-    }
-      
-    .actionButtons{
-        margin: 0;
-        width: fit-content;
-        padding: 0;
-        gap: 0;
-        display: flex;
-        justify-content: space-evenly;
-        margin-left: auto;
-    }
 
-    .actionButton{
-      width: auto;
-    }
-      
-    .priceDetails {
-          width: 100%;
-          margin-top: 1rem;
-    } 
+  .container {
+    flex-direction: column;
+    align-items: center;
+    max-width: fit-content;
+    width: 100%;
+    margin: 0px 10px 20px 10px;
+  }
+
+  .actionButtons {
+    margin: 0;
+    width: fit-content;
+    padding: 0;
+    gap: 0;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: auto;
+  }
+
+  .actionButton {
+    width: auto;
+  }
+
+  .priceDetails {
+    width: 100%;
+    margin-top: 1rem;
+  }
 }

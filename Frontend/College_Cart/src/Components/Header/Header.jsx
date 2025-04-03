@@ -22,7 +22,6 @@ const Header = () => {
   const { searchQuery, setSearchQuery } = useContext(UserDataContext);
   const [cartItems, setCartItems] = useState([]);
 
-
   const {totalQuantity} = (useSelector((state)=>state.cart));
   // const totalQuantity1 = obj.itemList.length;
   // console.log( totalQuantity);
@@ -88,7 +87,7 @@ const Header = () => {
         <div className={style.addProductCart} onClick={()=>navigate('/addCartProudct')}>
         <FaCartPlus className={style.cart} size={44}/>
         <div className={style.productCountInCart}>
-         <p>{cartItems.length ||totalQuantity}</p>
+         <p>{cartItems.length || totalQuantity}</p>
         </div>
         </div>
 
