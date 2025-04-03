@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserDataContext } from '../Header/context';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import styles from './exchange.module.css'
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import { data } from 'react-router-dom';
