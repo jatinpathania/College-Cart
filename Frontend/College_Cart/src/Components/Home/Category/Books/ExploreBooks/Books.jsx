@@ -14,6 +14,7 @@ const Books = () => {
     const navigate = useNavigate();
     const {products, data} = useContext(UserDataContext)
       useEffect(() => {
+        window.scrollTo(0, 0);  // This ensures the page always starts from the top
         if (products.length > 0) {
           const filterCategoryBooks = products.filter((item) => item.category === 'Books');
           setProductsBooks(filterCategoryBooks);
@@ -89,7 +90,7 @@ const Books = () => {
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">
-      <Header />
+      <div className="stickyHeader"><Header /></div>
       <main className="flex-grow container mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold mb-6">Books</h1>
         <div className="flex flex-wrap -mx-4">
