@@ -7,3 +7,10 @@
     font-size: 30px;
     margin-top: 300px;
 }
+
+.stickyHeader{
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000; 
+}

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Header from '../Header/Header';
+import './product.css'
 import ProductCard from './CardProduct';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
@@ -122,7 +123,9 @@ const Product = () => {
      };
   return (
     <>
+    <div class="stickyHeader">
       <Header />
+    </div>
       <div className='min-h-screen h-full' style={{ display: 'flex', flexWrap: 'wrap', gap: '40px', justifyContent: 'center', padding: '20px' }}>
         {loading ? (
           Array.from(new Array(8)).map((_, index) => <ProductSkeleton key={index} />)
