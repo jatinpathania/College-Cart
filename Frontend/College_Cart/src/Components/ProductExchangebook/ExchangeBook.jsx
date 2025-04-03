@@ -1,14 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { UserDataContext } from '../Header/context';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import styles from './exchange.module.css'
 
 const ExchangeBookAllProduct = () => {
   const { exchangeProduct } = useContext(UserDataContext);
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      <Header />
+      <div className={styles.stickyHeader}><Header /></div>
       <div className="container mx-auto px-4 py-8">    
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {exchangeProduct.map((item) => (
