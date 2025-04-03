@@ -16,7 +16,7 @@ const Home = () => {
   const {data} = useContext(UserDataContext)
   return (
     <>
-      <Header/>
+      <div class="stickyHeader"><Header/></div>
       <div className="home-container">
         <section className="hero">
           <div className="hero-content">
