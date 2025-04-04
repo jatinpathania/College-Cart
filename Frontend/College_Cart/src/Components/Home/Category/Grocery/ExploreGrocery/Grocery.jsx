@@ -11,6 +11,7 @@ const Grocery = () => {
     const navigate = useNavigate();
     const {products,data} = useContext(UserDataContext)
       useEffect(() => {
+        window.scrollTo(0, 0);  // This ensures the page always starts from the top
         if (products.length > 0) {
           const filterCategory = products.filter((item) => item.category === 'Grocery');
           setProductsGrocery(filterCategory);
@@ -84,7 +85,7 @@ const Grocery = () => {
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">
-      <Header />
+      <div className="stickyHeader"><Header /></div>
       <main className="flex-grow container mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold mb-6">Grocery</h1>
         <div className="flex flex-wrap -mx-4">

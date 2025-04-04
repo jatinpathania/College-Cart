@@ -10,13 +10,6 @@
     touch-action: none;
 }
 
-body:has(.sidebar.open) {
-    overflow: hidden;
-    height: 100vh;
-    touch-action: none;
-}
-
-
 .sidebar {
     position: fixed;
     top: 0;
