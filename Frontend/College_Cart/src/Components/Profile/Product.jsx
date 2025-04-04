@@ -191,6 +191,7 @@ const Product = () => {
             ))}
            {exchangeBooks.length > 0 && (
           <div>
+            <p className='text-2xl pl-10 font-bold'>Exchange Book Products</p>
             <ExchangeBookCard exchangeBooks={exchangeBooks} />
             </div>
           )}

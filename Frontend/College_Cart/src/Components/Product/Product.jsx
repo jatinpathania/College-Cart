@@ -129,7 +129,7 @@ const Product = () => {
         ) : filteredProducts.length > 0 ? (
           filteredProducts.map((product) => <ProductCard key={product._id} product={product} handleAddToCart={handleAddToCart} />)
         ) : (
-          <p>No products found</p>
+          <p className='text-2xl font-bold mt-16'>No Product Found</p>
         )}
       </div>
       <Footer />
