@@ -28,7 +28,7 @@ const Slice = createSlice({
         },
         signUpUserSuccess: (state, action) => {
             state.status = 'success',
-            state.isLoading = true,
+            state.isLoading = false;
             state.user = action.payload.user,
             state.token = action.payload.token,
             state.message = action.payload.message,
@@ -68,9 +68,11 @@ const Slice = createSlice({
         },
         emailVerifySuccess:(state,action)=>{
             state.status = 'success',
-            state.isLoading = false,
+            state.isLoading = false;
+            const token = action.payload.token;
+            setToken(token);
             state.user = action.payload.user,
-            state.token = action.payload.token
+            state.token = token
             state.message = action.payload.message
             state.error = null
         },
