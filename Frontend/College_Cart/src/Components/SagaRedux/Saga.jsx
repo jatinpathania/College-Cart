@@ -25,19 +25,28 @@ import {
 } from './Slice'
 
 import * as api from "./api"
-import { getToken } from "../../util/tokenService";
 import { updateCart } from "../Redux/Slice";
 
 function* signUpUserSaga(action) {
     try {
+        
         const response = yield call(api.signUp, action.payload);
-        if (response.data.message) {
+        const { message, user, token } = response.data;
+        if (message) {
             yield put(signUpUserSuccess({
                 message: response.data.message,
                 user: response.data.user || null,
                 token: response.data.token || null
             }))
         }
+        if (token && user) {
+            yield put(signInUserSuccess({
+              message,
+              user,
+              token
+            }));
+          }
+    
     } catch (error) {
         yield put(signUpUserFailed({
             message: error.message,
