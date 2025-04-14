@@ -12,6 +12,7 @@ const cors = require("cors");
 const joinRoomIdRouter = require("./Routes/joinRoom");
 const messageRouter = require("./Routes/message");
 const exchangeBookRoute = require("./Routes/exchangeBook")
+const orderRouter = require("./Routes/order")
 
 const allowedOrigins = [process.env.FRONTEND_URL, process.env.FRONTEND_DEPLOY_URL, process.env.FRONTEND_DEPLOY_URL_VERCEL];
 
@@ -44,6 +45,8 @@ app.use("/api", cartProduct);
 app.use("/api", joinRoomIdRouter);
 app.use("/api", messageRouter);
 app.use("/api", exchangeBookRoute);
+app.use("/api", orderRouter)
+
 
 app.listen(PORT, () => {
     console.log(`Server Started at PORT: ${PORT}`);
