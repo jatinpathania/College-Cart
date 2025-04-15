@@ -76,6 +76,7 @@ const Product = () => {
     dispatch({type: "cart/initialize"});
 
     useEffect(() => {
+      window.scrollTo(0, 0);
       if (products.length > 0) {
         const filtered = products.filter((product) =>
           product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 

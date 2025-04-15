@@ -72,6 +72,7 @@ const AddProduct = () => {
     };
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         if (message && message.includes('success')) {
             setFormData({
                 name: '',
