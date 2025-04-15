@@ -14,6 +14,7 @@ import { UserDataContext } from "../Header/context";
 import axios from "axios";
 import { motion } from "framer-motion";
 import toast, { Toaster } from 'react-hot-toast'; 
+import Checkout from "./Checkout";
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -444,9 +445,9 @@ const ProductDetails = () => {
                                     `${product?.product.hostleName} Hostel - Room ${product?.product.roomNumber}` :
                                     'Day Scholar'}
                             </div>
-                            <button className="buy-now-button">
-                                Buy Now
-                            </button>
+                            {/* <button className="buy-now-button"> */}
+                                Buy Now <Checkout product={product}/>
+                            {/* </button> */}
                             {/* <button 
                                 className="add-to-cart-button" 
                                 onClick={(e) => handleAddToCart(e, product)}
