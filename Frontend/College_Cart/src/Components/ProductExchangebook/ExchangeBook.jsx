@@ -5,7 +5,7 @@ import Footer from '../Footer/Footer';
 import styles from './exchange.module.css'
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
-import { data } from 'react-router-dom';
+import { HomeIcon, Hotel, Phone } from 'lucide-react';
 
 
 const ProductSkeleton = () => {
@@ -83,9 +83,9 @@ const ExchangeBookAllProduct = () => {
           filterData.map((item) => (
             <div 
               key={item._id} 
-              className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl"
             >
-              <div className="relative items-center flex justify-center">
+              <div className="relative items-center flex justify-center transition-transform duration-300 hover:scale-95">
                 <img 
                   className="w-[300px] h-[400px] object-cover mt-4 rounded-lg" 
                   src={item.image} 
@@ -97,12 +97,12 @@ const ExchangeBookAllProduct = () => {
                 <div className="mb-4">
                   {item.selectHostel === "Hostler" ? (
                     <div className="text-sm text-gray-600">
-                      <p>Room: {item.roomNumber}</p>
-                      <p>Hostel: {item.hostleName}</p>
+                     <div className='flex'><HomeIcon size={18}/> <p className='ml-2'> Room: {item.roomNumber}</p></div>
+                      <div className='flex'><Hotel size={18}/> <p className='ml-2'>Hostel: {item.hostleName}</p></div>
                     </div>
                   ) : (
-                    <div className="text-sm text-gray-600">
-                      <p>Contact: {item.dayScholarContectNumber}</p>
+                    <div className="text-sm text-gray-600 flex">
+                     <Phone size={16}/> <p className='ml-2'>Contact: {item.dayScholarContectNumber}</p>
                     </div>
                   )}
                 </div>
