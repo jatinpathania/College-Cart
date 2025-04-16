@@ -10,6 +10,7 @@ import Product from './Product';
 import Skeleton from '@mui/material/Skeleton';
 import Footer from "../Footer/Footer"
 import { X } from 'lucide-react';
+import axios from 'axios';
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const Profile = () => {
     const [userName, setUserName] = useState(data.username || '');
     const [profileImage, setProfileImage] = useState(null);
     const [showImageModal, setShowImageModal] = useState(false);
+    const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 // console.log(userProduct)
     const handleProfileUpdate = () => {
         const formData = new FormData();
@@ -71,6 +73,25 @@ const Profile = () => {
             document.body.style.overflow = 'auto';
         };
     },[showImageModal])
+
+
+    const [exchangeBookData, setExchangeBookData] = useState([])
+    useEffect(()=>{
+       const fetchData=async()=>{
+        try {
+            const response = await axios.get(`${backend_url}/allOrderBook`)
+            const fileterUserSealId = response.data.order.filter(
+                (item) => data._id === item.sealUser.userId
+            )
+            setExchangeBookData(fileterUserSealId)
+            // console.log(response.data.order)
+            console.log(fileterUserSealId)
+        } catch (error) {
+            console.log(error,"error");
+        }
+       }
+       fetchData()
+    },[data._id])
 
     return (
         <>
@@ -190,7 +211,18 @@ const Profile = () => {
                         }
                         </p>
                         <p>Total Products Buy: <span>0</span></p>
-                        <p></p>
+                        <p>Total Request Exchange Book: 
+                            {
+                                exchangeBookData ?(
+                                    <><span>{exchangeBookData.length}</span>
+                                    </>
+                                ):(
+                                    <>
+                                    <span>0</span>
+                                    </>
+                                )
+                            }
+                            </p>
                     </div>
                </div>
             </div>
