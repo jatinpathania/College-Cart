@@ -70,7 +70,7 @@ const Product = () => {
         (user)=> data._id === user.userId._id)
 
       setExchangeBooks(findUserBookCreate)
-      console.log(findUserBookCreate)
+      // console.log(findUserBookCreate)
     } catch (error) {
       console.log("Error", error);
     }
