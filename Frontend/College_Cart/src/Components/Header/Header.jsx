@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import { IoMenu } from "react-icons/io5";
 import { IoMdSearch } from "react-icons/io";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
 import icon from "../../assets/logo.jpeg";
 import { UserDataContext } from "./context";
@@ -19,6 +19,7 @@ const Header = () => {
   const [show, setShow] = useState(false);
   const profileRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
   const { searchQuery, setSearchQuery } = useContext(UserDataContext);
   const [cartItems, setCartItems] = useState([]);
 
@@ -26,6 +27,8 @@ const Header = () => {
   // const totalQuantity1 = obj.itemList.length;
   // console.log( totalQuantity);
   const isAuthenticated = Boolean(data && data._id);
+  const isHomepage = location.pathname === "/";
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -81,6 +84,7 @@ const Header = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className={style.searchInput}
+            disabled={isHomepage}
           />
         </div >
 
