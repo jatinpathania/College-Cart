@@ -74,6 +74,10 @@ const Profile = () => {
         };
     },[showImageModal])
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+
 
     const [exchangeBookData, setExchangeBookData] = useState([])
     useEffect(()=>{
