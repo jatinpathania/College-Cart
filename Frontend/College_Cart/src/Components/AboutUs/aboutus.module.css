@@ -1,0 +1,358 @@
+.pageWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex: 1;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 0;
+    margin-bottom: 60px;
+  }
+  
+  .heroContent {
+    max-width: 600px;
+  }
+  
+  .title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    line-height: 1.2;
+  }
+  
+  .missionStatement {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: #4a5568;
+  }
+  
+  .heroImage {
+    width: 450px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  }
+  
+  .content {
+    padding: 40px 0;
+  }
+  
+  .sectionHeader {
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  
+  .sectionTitle {
+    margin-top: 45px;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .divider {
+    width: 80px;
+    height: 4px;
+    background-color: #3498db;
+    margin: 0 auto;
+  }
+  
+  .text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: #4a5568;
+  }
+  
+  .problemGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+  
+  .problemCard {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .problemCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  }
+  
+  .problemTitle {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .problemDescription {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4a5568;
+  }
+  
+  .solutionContent {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    margin-top: 40px;
+  }
+  
+  .solutionText {
+    flex: 1;
+  }
+  
+  .solutionHighlights {
+    margin-top: 30px;
+  }
+  
+  .highlightItem {
+    margin-bottom: 25px;
+  }
+  
+  .highlightTitle {
+    font-size: 1.2rem;
+    color: #3498db;
+    margin-bottom: 10px;
+  }
+  
+  .solutionImage {
+    flex: 1;
+  }
+  
+  .featureImage {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  
+  .featuresGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+  
+  .featureCard {
+    padding: 30px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .featureCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .featureIcon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+    background-color: #e8f4fc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .featureIcon img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .featureTitle {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .featureDescription {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4a5568;
+  }
+  
+  .impactContent {
+    display: flex;
+    gap: 50px;
+    margin-top: 40px;
+  }
+  
+  .impactStats {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 30px;
+  }
+  
+  .statItem {
+    text-align: center;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .statNumber {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #3498db;
+    margin-bottom: 10px;
+  }
+  
+  .statLabel {
+    font-size: 1rem;
+    color: #4a5568;
+  }
+  
+  .impactTestimonials {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .testimonialCard {
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  }
+  
+  .testimonialText {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-style: italic;
+    color: #4a5568;
+    margin-bottom: 15px;
+  }
+  
+  .testimonialAuthor {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .roadmapList {
+    margin: 30px 0;
+    padding-left: 20px;
+  }
+  
+  .roadmapItem {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #4a5568;
+    position: relative;
+    padding-left: 30px;
+  }
+  
+  .roadmapItem:before {
+    content: "→";
+    color: #3498db;
+    position: absolute;
+    left: 0;
+  }
+  
+  .ctaBox {
+    text-align: center;
+    padding: 50px;
+    background-color: #3498db;
+    border-radius: 8px;
+    margin-top: 50px;
+    color: white;
+  }
+  
+  .ctaTitle {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .ctaText {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    opacity: 0.9;
+  }
+  
+  .ctaButton {
+    background-color: white;
+    color: #3498db;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .ctaButton:hover {
+    transform: translateY(-3px);
+    background-color: yellow;
+  }
+
+  @media (max-width: 1024px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .heroImage {
+      margin-top: 40px;
+      width: 100%;
+      max-width: 500px;
+    }
+    
+    .solutionContent {
+      flex-direction: column;
+    }
+    
+    .impactContent {
+      flex-direction: column;
+    }
+    
+    .impactStats {
+      grid-template-columns: repeat(3, 1fr);
+      margin-bottom: 40px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero {
+      padding: 60px 0;
+    }
+    
+    .title {
+      font-size: 2.5rem;
+    }
+    
+    .missionStatement {
+      font-size: 1.3rem;
+    }
+    
+    .sectionTitle {
+      font-size: 1.8rem;
+    }
+    
+    .impactStats {
+      grid-template-columns: 1fr;
+    }
+  }
