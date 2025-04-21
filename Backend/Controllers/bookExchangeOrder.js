@@ -62,3 +62,19 @@ exports.getAllExchangeBookOrder = async(req,res)=>{
     return res.status(400).json({success:false, message:"Order found during error"});
   }
 }
+
+exports.deleteExchangeBookOrderById=async (req,res) => {
+    const {id} = req.params;
+    // console.log(id)
+    try {
+        const orderDelete = await bookExchangeOrder.findById(id);
+        // console.log(orderDelete)
+        if(!orderDelete){
+            return res.status(404).json({message:"Order not found"})
+        }
+        await orderDelete.deleteOne();
+        return res.status(200).json({ success: true, message: "Order deleted successfully" });
+    } catch (error) {
+        return res.status(400).json({success:false, message:"Order delete during error"});
+    }
+}
