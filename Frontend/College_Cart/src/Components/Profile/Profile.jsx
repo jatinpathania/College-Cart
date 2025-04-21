@@ -11,6 +11,7 @@ import Skeleton from '@mui/material/Skeleton';
 import Footer from "../Footer/Footer"
 import { X } from 'lucide-react';
 import axios from 'axios';
+import RequestModal from './RequestModal';
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -20,6 +21,8 @@ const Profile = () => {
     const [profileImage, setProfileImage] = useState(null);
     const [showImageModal, setShowImageModal] = useState(false);
     const backend_url = import.meta.env.VITE_BACKEND_API_URL;
+    const [showRequestModal, setShowRequestModal] = useState(false);
+
 // console.log(userProduct)
     const handleProfileUpdate = () => {
         const formData = new FormData();
@@ -85,7 +88,7 @@ const Profile = () => {
             )
             setExchangeBookData(fileterUserSealId)
             // console.log(response.data.order)
-            console.log(fileterUserSealId)
+           // console.log(fileterUserSealId)
         } catch (error) {
             console.log(error,"error");
         }
@@ -214,7 +217,9 @@ const Profile = () => {
                         <p>Total Request Exchange Book: 
                             {
                                 exchangeBookData ?(
-                                    <><span>{exchangeBookData.length}</span>
+                                    <>
+                                        <span> {exchangeBookData.length}</span>
+                                      
                                     </>
                                 ):(
                                     <>
@@ -222,7 +227,9 @@ const Profile = () => {
                                     </>
                                 )
                             }
+                            
                             </p>
+                            <button className='bg-green-500 w-[200px] text-white font-bold hover:bg-green-600' onClick={() => setShowRequestModal(true)}>Show Request</button>
                     </div>
                </div>
             </div>
@@ -232,6 +239,11 @@ const Profile = () => {
             </div>
             <MessageHandler/>
             <Footer/>
+            <RequestModal 
+                 isOpen={showRequestModal}
+                onClose={() => setShowRequestModal(false)}
+                orderData={exchangeBookData}
+                />
         </>
     );
 };
