@@ -23,6 +23,9 @@ import Sport from './Components/Home/Category/SportsEquipment/ExploreSports/Spor
 import Grocery from './Components/Home/Category/Grocery/ExploreGrocery/Grocery'
 import ExchangeBook from './Components/ExchangeBookForm/ExchangeBook'
 import ExchangeBookAllProduct from './Components/ProductExchangebook/ExchangeBook'
+import Setting from "./Components/Setting/Setting"
+import AboutUs from "./Components/AboutUs/AboutUs"
+import OurTeam from "./Components/OurTeam/OurTeam"
 
 const App = () => {
   return (
@@ -48,6 +51,11 @@ const App = () => {
              <Route path='/all-clothing-item' element={<Clothings/>}/>
              <Route path='/all-sport-item' element={<Sport/>}/>
              <Route path='/all-grocery-item' element={<Grocery/>}/>
+             <Route path='/setting' element={<Setting/>}/>
+             <Route path='/aboutus' element={<AboutUs/>}/>
+             <Route path='/our-team' element={<OurTeam/>}/>
+
+
             <Route 
               path='/dashboard' 
               element={
