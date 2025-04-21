@@ -1,37 +1,39 @@
 import React from 'react';
 import { FaLinkedin, FaGithub, FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import './footer.css'
+import { useNavigate } from 'react-router-dom';
 const Footer = () => {
+  const navigate = useNavigate()
   return (
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-section">
           <h4>About College Cart</h4>
           <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Our Team</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Contact Us</a></li>
+            <li><p className="footerLinks" onClick={()=>navigate("/aboutus")}> About Us</p></li>
+            <li><p className="footerLinks" onClick={()=>navigate("/our-team")}>Our Team</p></li>
+            <li><p className="footerLinks"> Careers</p></li>
+            <li><p className="footerLinks"> Contact Us</p></li>
           </ul>
         </div>
 
         <div className="footer-section">
           <h4>Sell & Buy</h4>
           <ul>
-            <li><a href="#">Sell Items</a></li>
-            <li><a href="#">Buy Items</a></li>
-            <li><a href="#">Exchange Items</a></li>
-            <li><a href="#">Policies</a></li>
+            <li><p className="footerLinks" onClick={()=>navigate("/add-products-user")}> Sell Items</p></li>
+            <li><p className="footerLinks" onClick={()=>navigate("/all-products")}> Buy Items</p></li>
+            <li><p className="footerLinks"> Exchange Items</p></li>
+            <li><p className="footerLinks"> Policies</p></li>
           </ul>
         </div>
 
         <div className="footer-section">
           <h4>Support</h4>
           <ul>
-            <li><a href="#">Help Center</a></li>
-            <li><a href="#">FAQs</a></li>
-            <li><a href="#">Report Issues</a></li>
-            <li><a href="#">Feedback</a></li>
+            <li><p className="footerLinks"> Help Center</p></li>
+            <li><p className="footerLinks"> FAQs</p></li>
+            <li><p className="footerLinks"> Report Issues</p></li>
+            <li><p className="footerLinks"> Feedback</p></li>
           </ul>
         </div>
 

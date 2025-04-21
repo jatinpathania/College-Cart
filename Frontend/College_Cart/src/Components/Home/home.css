@@ -10,11 +10,12 @@
   width: 100%;
   z-index: 1000; 
 }
+/* https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3 */
 
 .hero {
   height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url('../../assets/chitkara1.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -24,6 +25,7 @@
   text-align: center;
   color: white;
 }
+
 
 .hero-content {
   max-width: 800px;
