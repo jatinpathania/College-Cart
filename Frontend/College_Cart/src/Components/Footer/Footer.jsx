@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaLinkedin, FaGithub, FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import './footer.css'
 import { useNavigate } from 'react-router-dom';
+import { UserDataContext } from '../Header/context';
 const Footer = () => {
   const navigate = useNavigate()
+  const {data} = useContext(UserDataContext)
   return (
     <footer className="footer">
       <div className="footer-content">
@@ -20,7 +22,7 @@ const Footer = () => {
         <div className="footer-section">
           <h4>Sell & Buy</h4>
           <ul>
-            <li><p className="footerLinks" onClick={()=>navigate("/add-products-user")}> Sell Items</p></li>
+            <li><p className="footerLinks" onClick={()=>navigate(`/${data._id}/add-products-user`)}> Sell Items</p></li>
             <li><p className="footerLinks" onClick={()=>navigate("/all-products")}> Buy Items</p></li>
             <li><p className="footerLinks"> Exchange Items</p></li>
             <li><p className="footerLinks"> Policies</p></li>
