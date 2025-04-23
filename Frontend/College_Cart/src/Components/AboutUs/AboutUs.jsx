@@ -1,19 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useContext,useEffect } from "react";
 import collegeCartInterface from '../../assets/collegeCartInterface.png';
 import styles from "./aboutus.module.css";
 import Header from '../Header/Header';
 import Footer from "../Footer/Footer";
 import { useNavigate } from 'react-router-dom';
+import { UserDataContext } from '../Header/context';
 
 const AboutUs = () => {
     const navigate = useNavigate()
+    const {data } = useContext(UserDataContext);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+
+  const checkLogin=()=>{
+    if(data){
+      navigate("/")
+    }else{
+      navigate("/login")
+    }
+  }
+
+
   return (
     <div className={styles.pageWrapper}>
-      <Header />
+      <Header hideSearch/>
       
       <div className={styles.container}>
         <div className={styles.hero}>
@@ -261,14 +273,7 @@ const AboutUs = () => {
                 <p className={styles.ctaText}>
                   Be part of a movement that's making college more affordable, sustainable, and connected.
                 </p>
-                <button className={styles.ctaButton} onClick={() => {
-                const isLoggedIn = localStorage.getItem('token');
-                if (isLoggedIn) {
-                    navigate("/");
-                } else {
-                navigate("/signup");
-                }
-                }}>
+                <button className={styles.ctaButton} onClick={()=>checkLogin()}>
                 Get Started Today</button>
               </div>
             </div>
