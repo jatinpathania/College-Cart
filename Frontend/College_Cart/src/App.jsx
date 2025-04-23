@@ -26,10 +26,7 @@ import ExchangeBookAllProduct from './Components/ProductExchangebook/ExchangeBoo
 import OurTeam from './Components/OurTeam/OurTeam'
 import AboutUs from './Components/AboutUs/AboutUs'
 import ContactUs from './Components/ContactUs/ContactUs'
-
 import Setting from "./Components/Setting/Setting"
-import AboutUs from "./Components/AboutUs/AboutUs"
-import OurTeam from "./Components/OurTeam/OurTeam"
 
 const App = () => {
   return (
