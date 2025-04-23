@@ -20,6 +20,7 @@ const Profile = () => {
     const [profileImage, setProfileImage] = useState(null);
     const [showImageModal, setShowImageModal] = useState(false);
     const backend_url = import.meta.env.VITE_BACKEND_API_URL;
+
 // console.log(userProduct)
     const handleProfileUpdate = () => {
         const formData = new FormData();
@@ -49,6 +50,7 @@ const Profile = () => {
     const toggleImageModal = () => {
         setShowImageModal(!showImageModal);
     };
+
 
   
 
@@ -99,7 +101,7 @@ const Profile = () => {
 
     return (
         <>
-            <Header />
+            <Header hideSearch/>
             <div className={styles.profilePageContainer}>
             <div className={styles.profilePage}>
                 <div className={styles.profileCard}>
@@ -201,7 +203,7 @@ const Profile = () => {
                 </div>
                <div className={styles.totalDetailsForBuyAndSelling}>
                     <div>
-                        <p>Total Products Sell:
+                        <p>Total Products Sold:
                         {
                             userProduct ? (
                                 <>
@@ -214,8 +216,8 @@ const Profile = () => {
                             )
                         }
                         </p>
-                        <p>Total Products Buy: <span>0</span></p>
-                        <p>Total Request Exchange Book: 
+                        <p>Total Products Bought: <span>0</span></p>
+                        <p>Total Requests For Exchanging Books: 
                             {
                                 exchangeBookData ?(
                                     <><span>{exchangeBookData.length}</span>
