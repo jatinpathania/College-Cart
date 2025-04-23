@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  padding: 50px 20px;
+  background-color: #f0f4f8;
+  min-height: 100vh;
+}
+
+.form-card {
+  background: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+.formHead {
+  color: #2563eb;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  background: #f1f5f9;
+  padding: 12px 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.input-box svg {
+  margin-right: 12px;
+  color: #2563eb;
+}
+
+.input-box input,
+.input-box select,
+.input-box textarea {
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1;
+  font-size: 1rem;
+  color: #333;
+}
+
+.input-box.textarea {
+  align-items: flex-start;
+}
+
+.input-box textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.input-box.select select {
+  background: transparent;
+  color: #333;
+  font-size: 1rem;
+}
+
+.input-box.select select:focus {
+  outline: none;
+  border: none;
+}
+
+.input-box.captcha {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.checkbox-wrap {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.checkbox-wrap label {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.submit-btn {
+  background-color: #2563eb;
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+.form-status {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: #16a34a;
+}
+
+.contact-container {
+  background-image: url('https://wallpapercave.com/wp/wp3248705.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
