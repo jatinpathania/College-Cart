@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './addproduct.css';
+import styles from './addproduct.module.css';
 import Header from '../Header/Header';
 import { productNew } from '../SagaRedux/Slice';
 import MessageHandler from "../Signup/MessageHandler"
 
 const AddProduct = () => {
     const dispatch = useDispatch();
+
     const { isLoading, error, message, product } = useSelector((state) => state.app);
 
     const PRODUCT_CATEGORIES = [
         "Electronics",
-        // "Furniture",
         "Clothing",
         "Books",
-        // "Stationary",
         "Sports Equipment",
-        // "Miscellaneous"
         "Grocery"
     ];
 
@@ -24,7 +22,7 @@ const AddProduct = () => {
         name: '',
         brand: '',
         category: '',
-        quantity:'',
+        quantity: '',
         selectHostel: '',
         hostleName: '',
         roomNumber: '',
@@ -45,22 +43,18 @@ const AddProduct = () => {
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        if (file) {
-            if (file.type.startsWith('image/')) {
-                setFormData(prevData => ({
-                    ...prevData,
-                    image: file
-                }));
-
-            } else {
-                e.target.value = '';
-            }
+        if (file && file.type.startsWith('image/')) {
+            setFormData(prevData => ({
+                ...prevData,
+                image: file
+            }));
+        } else {
+            e.target.value = '';
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const productFormData = new FormData();
         Object.keys(formData).forEach(key => {
             if (key !== 'image') {
@@ -77,7 +71,7 @@ const AddProduct = () => {
             setFormData({
                 name: '',
                 brand: '',
-                quantity:'',
+                quantity: '',
                 selectHostel: '',
                 hostleName: '',
                 roomNumber: '',
@@ -87,66 +81,62 @@ const AddProduct = () => {
                 image: null,
                 description: ''
             });
-            // const fileInput = document.querySelector('input[type="file"]');
-            // if (fileInput) fileInput.value = '';
         }
         console.log(product)
     }, [message, product]);
 
     return (
         <>
-            <Header />
-            <div className="form-wrapper">
-                <div className="form-container">
-                    <h2 className="form-title">Add New Product</h2>
+            <Header hideSearch/>
+            <div className={styles["form-wrapper"]}>
+            <h1 className={styles.pageHeading}>Your First Step Towards Selling!  Start Selling Today</h1>
+                <div className={styles["form-container"]}>
+                    <h2 className={styles["form-title"]}>Add New Product</h2>
                     <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label className="form-label">Product Name*</label>
+                        <div className={styles["form-group"]}>
+                            <label className={styles["form-label"]}>Product Name*</label>
                             <input
                                 type="text"
                                 name="name"
-                                className="form-input"
+                                className={styles["form-input"]}
                                 value={formData.name}
                                 onChange={handleChange}
                                 placeholder="Enter product name"
-                            // required
                             />
                         </div>
 
-                        <div className="form-group">
-                            <label className="form-label">Brand Name*</label>
+                        <div className={styles["form-group"]}>
+                            <label className={styles["form-label"]}>Brand Name*</label>
                             <input
                                 type="text"
                                 name="brand"
-                                className="form-input"
+                                className={styles["form-input"]}
                                 value={formData.brand}
                                 onChange={handleChange}
                                 placeholder="Enter brand name"
-                            // required
                             />
                         </div>
-                        <div className="form-group">
-                            <label className="form-label">Quantity*</label>
+
+                        <div className={styles["form-group"]}>
+                            <label className={styles["form-label"]}>Quantity*</label>
                             <input
                                 type="number"
                                 name="quantity"
-                                className="form-input"
+                                className={styles["form-input"]}
                                 value={formData.quantity}
                                 onChange={handleChange}
                                 placeholder="Enter quantity"
                                 min="1"
-                            // required
                             />
                         </div>
 
-                        <div className="form-group">
-                            <label className="form-label">Product Category*</label>
+                        <div className={styles["form-group"]}>
+                            <label className={styles["form-label"]}>Product Category*</label>
                             <select
                                 name="category"
-                                className="form-select"
+                                className={styles["form-select"]}
                                 value={formData.category}
                                 onChange={handleChange}
-                            // required
                             >
                                 <option value="">Select Category</option>
                                 {PRODUCT_CATEGORIES.map((category) => (
@@ -157,14 +147,13 @@ const AddProduct = () => {
                             </select>
                         </div>
 
-                        <div className="form-group">
-                            <label className="form-label">Select Option*</label>
+                        <div className={styles["form-group"]}>
+                            <label className={styles["form-label"]}>Select Option*</label>
                             <select
                                 name="selectHostel"
-                                className="form-select"
+                                className={styles["form-select"]}
                                 value={formData.selectHostel}
                                 onChange={handleChange}
-                            // required
                             >
                                 <option value="">Select Category</option>
                                 <option value="Hostler">Hostler</option>
@@ -174,14 +163,13 @@ const AddProduct = () => {
 
                         {formData.selectHostel === 'Hostler' && (
                             <>
-                                <div className="form-group">
-                                    <label className="form-label">Hostel Name*</label>
+                                <div className={styles["form-group"]}>
+                                    <label className={styles["form-label"]}>Hostel Name*</label>
                                     <select
                                         name="hostleName"
-                                        className="form-select"
+                                        className={styles["form-select"]}
                                         value={formData.hostleName}
                                         onChange={handleChange}
-                                    // required
                                     >
                                         <option value="">Select Hostel</option>
                                         <option value="Boss">Boss</option>
@@ -194,93 +182,85 @@ const AddProduct = () => {
                                     </select>
                                 </div>
 
-                                <div className="form-group">
-                                    <label className="form-label">Room Number*</label>
+                                <div className={styles["form-group"]}>
+                                    <label className={styles["form-label"]}>Room Number*</label>
                                     <input
                                         type="text"
                                         name="roomNumber"
-                                        className="form-input"
+                                        className={styles["form-input"]}
                                         value={formData.roomNumber}
                                         onChange={handleChange}
                                         placeholder="Enter room number"
-                                    // required
                                     />
                                 </div>
                             </>
                         )}
 
                         {formData.selectHostel === 'Day_Scholar' && (
-                            <div className="form-group">
-                                <label className="form-label">Contact Number*</label>
+                            <div className={styles["form-group"]}>
+                                <label className={styles["form-label"]}>Contact Number*</label>
                                 <input
                                     type="tel"
                                     name="dayScholarContectNumber"
-                                    className="form-input"
+                                    className={styles["form-input"]}
                                     value={formData.dayScholarContectNumber}
                                     onChange={handleChange}
                                     placeholder="Enter contact number"
-                                // required
-
                                 />
                             </div>
                         )}
 
-                        <div className="form-group">
-                            <label className="form-label">Buy Amount*</label>
+                        <div className={styles["form-group"]}>
+                            <label className={styles["form-label"]}>Buy Amount*</label>
                             <input
                                 type="number"
                                 name="prevAmount"
-                                className="form-input"
+                                className={styles["form-input"]}
                                 value={formData.prevAmount}
                                 onChange={handleChange}
                                 placeholder="Enter previous amount"
                                 min="10"
-                            // required
                             />
                         </div>
 
-                        <div className="form-group">
-                            <label className="form-label">Selling Amount*</label>
+                        <div className={styles["form-group"]}>
+                            <label className={styles["form-label"]}>Selling Amount*</label>
                             <input
                                 type="number"
                                 name="newAmount"
-                                className="form-input"
+                                className={styles["form-input"]}
                                 value={formData.newAmount}
                                 onChange={handleChange}
                                 placeholder="Enter new amount"
                                 min="10"
-                            // required
                             />
                         </div>
 
-                        <div className="form-group">
-                            <label className="form-label">Product Image*</label>
+                        <div className={styles["form-group"]}>
+                            <label className={styles["form-label"]}>Product Image*</label>
                             <input
                                 type="file"
                                 name="image"
-                                className="form-input"
+                                className={styles["form-input"]}
                                 onChange={handleImageChange}
                                 accept="image/*"
-                            // required
                             />
-
                         </div>
 
-                        <div className="form-group">
-                            <label className="form-label">Description*</label>
+                        <div className={styles["form-group"]}>
+                            <label className={styles["form-label"]}>Description*</label>
                             <textarea
                                 name="description"
-                                className="form-textarea"
+                                className={styles["form-textarea"]}
                                 value={formData.description}
                                 onChange={handleChange}
                                 placeholder="Enter product description"
-                            // required
                             ></textarea>
                         </div>
 
                         <button
                             type="submit"
-                            className="submit-button"
+                            className={styles["submit-button"]}
                             disabled={isLoading}
                         >
                             {isLoading ? 'Adding Product...' : 'Add Product'}
