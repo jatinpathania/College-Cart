@@ -9,6 +9,7 @@ import { io } from "socket.io-client";
 import Skeleton from '@mui/material/Skeleton';
 import { useNavigate } from 'react-router-dom';
 
+
 const Messages = () => {
   const navigate = useNavigate();
   const backend_url = import.meta.env.VITE_BACKEND_API_URL;
@@ -289,7 +290,7 @@ const Messages = () => {
   if (loading) {
     return (
       <>
-        <Header />
+        <Header hideSearch/>
         <div className="messages-container">
           <div className="conversation-list">
             <h2 className="conversations-title">Chat</h2>
