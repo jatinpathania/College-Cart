@@ -1,4 +1,4 @@
-import {useEffect,React} from "react";
+import {useEffect,useContext,React} from "react";
 import jatinImg from '../../assets/jatin.jpg';
 import harashImg from '../../assets/harash.jpeg';
 import hardikImg from '../../assets/hardik.jpeg';
@@ -6,7 +6,7 @@ import jyotiImg from '../../assets/jyoti.png'
 import styles from "./OurTeam.module.css";
 import Header from '../Header/Header';
 import Footer from "../Footer/Footer";
-
+import { UserDataContext } from '../Header/context';
 const teamMembers = [
   {
     name: "Harash Pooriya",
@@ -38,23 +38,23 @@ const teamMembers = [
     bio: "Hardik designs user-friendly interfaces that are visually appealing and easy for students to navigate.",
     image: hardikImg,
     tasks: [
-      "Designed wireframes and prototypes",
+      "Added animations and transitions",
       "Created style guide and design system",
       "Conducted user testing sessions"
     ]
   },
   {
     name: "Jyoti Thakur",
-    role: "Documentation Specialist",
-    bio: "Jyoti handles all documentation work, including technical guides, user manuals, and update logs for future scalability and clarity.",
+    role: "Documentation Specialist & Frontend Support",
+    bio: "Jyoti manages technical docs and also helped design the Electronics and Groceries pages.",
     image: jyotiImg,
     tasks: [
-      "Wrote Research Papers",
+      "Made Electronics page UI",
+      "Styled the Groceries section",
       "Created Project PPTs",
-      "Maintained project wiki",
       "Prepared technical specifications"
     ]
-  },
+  }  
 ];
 
 const OurTeam = () => {
@@ -64,7 +64,7 @@ const OurTeam = () => {
 
   return (
     <div className={styles.container}>
-      <Header />
+      <Header hideSearch/>
       <div className={styles.header}>
         <h1 className={styles.title}>Our Team</h1>
         <p className={styles.description}>
