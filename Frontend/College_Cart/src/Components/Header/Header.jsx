@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import { IoMenu } from "react-icons/io5";
 import { IoMdSearch } from "react-icons/io";
 import { motion } from "framer-motion";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
 import icon from "../../assets/logo.jpeg";
 import { UserDataContext } from "./context";
@@ -13,21 +13,18 @@ import { getToken } from "../../util/tokenService";
 import axios from "axios";
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
-const Header = () => {
+const Header = ({hideSearch}) => {
   const [isOpen, setIsOpen] = useState(false);
   const { data } = useContext(UserDataContext);
   const [show, setShow] = useState(false);
   const profileRef = useRef(null);
   const navigate = useNavigate();
-  const location = useLocation();
-  const { searchQuery, setSearchQuery } = useContext(UserDataContext);
+  const { searchQuery, setSearchQuery} = useContext(UserDataContext);
   const [cartItems, setCartItems] = useState([]);
-
   const {totalQuantity} = (useSelector((state)=>state.cart));
   // const totalQuantity1 = obj.itemList.length;
   // console.log( totalQuantity);
   const isAuthenticated = Boolean(data && data._id);
-  const isHomepage = location.pathname === "/";
 
 
   useEffect(() => {
@@ -76,17 +73,22 @@ const Header = () => {
           <img src={icon} alt="Logo" className={style.logo} />
         </div>
 
+        <div className={style.searchBar} style={{
+            visibility: hideSearch ? 'hidden' : 'visible',
+            pointerEvents: hideSearch ? 'none' : 'auto',
+            display: 'flex'
+        }}>
         <div className={style.searchContainer}>
           <IoMdSearch className={style.searchIcon} size={30}/>
           <input
-            type="text"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className={style.searchInput}
-            disabled={isHomepage}
-          />
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className={style.searchInput}
+        />
         </div >
+        </div>
 
         <div className={style.addProductCart} onClick={()=>navigate('/addCartProudct')}>
         <FaCartPlus className={style.cart} size={44}/>
