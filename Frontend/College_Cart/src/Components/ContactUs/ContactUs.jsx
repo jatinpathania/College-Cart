@@ -2,7 +2,6 @@ import React, { useContext,useState, useEffect } from 'react';
 import styles from './contactus.module.css';
 import { FaUser, FaEnvelope, FaCommentDots, FaPaperPlane } from 'react-icons/fa';
 import Header from '../Header/Header';
-import { UserDataContext } from '../Header/context';
 
 const generateCaptcha = () => {
   const num1 = Math.floor(Math.random() * 10);
@@ -22,11 +21,6 @@ function ContactUs() {
 
   const [captcha, setCaptcha] = useState(generateCaptcha());
   const [status, setStatus] = useState('');
-  const { setIsSearchDisabled } = useContext(UserDataContext);
-  useEffect(() => {
-    setIsSearchDisabled(true);
-    return () => setIsSearchDisabled(false);
-  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
