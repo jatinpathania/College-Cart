@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserDataContext } from '../Header/context';
 const Footer = () => {
   const navigate = useNavigate()
-  const {data}= useContext(UserDataContext)
+  const {data} = useContext(UserDataContext)
   return (
     <footer className="footer">
       <div className="footer-content">

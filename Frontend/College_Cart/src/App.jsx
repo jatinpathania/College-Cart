@@ -27,6 +27,9 @@ import OurTeam from './Components/OurTeam/OurTeam'
 import AboutUs from './Components/AboutUs/AboutUs'
 import ContactUs from './Components/ContactUs/ContactUs'
 
+import Setting from "./Components/Setting/Setting"
+import AboutUs from "./Components/AboutUs/AboutUs"
+import OurTeam from "./Components/OurTeam/OurTeam"
 
 const App = () => {
   return (
@@ -55,6 +58,11 @@ const App = () => {
              <Route path="/our-team" element={<OurTeam />}/>
              <Route path="/aboutus" element={<AboutUs/>}/>
              <Route path="/contact-us" element={<ContactUs />}/>
+             <Route path='/setting' element={<Setting/>}/>
+             <Route path='/aboutus' element={<AboutUs/>}/>
+             <Route path='/our-team' element={<OurTeam/>}/>
+
+
             <Route 
               path='/dashboard' 
               element={
