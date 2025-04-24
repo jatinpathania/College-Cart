@@ -24,7 +24,7 @@ const Footer = () => {
           <ul>
             <li><p className="footerLinks" onClick={()=>navigate(`/${data._id}/add-products-user`)}> Sell Items</p></li>
             <li><p className="footerLinks" onClick={()=>navigate("/all-products")}> Buy Items</p></li>
-            <li><p className="footerLinks"> Exchange Items</p></li>
+            <li><p className="footerLinks" onClick={()=>navigate("/all-products-exchange-books")}> Exchange Items</p></li>
             <li><p className="footerLinks"> Policies</p></li>
           </ul>
         </div>

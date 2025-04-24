@@ -81,6 +81,12 @@
   text-decoration: underline;
 }
 
+@media (max-width: 1367px) {
+  .footer{
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .footer-content {
     grid-template-columns: repeat(2, 1fr);
