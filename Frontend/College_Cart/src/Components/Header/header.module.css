@@ -28,6 +28,42 @@
   height: 80px;
   width: 80px;
 }
+.middleHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navLink {
+  margin-left: 24px;
+  font-size: 1rem;
+  font-weight: 550;
+  color: #444;
+  cursor: pointer;
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.25s ease;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: #4a90e2;
+  transition: width 0.3s ease;
+}
+
+.navLink:hover {
+  color: #4a90e2;
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
 
 .searchContainer {
   display: flex;
@@ -125,6 +161,10 @@
   justify-content: space-around;
 }
 
+.hideOnMobile {
+  display: none !important;
+}
+
 
 @media screen and (max-width: 1367px) {
   .logo {
@@ -190,6 +230,20 @@
   .header {
     width: 63vh;
   }
+
+  .middleHeader {
+    margin: 0;
+    padding: 0;
+    
+  }
+  
+  .navLink {
+    margin-left: 0px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 0;
+  }
+  
   
   .menuButton {
     width: 50px;
