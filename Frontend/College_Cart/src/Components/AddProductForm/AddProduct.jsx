@@ -1,4 +1,4 @@
-import React, { useState,useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './addproduct.module.css';
 import Header from '../Header/Header';
@@ -7,6 +7,9 @@ import MessageHandler from "../Signup/MessageHandler"
 
 const AddProduct = () => {
     const dispatch = useDispatch();
+    const [isUploaded, setIsUploaded] = useState(false);
+    const [fileName, setFileName] = useState('');
+
 
     const { isLoading, error, message, product } = useSelector((state) => state.app);
 
@@ -48,10 +51,13 @@ const AddProduct = () => {
                 ...prevData,
                 image: file
             }));
+            setFileName(file.name);
+            setIsUploaded(true);
         } else {
             e.target.value = '';
         }
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -87,9 +93,9 @@ const AddProduct = () => {
 
     return (
         <>
-            <Header hideSearch/>
+            <Header Header showSearch={false} showMiddleHeader={true} isProductsPage={false} />
             <div className={styles["form-wrapper"]}>
-            <h1 className={styles.pageHeading}>Your First Step Towards Selling!  Start Selling Today</h1>
+                <h1 className={styles.pageHeading}>Your First Step Towards Selling!  Start Selling Today</h1>
                 <div className={styles["form-container"]}>
                     <h2 className={styles["form-title"]}>Add New Product</h2>
                     <form onSubmit={handleSubmit}>
@@ -244,7 +250,16 @@ const AddProduct = () => {
                                 className={styles["form-input"]}
                                 onChange={handleImageChange}
                                 accept="image/*"
+                                disabled={isUploaded}
                             />
+
+                            {fileName && (
+                                <div className={styles.uploadedFileBox}>
+                                    <span role="img" aria-label="file">📄</span>
+                                    <span className={styles.fileText}>{fileName}</span>
+                                </div>
+                            )}
+
                         </div>
 
                         <div className={styles["form-group"]}>
