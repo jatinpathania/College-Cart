@@ -1,26 +1,27 @@
-import React, { useContext,useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import Header from "../Header/Header";
 import styles from "./exchange.module.css";
 import axios from 'axios';
 import { getToken } from '../../util/tokenService';
 import toast, { Toaster } from 'react-hot-toast';
-import { UserDataContext } from '../Header/context';
 
 const ExchangeBook = () => {
   const backend_url = import.meta.env.VITE_BACKEND_API_URL;
   const [isLoading, setIsLoading] = useState(false);
-  useEffect(()=>{
-    window.scrollTo(0, 0); 
-  },[])
+  const [fileName, setFileName] = useState('');
+  const [isUploaded, setIsUploaded] = useState(false);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   const hostelOptions = [
-    "Boss", 
-    "Aryabhata", 
-    "Sarabhai", 
-    "Kalpana", 
-    "Gargi", 
-    "Teresa", 
+    "Boss",
+    "Aryabhata",
+    "Sarabhai",
+    "Kalpana",
+    "Gargi",
+    "Teresa",
     "New girls hostel"
   ];
 
@@ -44,7 +45,7 @@ const ExchangeBook = () => {
     submitData.append('name', data.name);
     submitData.append('selectHostel', data.selectHostel);
     submitData.append('description', data.description);
-    
+
     if (data.image) {
       submitData.append('image', data.image);
     }
@@ -66,7 +67,7 @@ const ExchangeBook = () => {
           'Content-Type': 'multipart/form-data'
         }
       });
-      
+
       toast.success(response.data.message);
       reset();
     } catch (error) {
@@ -79,7 +80,7 @@ const ExchangeBook = () => {
 
   return (
     <>
-      <Header hideSearch/>
+      <Header Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/>
       <div className={styles.container}>
         <div className={styles.formContainer}>
           <h2 className={styles.formTitle}>List Your Book for Exchange</h2>
@@ -92,8 +93,8 @@ const ExchangeBook = () => {
             <div className={styles.formGroup}>
               <label>Book Name</label>
               <input
-                {...register('name', { 
-                  required: 'Book name is required' 
+                {...register('name', {
+                  required: 'Book name is required'
                 })}
                 placeholder="Enter book name"
               />
@@ -140,8 +141,8 @@ const ExchangeBook = () => {
                 <div className={styles.formGroup}>
                   <label>Room Number</label>
                   <input
-                    {...register('roomNumber', { 
-                      required: 'Room number is required' 
+                    {...register('roomNumber', {
+                      required: 'Room number is required'
                     })}
                     placeholder="Enter room number"
                   />
@@ -154,7 +155,7 @@ const ExchangeBook = () => {
               <div className={styles.formGroup}>
                 <label>Contact Number</label>
                 <input
-                  {...register('dayScholarContectNumber', { 
+                  {...register('dayScholarContectNumber', {
                     required: 'Contact number is required',
                     pattern: {
                       value: /^[0-9]{10}$/,
@@ -173,12 +174,8 @@ const ExchangeBook = () => {
             <div className={styles.formGroup}>
               <label>Book Description</label>
               <textarea
-                {...register('description', { 
+                {...register('description', {
                   required: 'Description is required',
-                  minLength: {
-                    value: 30,
-                    message: 'Description should be at least 30 characters'
-                  }
                 })}
                 placeholder="Describe the book's condition, edition, author, etc."
               />
@@ -197,14 +194,26 @@ const ExchangeBook = () => {
                       type="file"
                       id="image-upload"
                       accept="image/*"
+                      disabled={isUploaded}
                       onChange={(e) => {
-                        onChange(e.target.files ? e.target.files[0] : null);
+                        const file = e.target.files ? e.target.files[0] : null;
+                        if (file) {
+                          setFileName(file.name);
+                          setIsUploaded(true);
+                          onChange(file);
+                        }
                       }}
                       className={styles.fileInput}
                     />
                     <label htmlFor="image-upload" className={styles.fileInputLabel}>
                       Choose a photo...
                     </label>
+                    {fileName && (
+                      <div className={styles.uploadedFileBox}>
+                      <span role="img" aria-label="file">📄</span>
+                      <span className={styles.fileText}>{fileName}</span>
+                    </div>                    
+                    )}
                   </div>
                 )}
               />
