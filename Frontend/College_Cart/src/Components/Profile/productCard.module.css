@@ -197,7 +197,7 @@ span {
   max-width: 1000px;
   position: relative;
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1367px) {
   .productContainer {
       margin-left: 0;
       padding: 1rem;

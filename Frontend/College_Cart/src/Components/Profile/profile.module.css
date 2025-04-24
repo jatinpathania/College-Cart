@@ -356,21 +356,63 @@ input[type="file"]::-webkit-file-upload-button:hover {
 .closeModalButton:hover {
     background-color: rgba(0, 0, 0, 0.9);
 }
-@media screen and (max-width: 1024px) {
-    .profilePage {
-        flex-direction: column;
-        align-items: center;
-    }
 
-    .profileCard,
-    .totalDetailsForBuyAndSelling {
-        max-width: 100%;
+
+@media screen and (max-width: 1367px) {
+    .profilePageContainer {
+        padding: 1.5rem;
+    }
+    .profilePage {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        gap: 2rem;
+        flex-wrap: wrap;
     }
     
+    .profileCard,
+    .totalDetailsForBuyAndSelling {
+        flex: 1;
+        height: 100%;
+        min-height: 300px; 
+        box-sizing: border-box;
+    }
+
+    .profileImage {
+        width: 130px;
+        height: 130px;
+    }
+
+    .profileName {
+        font-size: 1.8rem;
+    }
+
+    .profileUsername,
+    .profileEmail,
+    .accountCreate,
+    .profileUpdate {
+        font-size: 1rem;
+    }
+
+    .btn {
+        width: 110px;
+        font-size: 0.95rem;
+    }
+
+    .dialogPage {
+        width: 75%;
+        padding: 2rem;
+    }
+
+    .textDialogText {
+        font-size: 24px;
+    }
+
     .modalImage {
-        max-height: 70vh;
+        max-height: 75vh;
     }
 }
+
 
 @media screen and (max-width: 768px) {
     .profilePageContainer {
