@@ -87,7 +87,7 @@ const CartProduct = () => {
 
   return (
     <>
-      <Header hideSearch/>
+      <Header Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/>
       <div className={styles.header}>
         <div className={styles.container}>
           <div className={styles.cart}>

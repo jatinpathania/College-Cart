@@ -64,7 +64,7 @@ const OurTeam = () => {
 
   return (
     <div className={styles.container}>
-      <Header hideSearch/>
+      <Header Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/>
       <div className={styles.header}>
         <h1 className={styles.title}>Our Team</h1>
         <p className={styles.description}>

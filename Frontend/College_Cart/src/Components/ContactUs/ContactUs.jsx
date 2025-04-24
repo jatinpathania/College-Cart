@@ -62,7 +62,7 @@ function ContactUs() {
 
   return (
     <>
-    <div><Header hideSearch/></div>
+    <div><Header Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/></div>
     <div className={styles['contact-container']}>
       <div className={styles['form-card']}>
         <h1 className={styles.formHead}>Contact Us</h1>

@@ -290,7 +290,7 @@ const Messages = () => {
   if (loading) {
     return (
       <>
-        <Header hideSearch/>
+        <Header Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/>
         <div className="messages-container">
           <div className="conversation-list">
             <h2 className="conversations-title">Chat</h2>

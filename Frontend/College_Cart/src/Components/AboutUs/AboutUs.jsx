@@ -25,7 +25,7 @@ const AboutUs = () => {
 
   return (
     <div className={styles.pageWrapper}>
-      <Header hideSearch/>
+      <Header Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/>
       
       <div className={styles.container}>
         <div className={styles.hero}>
