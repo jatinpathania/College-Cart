@@ -125,7 +125,7 @@ const Product = () => {
   return (
     <>
     <div class="stickyHeader">
-      <Header />
+    <Header showSearch={true} showMiddleHeader={true} isProductsPage={true} />
     </div>
       <div className='min-h-screen h-full' style={{ display: 'flex', flexWrap: 'wrap', gap: '40px', justifyContent: 'center', padding: '20px' }}>
         {loading ? (
