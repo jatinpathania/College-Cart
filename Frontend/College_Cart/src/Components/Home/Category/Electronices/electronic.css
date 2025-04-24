@@ -117,13 +117,32 @@
     width: 100%;
 }
 
-@media (max-width: 1200px) {
-    .product-card-electronics {
-        flex: 0 0 calc(25% - 15px);
+@media (max-width: 1367px) {
+    .electronics-container{
+        width: 100%;
+    }
+    .products-grid-electronics {
+        gap: 20px;
+        width: 100%;
+        flex-wrap: wrap;
+        margin:0px 15px 0px 15px;
     }
 
-    .product-skeleton-electronics {
-        flex: 0 0 calc(25% - 15px);
+    .product-card-electronics {
+        max-width: 195px;
+        width: 100%;
+        padding: 10px;
+        flex-wrap: wrap;
+    }
+
+    .product-skeleton {
+        flex: 0 0 calc(50% - 5px);
+        min-width: 140px;
+        padding: 10px;
+    }
+
+    .product-image-container-electronics {
+        height: 130px;
     }
 }
 
