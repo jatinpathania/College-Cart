@@ -10,6 +10,9 @@ import ExchangeModal from './ExchangeModal';
 import axios from 'axios';
 
 const ProductSkeleton = () => {
+  useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [])
   return (
     <div className='skeletonContainer'>
       <Box
