@@ -207,6 +207,10 @@
     width: 63vh;
   }
 
+  .home-container .searchContainer{
+    display: none !important;
+  }
+
   .hero p {
     font-size: 1.2rem;
   }

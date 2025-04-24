@@ -21,7 +21,7 @@ const Home = () => {
     <>
       
       <div className="home-container">
-      <div className="stickyHeader"><Header hideSearch /></div>
+      <div className="stickyHeader"><Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/></div>
         <section className="hero">
           <div className="hero-content">
             <h1>Buy, Sell & Exchange Items in Your University</h1>
