@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Faq.css';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 const faqData = [
   {
@@ -42,6 +44,9 @@ const Faq = () => {
   };
 
   return (
+    <>
+     <Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/>
+    
     <div className="faq-container">
       <h1>Frequently Asked Questions</h1>
       {faqData.map((faq, index) => (
@@ -57,6 +62,8 @@ const Faq = () => {
         </div>
       ))}
     </div>
+    <Footer/>
+    </>
   );
 };
 
