@@ -120,6 +120,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           </motion.div>
 
           <motion.div variants={itemsVaraints} whileHover={{ scale: 1.05 }}
+          onClick={()=>navigate("/setting")}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
             className={styles.menuItem}>
             <span className={styles.menuIcon}>  <Settings /></span>

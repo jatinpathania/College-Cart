@@ -7,8 +7,12 @@ import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import { HomeIcon, Hotel, Phone } from 'lucide-react';
 import ExchangeModal from './ExchangeModal';
+import axios from 'axios';
 
 const ProductSkeleton = () => {
+  useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [])
   return (
     <div className='skeletonContainer'>
       <Box
@@ -59,6 +63,7 @@ const ExchangeBookAllProduct = () => {
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
+  const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
   useEffect(() => {
     if (exchangeProduct.length > 0) {
@@ -83,6 +88,31 @@ const ExchangeBookAllProduct = () => {
     setSelectedBook(null);
   };
 
+  const [requestedBooks, setRequestedBooks] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${backend_url}/allrequest`);
+        const filterLoginUser = res.data.allRequest.filter(
+          (user) => user.bookId && user.approvedStatus !== "Cancel"
+        );
+        console.log(res.data)
+        const requestedBooksMap = {};
+        filterLoginUser.forEach(request => {
+          if (request.approvedStatus === "Approve" || request.approvedStatus === "Pending") {
+            requestedBooksMap[request.bookId] = true;
+          }
+        });
+        setRequestedBooks(requestedBooksMap);
+       console.log(requestedBooks)
+      } catch (error) {
+        console.log("Error", error);
+      }
+    };
+    fetchData();
+  }, [data._id]);
+
   return (
     <>
       <div className="bg-gray-100 min-h-screen">
@@ -99,7 +129,7 @@ const ExchangeBookAllProduct = () => {
                 >
                   <div className="relative items-center flex justify-center transition-transform duration-300 hover:scale-95">
                     <img
-                      className="w-full h-[400px] object-cover mt-4 rounded-lg"
+                      className="w-[300px] h-[400px] object-cover mt-4 rounded-lg"
                       src={item.image}
                       alt={item.name}
                     />
@@ -122,12 +152,23 @@ const ExchangeBookAllProduct = () => {
                     <p className="text-gray-700 mb-4 line-clamp-3">{item.description}</p>
 
                     <div className="flex justify-between items-center">
-                      <button 
-                        className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-yellow-400 w-full"
-                        onClick={() => handleExchangeClick(item)}
-                      >
-                        Exchange
-                      </button>
+                      {
+                        requestedBooks[item._id] ? (
+                          <button
+                            className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-yellow-400 w-full cursor-not-allowed"
+                            disabled
+                          >
+                             Requested
+                          </button>
+                        ) : (
+                          <button
+                            className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-yellow-400 w-full"
+                            onClick={() => handleExchangeClick(item)}
+                          >
+                            Exchange
+                          </button>
+                        )
+                      }
                     </div>
                   </div>
                 </div>
@@ -141,9 +182,9 @@ const ExchangeBookAllProduct = () => {
       <Footer />
 
       {modalOpen && selectedBook && (
-        <ExchangeModal 
-          isOpen={modalOpen} 
-          onClose={closeModal} 
+        <ExchangeModal
+          isOpen={modalOpen}
+          onClose={closeModal}
           bookData={selectedBook}
           userData={data}
         />

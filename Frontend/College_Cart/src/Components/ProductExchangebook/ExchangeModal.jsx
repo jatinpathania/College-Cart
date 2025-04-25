@@ -12,6 +12,8 @@ const ExchangeModal = ({ isOpen, onClose, bookData, userData }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
+  // console.log(bookData)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,7 +40,11 @@ const ExchangeModal = ({ isOpen, onClose, bookData, userData }) => {
 
     try {
       const payload = {
-        sealUser:{ userId:bookData.userId._id,userName:bookData.userId.name },
+        sealUser:{ userId:bookData.userId._id,
+          userName:bookData.userId.name,
+          dayScholarContectNumber:bookData.dayScholarContectNumber || "",
+          selectOption:bookData.selectHostel,roomNumber:bookData.roomNumber || "",
+          hostleName:bookData.hostleName },
         buyUser: { userId: userData._id, userName:userData.name },
         selectOption,
         hostleName,
@@ -47,12 +53,12 @@ const ExchangeModal = ({ isOpen, onClose, bookData, userData }) => {
       };
 
       const response = await axios.post(`${backend_url}/${bookData._id}/order-create-book-exchange`, payload);
-      
-      if (response.data) { 
+
+      // if (response.data) { 
         toast.success('Exchange order placed successfully!');
         onClose();
-        return;
-      }
+      //   return;
+      // }
      
     } catch (error) {
       console.error('Error submitting exchange order:', error);

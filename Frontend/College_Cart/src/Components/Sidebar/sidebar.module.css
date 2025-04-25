@@ -118,6 +118,30 @@ button {
     font-size: 16px;
 }
 
+@media screen and (max-width:1367px){
+    
+    .sidebar{
+        width: 40vw;
+        height: 100%;
+    }
+
+    body:has(.sidebar.open) {
+        overflow: hidden;
+        height: 100vh;
+        touch-action: none;
+    }
+    .sidebarLogo{
+        height: 50px;
+        width: 50px;
+    }
+    
+    .profileContainer{
+        padding:0px;
+    }
+   
+}
+
+
 
 @media screen and (orientation:portrait) and (max-width:480px){
     

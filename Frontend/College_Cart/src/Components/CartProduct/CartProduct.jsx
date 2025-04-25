@@ -5,14 +5,16 @@ import styles from "./CartProduct.module.css"
 import ProductPriceDetails from './ProductPriceDetails';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext,useEffect, useState } from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import { getToken } from '../../util/tokenService';
 import RemoveCartItem from './RemoveCartItem';
+import { UserDataContext } from '../Header/context';
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
 const CartProduct = () => {
+  
 
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -85,7 +87,7 @@ const CartProduct = () => {
 
   return (
     <>
-      <Header />
+      <Header Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/>
       <div className={styles.header}>
         <div className={styles.container}>
           <div className={styles.cart}>

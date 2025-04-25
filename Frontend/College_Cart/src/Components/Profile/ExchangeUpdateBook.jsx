@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { getToken } from '../../util/tokenService';
-import './updateProduct.css';
+import styles from './updateProduct.module.css';
 
 const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
 const ExchangeBookUpdate = ({ isOpen, onClose, productData }) => {
-
   if (!isOpen) return null;
+
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
 
@@ -54,7 +54,7 @@ const ExchangeBookUpdate = ({ isOpen, onClose, productData }) => {
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
     const token = getToken();
-    
+
     try {
       const formDataToSend = new FormData();
 
@@ -68,12 +68,17 @@ const ExchangeBookUpdate = ({ isOpen, onClose, productData }) => {
         formDataToSend.append('image', selectedImage);
       }
 
-    const response =  await axios.put(`${backend_url}/${productData._id}/updateBook`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}`
+      const response = await axios.put(
+        `${backend_url}/${productData._id}/updateBook`,
+        formDataToSend,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
+          }
         }
-      });
+      );
+
       toast.success(response.data.message);
       onClose();
     } catch (error) {
@@ -83,29 +88,30 @@ const ExchangeBookUpdate = ({ isOpen, onClose, productData }) => {
   };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <h2 className="modal-title">Update Product</h2>
-        
-        <form onSubmit={handleUpdateProduct} className="form-container">
-          <div className="form-group">
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalContent}>
+        <h2 className={styles.modalTitle}>Update Product</h2>
+
+        <form onSubmit={handleUpdateProduct} className={styles.formContainer}>
+          <div className={styles.formGroup}>
             <label>Name</label>
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="inputColorText"
+              className={styles.inputColorText}
               required
             />
           </div>
-          <div className="form-group">
+
+          <div className={styles.formGroup}>
             <label>Student Type</label>
             <select
               name="selectHostel"
               value={formData.selectHostel}
               onChange={handleChange}
-              className="inputColorText"
+              className={styles.inputColorText}
               required
             >
               <option value="">Select Type</option>
@@ -116,19 +122,19 @@ const ExchangeBookUpdate = ({ isOpen, onClose, productData }) => {
 
           {formData.selectHostel === 'Hostler' ? (
             <>
-              <div className="form-group">
+              <div className={styles.formGroup}>
                 <label>Hostel Name</label>
                 <select
                   name="hostleName"
                   value={formData.hostleName}
                   onChange={handleChange}
-                  className="inputColorText"
+                  className={styles.inputColorText}
                   required
                 >
                   <option value="">Select Hostel</option>
                   <option value="Boss">Boss</option>
                   <option value="Aryabhata">Aryabhata</option>
-                 <option value="Sarabhai">Sarabhai</option>
+                  <option value="Sarabhai">Sarabhai</option>
                   <option value="Kalpana">Kalpana</option>
                   <option value="Gargi">Gargi</option>
                   <option value="Teresa">Teresa</option>
@@ -136,73 +142,73 @@ const ExchangeBookUpdate = ({ isOpen, onClose, productData }) => {
                 </select>
               </div>
 
-              <div className="form-group">
+              <div className={styles.formGroup}>
                 <label>Room Number</label>
                 <input
                   type="text"
                   name="roomNumber"
                   value={formData.roomNumber}
                   onChange={handleChange}
-                  className="inputColorText"
+                  className={styles.inputColorText}
                   required
                 />
               </div>
             </>
-          ) : formData.selectHostel === 'Day Scholar' ? (
-            <div className="form-group">
+          ) : formData.selectHostel === 'Day_Scholar' ? (
+            <div className={styles.formGroup}>
               <label>Contact Number</label>
               <input
                 type="text"
                 name="dayScholarContectNumber"
                 value={formData.dayScholarContectNumber}
                 onChange={handleChange}
-                className="inputColorText"
+                className={styles.inputColorText}
                 required
               />
             </div>
           ) : null}
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label>Product Image</label>
-            <div className="image-upload-container">
+            <div className={styles.imageUploadContainer}>
               {imagePreview && (
-                <img 
-                  src={imagePreview} 
-                  alt="Product preview" 
-                  className="image-preview"
+                <img
+                  src={imagePreview}
+                  alt="Product preview"
+                  className={styles.imagePreview}
                 />
               )}
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
-                className="image-input"
+                className={styles.imageInput}
               />
             </div>
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label>Description</label>
             <textarea
               name="description"
               value={formData.description}
               onChange={handleChange}
-              className="inputColorText"
+              className={styles.inputColorText}
               required
             />
           </div>
 
-          <div className="modal-actions">
+          <div className={styles.modalActions}>
             <button
               type="button"
               onClick={onClose}
-              className="cancel-button"
+              className={styles.cancelButton}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="update-button"
+              className={styles.updateButton}
             >
               Update
             </button>

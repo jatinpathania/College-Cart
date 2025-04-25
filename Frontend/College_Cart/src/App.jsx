@@ -26,6 +26,9 @@ import ExchangeBookAllProduct from './Components/ProductExchangebook/ExchangeBoo
 import OurTeam from './Components/OurTeam/OurTeam'
 import AboutUs from './Components/AboutUs/AboutUs'
 import Faq  from './Components/Faq/Faq'
+import ContactUs from './Components/ContactUs/ContactUs'
+import Setting from "./Components/Setting/Setting"
+
 const App = () => {
   return (
     <Provider store={Store}>
@@ -51,10 +54,13 @@ const App = () => {
              <Route path='/all-sport-item' element={<Sport/>}/>
              <Route path='/all-grocery-item' element={<Grocery/>}/>
              <Route path="/our-team" element={<OurTeam />}/>
-             <Route path="/add-products-user" element={<AddProduct/>}/>
              <Route path="/aboutus" element={<AboutUs/>}/>
-             <Route path="/faq" element={<Faq/>}/>
 
+             <Route path="/faq" element={<Faq/>}/>
+             <Route path="/contact-us" element={<ContactUs />}/>
+             <Route path='/setting' element={<Setting/>}/>
+             <Route path='/aboutus' element={<AboutUs/>}/>
+             <Route path='/our-team' element={<OurTeam/>}/>
             <Route 
               path='/dashboard' 
               element={

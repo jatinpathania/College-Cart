@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect,useContext } from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import './home.css'
@@ -14,15 +14,23 @@ import { UserDataContext } from '../Header/context';
 const Home = () => {
   const navigate = useNavigate()
   const {data} = useContext(UserDataContext)
+  useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   return (
     <>
-      <div className="stickyHeader"><Header/></div>
+      
       <div className="home-container">
+      <div className="stickyHeader"><Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/></div>
         <section className="hero">
           <div className="hero-content">
             <h1>Buy, Sell & Exchange Items in Your University</h1>
             <p>Find amazing deals, trade items, and connect with students effortlessly!</p>
+            {data ? (
             <a href="#cards-head" className="cta-button">Get Started</a>
+            ) : (
+             <p onClick={() => navigate("/login")} className='cta-button'>Get Started</p>
+            )}
           </div>
         </section>
 
