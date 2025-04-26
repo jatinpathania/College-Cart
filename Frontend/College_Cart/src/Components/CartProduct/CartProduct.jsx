@@ -169,7 +169,7 @@ const CartProduct = () => {
               ))
             )}
           </div>
-          <ProductPriceDetails cartItem={cartItems} setCartItem={setCartItems} />
+          <ProductPriceDetails cartItem={cartItems}  />
         </div>
       </div>
       <RemoveCartItem
