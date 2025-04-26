@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 import "./messages.css";
 import axios from 'axios';
 import { UserDataContext } from '../Header/context';
@@ -187,7 +186,6 @@ const Messages = () => {
         sender: msg.senderId === userId ? 'self' : 'other',
         timestamp: msg.createdAt,
       }));
-    // console.log(formattedMessages)
       setMessages(formattedMessages);
     } catch (error) {
       console.error("Error fetching messages:", error);
@@ -290,7 +288,7 @@ const Messages = () => {
   if (loading) {
     return (
       <>
-        <Header Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/>
+        <Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/>
         <div className="messages-container">
           <div className="conversation-list">
             <h2 className="conversations-title">Chat</h2>
@@ -343,7 +341,7 @@ const Messages = () => {
 
   return (
     <>
-      <Header />
+      <Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/>
       <div className="messages-container">
         <div className="conversation-list">
           <h2 className="conversations-title">Chat</h2>
