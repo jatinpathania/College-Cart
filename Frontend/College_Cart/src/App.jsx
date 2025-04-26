@@ -25,6 +25,7 @@ import ExchangeBook from './Components/ExchangeBookForm/ExchangeBook'
 import ExchangeBookAllProduct from './Components/ProductExchangebook/ExchangeBook'
 import OurTeam from './Components/OurTeam/OurTeam'
 import AboutUs from './Components/AboutUs/AboutUs'
+import Faq  from './Components/Faq/Faq'
 import ContactUs from './Components/ContactUs/ContactUs'
 import Setting from "./Components/Setting/Setting"
 
@@ -54,12 +55,12 @@ const App = () => {
              <Route path='/all-grocery-item' element={<Grocery/>}/>
              <Route path="/our-team" element={<OurTeam />}/>
              <Route path="/aboutus" element={<AboutUs/>}/>
+
+             <Route path="/faq" element={<Faq/>}/>
              <Route path="/contact-us" element={<ContactUs />}/>
              <Route path='/setting' element={<Setting/>}/>
              <Route path='/aboutus' element={<AboutUs/>}/>
              <Route path='/our-team' element={<OurTeam/>}/>
-
-
             <Route 
               path='/dashboard' 
               element={

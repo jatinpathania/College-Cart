@@ -33,7 +33,7 @@ const Footer = () => {
           <h4>Support</h4>
           <ul>
             <li><p className="footerLinks"> Help Center</p></li>
-            <li><p className="footerLinks"> FAQs</p></li>
+            <li><p className="footerLinks" onClick={()=>navigate("/faq")}> FAQs</p></li>
             <li><p className="footerLinks"> Report Issues</p></li>
             <li><p className="footerLinks"> Feedback</p></li>
           </ul>
