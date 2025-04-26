@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "./ProductPriceDetails.module.css";
+import Checkout from "./Checkout";
 
-const ProductPriceDetails = ({ cartItem, setCartItems }) => {
+const ProductPriceDetails = ({ cartItem }) => {
+  // console.log(cartItem)
   const calculateTotals = () => {
     return cartItem.reduce(
       (acc, item) => ({
@@ -50,8 +52,8 @@ const ProductPriceDetails = ({ cartItem, setCartItems }) => {
         )}
       </div>
 
-      <button className={styles.button}>
-        Place Order
+      <button >
+        <Checkout cartItem={cartItem}/>
       </button>
     </div>
   );
