@@ -9,7 +9,7 @@ import Footer from "../Footer/Footer";
 import { UserDataContext } from '../Header/context';
 const teamMembers = [
   {
-    name: "Harash Pooriya",
+    name: "Harash Poriya",
     role: "Backend Developer",
     bio: "Harash manages the server, APIs, and database to ensure secure and efficient data flow.",
     image: harashImg,
