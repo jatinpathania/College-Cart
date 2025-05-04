@@ -1,4 +1,4 @@
-import React, { useContext,useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './contactus.module.css';
 import { FaUser, FaEnvelope, FaCommentDots, FaPaperPlane } from 'react-icons/fa';
 import Header from '../Header/Header';
@@ -62,96 +62,98 @@ function ContactUs() {
 
   return (
     <>
-    <div><Header Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/></div>
-    <div className={styles['contact-container']}>
-      <div className={styles['form-card']}>
-        <h1 className={styles.formHead}>Contact Us</h1>
-        <p className={styles.subtitle}>We're here to help. Reach out anytime.</p>
-        <form onSubmit={handleSubmit}>
-          <div className={styles['input-box']}>
-            <FaUser />
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className={styles['input-box']}>
-            <FaEnvelope />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className={`${styles['input-box']} ${styles.select}`}>
-            <select
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Subject</option>
-              <option value="issue">Issue</option>
-              <option value="feedback">Feedback</option>
-              <option value="query">Product Query</option>
-            </select>
-          </div>
-
-          <div className={`${styles['input-box']} ${styles.textarea}`}>
-            <FaCommentDots />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className={`${styles['input-box']} ${styles.captcha}`}>
-            <label>{captcha.question}</label>
-            <input
-              type="text"
-              name="captchaInput"
-              value={formData.captchaInput}
-              onChange={handleChange}
-              placeholder="Enter answer"
-              required
-            />
-          </div>
-
-          <div className={styles['checkbox-wrap']}>
-            <input
-              type="checkbox"
-              name="checkbox"
-              checked={formData.checkbox}
-              onChange={handleChange}
-              required
-            />
-            <label>I agree to share my details with College Cart for support purposes.</label>
-          </div>
-
-          <button
-            type="submit"
-            className={styles['submit-btn']}
-            disabled={!formData.checkbox}
-          >
-            <FaPaperPlane /> Send Message
-          </button>
-
-          {status && <p className={styles['form-status']}>{status}</p>}
-        </form>
+      <div>
+        <Header showSearch={false} showMiddleHeader={true} isProductsPage={false} />
       </div>
-    </div>
+      <div className={styles.contactContainer}>
+        <div className={styles.formCard}>
+          <h1 className={styles.formHead}>Contact Us</h1>
+          <p className={styles.subtitle}>We're here to help. Reach out anytime.</p>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.inputBox}>
+              <FaUser />
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className={styles.inputBox}>
+              <FaEnvelope />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className={`${styles.inputBox} ${styles.select}`}>
+              <select
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Subject</option>
+                <option value="issue">Issue</option>
+                <option value="feedback">Feedback</option>
+                <option value="query">Product Query</option>
+              </select>
+            </div>
+
+            <div className={`${styles.inputBox} ${styles.textarea}`}>
+              <FaCommentDots />
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className={`${styles.inputBox} ${styles.captcha}`}>
+              <label className={styles.captchaBox}>{captcha.question}</label>
+              <input
+                type="text"
+                name="captchaInput"
+                value={formData.captchaInput}
+                onChange={handleChange}
+                placeholder="Enter answer"
+                required
+              />
+            </div>
+
+            <div className={styles.checkboxWrap}>
+              <input
+                type="checkbox"
+                name="checkbox"
+                checked={formData.checkbox}
+                onChange={handleChange}
+                required
+              />
+              <label>I agree to share my details with College Cart for support purposes.</label>
+            </div>
+
+            <button
+              type="submit"
+              className={styles.submitBtn}
+              disabled={!formData.checkbox}
+            >
+              <FaPaperPlane /> Send Message
+            </button>
+
+            {status && <p className={styles.formStatus}>{status}</p>}
+          </form>
+        </div>
+      </div>
     </>
   );
 }
