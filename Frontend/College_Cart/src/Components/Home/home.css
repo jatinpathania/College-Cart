@@ -59,6 +59,7 @@
   background: #e67e22;
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 .cards-section {
   display: grid;
@@ -158,7 +159,7 @@
   }
 }
 
-@media screen and (max-width: 1367px) {
+@media screen and (min-width:1000px) and (max-width: 1367px) {
   .hero h1 {
     font-size: 3rem;
   }
