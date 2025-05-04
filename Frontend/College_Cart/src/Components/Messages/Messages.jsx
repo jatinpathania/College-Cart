@@ -289,6 +289,7 @@ const Messages = () => {
     return (
       <>
         <Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/>
+        <div className="header">
         <div className="messages-container">
           <div className="conversation-list">
             <h2 className="conversations-title">Chat</h2>
@@ -335,6 +336,7 @@ const Messages = () => {
             </div>
           </div>
         </div>
+        </div>
       </>
     );
   }
@@ -342,6 +344,7 @@ const Messages = () => {
   return (
     <>
       <Header showSearch={false} showMiddleHeader={true} isProductsPage={false}/>
+      <div className="header">
       <div className="messages-container">
         <div className="conversation-list">
           <h2 className="conversations-title">Chat</h2>
@@ -484,6 +487,7 @@ const Messages = () => {
             </>
           )}
         </div>
+      </div>
       </div>
     </>
   );
