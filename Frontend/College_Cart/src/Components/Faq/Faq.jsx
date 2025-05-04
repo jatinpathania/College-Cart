@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import './Faq.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -38,6 +38,10 @@ const faqData = [
 
 const Faq = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+
+  useState(()=>{
+    window.scrollTo(0,0);
+  },[])
 
   const toggleFAQ = (index) => {
     setActiveIndex(prevIndex => (prevIndex === index ? null : index));
