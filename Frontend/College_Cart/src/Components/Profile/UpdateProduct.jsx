@@ -20,6 +20,17 @@ const UpdateProduct = ({ isOpen, onClose, productData }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
 
+  useEffect(() => {
+          if(isOpen){
+              document.body.style.overflow = 'hidden';
+          }else{
+              document.body.style.overflow = 'auto';
+          }
+          return () => {
+              document.body.style.overflow = 'auto';
+          };
+      }, [isOpen]);
+
   const [formData, setFormData] = useState({
     name: '',
     brand: '',
