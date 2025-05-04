@@ -358,7 +358,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 }
 
 
-@media screen and (max-width: 1367px) {
+@media screen and (min-width:1000px) and (max-width: 1367px) {
     .profilePageContainer {
         padding: 1.5rem;
     }
@@ -414,7 +414,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width:480) and (max-width: 768px) {
     .profilePageContainer {
         padding: 1rem;
     }
@@ -461,7 +461,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 450px) {
     .profilePageContainer {
         padding: 0.5rem;
         width: 63vh;
