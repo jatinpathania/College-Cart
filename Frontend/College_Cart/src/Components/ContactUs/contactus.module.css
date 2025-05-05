@@ -3,7 +3,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh;
+  height: 100vh;
   padding: 60px 20px;
   display: flex;
   flex-direction: column;
@@ -135,7 +135,7 @@
 }
 
 /* Responsive Styles */
-@media (max-width: 768px) {
+@media screen and (min-width:500px) and(max-width: 768px) {
   .contactContainer {
     padding: 40px 15px;
   }
@@ -156,8 +156,10 @@
   }
 }
 
-@media (max-width: 450px) {
+@media screen and (orientation:portrait) and (max-width: 450px) {
   .contactContainer {
+    width: 63vh;
+    height: 1200px;
     padding: 30px 10px;
   }
 
