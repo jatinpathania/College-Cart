@@ -144,7 +144,7 @@ const AboutUs = () => {
       </div>
       <h3 className={styles.featureTitle}>Student Verification</h3>
       <p className={styles.featureDescription}>
-        Secure .edu email authentication ensures all users are verified campus community members.
+        Secure <strong>chitkarauniversity.edu</strong> email authentication ensures all users are verified campus community members.
       </p>
     </div>
     

@@ -309,7 +309,7 @@
     background-color: yellow;
   }
 
-  @media (max-width: 1024px) {
+  @media screen and (min-width:800px) and (max-width: 1024px) {
     .hero {
       flex-direction: column;
       text-align: center;
@@ -335,7 +335,7 @@
     }
   }
   
-  @media (max-width: 768px) {
+  @media screen and (min-width:500px) and  (max-width: 768px) {
     .hero {
       padding: 60px 0;
     }
@@ -356,3 +356,35 @@
       grid-template-columns: 1fr;
     }
   }
+
+  @media (min-width: 100px) and (max-width: 470px) {
+    .container{
+      width: 63vh;
+    }
+    .hero {
+      width: 59vh;
+      padding: 60px 10px;
+      gap: 10%;
+    }
+    .title {
+      font-size: 2.5rem;
+    }
+    
+    .missionStatement {
+      font-size: 1.3rem;
+    }
+
+    .solutionContent{
+      flex-direction: column;
+    }
+    
+    .sectionTitle {
+      font-size: 1.8rem;
+    }
+    
+    .impactStats {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+
