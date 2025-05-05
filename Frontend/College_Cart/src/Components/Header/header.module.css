@@ -165,8 +165,22 @@
   display: none !important;
 }
 
+.headerRight{
+  max-width: fit-content  ;
+  width: 100%;;
+}
 
-@media screen and (max-width: 1367px) {
+.person{
+  display: flex;
+  width: 100%;
+}
+
+.signup{
+  margin-left: 10px;
+}
+
+
+@media screen and (min-width:1201px) and (max-width: 1367px) {
   .logo {
     height: 60px;
     width: 60px;
@@ -222,24 +236,27 @@
   }
 }
 
-@media screen and (max-width:480px) {
+@media screen and (min-width:100px) and (max-width:470px) {
   .logo{
     display: none;
   }
 
   .header {
     width: 63vh;
+    padding: 4px 8px;
   }
 
   .middleHeader {
+    gap: 4%;
     margin: 0;
     padding: 0;
-    
+    max-width: 275px;
+    width: 100%;
   }
   
   .navLink {
     margin-left: 0px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     padding: 6px 0;
   }
@@ -299,18 +316,25 @@
     display: flex;
     justify-content: space-around;
   }
+  .headerRight{
+    max-width: fit-content;
+    width: 100%;
+  }
 
   .person{
     padding: 0px;
     margin: 0px;
+    gap: 5%;
   }
   .login{
     font-size: 12px;
-    margin: 0px !important;
+    width: 70px;
+    margin: 0px;
   }
   .signup{
     font-size: 12px;
-    margin-left: 7px !important;
+    width: 70px;
+    margin: 0px;
   }
 }
 @media screen and (min-width:480px) and (max-width:1200px) {

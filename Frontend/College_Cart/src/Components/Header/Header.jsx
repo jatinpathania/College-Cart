@@ -127,7 +127,7 @@ const Header = ({ showSearch = true, showMiddleHeader = true, isProductsPage = f
               </div>
             ) : (
               <>
-                <div className={`space-x-4 ${style.person}`}>
+                <div className={`${style.person}`}>
                   <motion.button className={`bg-yellow-300 p-2 font-bold rounded-lg w-16 hover:bg-yellow-400 ${style.login}`} whileHover={{ scale: 1.1 }} transition={{ type: "spring", stiffness: 100, damping: 90 }} onClick={() => navigate("/login")}>Login</motion.button>
                   <motion.button className={`text-white bg-black font-bold rounded-lg w-20 hover:bg-slate-800' ${style.signup}`} whileHover={{ scale: 1.1 }} transition={{ type: "spring", stiffness: 100, damping: 90 }} onClick={() => navigate('/signup')}>Signup</motion.button>
                 </div>
