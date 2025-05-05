@@ -241,3 +241,28 @@
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+@media screen and (min-width:500px) and  (max-width: 768px) {
+  
+}
+
+@media (min-width: 100px) and (max-width: 470px) {
+  .container{
+    width: 63vh;
+  }
+  .teamSection{
+    width: 63vh;
+  }
+  .teamGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+    max-width: 55vh;
+    
+  }
+  .card{
+    height: 250px;
+    width: 220px;
+  }
+}
