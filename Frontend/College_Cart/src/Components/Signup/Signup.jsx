@@ -15,6 +15,7 @@ const Signup = () => {
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const { status, user, token,isLoading } = useSelector((state) => state.app);
+  localStorage.setItem("token",token)
   const navigate = useNavigate();
   // const [isLoading, setIsLoading] = useState(false)
   // const [isLoadingCode, setIsLoadingCode] = useState(false)

@@ -13,7 +13,7 @@ const Signin = () => {
   const navigate = useNavigate()
   const {status,user,token} = useSelector((state)=>state.app)
   const [isLoading, setIsLoading] = useState(false);
- 
+  localStorage.setItem("token",token)
   const handleSubmit = async (e) => {
     e.preventDefault();
    
