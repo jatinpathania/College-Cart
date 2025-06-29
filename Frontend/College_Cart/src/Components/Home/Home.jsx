@@ -10,6 +10,7 @@ import Sport from './Category/SportsEquipment/Sport';
 import Grocery from './Category/Grocery/Grocery';
 import { useNavigate } from 'react-router-dom';
 import { UserDataContext } from '../Header/context';
+import Chatbot from '../Chatbot';
 
 const Home = () => {
   const navigate = useNavigate()
@@ -86,6 +87,7 @@ const Home = () => {
         </div>
       </div>
       <Footer />
+      <Chatbot/>
     </>
   );
 };
