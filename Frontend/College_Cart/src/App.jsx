@@ -73,8 +73,7 @@ const App = () => {
               <ProtectedRoute>
               <ExchangeBook/>
               </ProtectedRoute>
-              }/>
-
+              }/>            
               <Route path='/all-products-exchange-books' element={<ExchangeBookAllProduct/>}/>
           </Routes>
         </BrowserRouter>
