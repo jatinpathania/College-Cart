@@ -4,7 +4,7 @@ const axios = require("axios");
 require('dotenv').config();
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
-const BACKEND_API_URL = "https://ip-project-c0sb.onrender.com/api";
+const BACKEND_API_URL = process.env.BACKEND_API_URL
 
 async function productFetch(req) {
   const token = req.headers.authorization?.split(' ')[1];
