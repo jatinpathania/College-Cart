@@ -46,7 +46,7 @@ const Footer = () => {
             <a href="#" aria-label="Facebook"><FaFacebook /></a>
             <a href="#" aria-label="Twitter"><FaTwitter /></a>
             <a href="#" aria-label="LinkedIn"><FaLinkedin /></a>
-            <a href="#" aria-label="GitHub"><FaGithub /></a>
+            <a href="https://github.com/Harashporiya/IP_PROJECT" aria-label="GitHub"><FaGithub /></a>
           </div>
         </div>
       </div>

@@ -46,3 +46,9 @@
 .faq-item.active .icon {
   transform: rotate(180deg);
 }
+
+@media screen and (orientation:portrait) and (max-width:480px){
+  .faq-container{
+    width: 63vh;
+  }
+}
