@@ -15,6 +15,7 @@ const exchangeBookRoute = require("./Routes/exchangeBook")
 const orderRouter = require("./Routes/order")
 const orderBookExchangeRouter = require("./Routes/bookEchangeOrder")
 const requestRouter = require("./Routes/request")
+const agentRouter = require("./Routes/agent")
 
 const allowedOrigins = [process.env.FRONTEND_URL, process.env.FRONTEND_DEPLOY_URL, process.env.FRONTEND_DEPLOY_URL_VERCEL];
 
@@ -50,6 +51,8 @@ app.use("/api", exchangeBookRoute);
 app.use("/api", orderRouter)
 app.use("/api",orderBookExchangeRouter)
 app.use("/api", requestRouter);
+app.use("/api", agentRouter);
+
 
 app.listen(PORT, () => {
     console.log(`Server Started at PORT: ${PORT}`);
