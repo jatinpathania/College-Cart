@@ -60,9 +60,9 @@ Follow these rules:
 
     const chatStream = await groq.chat.completions.create({
       messages,
-      model: "meta-llama/llama-4-scout-17b-16e-instruct",
+      model: "llama-3.3-70b-versatile",
       temperature: 0.3,
-      max_completion_tokens: 200,
+      max_completion_tokens: 1024,
       top_p: 1,
       stream: true,
       stop: null
