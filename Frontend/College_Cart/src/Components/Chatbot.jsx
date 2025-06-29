@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Send, MessageSquare, X } from 'lucide-react';
+const backend_url = import.meta.env.VITE_BACKEND_API_URL;
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,8 +11,6 @@ const Chatbot = () => {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
- 
-  const backend_url =  'https://ip-project-c0sb.onrender.com/api';
 
   useEffect(() => {
     scrollToBottom();
@@ -32,12 +31,12 @@ const Chatbot = () => {
     try {
      
       const token = localStorage.getItem("token");
-       console.log(token)
+     //  console.log(token)
       if (!token) {
         throw new Error('Authentication token not found. Please login again.');
       }
 
-      const response = await fetch(`http://localhost:8002/api/agent`, {
+      const response = await fetch(`${backend_url}/agent`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +56,7 @@ const Chatbot = () => {
       }
 
       const data = await response.json();
-      console.log(data.agentRecord)
+     // console.log(data.agentRecord)
       if (data.agentRecord?.output) {
         setMessages(prev => [...prev, { text: data.agentRecord.output, sender: 'bot' }]);
       } else if (data.response) {
